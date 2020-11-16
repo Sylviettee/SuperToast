@@ -300,7 +300,6 @@ end
 ---@param func fun(msg:Message, args: string[], client: SuperToastClient):void
 ---@return Command
 function Command:execute(func)
-   p(func)
    assert(type(func) == 'function', 'The execute callback must be a function')
 
    self._execute = func
