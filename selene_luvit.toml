@@ -1,0 +1,97 @@
+[[p.args]] # Our favorite debugging tool
+type = "..."
+
+[jit] # LuaJIT
+
+[jit.arch]
+property = true
+
+[jit.version]
+property = true
+
+[jit.version_num]
+property = true
+
+[jit.status]
+args = []
+
+[jit.on]
+args = []
+
+[jit.os]
+property = true
+
+[jit.off]
+args = []
+
+[jit.flush]
+args = []
+
+[[jit.attach.args]]
+type = "function"
+required = true
+
+[jit.opt.start]
+args = []
+
+[process]
+property = true
+writable = "new-fields"
+
+[process.stdout]
+property = true
+
+[process.stdin]
+property = true
+
+[process.stderr]
+property = true
+
+[process.cpuUsage]
+args = []
+
+[[process.removeListener.args]]
+type = "string"
+required = true
+
+[[process.removeListener.args]]
+type = "function"
+required = true
+
+[[process.on.args]]
+type = "string"
+required = true
+
+[[process.on.args]]
+type = "function"
+required = true
+
+[process.pid]
+property = true
+
+[process.argv]
+property = true
+
+[process.memoryUsage]
+args = []
+
+[[process.exit.args]]
+type = "number"
+required = false
+
+[process.exitCode]
+property = true
+
+[[process.nextTick.args]]
+type = "function"
+required = true
+
+[[process.kill.args]]
+type = "number"
+required = true
+
+[process.cwd]
+args = []
+
+[process.env]
+property = true

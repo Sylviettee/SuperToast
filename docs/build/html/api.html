@@ -1,0 +1,1050 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API Reference &mdash; Supertoast 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Supertoast!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Supertoast
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-stringx">Stringx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dotenv">Dotenv</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#classes">Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#array">Array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#client">Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#option">Option</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subcommand">SubCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#typedarray">TypedArray</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Supertoast</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>API Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<p>The API documentation is where you find how to do basically anything.</p>
+<div class="section" id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-stringx">
+<span id="stringx"></span><h3>Stringx<a class="headerlink" href="#module-stringx" title="Permalink to this headline">¶</a></h3>
+<p>String utility library</p>
+<dl class="lua function">
+<dt id="stringx.split">
+<em class="property"> </em><code class="sig-prename descclassname">stringx.</code><code class="sig-name descname">split</code><span class="sig-paren">(</span><em class="sig-param">str</em>, <em class="sig-param">seperator</em><span class="sig-paren">)</span><a class="headerlink" href="#stringx.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split a string by a seperator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> (<em>str</em>) – The string to split</p></li>
+<li><p><strong>seperator</strong> (<em>str</em>) – The seperator</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt id="stringx.trim">
+<em class="property"> </em><code class="sig-prename descclassname">stringx.</code><code class="sig-name descname">trim</code><span class="sig-paren">(</span><em class="sig-param">str</em><span class="sig-paren">)</span><a class="headerlink" href="#stringx.trim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trim whitespace around a string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>str</strong> (<em>str</em>) – String to trim</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt id="stringx.startswith">
+<em class="property"> </em><code class="sig-prename descclassname">stringx.</code><code class="sig-name descname">startswith</code><span class="sig-paren">(</span><em class="sig-param">str</em>, <em class="sig-param">start</em><span class="sig-paren">)</span><a class="headerlink" href="#stringx.startswith" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a string starts with another string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> (<em>str</em>) – String to check</p></li>
+<li><p><strong>start</strong> (<em>str</em>) – What to check for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt id="stringx.endswith">
+<em class="property"> </em><code class="sig-prename descclassname">stringx.</code><code class="sig-name descname">endswith</code><span class="sig-paren">(</span><em class="sig-param">str</em>, <em class="sig-param">ends</em><span class="sig-paren">)</span><a class="headerlink" href="#stringx.endswith" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a string ends with another string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> (<em>str</em>) – String to check</p></li>
+<li><p><strong>ends</strong> (<em>str</em>) – What to check for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt id="stringx.random">
+<em class="property"> </em><code class="sig-prename descclassname">stringx.</code><code class="sig-name descname">random</code><span class="sig-paren">(</span><em class="sig-param">len</em>, <em class="sig-param">mn</em>, <em class="sig-param">mx</em><span class="sig-paren">)</span><a class="headerlink" href="#stringx.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string of random characters with the length of <cite>len</cite> and between <cite>min</cite> and <cite>max</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>len</strong> (<em>number</em>) – The length of the random string</p></li>
+<li><p><strong>mn</strong> (<em>number</em>) – Must be at least 0</p></li>
+<li><p><strong>mx</strong> (<em>number</em>) – Must be at most 255</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt id="stringx.pad">
+<em class="property"> </em><code class="sig-prename descclassname">stringx.</code><code class="sig-name descname">pad</code><span class="sig-paren">(</span><em class="sig-param">str</em>, <em class="sig-param">len</em>, <em class="sig-param">align</em>, <em class="sig-param">pattern</em><span class="sig-paren">)</span><a class="headerlink" href="#stringx.pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put spaces around a string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> (<em>str</em>) – The string to pad</p></li>
+<li><p><strong>len</strong> (<em>number</em>) – How much to pad</p></li>
+<li><p><strong>align</strong> (<em>str</em>) – The align of the padding</p></li>
+<li><p><strong>pattern</strong> (<em>str</em>) – The pattern to pad by</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt id="stringx.levenshtein">
+<em class="property"> </em><code class="sig-prename descclassname">stringx.</code><code class="sig-name descname">levenshtein</code><span class="sig-paren">(</span><em class="sig-param">str1</em>, <em class="sig-param">str2</em><span class="sig-paren">)</span><a class="headerlink" href="#stringx.levenshtein" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the difference between 2 strings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str1</strong> (<em>str</em>) – The string to compare to str2</p></li>
+<li><p><strong>str2</strong> (<em>str</em>) – The string to compare to str1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt id="stringx.shorten">
+<em class="property"> </em><code class="sig-prename descclassname">stringx.</code><code class="sig-name descname">shorten</code><span class="sig-paren">(</span><em class="sig-param">str</em>, <em class="sig-param">width</em>, <em class="sig-param">tail</em><span class="sig-paren">)</span><a class="headerlink" href="#stringx.shorten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shorten a string to be prefixed or sufixed by ellipsis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> (<em>str</em>) – The string to shorten</p></li>
+<li><p><strong>width</strong> (<em>number</em>) – The max size allowed</p></li>
+<li><p><strong>tail</strong> (<em>boolean</em>) – Show the front of the string when false and back of the string when true</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt id="stringx.fancyformat">
+<em class="property"> </em><code class="sig-prename descclassname">stringx.</code><code class="sig-name descname">fancyformat</code><span class="sig-paren">(</span><em class="sig-param">str</em><span class="sig-paren">)</span><a class="headerlink" href="#stringx.fancyformat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a factory to “fancy” format a string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>str</strong> (<em>str</em>) – The pattern string</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>function</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dotenv">
+<span id="dotenv"></span><h3>Dotenv<a class="headerlink" href="#module-dotenv" title="Permalink to this headline">¶</a></h3>
+<p>Dotenv parsing module</p>
+<dl class="lua function">
+<dt id="dotenv.parse">
+<em class="property"> </em><code class="sig-prename descclassname">dotenv.</code><code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param">src</em>, <em class="sig-param">options</em><span class="sig-paren">)</span><a class="headerlink" href="#dotenv.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a dotenv file and return the data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<em>str</em>) – </p></li>
+<li><p><strong>options</strong> (<em>dict[str, boolean]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict[str, any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt id="dotenv.config">
+<em class="property"> </em><code class="sig-prename descclassname">dotenv.</code><code class="sig-name descname">config</code><span class="sig-paren">(</span><em class="sig-param">options</em><span class="sig-paren">)</span><a class="headerlink" href="#dotenv.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a .env file into the current env</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>options</strong> (<em>dict[str, any]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<p>Properties prefixed with an <code class="docutils literal notranslate"><span class="pre">_</span></code> are private so you can’t access them.</p>
+<div class="section" id="array">
+<h3>Array<a class="headerlink" href="#array" title="Permalink to this headline">¶</a></h3>
+<dl class="lua class">
+<dt id="Array">
+<em class="property">class </em><code class="sig-name descname">Array</code><a class="headerlink" href="#Array" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="Array._data">
+<code class="sig-name descname">_data</code><em class="property">: </em>dict[number, any]<a class="headerlink" href="#Array._data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The data stored within</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.__init">
+<em class="property"> </em><code class="sig-name descname">__init</code><span class="sig-paren">(</span><em class="sig-param">starting</em><span class="sig-paren">)</span><a class="headerlink" href="#Array.__init" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>starting</strong> (<em>any</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.__pairs">
+<em class="property"> </em><code class="sig-name descname">__pairs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Array.__pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop over the array</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.iter">
+<em class="property"> </em><code class="sig-name descname">iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Array.iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over an array</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.unpack">
+<em class="property"> </em><code class="sig-name descname">unpack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Array.unpack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unpack the array</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.push">
+<em class="property"> </em><code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#Array.push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an item to the end of an array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> (<em>any</em>) – The item to add</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.pop">
+<em class="property"> </em><code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">pos</em><span class="sig-paren">)</span><a class="headerlink" href="#Array.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pop the item from the end of the array and return it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<em>number</em>) – The position to pop</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.forEach">
+<em class="property"> </em><code class="sig-name descname">forEach</code><span class="sig-paren">(</span><em class="sig-param">fn</em><span class="sig-paren">)</span><a class="headerlink" href="#Array.forEach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop over the array and call the function each time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fn</strong> (<em>fun(any, number):void</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.filter">
+<em class="property"> </em><code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">fn</em><span class="sig-paren">)</span><a class="headerlink" href="#Array.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop through each item and each item that satisfies the function gets added to an array and gets returned</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fn</strong> (<em>fun(any):void</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Array" title="Array">Array</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.find">
+<em class="property"> </em><code class="sig-name descname">find</code><span class="sig-paren">(</span><em class="sig-param">fn</em><span class="sig-paren">)</span><a class="headerlink" href="#Array.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first value which satisfies the function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fn</strong> (<em>fun(any):boolean</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>any or number or nil</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.map">
+<em class="property"> </em><code class="sig-name descname">map</code><span class="sig-paren">(</span><em class="sig-param">fn</em><span class="sig-paren">)</span><a class="headerlink" href="#Array.map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new array based on the results of the passed function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fn</strong> (<em>fun(any):any</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Array" title="Array">Array</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.slice">
+<em class="property"> </em><code class="sig-name descname">slice</code><span class="sig-paren">(</span><em class="sig-param">start</em>, <em class="sig-param">stop</em>, <em class="sig-param">step</em><span class="sig-paren">)</span><a class="headerlink" href="#Array.slice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slice an array using start, stop, and step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>number</em>) – The point to start the slice</p></li>
+<li><p><strong>stop</strong> (<em>number</em>) – The point to stop the slice</p></li>
+<li><p><strong>step</strong> (<em>number</em>) – The amount to step by</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Array" title="Array">Array</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.copy">
+<em class="property"> </em><code class="sig-name descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Array.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy an array into a new array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#Array" title="Array">Array</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Array.reverse">
+<em class="property"> </em><code class="sig-name descname">reverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Array.reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverse an array, does not affect original array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#Array" title="Array">Array</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="client">
+<h3>Client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h3>
+<dl class="lua class">
+<dt id="SuperToastClient">
+<em class="property">class </em><code class="sig-name descname">SuperToastClient</code><em class="property">: </em>Client<a class="headerlink" href="#SuperToastClient" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="SuperToastClient._config">
+<code class="sig-name descname">_config</code><em class="property">: </em>SuperToastOptions<a class="headerlink" href="#SuperToastClient._config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="SuperToastClient._token">
+<code class="sig-name descname">_token</code><em class="property">: </em>str<a class="headerlink" href="#SuperToastClient._token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="SuperToastClient._commands">
+<code class="sig-name descname">_commands</code><em class="property">: </em>TypedArray<a class="headerlink" href="#SuperToastClient._commands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="SuperToastClient._events">
+<code class="sig-name descname">_events</code><em class="property">: </em>TypedArray<a class="headerlink" href="#SuperToastClient._events" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="SuperToastClient._cogs">
+<code class="sig-name descname">_cogs</code><em class="property">: </em>TypedArray<a class="headerlink" href="#SuperToastClient._cogs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="lua class">
+<dt id="SuperToastOptions">
+<em class="property">class </em><code class="sig-name descname">SuperToastOptions</code><a class="headerlink" href="#SuperToastOptions" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="SuperToastOptions.defaultHelp">
+<code class="sig-name descname">defaultHelp</code><em class="property">: </em>boolean<a class="headerlink" href="#SuperToastOptions.defaultHelp" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">“true”</div>
+</div>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="SuperToastOptions.owners">
+<code class="sig-name descname">owners</code><em class="property">: </em>list[str]<a class="headerlink" href="#SuperToastOptions.owners" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">“{}”</div>
+</div>
+</dd></dl>
+
+<dl class="lua attribute">
+<dt id="SuperToastOptions.prefix">
+<code class="sig-name descname">prefix</code><em class="property">: </em>str<a class="headerlink" href="#SuperToastOptions.prefix" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">“’!’”</div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="command">
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<dl class="lua class">
+<dt id="Command">
+<em class="property">class </em><code class="sig-name descname">Command</code><a class="headerlink" href="#Command" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="Command._examples">
+<code class="sig-name descname">_examples</code><em class="property">: </em>list[TypedArray]<a class="headerlink" href="#Command._examples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._aliases">
+<code class="sig-name descname">_aliases</code><em class="property">: </em>list[TypedArray]<a class="headerlink" href="#Command._aliases" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._user_roles">
+<code class="sig-name descname">_user_roles</code><em class="property">: </em>list[TypedArray]<a class="headerlink" href="#Command._user_roles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._bot_roles">
+<code class="sig-name descname">_bot_roles</code><em class="property">: </em>list[TypedArray]<a class="headerlink" href="#Command._bot_roles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._user_permissions">
+<code class="sig-name descname">_user_permissions</code><em class="property">: </em>list[TypedArray]<a class="headerlink" href="#Command._user_permissions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._bot_permissions">
+<code class="sig-name descname">_bot_permissions</code><em class="property">: </em>list[TypedArray]<a class="headerlink" href="#Command._bot_permissions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._checks">
+<code class="sig-name descname">_checks</code><em class="property">: </em>list[TypedArray]<a class="headerlink" href="#Command._checks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._subcommands">
+<code class="sig-name descname">_subcommands</code><em class="property">: </em>list[TypedArray]<a class="headerlink" href="#Command._subcommands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._cooldowns">
+<code class="sig-name descname">_cooldowns</code><em class="property">: </em>dict[str, number]<a class="headerlink" href="#Command._cooldowns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._execute">
+<code class="sig-name descname">_execute</code><em class="property">: </em>function<a class="headerlink" href="#Command._execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._description">
+<code class="sig-name descname">_description</code><em class="property">: </em>str<a class="headerlink" href="#Command._description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._usage">
+<code class="sig-name descname">_usage</code><em class="property">: </em>str<a class="headerlink" href="#Command._usage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._name">
+<code class="sig-name descname">_name</code><em class="property">: </em>str<a class="headerlink" href="#Command._name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._guild_only">
+<code class="sig-name descname">_guild_only</code><em class="property">: </em>boolean<a class="headerlink" href="#Command._guild_only" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._nsfw_only">
+<code class="sig-name descname">_nsfw_only</code><em class="property">: </em>boolean<a class="headerlink" href="#Command._nsfw_only" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua attribute">
+<dt id="Command._cooldown">
+<code class="sig-name descname">_cooldown</code><em class="property">: </em>number<a class="headerlink" href="#Command._cooldown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua method">
+<dt id="Command.toRun">
+<em class="property"> </em><code class="sig-name descname">toRun</code><span class="sig-paren">(</span><em class="sig-param">message</em>, <em class="sig-param">args</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.toRun" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check a message to see if it matches all the criteria listed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>Message</em>) – </p></li>
+<li><p><strong>args</strong> (<em>list[str]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.description">
+<em class="property"> </em><code class="sig-name descname">description</code><span class="sig-paren">(</span><em class="sig-param">desc</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach a description to a command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>desc</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.usage">
+<em class="property"> </em><code class="sig-name descname">usage</code><span class="sig-paren">(</span><em class="sig-param">usage</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach a usage to a command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>usage</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.guild_only">
+<em class="property"> </em><code class="sig-name descname">guild_only</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Command.guild_only" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the command as guild only</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.nsfw_only">
+<em class="property"> </em><code class="sig-name descname">nsfw_only</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Command.nsfw_only" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the command as nsfw only</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.cooldown">
+<em class="property"> </em><code class="sig-name descname">cooldown</code><span class="sig-paren">(</span><em class="sig-param">cooldown</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.cooldown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the cooldown of the command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cooldown</strong> (<em>number</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.check">
+<em class="property"> </em><code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param">check</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a custom check to the command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>check</strong> (<em>fun(Message, list[str]):str or boolean</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.check_any">
+<em class="property"> </em><code class="sig-name descname">check_any</code><span class="sig-paren">(</span><em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.check_any" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add multiple custom checks</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vararg</strong> (<em>function</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.has_permission">
+<em class="property"> </em><code class="sig-name descname">has_permission</code><span class="sig-paren">(</span><em class="sig-param">perm</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.has_permission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add permission check for users</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>perm</strong> (<em>str or number</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.has_permissions">
+<em class="property"> </em><code class="sig-name descname">has_permissions</code><span class="sig-paren">(</span><em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.has_permissions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add multiple permission checks for users</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vararg</strong> (<em>str or number</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.bot_has_permission">
+<em class="property"> </em><code class="sig-name descname">bot_has_permission</code><span class="sig-paren">(</span><em class="sig-param">perm</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.bot_has_permission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add permission check for the bot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>perm</strong> (<em>str or number</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.bot_has_permissions">
+<em class="property"> </em><code class="sig-name descname">bot_has_permissions</code><span class="sig-paren">(</span><em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.bot_has_permissions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add multiple permission checks for the bot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vararg</strong> (<em>str or number</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.has_role">
+<em class="property"> </em><code class="sig-name descname">has_role</code><span class="sig-paren">(</span><em class="sig-param">role</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.has_role" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the user has a specific role</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>role</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.add_subcommand">
+<em class="property"> </em><code class="sig-name descname">add_subcommand</code><span class="sig-paren">(</span><em class="sig-param">subcommand</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.add_subcommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a subcommand to the function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subcommand</strong> (<a class="reference internal" href="#Subcommand" title="Subcommand"><em>Subcommand</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Command.execute">
+<em class="property"> </em><code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">func</em><span class="sig-paren">)</span><a class="headerlink" href="#Command.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the function to execute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>fun(Message, list[str], SuperToastClient):void</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#Command" title="Command">Command</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="option">
+<h3>Option<a class="headerlink" href="#option" title="Permalink to this headline">¶</a></h3>
+<dl class="lua class">
+<dt id="Option">
+<em class="property">class </em><code class="sig-name descname">Option</code><a class="headerlink" href="#Option" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="Option._options">
+<code class="sig-name descname">_options</code><em class="property">: </em>dict[str, dict[number, any]]<a class="headerlink" href="#Option._options" title="Permalink to this definition">¶</a></dt>
+<dd><p>The options dictionary</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Option.__init">
+<em class="property"> </em><code class="sig-name descname">__init</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span><a class="headerlink" href="#Option.__init" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dict</strong> (<em>any</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Option.validate">
+<em class="property"> </em><code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span><a class="headerlink" href="#Option.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate a dictionary, it will error if it meets an invalid type!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dict</strong> (<em>dict[str, any]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>nil</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="Option.toTable">
+<em class="property"> </em><code class="sig-name descname">toTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Option.toTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representing the options as an EmmyLua class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subcommand">
+<h3>SubCommand<a class="headerlink" href="#subcommand" title="Permalink to this headline">¶</a></h3>
+<dl class="lua class">
+<dt id="Subcommand">
+<em class="property">class </em><code class="sig-name descname">Subcommand</code><em class="property">: </em><a class="reference internal" href="#Command" title="Command">Command</a><a class="headerlink" href="#Subcommand" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="Subcommand._parent">
+<code class="sig-name descname">_parent</code><em class="property">: </em>Command<a class="headerlink" href="#Subcommand._parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua method">
+<dt id="Subcommand.__init">
+<em class="property"> </em><code class="sig-name descname">__init</code><span class="sig-paren">(</span><em class="sig-param">parent</em>, <em class="sig-param">name</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#Subcommand.__init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>any</em>) – </p></li>
+<li><p><strong>name</strong> (<em>any</em>) – </p></li>
+<li><p><strong>vararg</strong> (<em>any</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="typedarray">
+<h3>TypedArray<a class="headerlink" href="#typedarray" title="Permalink to this headline">¶</a></h3>
+<dl class="lua class">
+<dt id="TypedArray">
+<em class="property">class </em><code class="sig-name descname">TypedArray</code><em class="property">: </em><a class="reference internal" href="#Array" title="Array">Array</a><a class="headerlink" href="#TypedArray" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="lua attribute">
+<dt id="TypedArray.type">
+<code class="sig-name descname">type</code><em class="property">: </em>function<a class="headerlink" href="#TypedArray.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of the data</p>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="TypedArray.__init">
+<em class="property"> </em><code class="sig-name descname">__init</code><span class="sig-paren">(</span><em class="sig-param">arrType</em>, <em class="sig-param">starting</em><span class="sig-paren">)</span><a class="headerlink" href="#TypedArray.__init" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arrType</strong> (<em>any</em>) – </p></li>
+<li><p><strong>starting</strong> (<em>any</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua method">
+<dt id="TypedArray.push">
+<em class="property"> </em><code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#TypedArray.push" title="Permalink to this definition">¶</a></dt>
+<dd><p>A typed version of the push method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> (<em>any</em>) – The type of the item should be the specified type</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Supertoast!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Soviet Kitsune
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

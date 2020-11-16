@@ -1,0 +1,6 @@
+column_limit: 120
+indent_width: 3
+continuation_indent_width: 4
+double_quote_to_single_quote: true
+keep_simple_function_one_line: false
+keep_simple_control_block_one_line: false

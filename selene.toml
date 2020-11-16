@@ -1,0 +1,4 @@
+std = "selene_lua+selene_luvit"
+
+[rules]
+global_usage = "allow"
