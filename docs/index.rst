@@ -16,6 +16,7 @@ Documentation Contents
    :caption: Contents:
 
    api
+   types
 
 Looking for something specific? Try using the search
 

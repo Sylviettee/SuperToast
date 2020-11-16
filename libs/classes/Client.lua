@@ -77,8 +77,6 @@ function Helper:__init(token, options, discOptions)
    self:on('messageCreate', function(msg)
       local pre = self._config.prefix
 
-      p(pre, msg.content)
-
       if not stringx.startswith(msg.content, pre) then
          return
       end
@@ -88,8 +86,6 @@ function Helper:__init(token, options, discOptions)
       end
 
       local command = string.match(msg.content, pre .. '(%S+)'):lower()
-
-      p(command)
 
       if not command then
          return
