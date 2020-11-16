@@ -5,7 +5,19 @@
 <h1>SuperToast</h1>
 </div>
 
+<div align="center">
+    <a href='https://supertoast.readthedocs.io/en/latest/?badge=latest'>
+        <img src='https://readthedocs.org/projects/supertoast/badge/?version=latest' alt='Documentation Status' />
+    </a>
+</div>
+
+<br/>
+
+## About
+
 SuperToast is a Discordia command framework designed for ease of use.
+
+It is recommended to use EmmyLua when using this as you will get types as seen below.
 
 ## Quick example
 
