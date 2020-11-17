@@ -15,8 +15,9 @@ Documentation Contents
    :maxdepth: 2
    :caption: Contents:
 
-   api
    types
+   examples
+   api
 
 Looking for something specific? Try using the search
 

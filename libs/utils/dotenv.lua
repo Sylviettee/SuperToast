@@ -23,17 +23,15 @@ local RE_NEWLINES = [[\\n]]
 ---@return table<string, any>
 function dotenv.parse(src, options)
    local debug = options and options.debug
-   local obj = { }
+   local obj = {}
    for idx, line in pairs(stringx.split(src, NEWLINE)) do
-      local keyValueArr = {
-         match(line, RE_INI_KEY_VAL)
-      }
+      local keyValueArr = {match(line, RE_INI_KEY_VAL)}
       if keyValueArr ~= nil and #keyValueArr ~= 0 then
          local key = keyValueArr[1]
          local value = keyValueArr[2] or ''
          local endPos = #value
          local isDoubleQuoted = value:sub(1, 1) == '"' and value:sub(endPos, endPos) == '"'
-         local isSingleQuoted = value:sub(1, 1) == "'" and value:sub(endPos, endPos) == "'"
+         local isSingleQuoted = value:sub(1, 1) == '\'' and value:sub(endPos, endPos) == '\''
          if isSingleQuoted or isDoubleQuoted then
             value = value:sub(2, endPos - 1)
             if isDoubleQuoted then
@@ -44,7 +42,7 @@ function dotenv.parse(src, options)
          end
          obj[key] = value
       elseif debug then
-         print("Line " .. tostring(idx) .. " >> " .. tostring(line) .. "\nFailed to parse")
+         print('Line ' .. tostring(idx) .. ' >> ' .. tostring(line) .. '\nFailed to parse')
       end
    end
    return obj
@@ -54,23 +52,19 @@ end
 ---@param options table<string, any>
 function dotenv.config(options)
    if options == nil then
-      options = { }
+      options = {}
    end
 
    local path = options.path or resolve(process.cwd(), '.env')
    local encoding = options.encoding or 'utf8'
    local debug = options.debug or false
    local succ, parsed = pcall(function()
-      parsed = dotenv.parse(readFileSync(path, {
-         encoding = encoding
-      }), {
-         debug = debug
-      })
+      parsed = dotenv.parse(readFileSync(path, {encoding = encoding}), {debug = debug})
       for i, v in pairs(parsed) do
          if not process.env[i] then
             process.env[i] = v
          else
-            print(tostring(i) .. " is already defined in process.env and will not be overwritten")
+            print(tostring(i) .. ' is already defined in process.env and will not be overwritten')
          end
       end
       return parsed
@@ -79,9 +73,7 @@ function dotenv.config(options)
    if succ then
       return parsed
    else
-      return {
-         error = parsed
-      }
+      return {error = parsed}
    end
 end
 
