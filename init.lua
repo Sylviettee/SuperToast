@@ -1,6 +1,6 @@
 --- The SuperToast module
 ---@module SuperToast
-return {
+local SuperToast = {
    Array = require('classes/Array'),
    Client = require('classes/Client'),
    Command = require('classes/Command'),
@@ -12,3 +12,5 @@ return {
    stringx = require('utils/stringx'),
    dotenv = require('utils/dotenv')
 }
+
+return SuperToast
