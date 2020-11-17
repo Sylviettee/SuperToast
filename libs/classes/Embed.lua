@@ -19,7 +19,7 @@ end
 ---@return Embed
 function Embed:setTitle(title)
    assert(type(title) == 'string', 'The title must be a string')
-   self._embed.title = title
+   self._embed.title = title:sub(0, 256)
 
    return self
 end
@@ -30,7 +30,7 @@ end
 function Embed:setDescription(desc)
    assert(type(desc) == 'string', 'The description must be a string')
 
-   self._embed.description = desc
+   self._embed.description = desc:sub(2048)
 
    return self
 end
@@ -57,7 +57,11 @@ function Embed:addField(name, value, inline)
 
    self._embed.fields = self._embed.fields or {}
 
-   table.insert(self._embed.fields, {name = name, value = value, inline = inline or false})
+   if #self._embed.field >= 25 then
+      print 'Embed is at max fields!'
+   else
+      table.insert(self._embed.fields, {name = name:sub(0, 256), value = value:sub(0, 1024), inline = inline or false})
+   end
 
    return self
 end
@@ -70,7 +74,7 @@ end
 function Embed:setAuthor(name, icon, url)
    assert(type(name) == 'string', 'The name must be a string')
 
-   self._embed.author = {name = name, icon_url = icon or '', url = url or ''}
+   self._embed.author = {name = name:sub(0, 256), icon_url = icon or '', url = url or ''}
 
    return self
 end
@@ -82,7 +86,7 @@ end
 function Embed:setFooter(text, icon)
    assert(type(text) == 'string', 'The text must be a string')
 
-   self._embed.footer = {text = text, icon_url = icon or ''}
+   self._embed.footer = {text = text:sub(0, 2048), icon_url = icon or ''}
 
    return self
 end
