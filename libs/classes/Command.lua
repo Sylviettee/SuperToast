@@ -10,22 +10,8 @@ local enums = discordia.enums
 
 --- The command class to handle most functionality
 ---@class Command
----@field private _examples TypedArray[]
----@field private _aliases TypedArray[]
----@field private _user_roles TypedArray[]
----@field private _bot_roles TypedArray[]
----@field private _user_permissions TypedArray[]
----@field private _bot_permissions TypedArray[]
----@field private _checks TypedArray[]
----@field private _subcommands TypedArray[]
----@field private _cooldowns table<string, number>
----@field private _execute function
----@field private _description string
----@field private _usage string
----@field private _name string
----@field private _guild_only boolean
----@field private _nsfw_only boolean
----@field private _cooldown number
+---@field public name string
+---@field public aliases string[]
 local Command, get = class('Command')
 
 --- Create a new command

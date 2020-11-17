@@ -2,7 +2,6 @@ local class = require('discordia').class
 
 --- An array to store data within
 ---@class Array
----@field private _data table<number, any> The data stored within
 local Array = class('Array')
 
 function Array:__init(starting)

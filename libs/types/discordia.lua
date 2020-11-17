@@ -2543,21 +2543,21 @@ local enums = {}
 --- An empty table that can be used to store user data.
 --- This may be used an alternative to storing values on class instances or in global variables, both of which are not recommended.
 ---
----@field Client Client
----@field Clock Clock
----@field Color Color
----@field Date Date
----@field Deque Deque
----@field Emitter Emitter
----@field Logger Logger
----@field Mutex Mutex
----@field Permissions Permissions
----@field Stopwatch Stopwatch
----@field Time Time
----@field class class
----@field enums enums
----@field extensions function
----@field package table<string, any>
----@field storage table<any, any>
+---@field public Client Client
+---@field public Clock Clock
+---@field public Color Color
+---@field public Date Date
+---@field public Deque Deque
+---@field public Emitter Emitter
+---@field public Logger Logger
+---@field public Mutex Mutex
+---@field public Permissions Permissions
+---@field public Stopwatch Stopwatch
+---@field public Time Time
+---@field public class class
+---@field public enums enums
+---@field public extensions function
+---@field public package table<string, any>
+---@field public storage table<any, any>
 ---@class discordia
 local discordia = {}

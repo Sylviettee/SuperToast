@@ -29,7 +29,6 @@ end
 
 --- A class to typecheck option listings
 ---@class Option
----@field private _options table<string, table<number, any>> The options dictionary
 local Option = class('Option')
 
 function Option:__init(dict)
