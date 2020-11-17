@@ -4,6 +4,7 @@ return {
    Array = require('classes/Array'),
    Client = require('classes/Client'),
    Command = require('classes/Command'),
+   Embed = require('classes/Embed'),
    TypedArray = require('classes/TypedArray'),
    Option = require('classes/Option'),
    Subcommand = require('classes/Subcommand'),

@@ -1,7 +1,8 @@
 -- Converts Discordia doc comments into EmmyLua doc comments for types
 -- Uses code from Discordia doc generator
 -- CONSTANTS --
-local OUT = './libs/utils/types.lua'
+local HANDWRITTEN_IN = './other.template'
+local OUT = './libs/types/discordia.lua'
 local IN = './deps/discordia/libs'
 
 -- Fun time --
@@ -146,7 +147,7 @@ for f in coroutine.wrap(scan), IN do
    end
 end
 
-local writing = ''
+local writing = f('-- Do not touch, automatically generated!\n-- Generated on %s\n\n', os.date())
 
 local function convert(tp)
    if not tp:match('%-') then
@@ -252,5 +253,35 @@ for _, class in pairs(docs) do
 
    writing = writing .. '\n'
 end
+
+-- Fill out mixin
+
+local handWritten = fs.readFileSync(HANDWRITTEN_IN)
+
+local enums = require('discordia').enums
+
+local enum_descs = {}
+local fields = {}
+
+for i, v in pairs(enums) do
+   if i ~= 'enum' then
+      table.insert(fields, '---@field public ' .. i .. ' enum_' .. i)
+      local desc = '--- ' .. i .. ' enum'
+
+      for name, val in pairs(v) do
+         desc = desc ..
+                    f('\n---@field public %s %s | "%s"', name, type(val),
+                      type(val) == 'string' and f('\'%s\'', val) or val)
+      end
+
+      desc = desc .. '\n---@class enum_' .. i .. '\nlocal enum_' .. i .. ' = {}'
+
+      table.insert(enum_descs, desc)
+   end
+end
+
+handWritten = handWritten:gsub('%-%-%s?@enums', table.concat(enum_descs, '\n') .. table.concat(fields, '\n'))
+
+writing = writing .. '\n\n' .. handWritten
 
 fs.writeFileSync(OUT, writing)

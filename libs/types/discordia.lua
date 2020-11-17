@@ -1,3 +1,5 @@
+-- Do not touch, automatically generated!
+-- Generated on Mon Nov 16 17:19:18 2020
 ---Represents a Discord guild member. Though one user may be a member in more than one guild, each presence is represented by a different member object associated with that guild. Note that any method or property that exists for the User class is also available in the Member class.
 ---@class Member: UserPresence
 ---@field public roles ArrayIterable An iterable array of guild roles that the member has. This does not explicitly include the default everyone role. Object order is not guaranteed.
@@ -2039,3 +2041,523 @@ end
 function Snowflake:__init()
 end
 
+-- Hand written Discordia types for things which are also hand written in the documentation
+--- The Lua language does not have classes, but it does have all of the tools needed to write them.
+--- Discordia uses a custom class system that was written explicitly to encapsulate data provided by Discord in intuitive, efficient structures.
+---
+--- The `class` module used by Discordia is available to users in the main Discordia module.
+--- The class module is both the module table and a callable class constructor.
+---
+--- ```lua
+--- local discordia = require('discordia')
+--- local class = discordia.class
+--- ```
+---
+--- ## Constructing Classes and Objects
+---
+--- All Discordia classes must be uniquely named and must have an `__init` method.
+--- `UpperCamelCase` is used for class names while `lowerCamelCase` is used for public instances, properties, and methods.
+---
+--- ```lua
+--- local Apple = class('Apple') -- construct a new class
+---
+--- function Apple:__init(color) -- define the initializer
+---   ...
+--- end
+---
+--- local apple = Apple('red') -- call the class table to instantiate a new object
+--- ```
+---
+--- ## Properties
+---
+--- Discordia enforces a "protected" property policy.
+--- All new properties written directly to class objects must be prefixed with an underscore.
+--- Directly accessing underscored properties outside of the class definitions is not recommended.
+--- Additionally, to avoid potential compatibility issues, **writing custom properties to pre-defined Discordia classes is not recommended**.
+---
+--- ```lua
+--- local Apple = class('Apple')
+---
+--- function Apple:__init(color)
+---	self._color = color -- define a "protected" property
+--- end
+--- ```
+---
+--- Because of this underscore policy, Discordia classes also have **getters** and **setters** that can be used to define public properties.
+--- These are empty tables and should be populated by functions where getters return a value and setters modify a property.
+--- Note that an explicit `self` must be passed for these functions.
+---
+--- ```lua
+--- local Apple, get, set = class('Apple') -- multiple return values
+---
+--- function Apple:__init(color)
+---	self._color = color
+--- end
+---
+--- function get.color(self) -- define a getter
+---	return self._color
+--- end
+---
+--- function set.color(self, color) -- define a setter
+---   self._color = color
+--- end
+--- ```
+---
+--- With getters and setters, you can indirectly get/access and set/mutate protected (underscored) properties without having to use a method.
+--- More importantly, if a setter is not defined for a specific property, Discordia will prevent users from overwriting that property.
+--- Note Discordia itself never uses setters, but the option is available for people who want to make their own classes.
+---
+--- ```lua
+--- local apple = Apple('red')
+--- print(apple.color) -- 'red'
+---
+--- apple.color = 'green'
+--- print(apple.color) -- 'green'
+--- ```
+---
+--- ### Member Methods
+---
+--- Member methods are defined and called using Lua's colon notation so that an implicit `self` is passed to the function.
+---
+--- ```lua
+--- local Apple = class('Apple')
+---
+--- function Apple:__init(color)
+---	self._color = color
+--- end
+---
+--- function Apple:getColor() -- define a member method
+---   return self._color
+--- end
+---
+--- local user = Apple('red')
+--- print(user:getColor()) -- 'red'
+--- ```
+---
+--- ### Static Methods
+---
+--- Static methods are defined and called using Lua's dot notation.
+--- No implicit (or explicit) self is required for static methods.
+---
+--- ```lua
+--- local colors = {'red', 'yellow', 'green'}
+---
+--- function Apple.random() -- returns a random apple object
+---	return Apple(colors[math.random(#colors)])
+--- end
+--- ```
+---
+--- ## Inheritance
+---
+--- Discordia classes support single and multiple inheritance.
+--- Base or super classes are passed to the class constructor.
+---
+--- ```lua
+--- local Fruit = class('Fruit') -- Fruit is a base class
+---
+--- function Fruit:__init(color)
+---	self._color = color
+--- end
+---
+--- function Fruit:getColor()
+---	return self._color
+--- end
+---
+--- local Apple = class('Apple', Fruit) -- Apple inherits from Fruit
+---
+--- function Apple:__init(color)
+--- 	Fruit.__init(self, color) -- base constructor must be explicitly called
+--- end
+---
+--- local apple = Apple('red')
+---
+--- print(apple:getColor()) -- 'red'; method inherited from Fruit
+--- ```
+---
+--- ## Utilities
+---
+--- The class module contains a variety of tables and functions that may be useful to regular users.
+---
+--- #### classes
+---
+--- Table of all defined classes, indexed by name.
+---
+---@field classes table<string, any>
+---@class class
+local class = {}
+
+--- Function that returns true only if the provided argument is a Discordia class module.
+---
+--- ```lua
+--- print(class.isClass(Color)) -- true
+--- print(class.isClass(1337)) -- false
+--- ```
+---@param obj any
+---@return boolean
+function class.isClass(obj)
+end
+
+--- Function that returns true only if the provided argument is an instance of a Discordia class.
+---
+--- ```lua
+--- local color = Color(...)
+--- print(class.isObject(color)) -- true
+--- print(class.isObject(1337)) -- false
+--- ```
+---@param obj any
+---@return boolean
+function class.isObject(obj)
+end
+
+--- Function that returns true if the first argument is a subclass of the second argument.
+--- Note that classes are considered to be subclasses of themselves.
+---
+--- ```lua
+--- print(class.isSubclass(TextChannel, Channel)) -- true
+--- print(class.isSubclass(Color, Channel)) -- false
+--- print(class.isSubclass(Channel, Channel)) -- true
+--- ```
+---@param obj any
+---@param obj2 any
+---@return boolean
+function class.isSubclass(obj, obj2)
+end
+
+--- Function that returns the type of the provided argument.
+--- If the argument is a Discordia object, then this will return the name of its class; otherwise, it will return the result of calling Lua's global `type` function.
+---
+--- ```lua
+--- print(class.type(color)) -- 'Color'
+--- print(class.type(1337)) -- 'number'
+--- ```
+--- @param obj any
+--- @return string
+function class.type(obj)
+end
+
+--- Function that returns the number of each class instance currently alive (ie, not garbage collected) in table form.
+---
+--- ```lua
+--- local data = class.profile()
+--- for name, count in pairs(data) do
+---	print(name, count)
+--- end
+--- ```
+---@return table<string, number>
+function class.profile()
+end
+
+--- The Discord API uses numbers to represent certain data types.
+--- For convenience, these are enumerated in Discord as special read-only tables, found in the main Discordia module.
+--- All available enumerations are listed at the end of this page.
+---
+--- ```lua
+--- local discordia = require('discordia')
+--- local enums = discordia.enums
+--- ```
+---
+--- Enumerations (enums) can be accessed like a regular Lua table, but they cannot be modified.
+--- This is completely optional, but it is generally easier to use and read enumerations than it is to use and read plain numbers.
+--- For example, given a text channel object, the following are logically equivalent:
+---
+--- ```lua
+--- if channel.type == 0 then
+---   print('This is a text channel!')
+--- end
+---
+--- if channel.type == enums.channelType.text then
+---   print('This is a text channel!')
+--- end
+---
+--- print(enums.verificationLevel.low) -- 1
+--- ```
+---
+--- Additionally, enumerations work in reverse.
+--- If you have the number, but you want to recall the human-readable version, simply call the enum;
+--- it will return a string if the enumeration is valid.
+---
+--- ```lua
+--- print(enums.channelType(channel.type)) -- 'text'
+--- print(enums.verificationLevel(1)) -- 'low'
+--- ```
+---
+--- If necessary, custom enumerations can be written using the enum constructor:
+---
+--- ```lua
+--- local fruit = enums.enum {
+---	apple =  0,
+---	orange = 1,
+---	banana = 2,
+---	cherry = 3,
+--- }
+--- ```
+---
+--- ## Discord Enumerations
+---
+--- The enumerations are designed to be compatible with the Discord API. They are not necessarily unique to Discordia.
+--- gameType enum
+---@field public custom number | "4"
+---@field public listening number | "2"
+---@field public streaming number | "1"
+---@field public default number | "0"
+---@class enum_gameType
+local enum_gameType = {}
+--- messageType enum
+---@field public call number | "3"
+---@field public channelNameChange number | "4"
+---@field public pinnedMessage number | "6"
+---@field public memberJoin number | "7"
+---@field public recipientRemove number | "2"
+---@field public recipientAdd number | "1"
+---@field public premiumGuildSubscriptionTier1 number | "9"
+---@field public premiumGuildSubscriptionTier3 number | "11"
+---@field public premiumGuildSubscription number | "8"
+---@field public premiumGuildSubscriptionTier2 number | "10"
+---@field public channelIconchange number | "5"
+---@field public default number | "0"
+---@class enum_messageType
+local enum_messageType = {}
+--- activityType enum
+---@field public custom number | "4"
+---@field public listening number | "2"
+---@field public streaming number | "1"
+---@field public default number | "0"
+---@class enum_activityType
+local enum_activityType = {}
+--- verificationLevel enum
+---@field public none number | "0"
+---@field public medium number | "2"
+---@field public high number | "3"
+---@field public low number | "1"
+---@field public veryHigh number | "4"
+---@class enum_verificationLevel
+local enum_verificationLevel = {}
+--- messageFlag enum
+---@field public suppressEmbeds number | "4"
+---@field public urgent number | "16"
+---@field public isCrosspost number | "2"
+---@field public sourceMessageDeleted number | "8"
+---@field public crossposted number | "1"
+---@class enum_messageFlag
+local enum_messageFlag = {}
+--- webhookType enum
+---@field public incoming number | "1"
+---@field public channelFollower number | "2"
+---@class enum_webhookType
+local enum_webhookType = {}
+--- notificationSetting enum
+---@field public allMessages number | "0"
+---@field public onlyMentions number | "1"
+---@class enum_notificationSetting
+local enum_notificationSetting = {}
+--- logLevel enum
+---@field public none number | "0"
+---@field public info number | "3"
+---@field public debug number | "4"
+---@field public error number | "1"
+---@field public warning number | "2"
+---@class enum_logLevel
+local enum_logLevel = {}
+--- relationshipType enum
+---@field public none number | "0"
+---@field public friend number | "1"
+---@field public blocked number | "2"
+---@field public pendingOutgoing number | "4"
+---@field public pendingIncoming number | "3"
+---@class enum_relationshipType
+local enum_relationshipType = {}
+--- defaultAvatar enum
+---@field public blurple number | "0"
+---@field public green number | "2"
+---@field public gray number | "1"
+---@field public red number | "4"
+---@field public orange number | "3"
+---@class enum_defaultAvatar
+local enum_defaultAvatar = {}
+--- explicitContentLevel enum
+---@field public none number | "0"
+---@field public medium number | "1"
+---@field public high number | "2"
+---@class enum_explicitContentLevel
+local enum_explicitContentLevel = {}
+--- actionType enum
+---@field public memberUpdate number | "24"
+---@field public messageBulkDelete number | "73"
+---@field public webhookDelete number | "52"
+---@field public channelDelete number | "12"
+---@field public messageDelete number | "72"
+---@field public channelOverwriteDelete number | "15"
+---@field public roleDelete number | "32"
+---@field public channelUpdate number | "11"
+---@field public inviteCreate number | "40"
+---@field public messageUnpin number | "75"
+---@field public inviteUpdate number | "41"
+---@field public memberMove number | "26"
+---@field public messagePin number | "74"
+---@field public channelOverwriteUpdate number | "14"
+---@field public integrationDelete number | "82"
+---@field public webhookUpdate number | "51"
+---@field public memberBanAdd number | "22"
+---@field public inviteDelete number | "42"
+---@field public channelOverwriteCreate number | "13"
+---@field public emojiCreate number | "60"
+---@field public memberPrune number | "21"
+---@field public channelCreate number | "10"
+---@field public integrationUpdate number | "81"
+---@field public webhookCreate number | "50"
+---@field public emojiDelete number | "62"
+---@field public memberBanRemove number | "23"
+---@field public integrationCreate number | "80"
+---@field public memberDisconnect number | "27"
+---@field public guildUpdate number | "1"
+---@field public memberRoleUpdate number | "25"
+---@field public memberKick number | "20"
+---@field public roleUpdate number | "31"
+---@field public roleCreate number | "30"
+---@field public botAdd number | "28"
+---@field public emojiUpdate number | "61"
+---@class enum_actionType
+local enum_actionType = {}
+--- permission enum
+---@field public manageGuild number | "32"
+---@field public createInstantInvite number | "1"
+---@field public mentionEveryone number | "131072"
+---@field public manageRoles number | "268435456"
+---@field public addReactions number | "64"
+---@field public sendTextToSpeech number | "4096"
+---@field public readMessageHistory number | "65536"
+---@field public manageChannels number | "16"
+---@field public administrator number | "8"
+---@field public manageWebhooks number | "536870912"
+---@field public viewAuditLog number | "128"
+---@field public manageEmojis number | "1073741824"
+---@field public attachFiles number | "32768"
+---@field public moveMembers number | "16777216"
+---@field public banMembers number | "4"
+---@field public sendMessages number | "2048"
+---@field public manageMessages number | "8192"
+---@field public manageNicknames number | "134217728"
+---@field public useVoiceActivity number | "33554432"
+---@field public speak number | "2097152"
+---@field public readMessages number | "1024"
+---@field public connect number | "1048576"
+---@field public kickMembers number | "2"
+---@field public changeNickname number | "67108864"
+---@field public deafenMembers number | "8388608"
+---@field public muteMembers number | "4194304"
+---@field public prioritySpeaker number | "256"
+---@field public useExternalEmojis number | "262144"
+---@field public embedLinks number | "16384"
+---@field public stream number | "512"
+---@class enum_permission
+local enum_permission = {}
+--- status enum
+---@field public invisible string | "'invisible'"
+---@field public idle string | "'idle'"
+---@field public doNotDisturb string | "'dnd'"
+---@field public online string | "'online'"
+---@class enum_status
+local enum_status = {}
+--- premiumTier enum
+---@field public none number | "0"
+---@field public tier2 number | "2"
+---@field public tier3 number | "3"
+---@field public tier1 number | "1"
+---@class enum_premiumTier
+local enum_premiumTier = {}
+--- channelType enum
+---@field public private number | "1"
+---@field public group number | "3"
+---@field public category number | "4"
+---@field public news number | "5"
+---@field public voice number | "2"
+---@field public text number | "0"
+---@class enum_channelType
+local enum_channelType = {} ---@field public gameType enum_gameType
+---@field public messageType enum_messageType
+---@field public activityType enum_activityType
+---@field public verificationLevel enum_verificationLevel
+---@field public messageFlag enum_messageFlag
+---@field public webhookType enum_webhookType
+---@field public notificationSetting enum_notificationSetting
+---@field public logLevel enum_logLevel
+---@field public relationshipType enum_relationshipType
+---@field public defaultAvatar enum_defaultAvatar
+---@field public explicitContentLevel enum_explicitContentLevel
+---@field public actionType enum_actionType
+---@field public permission enum_permission
+---@field public status enum_status
+---@field public premiumTier enum_premiumTier
+---@field public channelType enum_channelType
+---@class enums
+local enums = {}
+
+--- To write a Discordia application, the library's main module must be required. If it's in a deps or libs folder, simply require it by name.
+--- If you've manually installed the library elsewhere, then you will need to provide a relative or full path to the Discordia directory.
+---
+--- (Side note: Add `--@type discordia` to view the types)
+---
+--- ```lua
+--- local discordia = require('discordia')
+--- ```
+---
+--- ## Classes
+---
+--- Discordia has many custom classes. Some of them are instantiated only by the library and not by users.
+--- The classes that may be safely instantiated by users are included in the Discordia module:
+---
+--- * Client
+--- * Clock
+--- * Color
+--- * Date
+--- * Deque
+--- * Emitter
+--- * Logger
+--- * Mutex
+--- * Permissions
+--- * Stopwatch
+--- * Time
+---
+--- ## Sub-Modules
+---
+--- In addition to classes, the Discordia module has some generic modules that may be helpful in writing your applications.
+---
+--- ### class
+---
+--- Used to create custom classes and provides tools for inspecting classes and class instances.
+---
+--- ### enums
+---
+--- Used to create custom enumerations or access a variety of pre-defined enumerations.
+---
+--- ### extensions
+---
+--- Extensions to the Lua standard library. Functions can be used directly or can be loaded into the Lua global tables.
+---
+--- ### package
+---
+--- Not to be confused with the global Lua module, this Discordia's literal package metadata, used to define the module when it is uploaded to lit, the Luvit Invention Toolkit.
+---
+--- ### storage
+---
+--- An empty table that can be used to store user data.
+--- This may be used an alternative to storing values on class instances or in global variables, both of which are not recommended.
+---
+---@field Client Client
+---@field Clock Clock
+---@field Color Color
+---@field Date Date
+---@field Deque Deque
+---@field Emitter Emitter
+---@field Logger Logger
+---@field Mutex Mutex
+---@field Permissions Permissions
+---@field Stopwatch Stopwatch
+---@field Time Time
+---@field class class
+---@field enums enums
+---@field extensions function
+---@field package table<string, any>
+---@field storage table<any, any>
+---@class discordia
+local discordia = {}

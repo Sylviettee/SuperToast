@@ -8,6 +8,7 @@ return {
    homepage = 'https://github.com/SovietKitsune/SuperToast',
    dependencies = {},
    files = {
-      '**.lua', '!test*', '!util' -- Utils are for running and ops
+      '**.lua', '!test*', '!util', -- Utils are for running and ops
+      'template.lua' -- Generates more types
    }
 }
