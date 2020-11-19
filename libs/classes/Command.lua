@@ -1,12 +1,17 @@
 local discordia = require('discordia')
 
----@type stringx
-local stringx = require('utils/stringx')
+---@type typed
+local typed = require('utils/typed')
 ---@type TypedArray
 local TypedArray = require('classes/TypedArray')
 
 local class = discordia.class
 local enums = discordia.enums
+
+local tString = typed.func(_, 'string')
+local tFunc = typed.func(_, 'function')
+local tFuncs = typed.func(_, 'function[]')
+local tNumber = typed.func('_', 'number')
 
 --- The command class to handle most functionality
 ---@class Command
@@ -130,7 +135,7 @@ end
 ---@param desc string
 ---@return Command
 function Command:description(desc)
-   assert(type(desc) == 'string', 'The description must be a string')
+   tString(desc)
 
    self._description = desc
 
@@ -141,7 +146,7 @@ end
 ---@param usage string
 ---@return Command
 function Command:usage(usage)
-   assert(type(usage) == 'string', 'The usage must be a string')
+   tString(usage)
 
    self._usage = usage
 
@@ -170,7 +175,7 @@ end
 ---@param cooldown number
 ---@return Command
 function Command:cooldown(cooldown)
-   assert(type(cooldown) == 'number', 'The cooldown must be a number')
+   tNumber(cooldown)
 
    self._cooldown = cooldown
 
@@ -191,9 +196,8 @@ end
 ---@return Command
 function Command:check_any(...)
    local funcs = {...}
-   for _, v in pairs(funcs) do
-      assert(type(v) == 'function', 'The check must be a function')
-   end
+
+   tFuncs(funcs)
 
    self:check(function(msg, args)
       for _, v in pairs(funcs) do
@@ -286,7 +290,7 @@ end
 ---@param func fun(msg:Message, args: string[], client: SuperToastClient):void
 ---@return Command
 function Command:execute(func)
-   assert(type(func) == 'function', 'The execute callback must be a function')
+   tFunc(func)
 
    self._execute = func
 

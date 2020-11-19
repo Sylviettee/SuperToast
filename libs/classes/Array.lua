@@ -35,6 +35,13 @@ function Array:get(k)
    return self._data[k]
 end
 
+--- Set an item at a specific index
+---@param k number
+---@param v any
+function Array:set(k, v)
+   self._data[k] = v
+end
+
 --- Iterate over an array
 function Array:iter()
    local i = 0

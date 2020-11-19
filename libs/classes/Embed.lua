@@ -2,6 +2,11 @@ local discordia = require('discordia')
 local enums = discordia.enums
 local class = discordia.class
 
+local typed = require('utils/typed')
+
+local tString = typed.func(_, 'string')
+local tNumber = typed.func(_, 'number')
+
 --- An embed class to allow structuring embeds easier
 ---@class Embed
 local Embed = class('Embed')
@@ -18,7 +23,8 @@ end
 ---@param title string
 ---@return Embed
 function Embed:setTitle(title)
-   assert(type(title) == 'string', 'The title must be a string')
+   tString(title)
+
    self._embed.title = title:sub(0, 256)
 
    return self
@@ -28,7 +34,7 @@ end
 ---@param desc string
 ---@return Embed
 function Embed:setDescription(desc)
-   assert(type(desc) == 'string', 'The description must be a string')
+   tString(desc)
 
    self._embed.description = desc:sub(2048)
 
@@ -39,7 +45,7 @@ end
 ---@param color number
 ---@return Embed
 function Embed:setColor(color)
-   assert(type(color) == 'number', 'The color must be a number')
+   tNumber(color)
 
    self._embed.color = color
 
@@ -55,9 +61,7 @@ end
 function Embed:addField(name, value, inline, ignore)
    inline = inline or false
 
-   assert(type(name) == 'string', 'The name must be a string')
-   assert(type(value) == 'string', 'The value must be a string')
-   assert(type(inline) == 'boolean', 'Inline must be a boolean')
+   typed.func(_, 'string', 'string', 'boolean')(name, value, inline)
 
    self._embed.fields = self._embed.fields or {}
 
@@ -81,9 +85,7 @@ function Embed:setAuthor(name, icon, url)
    icon = icon or ''
    url = url or ''
 
-   assert(type(name) == 'string', 'The name must be a string')
-   assert(type(icon) == 'string', 'The icon must be a string')
-   assert(type(url) == 'string', 'The url must be a string')
+   typed.func(_, 'string', 'string', 'string')(name, icon, url)
 
    self._embed.author = {name = name:sub(0, 256), icon_url = icon, url = url}
 
@@ -97,8 +99,7 @@ end
 function Embed:setFooter(text, icon)
    icon = icon or ''
 
-   assert(type(text) == 'string', 'The text must be a string')
-   assert(type(icon) == 'string', 'The icon must be a string')
+   typed.func(_, 'string', 'string')(text, icon)
 
    self._embed.footer = {text = text:sub(0, 2048), icon_url = icon}
 
@@ -109,7 +110,7 @@ end
 ---@param img string
 ---@return Embed
 function Embed:setImage(img)
-   assert(type(img) == 'string', 'The image must be a string')
+   tString(img)
 
    self._embed.image = {url = img}
 
@@ -120,7 +121,7 @@ end
 ---@param url string
 ---@return Embed
 function Embed:setThumbnail(url)
-   assert(type(url) == 'string', 'The url must be a string')
+   tString(url)
 
    self._embed.thumbnail = {url = url}
 
@@ -133,7 +134,7 @@ end
 function Embed:setTimestamp(date)
    date = date or os.date('!%Y-%m-%dT%TZ')
 
-   assert(type(date) == 'string', 'The date must be a string')
+   tString(date)
 
    self._embed.timestamp = date
 
@@ -142,7 +143,7 @@ end
 
 --- Set the url of the embed
 function Embed:setURL(url)
-   assert(type(url) == 'string', 'The url must be a string')
+   tString(url)
 
    self._embed.url = url
 

@@ -10,7 +10,8 @@ local SuperToast = {
    Subcommand = require('classes/Subcommand'),
 
    stringx = require('utils/stringx'),
-   dotenv = require('utils/dotenv')
+   dotenv = require('utils/dotenv'),
+   typed = require('utils/typed')
 }
 
 return SuperToast

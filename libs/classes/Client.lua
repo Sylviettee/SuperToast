@@ -1,15 +1,15 @@
-local discordia = require 'discordia'
+local discordia = require('discordia')
 
 local class = discordia.class
 
 ---@type stringx
-local stringx = require 'utils/stringx'
+local stringx = require('utils/stringx')
 
 ---@type TypedArray
-local TypedArray = require 'classes/TypedArray'
+local TypedArray = require('classes/TypedArray')
 
 ---@type Option
-local Option = require 'classes/Option'
+local Option = require('classes/Option')
 
 local clientOptions = Option({
    prefix = {'string', nil, '!'},
