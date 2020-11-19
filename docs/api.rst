@@ -17,6 +17,10 @@ Dotenv
 -------
 .. lua:automodule:: dotenv
 
+Typed
+------
+.. lua:automodule:: typed
+
 Classes
 ========
 
