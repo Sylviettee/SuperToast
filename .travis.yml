@@ -1,0 +1,22 @@
+language: c
+
+addons:
+  apt:
+    packages:
+      - curl
+      - lua5.1
+      - luarocks
+
+branches:
+  only:
+    - master
+
+install:
+  - curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sh
+  - sudo mv ./luvit /bin/
+  - sudo mv ./lit /bin/
+  - lit install SinisterRectus/discordia
+  - sudo luarocks --lua-version=5.1 install busted
+
+script:
+  - luvit testRunner.lua
