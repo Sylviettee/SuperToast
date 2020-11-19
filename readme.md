@@ -8,7 +8,7 @@
 <div align="center">
     <img alt="Read the Docs" src="https://img.shields.io/readthedocs/supertoast?style=flat-square">
     <img alt="Travis (.org)" src="https://img.shields.io/travis/sovietkitsune/supertoast?style=flat-square">
-    <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/sovietkitsune/toast?style=flat-square">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/sovietkitsune/supertoast/Testing?style=flat-square">
 </div>
 
 <br/>
