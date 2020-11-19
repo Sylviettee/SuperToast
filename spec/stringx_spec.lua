@@ -70,10 +70,7 @@ describe('stringx', function()
 
    describe('.fancyformat', function()
       it('should fancy format a string', function()
-         assert.are.same(
-            'this is fancy',
-            tostring(stringx.fancyformat '%s %s %s' 'this' 'is' 'fancy')
-         )
+         assert.are.same('this is fancy', tostring(stringx.fancyformat '%s %s %s' 'this' 'is' 'fancy'))
       end)
    end)
 end)

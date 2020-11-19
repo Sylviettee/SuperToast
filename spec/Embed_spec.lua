@@ -1,44 +1,24 @@
 local function validate(embed)
    local json = embed:toJSON()
 
-   assert(
-      json.title and #json.title <= 256 or true,
-      'Title must be less than or equal to 256 characters'
-   )
+   assert(json.title and #json.title <= 256 or true, 'Title must be less than or equal to 256 characters')
 
-   assert(
-      json.description and #json.description <= 2048 or true,
-      'Description must be less than or equal to 2048 characters'
-   )
+   assert(json.description and #json.description <= 2048 or true,
+          'Description must be less than or equal to 2048 characters')
 
-   assert(
-      json.fields and #json.fields <= 25 or true,
-      'Fields must be less than or equal to 25 characters'
-   )
+   assert(json.fields and #json.fields <= 25 or true, 'Fields must be less than or equal to 25 characters')
 
    if json.fields then
       for _, v in pairs(json.fields) do
-         assert(
-            #v.name <= 256,
-            'Field names must be less than or equal to 256 characters'
-         )
+         assert(#v.name <= 256, 'Field names must be less than or equal to 256 characters')
 
-         assert(
-            #v.value <= 1024,
-            'Field values must be less than or equal to 1024 characters'
-         )
+         assert(#v.value <= 1024, 'Field values must be less than or equal to 1024 characters')
       end
    end
 
-   assert(
-      json.footer and #json.footer.text <= 2048 or true,
-      'The footer must be less than or equal to 2048 characters'
-   )
+   assert(json.footer and #json.footer.text <= 2048 or true, 'The footer must be less than or equal to 2048 characters')
 
-   assert(
-      json.author and #json.author.name <= 256 or true,
-      'The author must be less than or equal to 256 characters'
-   )
+   assert(json.author and #json.author.name <= 256 or true, 'The author must be less than or equal to 256 characters')
 
    -- Total character limit is not enforced... yet
 end

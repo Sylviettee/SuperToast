@@ -89,7 +89,7 @@ SPACED_KEY = parsed
       end)
 
       it('should retain leading single quote', function()
-         assert.are.same("'retained", parsed.RETAIN_LEADING_SQUOTE)
+         assert.are.same('\'retained', parsed.RETAIN_LEADING_SQUOTE)
       end)
 
       it('should retain tailing double quote', function()
@@ -97,7 +97,7 @@ SPACED_KEY = parsed
       end)
 
       it('should retain tailing single quote', function()
-         assert.are.same("retained'", parsed.RETAIN_TRAILING_SQUOTE)
+         assert.are.same('retained\'', parsed.RETAIN_TRAILING_SQUOTE)
       end)
 
       it('should retain inner quotes when quoted', function()
@@ -119,31 +119,19 @@ SPACED_KEY = parsed
       it('should parse \\r endings', function()
          local newParsed = toast.dotenv.parse('SERVER=localhost\rPASSWORD=password\rDB=tests\r')
 
-         assert.are.same({
-            SERVER = 'localhost',
-            PASSWORD = 'password',
-            DB = 'tests'
-         }, newParsed)
+         assert.are.same({SERVER = 'localhost', PASSWORD = 'password', DB = 'tests'}, newParsed)
       end)
 
       it('should parse \\n endings', function()
          local newParsed = toast.dotenv.parse('SERVER=localhost\nPASSWORD=password\nDB=tests\n')
 
-         assert.are.same({
-            SERVER = 'localhost',
-            PASSWORD = 'password',
-            DB = 'tests'
-         }, newParsed)
+         assert.are.same({SERVER = 'localhost', PASSWORD = 'password', DB = 'tests'}, newParsed)
       end)
 
       it('should parse \\r\\n endings', function()
          local newParsed = toast.dotenv.parse('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n')
 
-         assert.are.same({
-            SERVER = 'localhost',
-            PASSWORD = 'password',
-            DB = 'tests'
-         }, newParsed)
+         assert.are.same({SERVER = 'localhost', PASSWORD = 'password', DB = 'tests'}, newParsed)
       end)
    end)
 end)

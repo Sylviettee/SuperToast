@@ -13,7 +13,7 @@ end
 local function split(str, delim)
    local out = {}
 
-   for s in gmatch(str, "([^" .. delim .. "]+)") do
+   for s in gmatch(str, '([^' .. delim .. ']+)') do
       table.insert(out, s)
    end
 

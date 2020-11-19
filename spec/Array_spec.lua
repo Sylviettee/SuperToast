@@ -14,7 +14,9 @@ describe('Array', function()
 
          local array = toast.Array {2, 9, 3, 2}
 
-         for i, v in pairs(array) do s(i, v) end
+         for i, v in pairs(array) do
+            s(i, v)
+         end
 
          assert.spy(s).was.called(4)
          assert.spy(s).was.called_with(2, 9)
@@ -127,7 +129,9 @@ describe('Array', function()
       it('should reduce the items in the new array', function()
          local array = toast.Array {5, 2, 8, 9}
 
-         local newArr = array:filter(function() return false end)
+         local newArr = array:filter(function()
+            return false
+         end)
 
          assert.is.equal(0, #newArr)
       end)
@@ -149,7 +153,9 @@ describe('Array', function()
       it('should return the found item', function()
          local array = toast.Array {2, 8, 1, '6'}
 
-         local item = array:find(function(v) return v == '6' end)
+         local item = array:find(function(v)
+            return v == '6'
+         end)
 
          assert.is.equal('6', item)
       end)
