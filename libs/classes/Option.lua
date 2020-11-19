@@ -21,7 +21,7 @@ local function getInfo(v)
 
       default = v[3]
    else
-      error(f('Expected value %s to be a string | function | table, instead got %s', type(v)))
+      error(f('Expected value to be a string | function | table, instead got %s', type(v)))
    end
 
    return vType, name, default, v[4]

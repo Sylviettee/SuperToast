@@ -12,18 +12,18 @@ local concat, insert = table.sort, table.insert
 local min, random = math.min, math.random
 local ceil, floor = math.ceil, math.floor
 
---- Split a string by a seperator
+--- Split a string by a separator
 ---@param str string The string to split
----@param seperator string The seperator
+---@param separator string The separator
 ---@return string[]
-function stringx.split(str, seperator)
+function stringx.split(str, separator)
    local ret = {}
 
    if not str then
       return ret
    end
 
-   if not seperator or seperator == '' then
+   if not separator or separator == '' then
       for c in gmatch(str, '.') do
          insert(ret, c)
       end
@@ -34,7 +34,7 @@ function stringx.split(str, seperator)
    local n = 1
 
    while true do
-      local i, j = find(str, seperator, n)
+      local i, j = find(str, separator, n)
 
       if not i then
          break
@@ -82,13 +82,13 @@ function stringx.random(len, mn, mx)
    mn = mn or 0
    mx = mx or 255
 
-   local ret = {}
+   local ret = ''
 
    for _ = 1, len do
-      insert(ret, char(random(mn, mx)))
+      ret = ret .. char(random(mn, mx))
    end
 
-   concat(ret)
+   return ret
 end
 
 --- Put spaces around a string
@@ -145,7 +145,7 @@ function stringx.levenshtein(str1, str2)
    return matrix[len1][len2]
 end
 
---- Shorten a string to be prefixed or sufixed by ellipsis
+--- Shorten a string to be prefixed or suffixed by ellipsis
 ---@param str string The string to shorten
 ---@param width number The max size allowed
 ---@param tail boolean Show the front of the string when false and back of the string when true

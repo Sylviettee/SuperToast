@@ -31,7 +31,7 @@ end
 --- Get an item at a specific index
 ---@param k number The key to get the value of
 ---@return any
-function Array:__index(k)
+function Array:get(k)
    return self._data[k]
 end
 
@@ -60,7 +60,7 @@ end
 --- Pop the item from the end of the array and return it
 ---@param pos number The position to pop
 function Array:pop(pos)
-   table.remove(self._data, pos)
+   return table.remove(self._data, pos)
 end
 
 --- Loop over the array and call the function each time
@@ -140,14 +140,14 @@ end
 --- Reverse an array, does not affect original array
 ---@return Array
 function Array:reverse()
-   local clone = self:clone()
-   local arr = Array()
+   local clone = self:copy()
+   local tbl = {}
 
    for i = 1, #clone do
-      arr[i] = clone:pop()
+      tbl[i] = clone:pop()
    end
 
-   return arr
+   return Array(tbl)
 end
 
 return Array

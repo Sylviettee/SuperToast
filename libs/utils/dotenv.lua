@@ -4,10 +4,20 @@ local dotenv = {}
 
 local stringx = require 'utils/stringx'
 
-local match, gsub
+local match, gmatch, gsub
 do
    local _obj_0 = require('rex')
-   match, gsub = _obj_0.match, _obj_0.gsub
+   match, gmatch, gsub = _obj_0.match, _obj_0.gmatch, _obj_0.gsub
+end
+
+local function split(str, delim)
+   local out = {}
+
+   for s in gmatch(str, "([^" .. delim .. "]+)") do
+      table.insert(out, s)
+   end
+
+   return out
 end
 
 local readFileSync = require('fs').readFileSync
@@ -16,6 +26,7 @@ local resolve = require('path').resolve
 local NEWLINE = '\n'
 local RE_INI_KEY_VAL = [[^\s*([\w.-]+)\s*=\s*(.*)?\s*$]]
 local RE_NEWLINES = [[\\n]]
+local NEWLINES_MATCH = [[\n|\r|\r\n]]
 
 --- Parse a dotenv file and return the data
 ---@param src string
@@ -24,7 +35,7 @@ local RE_NEWLINES = [[\\n]]
 function dotenv.parse(src, options)
    local debug = options and options.debug
    local obj = {}
-   for idx, line in pairs(stringx.split(src, NEWLINE)) do
+   for idx, line in pairs(split(src, NEWLINES_MATCH)) do
       local keyValueArr = {match(line, RE_INI_KEY_VAL)}
       if keyValueArr ~= nil and #keyValueArr ~= 0 then
          local key = keyValueArr[1]
