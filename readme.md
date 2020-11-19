@@ -6,9 +6,9 @@
 </div>
 
 <div align="center">
-    <a href='https://supertoast.readthedocs.io/en/latest/?badge=latest'>
-        <img src='https://readthedocs.org/projects/supertoast/badge/?version=latest' alt='Documentation Status' />
-    </a>
+    <img alt="Read the Docs" src="https://img.shields.io/readthedocs/supertoast?style=flat-square">
+    <img alt="Travis (.org)" src="https://img.shields.io/travis/sovietkitsune/supertoast?style=flat-square">
+    <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/sovietkitsune/toast?style=flat-square">
 </div>
 
 <br/>
