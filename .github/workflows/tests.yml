@@ -26,6 +26,7 @@ jobs:
         run: |
           luarocks install busted
           eval `luarocks path`
+          lit install SinisterRectus/discordia
 
       - name: test
         run: |
