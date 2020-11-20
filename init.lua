@@ -9,8 +9,12 @@ local SuperToast = {
    Option = require('classes/Option'),
    Subcommand = require('classes/Subcommand'),
 
-   stringx = require('utils/stringx'),
+   commandHandler = require('utils/commandHandler'),
    dotenv = require('utils/dotenv'),
+   errorResolver = require('utils/errorResolver'),
+   help = require('utils/help'),
+   ms = require('utils/ms'),
+   stringx = require('utils/stringx'),
    typed = require('utils/typed')
 }
 

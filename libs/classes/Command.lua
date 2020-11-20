@@ -1,3 +1,4 @@
+---@type discordia
 local discordia = require('discordia')
 
 ---@type typed
@@ -15,8 +16,17 @@ local tNumber = typed.func('_', 'number')
 
 --- The command class to handle most functionality
 ---@class Command
+---@field public isSub boolean
 ---@field public name string
+---@field public description string
+---@field public usage string
+---@field public cooldown number
+---@field public flags table<string, boolean>
 ---@field public aliases string[]
+---@field public examples string[]
+---@field public user_permissions string[]
+---@field public bot_permissions string[]
+---@field public subcommands Subcommand[]
 local Command, get = class('Command')
 
 --- Create a new command
@@ -33,7 +43,7 @@ local Command, get = class('Command')
 ---@vararg string
 ---@return Command
 function Command:__init(name, ...)
-   assert(type(name) == 'string', 'The command name must be a string')
+   tString(name)
    self._name = name
 
    for _, v in pairs({...}) do
@@ -62,8 +72,6 @@ function Command:toRun(message, args)
    if isSub then
       return isSub:toRun(message)
    end
-
-   -- TODO the other checks
 
    ---@type GuildTextChannel
    local channel = message.channel
@@ -124,7 +132,7 @@ function Command:toRun(message, args)
    for check in self._checks:iter() do
       local res = check(message, args)
       if res ~= true then
-         return 'CUSTOM' .. tostring(res)
+         return 'CUSTOM_' .. tostring(res or 'UNKNOWN')
       end
    end
 
@@ -138,6 +146,15 @@ function Command:description(desc)
    tString(desc)
 
    self._description = desc
+
+   return self
+end
+
+--- Attach an example to a command
+---@param example string
+---@return Command
+function Command:example(example)
+   self._examples:push(example)
 
    return self
 end
@@ -303,6 +320,54 @@ end
 
 function get:aliases()
    return self._aliases
+end
+
+function get:getDescription()
+   return self._description
+end
+
+function get:getExamples()
+   return self._examples
+end
+
+function get:getUsage()
+   return self._usage
+end
+
+function get:flags()
+   return {guild_only = self._guild_only, nsfw_only = self._nsfw_only}
+end
+
+function get:getCooldown()
+   return self._cooldown
+end
+
+function get:user_permissions()
+   local perms = {}
+
+   for _, v in pairs(self._user_permissions) do
+      table.insert(perms, enums.permission(v))
+   end
+
+   return perms
+end
+
+function get:bot_permissions()
+   local perms = {}
+
+   for _, v in pairs(self._bot_permissions) do
+      table.insert(perms, enums.permission(v))
+   end
+
+   return perms
+end
+
+function get:subcommands()
+   return self._subcommands
+end
+
+function get:isSub()
+   return false
 end
 
 return Command

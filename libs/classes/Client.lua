@@ -11,9 +11,14 @@ local TypedArray = require('classes/TypedArray')
 ---@type Option
 local Option = require('classes/Option')
 
+local ch = require('utils/commandHandler')
+local er = require('utils/errorResolver')
+
 local clientOptions = Option({
    prefix = {'string', nil, '!'},
    defaultHelp = {'boolean', nil, true},
+   commandHandler = {'function', nil, ch, 'toast.commandHandler'},
+   errorResolver = {'function', nil, er, 'toast.errorResolver'},
    owners = {'table', 'string[]', {}, '{}'}
 })
 
@@ -37,12 +42,16 @@ local f = string.format
 ---@field public lastShard number | "-1"
 
 ---@class SuperToastOptions
+---@field public commandHandler fun(client: SuperToastClient, msg: Message) | "toast.commandHandler"
+---@field public errorResolver fun(cmd: Command, err: string):string | "toast.errorResolver"
 ---@field public defaultHelp boolean | "true"
 ---@field public owners string[] | "{}"
 ---@field public prefix string | "'!'"
 
 --- The SuperToast client with all the fun features
 ---@class SuperToastClient: Client
+---@field commands TypedArray
+---@field config SuperToastOptions
 local Helper, get = class('SuperToast Client', discordia.Client)
 
 --- Create a new SuperToast client
@@ -57,6 +66,7 @@ function Helper:__init(token, options, discOptions)
 
    assert(token, 'A token must be passed!')
 
+   ---@type SuperToastOptions
    self._config = clientOptions:validate(options or {})
    self._token = token
 
@@ -70,49 +80,7 @@ function Helper:__init(token, options, discOptions)
 
    ---@param msg Message
    self:on('messageCreate', function(msg)
-      local pre = self._config.prefix
-
-      if not stringx.startswith(msg.content, pre) then
-         return
-      end
-
-      if msg.author.bot then
-         return
-      end
-
-      local command = string.match(msg.content, pre .. '(%S+)'):lower()
-
-      if not command then
-         return
-      end
-
-      local args = {}
-
-      for arg in string.gmatch(string.match(msg.content, pre .. '%S+%s*(.*)'), '%S+') do
-         table.insert(args, arg)
-      end
-
-      local found = self._commands:find(function(cmd)
-         return cmd.name == command or cmd.aliases:find(function(alias)
-            return alias == command
-         end)
-      end)
-
-      if found then
-         local toRun = found:toRun(msg, args)
-
-         if type(toRun) == 'string' then
-            return toRun -- TODO; use config table
-         else
-            local succ, err = pcall(toRun, msg, args)
-
-            if not succ then
-               msg:reply('Something went wrong, try again later')
-
-               self:error(err)
-            end
-         end
-      end
+      self._config.commandHandler(self, msg)
    end)
 end
 
@@ -130,6 +98,14 @@ end
 ---@param command Command
 function Helper:addCommand(command)
    self._commands:push(command)
+end
+
+function get:commands()
+   return self._commands
+end
+
+function get:config()
+   return self._config
 end
 
 return Helper

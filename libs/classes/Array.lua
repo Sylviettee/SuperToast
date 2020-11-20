@@ -64,6 +64,12 @@ function Array:push(item)
    table.insert(self._data, item)
 end
 
+--- Concat an array
+---@param sep string
+function Array:concat(sep)
+   return table.concat(self._data, sep)
+end
+
 --- Pop the item from the end of the array and return it
 ---@param pos number The position to pop
 function Array:pop(pos)
@@ -100,6 +106,19 @@ function Array:find(fn)
    for i, v in pairs(self) do
       if fn(v) then
          return v, i
+      end
+   end
+end
+
+--- Similar to array:find except returns what the function returns as long as its truthy
+---@param fn fun(val:any):any
+---@return any, number|nil
+function Array:search(fn)
+   for i, v in pairs(self) do
+      local res = fn(v)
+
+      if res then
+         return res, i
       end
    end
 end
