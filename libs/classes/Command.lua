@@ -27,6 +27,7 @@ local tNumber = typed.func('_', 'number')
 ---@field public user_permissions string[]
 ---@field public bot_permissions string[]
 ---@field public subcommands Subcommand[]
+---@field public rawExecute function
 local Command, get = class('Command')
 
 --- Create a new command
@@ -368,6 +369,10 @@ end
 
 function get:isSub()
    return false
+end
+
+function get:rawExecute()
+   return self._execute
 end
 
 return Command

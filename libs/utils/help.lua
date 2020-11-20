@@ -8,6 +8,14 @@ local ms = require('utils/ms')
 local help = command('help'):description('Get help on a specific command'):usage('<name>'):example('help')
 
 help:execute(function(msg, args, client)
+   if not args[1] then
+      local cmd = help.subcommands:find(function(x)
+         return x.name == 'all'
+      end).rawExecute
+
+      return cmd(msg, args, client)
+   end
+
    ---@type Command
    local cmd = client.commands:search(function(comm)
       local q = args[1]
