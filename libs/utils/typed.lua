@@ -39,10 +39,10 @@ function typed.whatIs(this)
       if type(this) == 'table' then
          if typed.isArray(this) then
             if #this > 0 then
-               local currentType = type(this[1])
+               local currentType = typed.whatIs(this[1])
 
                for _, v in pairs(this) do
-                  if type(v) ~= currentType and currentType ~= 'any' then
+                  if typed.whatIs(v) ~= currentType and currentType ~= 'any' then
                      currentType = 'any'
                   end
                end
@@ -57,15 +57,15 @@ function typed.whatIs(this)
 
             for i, v in pairs(this) do
                if not keyType then
-                  keyType = type(i)
-                  valueType = type(v)
+                  keyType = typed.whatIs(i)
+                  valueType = typed.whatIs(v)
                end
 
-               if type(i) ~= keyType and keyType ~= 'any' then
+               if typed.whatIs(i) ~= keyType and keyType ~= 'any' then
                   keyType = 'any'
                end
 
-               if type(v) ~= valueType and valueType ~= 'any' then
+               if typed.whatIs(v) ~= valueType and valueType ~= 'any' then
                   valueType = 'any'
                end
             end
