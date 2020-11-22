@@ -47,10 +47,6 @@ function Command:__init(name, ...)
    tString(name)
    self._name = name
 
-   for _, v in pairs({...}) do
-      assert(type(v) == 'string', 'The command aliases must be strings')
-   end
-
    self._examples = TypedArray 'string'
    self._aliases = TypedArray 'string'
    self._user_roles = TypedArray 'string'
@@ -59,6 +55,10 @@ function Command:__init(name, ...)
    self._bot_permissions = TypedArray 'number'
    self._checks = TypedArray 'function'
    self._subcommands = TypedArray 'Subcommand'
+
+   for _, v in pairs({...}) do
+      self._aliases:push(v)
+   end
 end
 
 --- Check a message to see if it matches all the criteria listed
