@@ -163,7 +163,7 @@ function Embed:send(channel)
       ---@type Permissions
       local perms = channel.guild.me:getPermissions(channel)
 
-      if perms:has(enums.permissions.embedLinks) then
+      if perms:has(enums.permission.embedLinks) then
          return channel:send({embed = self:toJSON()})
       else
          return channel:send('I do not have permissions to send embeds!')
