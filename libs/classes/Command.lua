@@ -2,7 +2,7 @@
 local discordia = require('discordia')
 
 ---@type typed
-local typed = require('utils/typed')
+local typed = require('typed')
 ---@type TypedArray
 local TypedArray = require('classes/TypedArray')
 

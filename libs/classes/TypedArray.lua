@@ -1,6 +1,6 @@
 local class = require('discordia').class
 local Array = require('classes/Array')
-local typed = require('utils/typed')
+local typed = require('typed')
 
 local f = string.format
 

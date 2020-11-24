@@ -2,7 +2,7 @@ local discordia = require('discordia')
 local enums = discordia.enums
 local class = discordia.class
 
-local typed = require('utils/typed')
+local typed = require('typed')
 
 local tString = typed.func(_, 'string')
 local tNumber = typed.func(_, 'number')
