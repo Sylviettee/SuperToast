@@ -22,7 +22,7 @@ jobs:
         run: |
           luarocks install busted
           eval `luarocks path`
-          ./lit install SinisterRectus/discordia
+          ./lit install
 
       - name: test
         run: |
