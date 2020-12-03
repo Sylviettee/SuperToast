@@ -5,6 +5,8 @@ local discordia = require('discordia')
 local typed = require('typed')
 ---@type TypedArray
 local TypedArray = require('classes/TypedArray')
+---@type Array
+local Array = require('classes/Array')
 
 local class = discordia.class
 local enums = discordia.enums
@@ -70,8 +72,11 @@ function Command:toRun(message, args)
       return v.name == args[1]
    end)
 
+   ---@type Array
+   local _ = Array(args)
+
    if isSub then
-      return isSub:toRun(message)
+      return isSub:toRun(message, _:slice(2))
    end
 
    ---@type GuildTextChannel

@@ -104,6 +104,18 @@ function Helper:addCommand(command)
    self._commands:push(command)
 end
 
+--- Remove a subcommand from the client
+---@param command Command
+function Helper:removeCommand(command)
+   local _, i = self._commands:find(function(val)
+      return val.name == command.name
+   end)
+
+   if i then
+      self._commands:pop(i)
+   end
+end
+
 
 local function parseFile(obj, files)
    if type(obj) == 'string' then
