@@ -1,5 +1,5 @@
 -- Do not touch, automatically generated!
--- Generated on Sat Dec  5 22:38:26 2020
+-- Generated on Sun Dec  6 00:08:35 2020
 
 ---Represents a Discord guild member. Though one user may be a member in more than one guild, each presence is represented by a different member object associated with that guild. Note that any method or property that exists for the User class is also available in the Member class.
 ---@class Member: UserPresence
@@ -14,6 +14,8 @@
 ---@field public guild Guild The guild in which this member exists.
 ---@field public highestRole Role The highest positioned role that the member has. If the member has no explicit roles, then this is equivalent to `Member.guild.defaultRole`.
 local Member = {}
+---@type Member | fun():Member
+Member = Member
 ---Returns a color object that represents the member's color as determined by its highest colored role. If the member has no colored roles, then the default color with a value of 0 is returned.
 ---@return Color
 function Member:getColor() end
@@ -80,6 +82,8 @@ function Member:__init() end
 ---@field public client Client A shortcut to the client object to which this container is visible.
 ---@field public parent Container | Client The parent object of to which this container is a child. For example, the parent of a role is the guild in which the role exists.
 local Container = {}
+---@type Container | fun():Container
+Container = Container
 ---Defines the behavior of the `==` operator. Allows containers to be directly compared according to their type and `__hash` return values.
 ---@return boolean
 function Container:__eq() end
@@ -95,6 +99,8 @@ function Container:__init() end
 ---@field public first any The first object in the array
 ---@field public last any The last object in the array
 local ArrayIterable = {}
+---@type ArrayIterable | fun():ArrayIterable
+ArrayIterable = ArrayIterable
 ---Returns an iterator for all contained objects in a consistent order.
 ---@return function
 function ArrayIterable:iter() end
@@ -105,6 +111,8 @@ function ArrayIterable:__init() end
 ---Iterable class that wraps another iterable and serves a subset of the objects that the original iterable contains.
 ---@class FilteredIterable: Iterable
 local FilteredIterable = {}
+---@type FilteredIterable | fun():FilteredIterable
+FilteredIterable = FilteredIterable
 ---Returns an iterator that returns all contained objects. The order of the objects is not guaranteed.
 ---@return function
 function FilteredIterable:iter() end
@@ -125,6 +133,8 @@ function FilteredIterable:__init() end
 ---@field public defaultAvatar number The default avatar for the webhook. See the `defaultAvatar` enumeration for a human-readable representation. This should always be `defaultAvatar.blurple`.
 ---@field public defaultAvatarURL string Equivalent to the result of calling `Webhook:getDefaultAvatarURL()`.
 local Webhook = {}
+---@type Webhook | fun():Webhook
+Webhook = Webhook
 ---Returns a URL that can be used to view the webhooks's full avatar. If provided, the size must be a power of 2 while the extension must be a valid image format. If the webhook does not have a custom avatar, the default URL is returned.
 ---@param size number
 ---@param ext string
@@ -164,6 +174,8 @@ function Webhook:__init() end
 ---@field public groupChannels Cache An iterable cache of all group channels that are visible to the client. Only user-accounts should have these.
 ---@field public relationships Cache An iterable cache of all relationships that are visible to the client. Only user-accounts should have these.
 local Client = {}
+---@type Client | fun(options: table):Client
+Client = Client
 ---Authenticates the current user via HTTPS and launches as many WSS gateway shards as are required or requested. By using coroutines that are automatically managed by Luvit libraries and a libuv event loop, multiple clients per process and multiple shards per client can operate concurrently. This should be the last method called after all other code and event handlers have been initialized. If a presence table is provided, it will act as if the user called `setStatus` and `setGame` after `run`.
 ---@param token string
 ---@param presence table
@@ -245,6 +257,8 @@ function Client:__init(options) end
 ---Iterable class that holds references to Discordia Class objects in no particular order.
 ---@class Cache: Iterable
 local Cache = {}
+---@type Cache | fun():Cache
+Cache = Cache
 ---Returns an individual object by key, where the key should match the result of calling `__hash` on the contained objects. Unlike Iterable:get, this method operates with O(1) complexity.
 ---@param k any
 ---@return any
@@ -266,6 +280,8 @@ function Cache:__init() end
 ---@field public reason string | nil The reason provided by the user for the change.
 ---@field public guild Guild The guild in which this audit log entry was found.
 local AuditLogEntry = {}
+---@type AuditLogEntry | fun():AuditLogEntry
+AuditLogEntry = AuditLogEntry
 ---Returns two tables of the target's properties before the change, and after the change.
 ---@return table table
 function AuditLogEntry:getBeforeAfter() end
@@ -304,6 +320,8 @@ function AuditLogEntry:__init() end
 ---@field public emojiHash string | nil The discord hash for the emoji used in this presence if one is set. This will be the raw string for a standard emoji.
 ---@field public emojiURL string | nil string The URL that can be used to view a full version of the emoji used in this activity if one is set and if it is a custom emoji.
 local Activity = {}
+---@type Activity | fun():Activity
+Activity = Activity
 ---Create a new Activity
 ---@return Activity
 function Activity:__init() end
@@ -314,6 +332,8 @@ function Activity:__init() end
 ---@field public guild Guild The guild in which this ban object exists.
 ---@field public user User The user that this ban object represents.
 local Ban = {}
+---@type Ban | fun():Ban
+Ban = Ban
 ---Returns `Ban.user.id`
 ---@return string
 function Ban:__hash() end
@@ -327,6 +347,8 @@ function Ban:__init() end
 ---Iterable class that wraps another cache. Objects added to or removed from a secondary cache are also automatically added to or removed from the primary cache that it wraps.
 ---@class SecondaryCache: Iterable
 local SecondaryCache = {}
+---@type SecondaryCache | fun():SecondaryCache
+SecondaryCache = SecondaryCache
 ---Returns an individual object by key, where the key should match the result of calling `__hash` on the contained objects. Unlike the default version, this method operates with O(1) complexity.
 ---@param k any
 ---@return any
@@ -345,6 +367,8 @@ function SecondaryCache:__init() end
 ---@field public connectedMembers TableIterable An iterable of all users connected to the channel.
 ---@field public connection VoiceConnection | nil The VoiceConnection for this channel if one exists.
 local GuildVoiceChannel = {}
+---@type GuildVoiceChannel | fun():GuildVoiceChannel
+GuildVoiceChannel = GuildVoiceChannel
 ---Sets the channel's audio bitrate in bits per second (bps). This must be between 8000 and 96000 (or 128000 for partnered servers). If `nil` is passed, the default is set, which is 64000.
 ---@param bitrate number
 ---@return boolean
@@ -367,6 +391,8 @@ function GuildVoiceChannel:__init() end
 ---@class TextChannel: Channel
 ---@field public messages WeakCache An iterable weak cache of all messages that are visible to the client. Messages that are not referenced elsewhere are eventually garbage collected. To access a message that may exist but is not cached, use `TextChannel:getMessage`.
 local TextChannel = {}
+---@type TextChannel | fun():TextChannel
+TextChannel = TextChannel
 ---Gets a message object by ID. If the object is already cached, then the cached object will be returned; otherwise, an HTTP request is made.
 ---@param id Message | string
 ---@return Message
@@ -418,6 +444,8 @@ function TextChannel:__init() end
 ---Used to periodically execute code according to the ticking of the system clock instead of arbitrary interval.
 ---@class Clock: Emitter
 local Clock = {}
+---@type Clock | fun():Clock
+Clock = Clock
 ---Starts the main loop for the clock. If a truthy argument is passed, then UTC time is used; otherwise, local time is used. As the clock ticks, an event is emitted for every `os.date` value change. The event name is the key of the value that changed and the event argument is the corresponding date table.
 ---@param utc boolean
 ---@return nil
@@ -432,6 +460,8 @@ function Clock:__init() end
 ---Iterable class that wraps a basic Lua table, where order is not guaranteed. Some versions may use a map function to shape the objects before they are accessed.
 ---@class TableIterable: Iterable
 local TableIterable = {}
+---@type TableIterable | fun():TableIterable
+TableIterable = TableIterable
 ---Returns an iterator that returns all contained objects. The order of the objects is not guaranteed.
 ---@return function
 function TableIterable:iter() end
@@ -447,6 +477,8 @@ function TableIterable:__init() end
 ---@field public allowedPermissions number The number representing the total permissions allowed by this overwrite.
 ---@field public deniedPermissions number The number representing the total permissions denied by this overwrite.
 local PermissionOverwrite = {}
+---@type PermissionOverwrite | fun():PermissionOverwrite
+PermissionOverwrite = PermissionOverwrite
 ---Deletes the permission overwrite. This can be undone by creating a new version of the same overwrite.
 ---@return boolean
 function PermissionOverwrite:delete() end
@@ -502,6 +534,8 @@ function PermissionOverwrite:__init() end
 ---@field public textChannels FilteredIterable Iterable of all textChannels in the Category.
 ---@field public voiceChannels FilteredIterable Iterable of all voiceChannels in the Category.
 local GuildCategoryChannel = {}
+---@type GuildCategoryChannel | fun():GuildCategoryChannel
+GuildCategoryChannel = GuildCategoryChannel
 ---Creates a new GuildTextChannel with this category as it's parent. Similar to `Guild:createTextChannel(name)`
 ---@param name string
 ---@return GuildTextChannel
@@ -522,6 +556,8 @@ function GuildCategoryChannel:__init() end
 ---@field public isNews boolean Whether this channel is a news channel of type 5.
 ---@field public members FilteredIterable A filtered iterable of guild members that have permission to read this channel. If you want to check whether a specific member has permission to read this channel, it would be better to get the member object elsewhere and use `Member:hasPermission` rather than check whether the member exists here.
 local GuildTextChannel = {}
+---@type GuildTextChannel | fun():GuildTextChannel
+GuildTextChannel = GuildTextChannel
 ---Creates a webhook for this channel. The name must be between 2 and 32 characters in length.
 ---@param name string
 ---@return Webhook
@@ -558,6 +594,8 @@ function GuildTextChannel:__init() end
 ---@field public g number The value that represents the color's green-level.
 ---@field public b number The value that represents the color's blue-level.
 local Color = {}
+---@type Color | fun(value: number):Color
+Color = Color
 ---Returns a 6-digit hexadecimal string that represents the color value.
 ---@return string
 function Color:toHex() end
@@ -618,6 +656,8 @@ function Color:__init(value) end
 ---@field public icon string | nil The hash for the channel's custom icon, if one is set.
 ---@field public iconURL string | nil The URL that can be used to view the channel's icon, if one is set.
 local GroupChannel = {}
+---@type GroupChannel | fun():GroupChannel
+GroupChannel = GroupChannel
 ---Sets the channel's name. This must be between 1 and 100 characters in length.
 ---@param name string
 ---@return boolean
@@ -651,6 +691,8 @@ function GroupChannel:__init() end
 ---@field public count number The total number of users that have used this reaction.
 ---@field public message Message The message on which this reaction exists.
 local Reaction = {}
+---@type Reaction | fun():Reaction
+Reaction = Reaction
 ---Returns `Reaction.emojiId or Reaction.emojiName`
 ---@return string
 function Reaction:__hash() end
@@ -702,6 +744,8 @@ function Reaction:__init() end
 ---@field public approximatePresenceCount number | nil The approximate count of online members.
 ---@field public approximateMemberCount number | nil The approximate count of all members.
 local Invite = {}
+---@type Invite | fun():Invite
+Invite = Invite
 ---Returns `Invite.code`
 ---@return string
 function Invite:__hash() end
@@ -721,6 +765,8 @@ function Invite:__init() end
 ---@field public category GuildCategoryChannel | nil The parent channel category that may contain this channel.
 ---@field public private boolean Whether the "everyone" role has permission to view this channel. In the Discord channel, private text channels are indicated with a lock icon and private voice channels are not visible.
 local GuildChannel = {}
+---@type GuildChannel | fun():GuildChannel
+GuildChannel = GuildChannel
 ---Sets the channel's name. This must be between 2 and 100 characters in length.
 ---@param name string
 ---@return boolean
@@ -758,6 +804,8 @@ function GuildChannel:__init() end
 ---Represents a length of time and provides utilities for converting to and from different formats. Supported units are: weeks, days, hours, minutes, seconds, and milliseconds.
 ---@class Time
 local Time = {}
+---@type Time | fun():Time
+Time = Time
 ---Returns a human-readable string built from the set of normalized time values that the object represents.
 ---@return string
 function Time:toString() end
@@ -817,6 +865,8 @@ function Time:__init() end
 ---Extends the functionality of a regular cache by making use of weak references to the objects that are cached. If all references to an object are weak, as they are here, then the object will be deleted on the next garbage collection cycle.
 ---@class WeakCache: Cache
 local WeakCache = {}
+---@type WeakCache | fun():WeakCache
+WeakCache = WeakCache
 ---Create a new WeakCache
 ---@return WeakCache
 function WeakCache:__init() end
@@ -824,6 +874,8 @@ function WeakCache:__init() end
 ---Used to log formatted messages to stdout (the console) or to a file. The `dateTime` argument should be a format string that is accepted by `os.date`. The file argument should be a relative or absolute file path or `nil` if no log file is desired. See the `logLevel` enumeration for acceptable log level values.
 ---@class Logger
 local Logger = {}
+---@type Logger | fun(level: number, dateTime: string, file: string):Logger
+Logger = Logger
 ---If the provided level is less than or equal to the log level set on initialization, this logs a message to stdout as defined by Luvit's `process` module and to a file if one was provided on initialization. The `msg, ...` pair is formatted according to `string.format` and returned if the message is logged.
 ---@param level number
 ---@param msg string
@@ -840,6 +892,8 @@ function Logger:__init(level, dateTime, file) end
 ---Mutual exclusion class used to control Lua coroutine execution order.
 ---@class Mutex
 local Mutex = {}
+---@type Mutex | fun():Mutex
+Mutex = Mutex
 ---If the mutex is not active (if a coroutine is not queued), this will activate the mutex; otherwise, this will yield and queue the current coroutine.
 ---@param prepend boolean
 ---@return nil
@@ -859,6 +913,8 @@ function Mutex:__init() end
 ---@class VoiceConnection
 ---@field public channel GuildVoiceChannel | nil The corresponding GuildVoiceChannel for this connection, if one exists.
 local VoiceConnection = {}
+---@type VoiceConnection | fun():VoiceConnection
+VoiceConnection = VoiceConnection
 ---Returns the bitrate of the interal Opus encoder in bits per second (bps).
 ---@return nil
 function VoiceConnection:getBitrate() end
@@ -903,6 +959,8 @@ function VoiceConnection:__init() end
 ---@class Stopwatch
 ---@field public milliseconds number The total number of elapsed milliseconds. If the stopwatch is running, this will naturally be different each time that it is accessed.
 local Stopwatch = {}
+---@type Stopwatch | fun():Stopwatch
+Stopwatch = Stopwatch
 ---Defines the behavior of the `tostring` function. Returns a string that represents the elapsed milliseconds for convenience of introspection.
 ---@return string
 function Stopwatch:__tostring() end
@@ -926,6 +984,8 @@ function Stopwatch:__init() end
 ---@class Permissions
 ---@field public value number The raw decimal value that represents the permissions value.
 local Permissions = {}
+---@type Permissions | fun():Permissions
+Permissions = Permissions
 ---Defines the behavior of the `tostring` function. Returns a readable list of permissions stored for convenience of introspection.
 ---@return string
 function Permissions:__tostring() end
@@ -1001,6 +1061,8 @@ function Permissions:__init() end
 ---@field public animated boolean Whether this emoji is animated.
 ---@field public roles ArrayIterable An iterable array of roles that may be required to use this emoji, generally related to integration-managed emojis. Object order is not guaranteed.
 local Emoji = {}
+---@type Emoji | fun():Emoji
+Emoji = Emoji
 ---Sets the emoji's name. The name must be between 2 and 32 characters in length.
 ---@param name string
 ---@return boolean
@@ -1025,6 +1087,8 @@ function Emoji:__init() end
 ---@field public type number The channel type. See the `channelType` enumeration for a human-readable representation.
 ---@field public mentionString string A string that, when included in a message content, may resolve as a link to a channel in the official Discord client.
 local Channel = {}
+---@type Channel | fun():Channel
+Channel = Channel
 ---Create a new Channel
 ---@return Channel
 function Channel:__init() end
@@ -1032,6 +1096,8 @@ function Channel:__init() end
 ---Represents a single moment in time and provides utilities for converting to and from different date and time formats. Although microsecond precision is available, most formats are implemented with only second precision.
 ---@class Date
 local Date = {}
+---@type Date | fun(seconds: number, microseconds: number):Date
+Date = Date
 ---Returns a string from this Date object via Lua's `os.date`. If no format string is provided, the default is '%a %b %d %Y %T GMT%z (%Z)'.
 ---@param fmt string
 ---@return string
@@ -1126,6 +1192,8 @@ function Date:__init(seconds, microseconds) end
 ---An implementation of a double-ended queue.
 ---@class Deque
 local Deque = {}
+---@type Deque | fun():Deque
+Deque = Deque
 ---Returns the total number of values stored.
 ---@return number
 function Deque:getCount() end
@@ -1183,6 +1251,8 @@ function Deque:__init() end
 ---@field public link string URL that can be used to jump-to the message in the Discord client.
 ---@field public webhookId string | nil The ID of the webhook that generated this message, if applicable.
 local Message = {}
+---@type Message | fun():Message
+Message = Message
 ---Sets the message's content. The message must be authored by the current user (ie: you cannot change the content of messages sent by other users). The content must be from 1 to 2000 characters in length.
 ---@param content string
 ---@return boolean
@@ -1239,6 +1309,8 @@ function Message:__init() end
 ---@field public name string Equivalent to `PrivateChannel.recipient.username`.
 ---@field public recipient User The recipient of this channel's messages, other than the current user.
 local PrivateChannel = {}
+---@type PrivateChannel | fun():PrivateChannel
+PrivateChannel = PrivateChannel
 ---Closes the channel. This does not delete the channel. To re-open the channel, use `User:getPrivateChannel`.
 ---@return boolean
 function PrivateChannel:close() end
@@ -1249,6 +1321,8 @@ function PrivateChannel:__init() end
 ---Abstract base class that defines the base methods and properties for a general purpose data structure with features that are better suited for an object-oriented environment. Note: All sub-classes should implement their own `__init` and `iter` methods and all stored objects should have a `__hash` method.
 ---@class Iterable
 local Iterable = {}
+---@type Iterable | fun():Iterable
+Iterable = Iterable
 ---Defines the behavior of the `pairs` function. Returns an iterator that returns a `key, value` pair, where `key` is the result of calling `__hash` on the `value`.
 ---@return function
 function Iterable:__pairs() end
@@ -1300,6 +1374,8 @@ function Iterable:__init() end
 ---@field public name string Equivalent to `Relationship.user.username`.
 ---@field public type number The relationship type. See the `relationshipType` enumeration for a human-readable representation.
 local Relationship = {}
+---@type Relationship | fun():Relationship
+Relationship = Relationship
 ---Create a new Relationship
 ---@return Relationship
 function Relationship:__init() end
@@ -1318,6 +1394,8 @@ function Relationship:__init() end
 ---@field public members FilteredIterable A filtered iterable of guild members that have this role. If you want to check whether a specific member has this role, it would be better to get the member object elsewhere and use `Member:hasRole` rather than check whether the member exists here.
 ---@field public emojis FilteredIterable A filtered iterable of guild emojis that have this role. If you want to check whether a specific emoji has this role, it would be better to get the emoji object elsewhere and use `Emoji:hasRole` rather than check whether the emoji exists here.
 local Role = {}
+---@type Role | fun():Role
+Role = Role
 ---Permanently deletes the role. This cannot be undone!
 ---@return boolean
 function Role:delete() end
@@ -1421,6 +1499,8 @@ function Role:__init() end
 ---@field public voiceChannels Cache An iterable cache of all voice channels that exist in this guild.
 ---@field public categories Cache An iterable cache of all channel categories that exist in this guild.
 local Guild = {}
+---@type Guild | fun():Guild
+Guild = Guild
 ---Asynchronously loads all members for this guild. You do not need to call this if the `cacheAllMembers` client option (and the `syncGuilds` option for user-accounts) is enabled on start-up.
 ---@return boolean
 function Guild:requestMembers() end
@@ -1581,6 +1661,8 @@ function Guild:__init() end
 ---@field public mentionString string A string that, when included in a message content, may resolve as user notification in the official Discord client.
 ---@field public mutualGuilds FilteredIterable A iterable cache of all guilds where this user shares a membership with the current user. The guild must be cached on the current client and the user's member object must be cached in that guild in order for it to appear here.
 local User = {}
+---@type User | fun():User
+User = User
 ---Returns a URL that can be used to view the user's full avatar. If provided, the size must be a power of 2 while the extension must be a valid image format. If the user does not have a custom avatar, the default URL is returned.
 ---@param size number
 ---@param ext string
@@ -1614,6 +1696,8 @@ function User:__init() end
 ---@field public user User The user that this presence represents.
 ---@field public activity Activity | nil The Activity that this presence represents.
 local UserPresence = {}
+---@type UserPresence | fun():UserPresence
+UserPresence = UserPresence
 ---Returns `UserPresence.user.id`
 ---@return string
 function UserPresence:__hash() end
@@ -1624,6 +1708,8 @@ function UserPresence:__init() end
 ---Implements an asynchronous event emitter where callbacks can be subscribed to specific named events. When events are emitted, the callbacks are called in the order that they were originally registered.
 ---@class Emitter
 local Emitter = {}
+---@type Emitter | fun():Emitter
+Emitter = Emitter
 ---Subscribes a callback to be called every time the named event is emitted. Callbacks registered with this method will automatically be wrapped as a new coroutine when they are called. Returns the original callback for convenience.
 ---@param name string
 ---@param fn function
@@ -1682,6 +1768,8 @@ function Emitter:__init() end
 ---@field public createdAt number The Unix time in seconds at which this object was created by Discord. Additional decimal points may be present, though only the first 3 (milliseconds) should be considered accurate. Equivalent to `Date.parseSnowflake(Snowflake.id)`.
 ---@field public timestamp string The date and time at which this object was created by Discord, represented as an ISO 8601 string plus microseconds when available. Equivalent to `Date.fromSnowflake(Snowflake.id):toISO()`.
 local Snowflake = {}
+---@type Snowflake | fun():Snowflake
+Snowflake = Snowflake
 ---Returns `Snowflake.id`
 ---@return string
 function Snowflake:__hash() end

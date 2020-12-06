@@ -208,6 +208,26 @@ local function descFunc(method)
    return func, inParen
 end
 
+local function descInlineFunc(method)
+   local func = 'fun('
+
+   for i, param in pairs(method.parameters) do
+      if param[1] ~= '...' then
+         func = func .. f('%s: %s%s', param[1], convert(param[2]), i ~= #method.parameters and ', ' or '')
+      else
+         func = func .. '...'
+      end
+   end
+
+   local new = {}
+
+   for i, v in pairs(method.returns) do
+      new[i] = convert(v)
+   end
+
+   return func .. '):' .. concat(new, ', ')
+end
+
 for _, class in pairs(docs) do
    writing = writing .. f('---%s\n---@class %s', class.desc, class.name)
 
@@ -227,7 +247,10 @@ for _, class in pairs(docs) do
 
    -- Create table
 
-   writing = writing .. f('local %s = {}\n', class.name)
+   writing = writing .. f('local %s = {}\n---@type %s | %s\n%s = %s\n', class.name, class.name, descInlineFunc({
+      parameters = class.parameters,
+      returns = {class.name}
+   }), class.name, class.name)
 
    -- Methods
 
