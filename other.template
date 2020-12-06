@@ -1,4 +1,80 @@
 -- Hand written Discordia types for things which are also hand written in the documentation
+
+-- Add in auto complete for events
+
+---@alias clientEvents string
+---| "'ready'"                  # Emitted after all shards and guilds are fully loaded.
+---| "'shardReady'"             # Emitted after a shard successfully connects to a Discord gateway and loads all corresponding guilds.
+---| "'shardResume'"            # Emitted after the client successfully resumes a severed gateway connection.
+---| "'channelCreate'"          # Emitted when a guild channel is created, when a private channel is opened, or when a group channel is joined.
+---| "'channelUpdate'"          # Emitted when a channel property is updated, such as its name, topic, bitrate, etc.
+---| "'channelDelete'"          # Emitted when a guild channel is deleted, when a private channel is closed, or when a group channel is left.
+---| "'recipientAdd'"           # Emitted when a new recipient is added to a group channel. User-accounts only.
+---| "'recipientRemove'"        # Emitted when a new recipient is removed from a group channel. User-accounts only.
+---| "'guildAvailable'"         # Emitted when a guild becomes available. This can occur after a server outage or as guild data is streamed in after login.
+---| "'guildCreate'"            # Emitted when a guild is created from the perspective of the current user, usually after the client user joins a new one.
+---| "'guildUpdate'"            # Emitted when a guild property is updated such as its name, region, icon, etc.
+---| "'guildUnavailable'"       # Emitted when a guild becomes unavailable, potentially due to a server outage. Unavailable guilds may lack significant data.
+---| "'guildDelete'"            # Emitted when a guild is deleted from the perspective of the current user, usually after the client leaves one.
+---| "'userBan'"                # Emitted when a user is banned from a guild.
+---| "'userUnban'"              # Emitted when a user is unbanned from a guild.
+---| "'emojisUpdate'"           # Emitted when a guild's custom emoji is updated.
+---| "'memberJoin'"             # Emitted when a new user joins a guild.
+---| "'memberLeave'"            # Emitted when a user leaves a guild.
+---| "'memberUpdate'"           # Emitted when a guild member property is updated, such as its roles or nickname. See presenceUpdate for status changes.
+---| "'roleCreate'"             # Emitted when a guild role is created.
+---| "'roleUpdate'"             # Emitted when a guild role property is updated, such as its name, color, permissions, etc.
+---| "'roleDelete'"             # Emitted when a guild role is deleted.
+---| "'messageCreate'"          # Emitted when a text channel message is created.
+---| "'messageUpdate'"          # Emitted when the content of a text channel message is edited.
+---| "'messageUpdateUncached'"  # Emitted when the content of a text channel message is edited, but the message is not cached by the client.
+---| "'messageDelete'"          # Emitted when a text channel message is deleted. Bulk deletions will fire this for every message that is deleted.
+---| "'messageDeleteUncached'"  # Emitted when a text channel message is deleted, but the message is not cached by the client. Bulk deletions will fire this for every message that is deleted, but not cached.
+---| "'reactionAdd'"            # Emitted when an emoji reaction is added to message.
+---| "'reactionAddUncached'"    # Emitted when an emoji reaction is added to message, but the message is not cached by the client.
+---| "'reactionRemove'"         # Emitted when an emoji reaction is removed from a message.
+---| "'reactionRemoveUncached'" # Emitted when an emoji reaction is removed from a message, but the message is not cached by the client.
+---| "'pinsUpdate'"             # Emitted when a message is pinned or unpinned in a channel.
+---| "'presenceUpdate'"         # Emitted when a guild member's status or user properties change. See memberUpdate for role and nickname changes.
+---| "'relationshipUpdate'"     # Emitted when a relationship's (friend, blocked user) status or user properties change. User-accounts only.
+---| "'relationshipAdd'"        # Emitted when a relationship (friend, blocked user) is added. User-accounts only.
+---| "'relationshipRemove'"     # Emitted when a relationship (friend, blocked user) is removed. User-accounts only.
+---| "'typingStart'"            # Emitted when a user starts typing in a text channel.
+---| "'userUpdate'"             # Emitted when the client user updates itself.
+---| "'voiceConnect'"           # Emitted when a guild member connects to voice chat.
+---| "'voiceDisconnect'"        # Emitted when a guild member disconnects from voice chat.
+---| "'voiceUpdate'"            # Emitted when a guild member's mute/deaf status changes.
+---| "'voiceChannelJoin'"       # Emitted when a guild member joins a voice channel.
+---| "'voiceChannelLeave'"      # Emitted when a guild member leaves a voice channel.
+---| "'webhooksUpdate'"         # Emitted when a guild's text channel's webhooks have updated.
+---| "'heartbeat'"              # Emitted when Discord responds with a heartbeat acknowledgement.
+---| "'raw'"                    # Emitted for every Discord gateway event.
+---| "'debug'"                  # Emitted to provide detailed information regarding specific library behavior.
+---| "'info'"                   # Emitted to provide helpful information regarding general library behavior.
+---| "'warning'"                # Emitted when something went wrong, but your code will probably continue operating normally.
+---| "'error'"                  # Emitted when something went wrong and your code may not continue operating normally.
+
+---Subscribes a callback to be called every time the named event is emitted. Callbacks registered with this method will automatically be wrapped as a new coroutine when they are called. Returns the original callback for convenience.
+---@param name clientEvents
+---@param fn function
+---@return function
+function Client:on(name, fn) end
+---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method will automatically be wrapped as a new coroutine when they are called. Returns the original callback for convenience.
+---@param name clientEvents
+---@param fn function
+---@return function
+function Client:once(name, fn) end
+---Subscribes a callback to be called every time the named event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
+---@param name clientEvents
+---@param fn function
+---@return function
+function Client:onSync(name, fn) end
+---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
+---@param name clientEvents
+---@param fn function
+---@return function
+function Client:onceSync(name, fn) end
+
 --- The Lua language does not have classes, but it does have all of the tools needed to write them.
 --- Discordia uses a custom class system that was written explicitly to encapsulate data provided by Discord in intuitive, efficient structures.
 ---
@@ -139,8 +215,8 @@
 ---
 --- Table of all defined classes, indexed by name.
 ---
----@field classes table<string, any>
 ---@class class
+---@field classes table<string, any>
 local class = {}
 
 --- Function that returns true only if the provided argument is a Discordia class module.
@@ -307,6 +383,7 @@ local enums = {}
 --- An empty table that can be used to store user data.
 --- This may be used an alternative to storing values on class instances or in global variables, both of which are not recommended.
 ---
+---@class discordia
 ---@field Client Client
 ---@field Clock Clock
 ---@field Color Color
@@ -323,5 +400,4 @@ local enums = {}
 ---@field extensions function
 ---@field package table<string, any>
 ---@field storage table<any, any>
----@class discordia
 local discordia = {}

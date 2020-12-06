@@ -1,5 +1,6 @@
 -- Do not touch, automatically generated!
--- Generated on Mon Nov 16 17:19:18 2020
+-- Generated on Sat Dec  5 22:38:26 2020
+
 ---Represents a Discord guild member. Though one user may be a member in more than one guild, each presence is represented by a different member object associated with that guild. Note that any method or property that exists for the User class is also available in the Member class.
 ---@class Member: UserPresence
 ---@field public roles ArrayIterable An iterable array of guild roles that the member has. This does not explicitly include the default everyone role. Object order is not guaranteed.
@@ -15,80 +16,64 @@
 local Member = {}
 ---Returns a color object that represents the member's color as determined by its highest colored role. If the member has no colored roles, then the default color with a value of 0 is returned.
 ---@return Color
-function Member:getColor()
-end
+function Member:getColor() end
 ---Checks whether the member has a specific permission. If `channel` is omitted, then only guild-level permissions are checked. This is a relatively expensive operation. If you need to check multiple permissions at once, use the `getPermissions` method and check the resulting object.
 ---@param channel GuildChannel
 ---@param perm Permissions | number
 ---@return boolean
-function Member:hasPermission(channel, perm)
-end
+function Member:hasPermission(channel, perm) end
 ---Returns a permissions object that represents the member's total permissions for the guild, or for a specific channel if one is provided. If you just need to check one permission, use the `hasPermission` method.
 ---@param channel GuildChannel
 ---@return Permissions
-function Member:getPermissions(channel)
-end
+function Member:getPermissions(channel) end
 ---Adds a role to the member. If the member already has the role, then no action is taken. Note that the everyone role cannot be explicitly added.
 ---@param id Role | string
 ---@return boolean
-function Member:addRole(id)
-end
+function Member:addRole(id) end
 ---Removes a role from the member. If the member does not have the role, then no action is taken. Note that the everyone role cannot be removed.
 ---@param id Role | string
 ---@return boolean
-function Member:removeRole(id)
-end
+function Member:removeRole(id) end
 ---Checks whether the member has a specific role. This will return true for the guild's default role in addition to any explicitly assigned roles.
 ---@param id Role | string
 ---@return boolean
-function Member:hasRole(id)
-end
+function Member:hasRole(id) end
 ---Sets the member's nickname. This must be between 1 and 32 characters in length. Pass `nil` to remove the nickname.
 ---@param nick string
 ---@return boolean
-function Member:setNickname(nick)
-end
+function Member:setNickname(nick) end
 ---Moves the member to a new voice channel, but only if the member has an active voice connection in the current guild. Due to complexities in voice state handling, the member's `voiceChannel` property will update asynchronously via WebSocket; not as a result of the HTTP request.
 ---@param id Channel | string
 ---@return boolean
-function Member:setVoiceChannel(id)
-end
+function Member:setVoiceChannel(id) end
 ---Mutes the member in its guild.
 ---@return boolean
-function Member:mute()
-end
+function Member:mute() end
 ---Unmutes the member in its guild.
 ---@return boolean
-function Member:unmute()
-end
+function Member:unmute() end
 ---Deafens the member in its guild.
 ---@return boolean
-function Member:deafen()
-end
+function Member:deafen() end
 ---Undeafens the member in its guild.
 ---@return boolean
-function Member:undeafen()
-end
+function Member:undeafen() end
 ---Equivalent to `Member.guild:kickUser(Member.user, reason)`
 ---@param reason string
 ---@return boolean
-function Member:kick(reason)
-end
+function Member:kick(reason) end
 ---Equivalent to `Member.guild:banUser(Member.user, reason, days)`
 ---@param reason string
 ---@param days number
 ---@return boolean
-function Member:ban(reason, days)
-end
+function Member:ban(reason, days) end
 ---Equivalent to `Member.guild:unbanUser(Member.user, reason)`
 ---@param reason string
 ---@return boolean
-function Member:unban(reason)
-end
+function Member:unban(reason) end
 ---Create a new Member
 ---@return Member
-function Member:__init()
-end
+function Member:__init() end
 
 ---Defines the base methods and properties for all Discord objects and structures. Container classes are constructed internally with information received from Discord and should never be manually constructed.
 ---@class Container
@@ -97,16 +82,13 @@ end
 local Container = {}
 ---Defines the behavior of the `==` operator. Allows containers to be directly compared according to their type and `__hash` return values.
 ---@return boolean
-function Container:__eq()
-end
+function Container:__eq() end
 ---Defines the behavior of the `tostring` function. All containers follow the format `ClassName: hash`.
 ---@return string
-function Container:__tostring()
-end
+function Container:__tostring() end
 ---Create a new Container
 ---@return Container
-function Container:__init()
-end
+function Container:__init() end
 
 ---Iterable class that contains objects in a constant, ordered fashion, although the order may change if the internal array is modified. Some versions may use a map function to shape the objects before they are accessed.
 ---@class ArrayIterable: Iterable
@@ -115,24 +97,20 @@ end
 local ArrayIterable = {}
 ---Returns an iterator for all contained objects in a consistent order.
 ---@return function
-function ArrayIterable:iter()
-end
+function ArrayIterable:iter() end
 ---Create a new ArrayIterable
 ---@return ArrayIterable
-function ArrayIterable:__init()
-end
+function ArrayIterable:__init() end
 
 ---Iterable class that wraps another iterable and serves a subset of the objects that the original iterable contains.
 ---@class FilteredIterable: Iterable
 local FilteredIterable = {}
 ---Returns an iterator that returns all contained objects. The order of the objects is not guaranteed.
 ---@return function
-function FilteredIterable:iter()
-end
+function FilteredIterable:iter() end
 ---Create a new FilteredIterable
 ---@return FilteredIterable
-function FilteredIterable:__init()
-end
+function FilteredIterable:__init() end
 
 ---Represents a handle used to send webhook messages to a guild text channel in a one-way fashion. This class defines methods and properties for managing the webhook, not for sending messages.
 ---@class Webhook: Snowflake
@@ -151,31 +129,25 @@ local Webhook = {}
 ---@param size number
 ---@param ext string
 ---@return string
-function Webhook:getAvatarURL(size, ext)
-end
+function Webhook:getAvatarURL(size, ext) end
 ---Returns a URL that can be used to view the webhooks's default avatar.
 ---@param size number
 ---@return string
-function Webhook:getDefaultAvatarURL(size)
-end
+function Webhook:getDefaultAvatarURL(size) end
 ---Sets the webhook's name. This must be between 2 and 32 characters in length.
 ---@param name string
 ---@return boolean
-function Webhook:setName(name)
-end
+function Webhook:setName(name) end
 ---Sets the webhook's avatar. If `nil` is passed, the avatar is removed.
 ---@param avatar string
 ---@return boolean
-function Webhook:setAvatar(avatar)
-end
+function Webhook:setAvatar(avatar) end
 ---Permanently deletes the webhook. This cannot be undone!
 ---@return boolean
-function Webhook:delete()
-end
+function Webhook:delete() end
 ---Create a new Webhook
 ---@return Webhook
-function Webhook:__init()
-end
+function Webhook:__init() end
 
 ---The main point of entry into a Discordia application. All data relevant to Discord is accessible through a client instance or its child objects after a connection to Discord is established with the `run` method. In other words, client data should not be expected and most client methods should not be called until after the `ready` event is received. Base emitter methods may be called at any time. See [[client options]].
 ---@class Client: Emitter
@@ -196,99 +168,79 @@ local Client = {}
 ---@param token string
 ---@param presence table
 ---@return nil
-function Client:run(token, presence)
-end
+function Client:run(token, presence) end
 ---Disconnects all shards and effectively stop their loops. This does not empty any data that the client may have cached.
 ---@return nil
-function Client:stop()
-end
+function Client:stop() end
 ---Sets the client's username. This must be between 2 and 32 characters in length. This does not change the application name.
 ---@param username string
 ---@return boolean
-function Client:setUsername(username)
-end
+function Client:setUsername(username) end
 ---Sets the client's avatar. To remove the avatar, pass an empty string or nil. This does not change the application image.
 ---@param avatar string
 ---@return boolean
-function Client:setAvatar(avatar)
-end
+function Client:setAvatar(avatar) end
 ---Creates a new guild. The name must be between 2 and 100 characters in length. This method may not work if the current user is in too many guilds. Note that this does not return the created guild object; wait for the corresponding `guildCreate` event if you need the object.
 ---@param name string
 ---@return boolean
-function Client:createGuild(name)
-end
+function Client:createGuild(name) end
 ---Creates a new group channel. This method is only available for user accounts.
 ---@return GroupChannel
-function Client:createGroupChannel()
-end
+function Client:createGroupChannel() end
 ---Gets a webhook object by ID. This always makes an HTTP request to obtain a static object that is not cached and is not updated by gateway events.
 ---@param id string
 ---@return Webhook
-function Client:getWebhook(id)
-end
+function Client:getWebhook(id) end
 ---Gets an invite object by code. This always makes an HTTP request to obtain a static object that is not cached and is not updated by gateway events.
 ---@param code string
 ---@param counts boolean
 ---@return Invite
-function Client:getInvite(code, counts)
-end
+function Client:getInvite(code, counts) end
 ---Gets a user object by ID. If the object is already cached, then the cached object will be returned; otherwise, an HTTP request is made. Under circumstances which should be rare, the user object may be an old version, not updated by gateway events.
 ---@param id User | string
 ---@return User
-function Client:getUser(id)
-end
+function Client:getUser(id) end
 ---Gets a guild object by ID. The current user must be in the guild and the client must be running the appropriate shard that serves this guild. This method never makes an HTTP request to obtain a guild.
 ---@param id Guild | string
 ---@return Guild
-function Client:getGuild(id)
-end
+function Client:getGuild(id) end
 ---Gets a channel object by ID. For guild channels, the current user must be in the channel's guild and the client must be running the appropriate shard that serves the channel's guild. For private channels, the channel must have been previously opened and cached. If the channel is not cached, `User:getPrivateChannel` should be used instead.
 ---@param id Channel | string
 ---@return Channel
-function Client:getChannel(id)
-end
+function Client:getChannel(id) end
 ---Gets a role object by ID. The current user must be in the role's guild and the client must be running the appropriate shard that serves the role's guild.
 ---@param id Role | string
 ---@return Role
-function Client:getRole(id)
-end
+function Client:getRole(id) end
 ---Gets an emoji object by ID. The current user must be in the emoji's guild and the client must be running the appropriate shard that serves the emoji's guild.
 ---@param id Emoji | string
 ---@return Emoji
-function Client:getEmoji(id)
-end
+function Client:getEmoji(id) end
 ---Returns a raw data table that contains a list of voice regions as provided by Discord, with no formatting beyond what is provided by the Discord API.
 ---@return table
-function Client:listVoiceRegions()
-end
+function Client:listVoiceRegions() end
 ---Returns a raw data table that contains a list of connections as provided by Discord, with no formatting beyond what is provided by the Discord API. This is unrelated to voice connections.
 ---@return table
-function Client:getConnections()
-end
+function Client:getConnections() end
 ---Returns a raw data table that contains information about the current OAuth2 application, with no formatting beyond what is provided by the Discord API.
 ---@return table
-function Client:getApplicationInformation()
-end
+function Client:getApplicationInformation() end
 ---Sets the current users's status on all shards that are managed by this client. See the `status` enumeration for acceptable status values.
 ---@param status string
 ---@return nil
-function Client:setStatus(status)
-end
+function Client:setStatus(status) end
 ---Sets the current users's game on all shards that are managed by this client. If a string is passed, it is treated as the game name. If a table is passed, it must have a `name` field and may optionally have a `url` or `type` field. Pass `nil` to remove the game status.
 ---@param game string | table
 ---@return nil
-function Client:setGame(game)
-end
+function Client:setGame(game) end
 ---Set the current user's AFK status on all shards that are managed by this client. This generally applies to user accounts and their push notifications.
 ---@param afk boolean
 ---@return nil
-function Client:setAFK(afk)
-end
+function Client:setAFK(afk) end
 ---Create a new Client
 ---@param options table
 ---@return Client
-function Client:__init(options)
-end
+function Client:__init(options) end
 
 ---Iterable class that holds references to Discordia Class objects in no particular order.
 ---@class Cache: Iterable
@@ -296,16 +248,13 @@ local Cache = {}
 ---Returns an individual object by key, where the key should match the result of calling `__hash` on the contained objects. Unlike Iterable:get, this method operates with O(1) complexity.
 ---@param k any
 ---@return any
-function Cache:get(k)
-end
+function Cache:get(k) end
 ---Returns an iterator that returns all contained objects. The order of the objects is not guaranteed.
 ---@return function
-function Cache:iter()
-end
+function Cache:iter() end
 ---Create a new Cache
 ---@return Cache
-function Cache:__init()
-end
+function Cache:__init() end
 
 ---Represents an entry made into a guild's audit log.
 ---@class AuditLogEntry: Snowflake
@@ -319,24 +268,19 @@ end
 local AuditLogEntry = {}
 ---Returns two tables of the target's properties before the change, and after the change.
 ---@return table table
-function AuditLogEntry:getBeforeAfter()
-end
+function AuditLogEntry:getBeforeAfter() end
 ---Gets the target object of the affected entity. The returned object can be: [[Guild]], [[GuildChannel]], [[User]], [[Member]], [[Role]], [[Webhook]], [[Emoji]], nil
 ---@return any
-function AuditLogEntry:getTarget()
-end
+function AuditLogEntry:getTarget() end
 ---Gets the user who performed the changes.
 ---@return User
-function AuditLogEntry:getUser()
-end
+function AuditLogEntry:getUser() end
 ---Gets the member object of the user who performed the changes.
 ---@return Member | nil
-function AuditLogEntry:getMember()
-end
+function AuditLogEntry:getMember() end
 ---Create a new AuditLogEntry
 ---@return AuditLogEntry
-function AuditLogEntry:__init()
-end
+function AuditLogEntry:__init() end
 
 ---Represents a Discord user's presence data, either plain game or streaming presence or a rich presence. Most if not all properties may be nil.
 ---@class Activity
@@ -362,8 +306,7 @@ end
 local Activity = {}
 ---Create a new Activity
 ---@return Activity
-function Activity:__init()
-end
+function Activity:__init() end
 
 ---Represents a Discord guild ban. Essentially a combination of the banned user and a reason explaining the ban, if one was provided.
 ---@class Ban: Container
@@ -373,16 +316,13 @@ end
 local Ban = {}
 ---Returns `Ban.user.id`
 ---@return string
-function Ban:__hash()
-end
+function Ban:__hash() end
 ---Deletes the ban object, unbanning the corresponding user. Equivalent to `Ban.guild:unbanUser(Ban.user)`.
 ---@return boolean
-function Ban:delete()
-end
+function Ban:delete() end
 ---Create a new Ban
 ---@return Ban
-function Ban:__init()
-end
+function Ban:__init() end
 
 ---Iterable class that wraps another cache. Objects added to or removed from a secondary cache are also automatically added to or removed from the primary cache that it wraps.
 ---@class SecondaryCache: Iterable
@@ -390,16 +330,13 @@ local SecondaryCache = {}
 ---Returns an individual object by key, where the key should match the result of calling `__hash` on the contained objects. Unlike the default version, this method operates with O(1) complexity.
 ---@param k any
 ---@return any
-function SecondaryCache:get(k)
-end
+function SecondaryCache:get(k) end
 ---Returns an iterator that returns all contained objects. The order of the objects is not guaranteed.
 ---@return function
-function SecondaryCache:iter()
-end
+function SecondaryCache:iter() end
 ---Create a new SecondaryCache
 ---@return SecondaryCache
-function SecondaryCache:__init()
-end
+function SecondaryCache:__init() end
 
 ---Represents a voice channel in a Discord guild, where guild members can connect and communicate via voice chat.
 ---@class GuildVoiceChannel: GuildChannel
@@ -411,25 +348,20 @@ local GuildVoiceChannel = {}
 ---Sets the channel's audio bitrate in bits per second (bps). This must be between 8000 and 96000 (or 128000 for partnered servers). If `nil` is passed, the default is set, which is 64000.
 ---@param bitrate number
 ---@return boolean
-function GuildVoiceChannel:setBitrate(bitrate)
-end
+function GuildVoiceChannel:setBitrate(bitrate) end
 ---Sets the channel's user limit. This must be between 0 and 99 (where 0 is unlimited). If `nil` is passed, the default is set, which is 0.
 ---@param user_limit number
 ---@return boolean
-function GuildVoiceChannel:setUserLimit(user_limit)
-end
+function GuildVoiceChannel:setUserLimit(user_limit) end
 ---Join this channel and form a connection to the Voice Gateway.
 ---@return VoiceConnection
-function GuildVoiceChannel:join()
-end
+function GuildVoiceChannel:join() end
 ---Leave this channel if there is an existing voice connection to it. Equivalent to GuildVoiceChannel.connection:close()
 ---@return boolean
-function GuildVoiceChannel:leave()
-end
+function GuildVoiceChannel:leave() end
 ---Create a new GuildVoiceChannel
 ---@return GuildVoiceChannel
-function GuildVoiceChannel:__init()
-end
+function GuildVoiceChannel:__init() end
 
 ---Defines the base methods and properties for all Discord text channels.
 ---@class TextChannel: Channel
@@ -438,62 +370,50 @@ local TextChannel = {}
 ---Gets a message object by ID. If the object is already cached, then the cached object will be returned; otherwise, an HTTP request is made.
 ---@param id Message | string
 ---@return Message
-function TextChannel:getMessage(id)
-end
+function TextChannel:getMessage(id) end
 ---Returns the first message found in the channel, if any exist. This is not a cache shortcut; an HTTP request is made each time this method is called.
 ---@return Message
-function TextChannel:getFirstMessage()
-end
+function TextChannel:getFirstMessage() end
 ---Returns the last message found in the channel, if any exist. This is not a cache shortcut; an HTTP request is made each time this method is called.
 ---@return Message
-function TextChannel:getLastMessage()
-end
+function TextChannel:getLastMessage() end
 ---Returns a newly constructed cache of between 1 and 100 (default = 50) message objects found in the channel. While the cache will never automatically gain or lose objects, the objects that it contains may be updated by gateway events.
 ---@param limit number
 ---@return SecondaryCache
-function TextChannel:getMessages(limit)
-end
+function TextChannel:getMessages(limit) end
 ---Returns a newly constructed cache of between 1 and 100 (default = 50) message objects found in the channel after a specific id. While the cache will never automatically gain or lose objects, the objects that it contains may be updated by gateway events.
 ---@param id Message | string
 ---@param limit number
 ---@return SecondaryCache
-function TextChannel:getMessagesAfter(id, limit)
-end
+function TextChannel:getMessagesAfter(id, limit) end
 ---Returns a newly constructed cache of between 1 and 100 (default = 50) message objects found in the channel before a specific id. While the cache will never automatically gain or lose objects, the objects that it contains may be updated by gateway events.
 ---@param id Message | string
 ---@param limit number
 ---@return SecondaryCache
-function TextChannel:getMessagesBefore(id, limit)
-end
+function TextChannel:getMessagesBefore(id, limit) end
 ---Returns a newly constructed cache of between 1 and 100 (default = 50) message objects found in the channel around a specific point. While the cache will never automatically gain or lose objects, the objects that it contains may be updated by gateway events.
 ---@param id Message | string
 ---@param limit number
 ---@return SecondaryCache
-function TextChannel:getMessagesAround(id, limit)
-end
+function TextChannel:getMessagesAround(id, limit) end
 ---Returns a newly constructed cache of up to 50 messages that are pinned in the channel. While the cache will never automatically gain or lose objects, the objects that it contains may be updated by gateway events.
 ---@return SecondaryCache
-function TextChannel:getPinnedMessages()
-end
+function TextChannel:getPinnedMessages() end
 ---Indicates in the channel that the client's user "is typing".
 ---@return boolean
-function TextChannel:broadcastTyping()
-end
+function TextChannel:broadcastTyping() end
 ---Sends a message to the channel. If `content` is a string, then this is simply sent as the message content. If it is a table, more advanced formatting is allowed. See [[managing messages]] for more information.
 ---@param content string | table
 ---@return Message
-function TextChannel:send(content)
-end
+function TextChannel:send(content) end
 ---Sends a message to the channel with content formatted with `...` via `string.format`
 ---@param content string
 ---@vararg any
 ---@return Message
-function TextChannel:sendf(content, ...)
-end
+function TextChannel:sendf(content, ...) end
 ---Create a new TextChannel
 ---@return TextChannel
-function TextChannel:__init()
-end
+function TextChannel:__init() end
 
 ---Used to periodically execute code according to the ticking of the system clock instead of arbitrary interval.
 ---@class Clock: Emitter
@@ -501,28 +421,23 @@ local Clock = {}
 ---Starts the main loop for the clock. If a truthy argument is passed, then UTC time is used; otherwise, local time is used. As the clock ticks, an event is emitted for every `os.date` value change. The event name is the key of the value that changed and the event argument is the corresponding date table.
 ---@param utc boolean
 ---@return nil
-function Clock:start(utc)
-end
+function Clock:start(utc) end
 ---Stops the main loop for the clock.
 ---@return nil
-function Clock:stop()
-end
+function Clock:stop() end
 ---Create a new Clock
 ---@return Clock
-function Clock:__init()
-end
+function Clock:__init() end
 
 ---Iterable class that wraps a basic Lua table, where order is not guaranteed. Some versions may use a map function to shape the objects before they are accessed.
 ---@class TableIterable: Iterable
 local TableIterable = {}
 ---Returns an iterator that returns all contained objects. The order of the objects is not guaranteed.
 ---@return function
-function TableIterable:iter()
-end
+function TableIterable:iter() end
 ---Create a new TableIterable
 ---@return TableIterable
-function TableIterable:__init()
-end
+function TableIterable:__init() end
 
 ---Represents an object that is used to allow or deny specific permissions for a role or member in a Discord guild channel.
 ---@class PermissionOverwrite: Snowflake
@@ -534,67 +449,53 @@ end
 local PermissionOverwrite = {}
 ---Deletes the permission overwrite. This can be undone by creating a new version of the same overwrite.
 ---@return boolean
-function PermissionOverwrite:delete()
-end
+function PermissionOverwrite:delete() end
 ---Returns the object associated with this overwrite, either a role or member. This may make an HTTP request if the object is not cached.
 ---@return Role | Member
-function PermissionOverwrite:getObject()
-end
+function PermissionOverwrite:getObject() end
 ---Returns a permissions object that represents the permissions that this overwrite explicitly allows.
 ---@return Permissions
-function PermissionOverwrite:getAllowedPermissions()
-end
+function PermissionOverwrite:getAllowedPermissions() end
 ---Returns a permissions object that represents the permissions that this overwrite explicitly denies.
 ---@return Permissions
-function PermissionOverwrite:getDeniedPermissions()
-end
+function PermissionOverwrite:getDeniedPermissions() end
 ---Sets the permissions that this overwrite explicitly allows and denies. This method does NOT resolve conflicts. Please be sure to use the correct parameters.
 ---@param allowed Permissions[] | number[]
 ---@param denied Permissions[] | number[]
 ---@return boolean
-function PermissionOverwrite:setPermissions(allowed, denied)
-end
+function PermissionOverwrite:setPermissions(allowed, denied) end
 ---Sets the permissions that this overwrite explicitly allows.
 ---@param allowed Permissions[] | number[]
 ---@return boolean
-function PermissionOverwrite:setAllowedPermissions(allowed)
-end
+function PermissionOverwrite:setAllowedPermissions(allowed) end
 ---Sets the permissions that this overwrite explicitly denies.
 ---@param denied Permissions[] | number[]
 ---@return boolean
-function PermissionOverwrite:setDeniedPermissions(denied)
-end
+function PermissionOverwrite:setDeniedPermissions(denied) end
 ---Allows individual permissions in this overwrite.
 ---@vararg number
 ---@return boolean
-function PermissionOverwrite:allowPermissions(...)
-end
+function PermissionOverwrite:allowPermissions(...) end
 ---Denies individual permissions in this overwrite.
 ---@vararg number
 ---@return boolean
-function PermissionOverwrite:denyPermissions(...)
-end
+function PermissionOverwrite:denyPermissions(...) end
 ---Clears individual permissions in this overwrite.
 ---@vararg number
 ---@return boolean
-function PermissionOverwrite:clearPermissions(...)
-end
+function PermissionOverwrite:clearPermissions(...) end
 ---Allows all permissions in this overwrite.
 ---@return boolean
-function PermissionOverwrite:allowAllPermissions()
-end
+function PermissionOverwrite:allowAllPermissions() end
 ---Denies all permissions in this overwrite.
 ---@return boolean
-function PermissionOverwrite:denyAllPermissions()
-end
+function PermissionOverwrite:denyAllPermissions() end
 ---Clears all permissions in this overwrite.
 ---@return boolean
-function PermissionOverwrite:clearAllPermissions()
-end
+function PermissionOverwrite:clearAllPermissions() end
 ---Create a new PermissionOverwrite
 ---@return PermissionOverwrite
-function PermissionOverwrite:__init()
-end
+function PermissionOverwrite:__init() end
 
 ---Represents a channel category in a Discord guild, used to organize individual text or voice channels in that guild.
 ---@class GuildCategoryChannel: GuildChannel
@@ -604,17 +505,14 @@ local GuildCategoryChannel = {}
 ---Creates a new GuildTextChannel with this category as it's parent. Similar to `Guild:createTextChannel(name)`
 ---@param name string
 ---@return GuildTextChannel
-function GuildCategoryChannel:createTextChannel(name)
-end
+function GuildCategoryChannel:createTextChannel(name) end
 ---Creates a new GuildVoiceChannel with this category as it's parent. Similar to `Guild:createVoiceChannel(name)`
 ---@param name string
 ---@return GuildVoiceChannel
-function GuildCategoryChannel:createVoiceChannel(name)
-end
+function GuildCategoryChannel:createVoiceChannel(name) end
 ---Create a new GuildCategoryChannel
 ---@return GuildCategoryChannel
-function GuildCategoryChannel:__init()
-end
+function GuildCategoryChannel:__init() end
 
 ---Represents a text channel in a Discord guild, where guild members and webhooks can send and receive messages.
 ---@class GuildTextChannel: GuildChannel: TextChannel
@@ -627,39 +525,31 @@ local GuildTextChannel = {}
 ---Creates a webhook for this channel. The name must be between 2 and 32 characters in length.
 ---@param name string
 ---@return Webhook
-function GuildTextChannel:createWebhook(name)
-end
+function GuildTextChannel:createWebhook(name) end
 ---Returns a newly constructed cache of all webhook objects for the channel. The cache and its objects are not automatically updated via gateway events. You must call this method again to get the updated objects.
 ---@return Cache
-function GuildTextChannel:getWebhooks()
-end
+function GuildTextChannel:getWebhooks() end
 ---Bulk deletes multiple messages, from 2 to 100, from the channel. Messages over 2 weeks old cannot be deleted and will return an error.
 ---@param messages Message[] | string[]
 ---@return boolean
-function GuildTextChannel:bulkDelete(messages)
-end
+function GuildTextChannel:bulkDelete(messages) end
 ---Sets the channel's topic. This must be between 1 and 1024 characters. Pass `nil` to remove the topic.
 ---@param topic string
 ---@return boolean
-function GuildTextChannel:setTopic(topic)
-end
+function GuildTextChannel:setTopic(topic) end
 ---Sets the channel's slowmode rate limit in seconds. This must be between 0 and 120. Passing 0 or `nil` will clear the limit.
 ---@param limit number
 ---@return boolean
-function GuildTextChannel:setRateLimit(limit)
-end
+function GuildTextChannel:setRateLimit(limit) end
 ---Enables the NSFW setting for the channel. NSFW channels are hidden from users until the user explicitly requests to view them.
 ---@return boolean
-function GuildTextChannel:enableNSFW()
-end
+function GuildTextChannel:enableNSFW() end
 ---Disables the NSFW setting for the channel. NSFW channels are hidden from users until the user explicitly requests to view them.
 ---@return boolean
-function GuildTextChannel:disableNSFW()
-end
+function GuildTextChannel:disableNSFW() end
 ---Create a new GuildTextChannel
 ---@return GuildTextChannel
-function GuildTextChannel:__init()
-end
+function GuildTextChannel:__init() end
 
 ---Wrapper for 24-bit colors packed as a decimal value. See the static constructors for more information.
 ---@class Color
@@ -670,67 +560,54 @@ end
 local Color = {}
 ---Returns a 6-digit hexadecimal string that represents the color value.
 ---@return string
-function Color:toHex()
-end
+function Color:toHex() end
 ---Returns the red, green, and blue values that are packed into the color value.
 ---@return number number number
-function Color:toRGB()
-end
+function Color:toRGB() end
 ---Returns the hue, saturation, and value that represents the color value.
 ---@return number number number
-function Color:toHSV()
-end
+function Color:toHSV() end
 ---Returns the hue, saturation, and lightness that represents the color value.
 ---@return number number number
-function Color:toHSL()
-end
+function Color:toHSL() end
 ---Sets the color's red-level.
 ---@return nil
-function Color:setRed()
-end
+function Color:setRed() end
 ---Sets the color's green-level.
 ---@return nil
-function Color:setGreen()
-end
+function Color:setGreen() end
 ---Sets the color's blue-level.
 ---@return nil
-function Color:setBlue()
-end
+function Color:setBlue() end
 ---Returns a new copy of the original color object.
 ---@return Color
-function Color:copy()
-end
+function Color:copy() end
 ---Constructs a new Color object from a hexadecimal string. The string may or may not be prefixed by `#`; all other characters are interpreted as a hex string.
 ---@param hex string
 ---@return Color
-function Color.fromHex(hex)
-end
+function Color.fromHex(hex) end
 ---Constructs a new Color object from RGB values. Values are allowed to overflow though one component will not overflow to the next component.
 ---@param r number
 ---@param g number
 ---@param b number
 ---@return Color
-function Color.fromRGB(r, g, b)
-end
+function Color.fromRGB(r, g, b) end
 ---Constructs a new Color object from HSV values. Hue is allowed to overflow while saturation and value are clamped to [0, 1].
 ---@param h number
 ---@param s number
 ---@param v number
 ---@return Color
-function Color.fromHSV(h, s, v)
-end
+function Color.fromHSV(h, s, v) end
 ---Constructs a new Color object from HSL values. Hue is allowed to overflow while saturation and lightness are clamped to [0, 1].
 ---@param h number
 ---@param s number
 ---@param l number
 ---@return Color
-function Color.fromHSL(h, s, l)
-end
+function Color.fromHSL(h, s, l) end
 ---Create a new Color
 ---@param value number
 ---@return Color
-function Color:__init(value)
-end
+function Color:__init(value) end
 
 ---Represents a Discord group channel. Essentially a private channel that may have more than one and up to ten recipients. This class should only be relevant to user-accounts; bots cannot normally join group channels.
 ---@class GroupChannel: TextChannel
@@ -744,31 +621,25 @@ local GroupChannel = {}
 ---Sets the channel's name. This must be between 1 and 100 characters in length.
 ---@param name string
 ---@return boolean
-function GroupChannel:setName(name)
-end
+function GroupChannel:setName(name) end
 ---Sets the channel's icon. To remove the icon, pass `nil`.
 ---@param icon string
 ---@return boolean
-function GroupChannel:setIcon(icon)
-end
+function GroupChannel:setIcon(icon) end
 ---Adds a user to the channel.
 ---@param id User | string
 ---@return boolean
-function GroupChannel:addRecipient(id)
-end
+function GroupChannel:addRecipient(id) end
 ---Removes a user from the channel.
 ---@param id User | string
 ---@return boolean
-function GroupChannel:removeRecipient(id)
-end
+function GroupChannel:removeRecipient(id) end
 ---Removes the client's user from the channel. If no users remain, the channel is destroyed.
 ---@return boolean
-function GroupChannel:leave()
-end
+function GroupChannel:leave() end
 ---Create a new GroupChannel
 ---@return GroupChannel
-function GroupChannel:__init()
-end
+function GroupChannel:__init() end
 
 ---Represents an emoji that has been used to react to a Discord text message. Both standard and custom emojis can be used.
 ---@class Reaction: Container
@@ -782,34 +653,28 @@ end
 local Reaction = {}
 ---Returns `Reaction.emojiId or Reaction.emojiName`
 ---@return string
-function Reaction:__hash()
-end
+function Reaction:__hash() end
 ---Returns a newly constructed cache of all users that have used this reaction in its parent message. The cache is not automatically updated via gateway events, but the internally referenced user objects may be updated. You must call this method again to guarantee that the objects are update to date.
 ---@param limit number
 ---@return SecondaryCache
-function Reaction:getUsers(limit)
-end
+function Reaction:getUsers(limit) end
 ---Returns a newly constructed cache of all users that have used this reaction before the specified id in its parent message. The cache is not automatically updated via gateway events, but the internally referenced user objects may be updated. You must call this method again to guarantee that the objects are update to date.
 ---@param id User | string
 ---@param limit number
 ---@return SecondaryCache
-function Reaction:getUsersBefore(id, limit)
-end
+function Reaction:getUsersBefore(id, limit) end
 ---Returns a newly constructed cache of all users that have used this reaction after the specified id in its parent message. The cache is not automatically updated via gateway events, but the internally referenced user objects may be updated. You must call this method again to guarantee that the objects are update to date.
 ---@param id User | string
 ---@param limit number
 ---@return SecondaryCache
-function Reaction:getUsersAfter(id, limit)
-end
+function Reaction:getUsersAfter(id, limit) end
 ---Equivalent to `Reaction.message:removeReaction(Reaction)`
 ---@param id User | string
 ---@return boolean
-function Reaction:delete(id)
-end
+function Reaction:delete(id) end
 ---Create a new Reaction
 ---@return Reaction
-function Reaction:__init()
-end
+function Reaction:__init() end
 
 ---Represents an invitation to a Discord guild channel. Invites can be used to join a guild, though they are not always permanent.
 ---@class Invite: Container
@@ -839,16 +704,13 @@ end
 local Invite = {}
 ---Returns `Invite.code`
 ---@return string
-function Invite:__hash()
-end
+function Invite:__hash() end
 ---Permanently deletes the invite. This cannot be undone!
 ---@return boolean
-function Invite:delete()
-end
+function Invite:delete() end
 ---Create a new Invite
 ---@return Invite
-function Invite:__init()
-end
+function Invite:__init() end
 
 ---Defines the base methods and properties for all Discord guild channels.
 ---@class GuildChannel: Channel
@@ -862,128 +724,102 @@ local GuildChannel = {}
 ---Sets the channel's name. This must be between 2 and 100 characters in length.
 ---@param name string
 ---@return boolean
-function GuildChannel:setName(name)
-end
+function GuildChannel:setName(name) end
 ---Sets the channel's parent category.
 ---@param id Channel | string
 ---@return boolean
-function GuildChannel:setCategory(id)
-end
+function GuildChannel:setCategory(id) end
 ---Moves a channel up its list. The parameter `n` indicates how many spaces the channel should be moved, clamped to the highest position, with a default of 1 if it is omitted. This will also normalize the positions of all channels.
 ---@param n number
 ---@return boolean
-function GuildChannel:moveUp(n)
-end
+function GuildChannel:moveUp(n) end
 ---Moves a channel down its list. The parameter `n` indicates how many spaces the channel should be moved, clamped to the lowest position, with a default of 1 if it is omitted. This will also normalize the positions of all channels.
 ---@param n number
 ---@return boolean
-function GuildChannel:moveDown(n)
-end
+function GuildChannel:moveDown(n) end
 ---Creates an invite to the channel. Optional payload fields are: max_age: number time in seconds until expiration, default = 86400 (24 hours), max_uses: number total number of uses allowed, default = 0 (unlimited), temporary: boolean whether the invite grants temporary membership, default = false, unique: boolean whether a unique code should be guaranteed, default = false
 ---@param payload table
 ---@return Invite
-function GuildChannel:createInvite(payload)
-end
+function GuildChannel:createInvite(payload) end
 ---Returns a newly constructed cache of all invite objects for the channel. The cache and its objects are not automatically updated via gateway events. You must call this method again to get the updated objects.
 ---@return Cache
-function GuildChannel:getInvites()
-end
+function GuildChannel:getInvites() end
 ---Returns a permission overwrite object corresponding to the provided member or role object. If a cached overwrite is not found, an empty overwrite with zero-permissions is returned instead. Therefore, this can be used to create a new overwrite when one does not exist. Note that the member or role must exist in the same guild as the channel does.
 ---@param obj Role | Member
 ---@return PermissionOverwrite
-function GuildChannel:getPermissionOverwriteFor(obj)
-end
+function GuildChannel:getPermissionOverwriteFor(obj) end
 ---Permanently deletes the channel. This cannot be undone!
 ---@return boolean
-function GuildChannel:delete()
-end
+function GuildChannel:delete() end
 ---Create a new GuildChannel
 ---@return GuildChannel
-function GuildChannel:__init()
-end
+function GuildChannel:__init() end
 
 ---Represents a length of time and provides utilities for converting to and from different formats. Supported units are: weeks, days, hours, minutes, seconds, and milliseconds.
 ---@class Time
 local Time = {}
 ---Returns a human-readable string built from the set of normalized time values that the object represents.
 ---@return string
-function Time:toString()
-end
+function Time:toString() end
 ---Returns the total number of weeks that the time object represents.
 ---@return number
-function Time:toWeeks()
-end
+function Time:toWeeks() end
 ---Returns the total number of days that the time object represents.
 ---@return number
-function Time:toDays()
-end
+function Time:toDays() end
 ---Returns the total number of hours that the time object represents.
 ---@return number
-function Time:toHours()
-end
+function Time:toHours() end
 ---Returns the total number of minutes that the time object represents.
 ---@return number
-function Time:toMinutes()
-end
+function Time:toMinutes() end
 ---Returns the total number of seconds that the time object represents.
 ---@return number
-function Time:toSeconds()
-end
+function Time:toSeconds() end
 ---Returns the total number of milliseconds that the time object represents.
 ---@return number
-function Time:toMilliseconds()
-end
+function Time:toMilliseconds() end
 ---Returns a table of normalized time values that represent the time object in a more accessible form.
 ---@return number
-function Time:toTable()
-end
+function Time:toTable() end
 ---Constructs a new Time object from a value interpreted as weeks, where a week is equal to 7 days.
 ---@param t number
 ---@return Time
-function Time.fromWeeks(t)
-end
+function Time.fromWeeks(t) end
 ---Constructs a new Time object from a value interpreted as days, where a day is equal to 24 hours.
 ---@param t number
 ---@return Time
-function Time.fromDays(t)
-end
+function Time.fromDays(t) end
 ---Constructs a new Time object from a value interpreted as hours, where an hour is equal to 60 minutes.
 ---@param t number
 ---@return Time
-function Time.fromHours(t)
-end
+function Time.fromHours(t) end
 ---Constructs a new Time object from a value interpreted as minutes, where a minute is equal to 60 seconds.
 ---@param t number
 ---@return Time
-function Time.fromMinutes(t)
-end
+function Time.fromMinutes(t) end
 ---Constructs a new Time object from a value interpreted as seconds, where a second is equal to 1000 milliseconds.
 ---@param t number
 ---@return Time
-function Time.fromSeconds(t)
-end
+function Time.fromSeconds(t) end
 ---Constructs a new Time object from a value interpreted as milliseconds, the base unit represented.
 ---@param t number
 ---@return Time
-function Time.fromMilliseconds(t)
-end
+function Time.fromMilliseconds(t) end
 ---Constructs a new Time object from a table of time values where the keys are defined in the constructors above (eg: `weeks`, `days`, `hours`).
 ---@param t table
 ---@return Time
-function Time.fromTable(t)
-end
+function Time.fromTable(t) end
 ---Create a new Time
 ---@return Time
-function Time:__init()
-end
+function Time:__init() end
 
 ---Extends the functionality of a regular cache by making use of weak references to the objects that are cached. If all references to an object are weak, as they are here, then the object will be deleted on the next garbage collection cycle.
 ---@class WeakCache: Cache
 local WeakCache = {}
 ---Create a new WeakCache
 ---@return WeakCache
-function WeakCache:__init()
-end
+function WeakCache:__init() end
 
 ---Used to log formatted messages to stdout (the console) or to a file. The `dateTime` argument should be a format string that is accepted by `os.date`. The file argument should be a relative or absolute file path or `nil` if no log file is desired. See the `logLevel` enumeration for acceptable log level values.
 ---@class Logger
@@ -993,15 +829,13 @@ local Logger = {}
 ---@param msg string
 ---@vararg any
 ---@return string
-function Logger:log(level, msg, ...)
-end
+function Logger:log(level, msg, ...) end
 ---Create a new Logger
 ---@param level number
 ---@param dateTime string
 ---@param file string
 ---@return Logger
-function Logger:__init(level, dateTime, file)
-end
+function Logger:__init(level, dateTime, file) end
 
 ---Mutual exclusion class used to control Lua coroutine execution order.
 ---@class Mutex
@@ -1009,21 +843,17 @@ local Mutex = {}
 ---If the mutex is not active (if a coroutine is not queued), this will activate the mutex; otherwise, this will yield and queue the current coroutine.
 ---@param prepend boolean
 ---@return nil
-function Mutex:lock(prepend)
-end
+function Mutex:lock(prepend) end
 ---If the mutex is active (if a coroutine is queued), this will dequeue and resume the next available coroutine; otherwise, this will deactivate the mutex.
 ---@return nil
-function Mutex:unlock()
-end
+function Mutex:unlock() end
 ---Asynchronously unlocks the mutex after a specified time in milliseconds. The relevant `uv_timer` object is returned.
 ---@param delay number
 ---@return uv_timer
-function Mutex:unlockAfter(delay)
-end
+function Mutex:unlockAfter(delay) end
 ---Create a new Mutex
 ---@return Mutex
-function Mutex:__init()
-end
+function Mutex:__init() end
 
 ---Represents a connection to a Discord voice server.
 ---@class VoiceConnection
@@ -1031,54 +861,43 @@ end
 local VoiceConnection = {}
 ---Returns the bitrate of the interal Opus encoder in bits per second (bps).
 ---@return nil
-function VoiceConnection:getBitrate()
-end
+function VoiceConnection:getBitrate() end
 ---Sets the bitrate of the interal Opus encoder in bits per second (bps). This should be between 8000 and 128000, inclusive.
 ---@param bitrate number
 ---@return nil
-function VoiceConnection:setBitrate(bitrate)
-end
+function VoiceConnection:setBitrate(bitrate) end
 ---Returns the complexity of the interal Opus encoder.
 ---@return number
-function VoiceConnection:getComplexity()
-end
+function VoiceConnection:getComplexity() end
 ---Sets the complexity of the interal Opus encoder. This should be between 0 and 10, inclusive.
 ---@param complexity number
 ---@return nil
-function VoiceConnection:setComplexity(complexity)
-end
+function VoiceConnection:setComplexity(complexity) end
 ---Plays PCM data over the established connection. If a duration (in milliseconds) is provided, the audio stream will automatically stop after that time has elapsed; otherwise, it will play until the source is exhausted. The returned number is the time elapsed while streaming and the returned string is a message detailing the reason why the stream stopped. For more information about acceptable sources, see the [[voice]] page.
 ---@param source string | function | table | userdata
 ---@param duration number
 ---@return number string
-function VoiceConnection:playPCM(source, duration)
-end
+function VoiceConnection:playPCM(source, duration) end
 ---Plays audio over the established connection using an FFmpeg process, assuming FFmpeg is properly configured. If a duration (in milliseconds) is provided, the audio stream will automatically stop after that time has elapsed; otherwise, it will play until the source is exhausted. The returned number is the time elapsed while streaming and the returned string is a message detailing the reason why the stream stopped. For more information about using FFmpeg, see the [[voice]] page.
 ---@param path string
 ---@param duration number
 ---@return number string
-function VoiceConnection:playFFmpeg(path, duration)
-end
+function VoiceConnection:playFFmpeg(path, duration) end
 ---Temporarily pauses the audio stream for this connection, if one is active. Like most Discordia methods, this must be called inside of a coroutine, as it will yield until the stream is actually paused, usually on the next tick.
 ---@return nil
-function VoiceConnection:pauseStream()
-end
+function VoiceConnection:pauseStream() end
 ---Resumes the audio stream for this connection, if one is active and paused. Like most Discordia methods, this must be called inside of a coroutine, as it will yield until the stream is actually resumed, usually on the next tick.
 ---@return nil
-function VoiceConnection:resumeStream()
-end
+function VoiceConnection:resumeStream() end
 ---Irreversibly stops the audio stream for this connection, if one is active. Like most Discordia methods, this must be called inside of a coroutine, as it will yield until the stream is actually stopped, usually on the next tick.
 ---@return nil
-function VoiceConnection:stopStream()
-end
+function VoiceConnection:stopStream() end
 ---Stops the audio stream for this connection, if one is active, disconnects from the voice server, and leaves the corresponding voice channel. Like most Discordia methods, this must be called inside of a coroutine.
 ---@return boolean
-function VoiceConnection:close()
-end
+function VoiceConnection:close() end
 ---Create a new VoiceConnection
 ---@return VoiceConnection
-function VoiceConnection:__init()
-end
+function VoiceConnection:__init() end
 
 ---Used to measure an elapsed period of time. If a truthy value is passed as an argument, then the stopwatch will initialize in an idle state; otherwise, it will initialize in an active state. Although nanosecond precision is available, Lua can only reliably provide microsecond accuracy due to the lack of native 64-bit integer support. Generally, milliseconds should be sufficient here.
 ---@class Stopwatch
@@ -1086,28 +905,22 @@ end
 local Stopwatch = {}
 ---Defines the behavior of the `tostring` function. Returns a string that represents the elapsed milliseconds for convenience of introspection.
 ---@return string
-function Stopwatch:__tostring()
-end
+function Stopwatch:__tostring() end
 ---Effectively stops the stopwatch.
 ---@return nil
-function Stopwatch:stop()
-end
+function Stopwatch:stop() end
 ---Effectively starts the stopwatch.
 ---@return nil
-function Stopwatch:start()
-end
+function Stopwatch:start() end
 ---Effectively resets the stopwatch.
 ---@return nil
-function Stopwatch:reset()
-end
+function Stopwatch:reset() end
 ---Returns a new Time object that represents the currently elapsed time. This is useful for "catching" the current time and comparing its many forms as required.
 ---@return Time
-function Stopwatch:getTime()
-end
+function Stopwatch:getTime() end
 ---Create a new Stopwatch
 ---@return Stopwatch
-function Stopwatch:__init()
-end
+function Stopwatch:__init() end
 
 ---Wrapper for a bitfield that is more specifically used to represent Discord permissions. See the `permission` enumeration for acceptable permission values.
 ---@class Permissions
@@ -1115,84 +928,66 @@ end
 local Permissions = {}
 ---Defines the behavior of the `tostring` function. Returns a readable list of permissions stored for convenience of introspection.
 ---@return string
-function Permissions:__tostring()
-end
+function Permissions:__tostring() end
 ---Defines the behavior of the `==` operator. Allows permissions to be directly compared according to their value.
 ---@return boolean
-function Permissions:__eq()
-end
+function Permissions:__eq() end
 ---Enables a specific permission or permissions. See the `permission` enumeration for acceptable permission values.
 ---@vararg number
 ---@return nil
-function Permissions:enable(...)
-end
+function Permissions:enable(...) end
 ---Disables a specific permission or permissions. See the `permission` enumeration for acceptable permission values.
 ---@vararg number
 ---@return nil
-function Permissions:disable(...)
-end
+function Permissions:disable(...) end
 ---Returns whether this set has a specific permission or permissions. See the `permission` enumeration for acceptable permission values.
 ---@vararg number
 ---@return boolean
-function Permissions:has(...)
-end
+function Permissions:has(...) end
 ---Enables all permissions values.
 ---@return nil
-function Permissions:enableAll()
-end
+function Permissions:enableAll() end
 ---Disables all permissions values.
 ---@return nil
-function Permissions:disableAll()
-end
+function Permissions:disableAll() end
 ---Returns the hexadecimal string that represents the permissions value.
 ---@return string
-function Permissions:toHex()
-end
+function Permissions:toHex() end
 ---Returns a table that represents the permissions value, where the keys are the permission names and the values are `true` or `false`.
 ---@return table
-function Permissions:toTable()
-end
+function Permissions:toTable() end
 ---Returns an array of the names of the permissions that this objects represents.
 ---@return table
-function Permissions:toArray()
-end
+function Permissions:toArray() end
 ---Returns a new Permissions object that contains the permissions that are in either `self` or `other` (bitwise OR).
 ---@param other Permissions
 ---@return Permissions
-function Permissions:union(other)
-end
+function Permissions:union(other) end
 ---Returns a new Permissions object that contains the permissions that are in both `self` and `other` (bitwise AND).
 ---@param other Permissions
 ---@return Permissions
-function Permissions:intersection(other)
-end
+function Permissions:intersection(other) end
 ---Returns a new Permissions object that contains the permissions that are not in `self` or `other` (bitwise XOR).
 ---@param other Permissions
 ---@return Permissions
-function Permissions:name(other)
-end
+function Permissions:name(other) end
 ---Returns a new Permissions object that contains the permissions that are not in `self`, but are in `other` (or the set of all permissions if omitted).
 ---@param other Permissions
 ---@return Permissions
-function Permissions:complement(other)
-end
+function Permissions:complement(other) end
 ---Returns a new copy of the original permissions object.
 ---@return Permissions
-function Permissions:copy()
-end
+function Permissions:copy() end
 ---Returns a Permissions object with all of the defined permissions.
 ---@vararg number
 ---@return Permissions
-function Permissions.fromMany(...)
-end
+function Permissions.fromMany(...) end
 ---Returns a Permissions object with all permissions.
 ---@return Permissions
-function Permissions.all()
-end
+function Permissions.all() end
 ---Create a new Permissions
 ---@return Permissions
-function Permissions:__init()
-end
+function Permissions:__init() end
 
 ---Represents a custom emoji object usable in message content and reactions. Standard unicode emojis do not have a class; they are just strings.
 ---@class Emoji: Snowflake
@@ -1209,26 +1004,21 @@ local Emoji = {}
 ---Sets the emoji's name. The name must be between 2 and 32 characters in length.
 ---@param name string
 ---@return boolean
-function Emoji:setName(name)
-end
+function Emoji:setName(name) end
 ---Sets the roles that can use the emoji.
 ---@param roles Role[] | string[]
 ---@return boolean
-function Emoji:setRoles(roles)
-end
+function Emoji:setRoles(roles) end
 ---Permanently deletes the emoji. This cannot be undone!
 ---@return boolean
-function Emoji:delete()
-end
+function Emoji:delete() end
 ---Returns whether or not the provided role is allowed to use the emoji.
 ---@param id Role | string
 ---@return boolean
-function Emoji:hasRole(id)
-end
+function Emoji:hasRole(id) end
 ---Create a new Emoji
 ---@return Emoji
-function Emoji:__init()
-end
+function Emoji:__init() end
 
 ---Defines the base methods and properties for all Discord channel types.
 ---@class Channel: Snowflake
@@ -1237,8 +1027,7 @@ end
 local Channel = {}
 ---Create a new Channel
 ---@return Channel
-function Channel:__init()
-end
+function Channel:__init() end
 
 ---Represents a single moment in time and provides utilities for converting to and from different date and time formats. Although microsecond precision is available, most formats are implemented with only second precision.
 ---@class Date
@@ -1246,159 +1035,126 @@ local Date = {}
 ---Returns a string from this Date object via Lua's `os.date`. If no format string is provided, the default is '%a %b %d %Y %T GMT%z (%Z)'.
 ---@param fmt string
 ---@return string
-function Date:toString(fmt)
-end
+function Date:toString(fmt) end
 ---Returns an ISO 8601 string that represents the stored date and time. If `sep` and `tz` are both provided, then they are used as a custom separator and timezone; otherwise, `T` is used for the separator and `+00:00` is used for the timezone, plus microseconds if available.
 ---@param sep string
 ---@param tz string
 ---@return string
-function Date:toISO(sep, tz)
-end
+function Date:toISO(sep, tz) end
 ---Returns an RFC 2822 string that represents the stored date and time.
 ---@return string
-function Date:toHeader()
-end
+function Date:toHeader() end
 ---Returns a synthetic Discord Snowflake ID based on the stored date and time. Due to the lack of native 64-bit support, the result may lack precision. In other words, `Date.fromSnowflake(id):toSnowflake() == id` may be `false`.
 ---@return string
-function Date:toSnowflake()
-end
+function Date:toSnowflake() end
 ---Returns a Lua date table that represents the stored date and time as a local time. Equivalent to `os.date('*t', s)` where `s` is the Unix time in seconds.
 ---@return table
-function Date:toTable()
-end
+function Date:toTable() end
 ---Returns a Lua date table that represents the stored date and time as a UTC time. Equivalent to `os.date('!*t', s)` where `s` is the Unix time in seconds.
 ---@return table
-function Date:toTableUTC()
-end
+function Date:toTableUTC() end
 ---Returns a Unix time in seconds that represents the stored date and time.
 ---@return number
-function Date:toSeconds()
-end
+function Date:toSeconds() end
 ---Returns a Unix time in milliseconds that represents the stored date and time.
 ---@return number
-function Date:toMilliseconds()
-end
+function Date:toMilliseconds() end
 ---Returns a Unix time in microseconds that represents the stored date and time.
 ---@return number
-function Date:toMicroseconds()
-end
+function Date:toMicroseconds() end
 ---Returns the seconds and microseconds that are stored in the date object.
 ---@return number number
-function Date:toParts()
-end
+function Date:toParts() end
 ---Converts an ISO 8601 string into a Unix time in seconds. For compatibility with Discord's timestamp format, microseconds are also provided as a second return value.
 ---@param str string
 ---@return number number
-function Date.parseISO(str)
-end
+function Date.parseISO(str) end
 ---Converts an RFC 2822 string (an HTTP Date header) into a Unix time in seconds.
 ---@param str string
 ---@return number
-function Date.parseHeader(str)
-end
+function Date.parseHeader(str) end
 ---Converts a Discord Snowflake ID into a Unix time in seconds. Additional decimal points may be present, though only the first 3 (milliseconds) should be considered accurate.
 ---@param id string
 ---@return number
-function Date.parseSnowflake(id)
-end
+function Date.parseSnowflake(id) end
 ---Interprets a Lua date table as a local time and converts it to a Unix time in seconds. Equivalent to `os.time(tbl)`.
 ---@param tbl table
 ---@return number
-function Date.parseTable(tbl)
-end
+function Date.parseTable(tbl) end
 ---Interprets a Lua date table as a UTC time and converts it to a Unix time in seconds. Equivalent to `os.time(tbl)` with a correction for UTC.
 ---@param tbl table
 ---@return number
-function Date.parseTableUTC(tbl)
-end
+function Date.parseTableUTC(tbl) end
 ---Constructs a new Date object from an ISO 8601 string. Equivalent to `Date(Date.parseISO(str))`.
 ---@param str string
 ---@return Date
-function Date.fromISO(str)
-end
+function Date.fromISO(str) end
 ---Constructs a new Date object from an RFC 2822 string. Equivalent to `Date(Date.parseHeader(str))`.
 ---@param str string
 ---@return Date
-function Date.fromHeader(str)
-end
+function Date.fromHeader(str) end
 ---Constructs a new Date object from a Discord/Twitter Snowflake ID. Equivalent to `Date(Date.parseSnowflake(id))`.
 ---@param id string
 ---@return Date
-function Date.fromSnowflake(id)
-end
+function Date.fromSnowflake(id) end
 ---Constructs a new Date object from a Lua date table interpreted as a local time. Equivalent to `Date(Date.parseTable(tbl))`.
 ---@param tbl table
 ---@return Date
-function Date.fromTable(tbl)
-end
+function Date.fromTable(tbl) end
 ---Constructs a new Date object from a Lua date table interpreted as a UTC time. Equivalent to `Date(Date.parseTableUTC(tbl))`.
 ---@param tbl table
 ---@return Date
-function Date.fromTableUTC(tbl)
-end
+function Date.fromTableUTC(tbl) end
 ---Constructs a new Date object from a Unix time in seconds.
 ---@param s number
 ---@return Date
-function Date.fromSeconds(s)
-end
+function Date.fromSeconds(s) end
 ---Constructs a new Date object from a Unix time in milliseconds.
 ---@param ms number
 ---@return Date
-function Date.fromMilliseconds(ms)
-end
+function Date.fromMilliseconds(ms) end
 ---Constructs a new Date object from a Unix time in microseconds.
 ---@param us number
 ---@return Date
-function Date.fromMicroseconds(us)
-end
+function Date.fromMicroseconds(us) end
 ---Create a new Date
 ---@param seconds number
 ---@param microseconds number
 ---@return Date
-function Date:__init(seconds, microseconds)
-end
+function Date:__init(seconds, microseconds) end
 
 ---An implementation of a double-ended queue.
 ---@class Deque
 local Deque = {}
 ---Returns the total number of values stored.
 ---@return number
-function Deque:getCount()
-end
+function Deque:getCount() end
 ---Adds a value of any type to the left side of the deque.
 ---@param obj any
 ---@return nil
-function Deque:pushLeft(obj)
-end
+function Deque:pushLeft(obj) end
 ---Adds a value of any type to the right side of the deque.
 ---@param obj any
 ---@return nil
-function Deque:pushRight(obj)
-end
+function Deque:pushRight(obj) end
 ---Removes and returns a value from the left side of the deque.
 ---@return any
-function Deque:popLeft()
-end
+function Deque:popLeft() end
 ---Removes and returns a value from the right side of the deque.
 ---@return any
-function Deque:popRight()
-end
+function Deque:popRight() end
 ---Returns the value at the left side of the deque without removing it.
 ---@return any
-function Deque:peekLeft()
-end
+function Deque:peekLeft() end
 ---Returns the value at the right side of the deque without removing it.
 ---@return any
-function Deque:peekRight()
-end
+function Deque:peekRight() end
 ---Iterates over the deque from left to right.
 ---@return function
-function Deque:iter()
-end
+function Deque:iter() end
 ---Create a new Deque
 ---@return Deque
-function Deque:__init()
-end
+function Deque:__init() end
 
 ---Represents a text message sent in a Discord text channel. Messages can contain simple content strings, rich embeds, attachments, or reactions.
 ---@class Message: Snowflake
@@ -1430,67 +1186,53 @@ local Message = {}
 ---Sets the message's content. The message must be authored by the current user (ie: you cannot change the content of messages sent by other users). The content must be from 1 to 2000 characters in length.
 ---@param content string
 ---@return boolean
-function Message:setContent(content)
-end
+function Message:setContent(content) end
 ---Sets the message's embed. The message must be authored by the current user. (ie: you cannot change the embed of messages sent by other users).
 ---@param embed table
 ---@return boolean
-function Message:setEmbed(embed)
-end
+function Message:setEmbed(embed) end
 ---Hides all embeds for this message.
 ---@return boolean
-function Message:hideEmbeds()
-end
+function Message:hideEmbeds() end
 ---Shows all embeds for this message.
 ---@return boolean
-function Message:showEmbeds()
-end
+function Message:showEmbeds() end
 ---Indicates whether the message has a particular flag set.
 ---@param flag number
 ---@return boolean
-function Message:hasFlag(flag)
-end
+function Message:hasFlag(flag) end
 ---Sets multiple properties of the message at the same time using a table similar to the one supported by `TextChannel.send`, except only `content` and `embed` are valid fields; `mention(s)`, `file(s)`, etc are not supported. The message must be authored by the current user. (ie: you cannot change the embed of messages sent by other users).
 ---@param data table
 ---@return boolean
-function Message:update(data)
-end
+function Message:update(data) end
 ---Pins the message in the channel.
 ---@return boolean
-function Message:pin()
-end
+function Message:pin() end
 ---Unpins the message in the channel.
 ---@return boolean
-function Message:unpin()
-end
+function Message:unpin() end
 ---Adds a reaction to the message. Note that this does not return the new reaction object; wait for the `reactionAdd` event instead.
 ---@param emoji Emoji | Reaction | string
 ---@return boolean
-function Message:addReaction(emoji)
-end
+function Message:addReaction(emoji) end
 ---Removes a reaction from the message. Note that this does not return the old reaction object; wait for the `reactionRemove` event instead. If no user is indicated, then this will remove the current user's reaction.
 ---@param emoji Emoji | Reaction | string
 ---@param id User | string
 ---@return boolean
-function Message:removeReaction(emoji, id)
-end
+function Message:removeReaction(emoji, id) end
 ---Removes all reactions from the message.
 ---@return boolean
-function Message:clearReactions()
-end
+function Message:clearReactions() end
 ---Permanently deletes the message. This cannot be undone!
 ---@return boolean
-function Message:delete()
-end
+function Message:delete() end
 ---Equivalent to `Message.channel:send(content)`.
 ---@param content string | table
 ---@return Message
-function Message:reply(content)
-end
+function Message:reply(content) end
 ---Create a new Message
 ---@return Message
-function Message:__init()
-end
+function Message:__init() end
 
 ---Represents a private Discord text channel used to track correspondences between the current user and one other recipient.
 ---@class PrivateChannel: TextChannel
@@ -1499,73 +1241,59 @@ end
 local PrivateChannel = {}
 ---Closes the channel. This does not delete the channel. To re-open the channel, use `User:getPrivateChannel`.
 ---@return boolean
-function PrivateChannel:close()
-end
+function PrivateChannel:close() end
 ---Create a new PrivateChannel
 ---@return PrivateChannel
-function PrivateChannel:__init()
-end
+function PrivateChannel:__init() end
 
 ---Abstract base class that defines the base methods and properties for a general purpose data structure with features that are better suited for an object-oriented environment. Note: All sub-classes should implement their own `__init` and `iter` methods and all stored objects should have a `__hash` method.
 ---@class Iterable
 local Iterable = {}
 ---Defines the behavior of the `pairs` function. Returns an iterator that returns a `key, value` pair, where `key` is the result of calling `__hash` on the `value`.
 ---@return function
-function Iterable:__pairs()
-end
+function Iterable:__pairs() end
 ---Defines the behavior of the `#` operator. Returns the total number of objects stored in the iterable.
 ---@return function
-function Iterable:__len()
-end
+function Iterable:__len() end
 ---Returns an individual object by key, where the key should match the result of calling `__hash` on the contained objects. Operates with up to O(n) complexity.
 ---@param k any
 ---@return any
-function Iterable:get(k)
-end
+function Iterable:get(k) end
 ---Returns the first object that satisfies a predicate.
 ---@param fn function
 ---@return any
-function Iterable:find(fn)
-end
+function Iterable:find(fn) end
 ---Returns an iterator that returns all objects that satisfy a predicate.
 ---@param fn function
 ---@return function
-function Iterable:findAll(fn)
-end
+function Iterable:findAll(fn) end
 ---Iterates through all objects and calls a function `fn` that takes the objects as an argument.
 ---@param fn function
 ---@return nil
-function Iterable:forEach(fn)
-end
+function Iterable:forEach(fn) end
 ---Returns a random object that is contained in the iterable.
 ---@return any
-function Iterable:random()
-end
+function Iterable:random() end
 ---If a predicate is provided, this returns the number of objects in the iterable that satistfy the predicate; otherwise, the total number of objects.
 ---@param fn function
 ---@return number
-function Iterable:count(fn)
-end
+function Iterable:count(fn) end
 ---Returns a sequentially-indexed table that contains references to all objects. If a `sortBy` string is provided, then the table is sorted by that particular property. If a predicate is provided, then only objects that satisfy it will be included.
 ---@param sortBy string
 ---@param fn function
 ---@return table
-function Iterable:toArray(sortBy, fn)
-end
+function Iterable:toArray(sortBy, fn) end
 ---Similarly to an SQL query, this returns a sorted Lua table of rows where each row corresponds to each object in the iterable, and each value in the row is selected from the objects according to the keys provided.
 ---@vararg string
 ---@return table
-function Iterable:select(...)
-end
+function Iterable:select(...) end
 ---This returns an iterator that, when called, returns the values from each encountered object, picked by the provided keys. If a key is a string, the objects are indexed with the string. If a key is a function, the function is called with the object passed as its first argument.
 ---@vararg string | function
 ---@return function
-function Iterable:pick(...)
-end
+function Iterable:pick(...) end
 ---Create a new Iterable
 ---@return Iterable
-function Iterable:__init()
-end
+function Iterable:__init() end
 
 ---Represents a relationship between the current user and another Discord user. This is generally either a friend or a blocked user. This class should only be relevant to user-accounts; bots cannot normally have relationships.
 ---@class Relationship: UserPresence
@@ -1574,8 +1302,7 @@ end
 local Relationship = {}
 ---Create a new Relationship
 ---@return Relationship
-function Relationship:__init()
-end
+function Relationship:__init() end
 
 ---Represents a Discord guild role, which is used to assign priority, permissions, and a color to guild members.
 ---@class Role: Snowflake
@@ -1593,79 +1320,62 @@ end
 local Role = {}
 ---Permanently deletes the role. This cannot be undone!
 ---@return boolean
-function Role:delete()
-end
+function Role:delete() end
 ---Moves a role down its list. The parameter `n` indicates how many spaces the role should be moved, clamped to the lowest position, with a default of 1 if it is omitted. This will also normalize the positions of all roles. Note that the default everyone role cannot be moved.
 ---@param n number
 ---@return boolean
-function Role:moveDown(n)
-end
+function Role:moveDown(n) end
 ---Moves a role up its list. The parameter `n` indicates how many spaces the role should be moved, clamped to the highest position, with a default of 1 if it is omitted. This will also normalize the positions of all roles. Note that the default everyone role cannot be moved.
 ---@param n number
 ---@return boolean
-function Role:moveUp(n)
-end
+function Role:moveUp(n) end
 ---Sets the role's name. The name must be between 1 and 100 characters in length.
 ---@param name string
 ---@return boolean
-function Role:setName(name)
-end
+function Role:setName(name) end
 ---Sets the role's display color.
 ---@param color number | Color
 ---@return boolean
-function Role:setColor(color)
-end
+function Role:setColor(color) end
 ---Sets the permissions that this role explicitly allows.
 ---@param permissions Permissions | number
 ---@return boolean
-function Role:setPermissions(permissions)
-end
+function Role:setPermissions(permissions) end
 ---Causes members with this role to display above unhoisted roles in the member list.
 ---@return boolean
-function Role:hoist()
-end
+function Role:hoist() end
 ---Causes member with this role to display amongst other unhoisted members.
 ---@return boolean
-function Role:unhoist()
-end
+function Role:unhoist() end
 ---Allows anyone to mention this role in text messages.
 ---@return boolean
-function Role:enableMentioning()
-end
+function Role:enableMentioning() end
 ---Disallows anyone to mention this role in text messages.
 ---@return boolean
-function Role:disableMentioning()
-end
+function Role:disableMentioning() end
 ---Enables individual permissions for this role. This does not necessarily fully allow the permissions.
 ---@vararg number
 ---@return boolean
-function Role:enablePermissions(...)
-end
+function Role:enablePermissions(...) end
 ---Disables individual permissions for this role. This does not necessarily fully disallow the permissions.
 ---@vararg number
 ---@return boolean
-function Role:disablePermissions(...)
-end
+function Role:disablePermissions(...) end
 ---Enables all permissions for this role. This does not necessarily fully allow the permissions.
 ---@return boolean
-function Role:enableAllPermissions()
-end
+function Role:enableAllPermissions() end
 ---Disables all permissions for this role. This does not necessarily fully disallow the permissions.
 ---@return boolean
-function Role:disableAllPermissions()
-end
+function Role:disableAllPermissions() end
 ---Returns a color object that represents the role's display color.
 ---@return Color
-function Role:getColor()
-end
+function Role:getColor() end
 ---Returns a permissions object that represents the permissions that this role has enabled.
 ---@return Permissions
-function Role:getPermissions()
-end
+function Role:getPermissions() end
 ---Create a new Role
 ---@return Role
-function Role:__init()
-end
+function Role:__init() end
 
 ---Represents a Discord guild (or server). Guilds are a collection of members, channels, and roles that represents one community.
 ---@class Guild: Snowflake
@@ -1713,186 +1423,149 @@ end
 local Guild = {}
 ---Asynchronously loads all members for this guild. You do not need to call this if the `cacheAllMembers` client option (and the `syncGuilds` option for user-accounts) is enabled on start-up.
 ---@return boolean
-function Guild:requestMembers()
-end
+function Guild:requestMembers() end
 ---Asynchronously loads certain data and enables the receiving of certain events for this guild. You do not need to call this if the `syncGuilds` client option is enabled on start-up. Note: This is only for user accounts. Bot accounts never need to sync guilds!
 ---@return boolean
-function Guild:sync()
-end
+function Guild:sync() end
 ---Gets a member object by ID. If the object is already cached, then the cached object will be returned; otherwise, an HTTP request is made.
 ---@param id User | string
 ---@return Member
-function Guild:getMember(id)
-end
+function Guild:getMember(id) end
 ---Gets a role object by ID.
 ---@param id Role | string
 ---@return Role
-function Guild:getRole(id)
-end
+function Guild:getRole(id) end
 ---Gets a emoji object by ID.
 ---@param id Emoji | string
 ---@return Emoji
-function Guild:getEmoji(id)
-end
+function Guild:getEmoji(id) end
 ---Gets a text, voice, or category channel object by ID.
 ---@param id Channel | string
 ---@return GuildChannel
-function Guild:getChannel(id)
-end
+function Guild:getChannel(id) end
 ---Creates a new text channel in this guild. The name must be between 2 and 100 characters in length.
 ---@param name string
 ---@return GuildTextChannel
-function Guild:createTextChannel(name)
-end
+function Guild:createTextChannel(name) end
 ---Creates a new voice channel in this guild. The name must be between 2 and 100 characters in length.
 ---@param name string
 ---@return GuildVoiceChannel
-function Guild:createVoiceChannel(name)
-end
+function Guild:createVoiceChannel(name) end
 ---Creates a channel category in this guild. The name must be between 2 and 100 characters in length.
 ---@param name string
 ---@return GuildCategoryChannel
-function Guild:createCategory(name)
-end
+function Guild:createCategory(name) end
 ---Creates a new role in this guild. The name must be between 1 and 100 characters in length.
 ---@param name string
 ---@return Role
-function Guild:createRole(name)
-end
+function Guild:createRole(name) end
 ---Creates a new emoji in this guild. The name must be between 2 and 32 characters in length. The image must not be over 256kb, any higher will return a 400 Bad Request
 ---@param name string
 ---@param image string
 ---@return Emoji
-function Guild:createEmoji(name, image)
-end
+function Guild:createEmoji(name, image) end
 ---Sets the guilds name. This must be between 2 and 100 characters in length.
 ---@param name string
 ---@return boolean
-function Guild:setName(name)
-end
+function Guild:setName(name) end
 ---Sets the guild's voice region (eg: `us-east`). See `listVoiceRegions` for a list of acceptable regions.
 ---@param region string
 ---@return boolean
-function Guild:setRegion(region)
-end
+function Guild:setRegion(region) end
 ---Sets the guild's verification level setting. See the `verificationLevel` enumeration for acceptable values.
 ---@param verification_level number
 ---@return boolean
-function Guild:setVerificationLevel(verification_level)
-end
+function Guild:setVerificationLevel(verification_level) end
 ---Sets the guild's default notification setting. See the `notficationSetting` enumeration for acceptable values.
 ---@param default_message_notifications number
 ---@return boolean
-function Guild:setNotificationSetting(default_message_notifications)
-end
+function Guild:setNotificationSetting(default_message_notifications) end
 ---Sets the guild's explicit content level setting. See the `explicitContentLevel` enumeration for acceptable values.
 ---@param explicit_content_filter number
 ---@return boolean
-function Guild:setExplicitContentSetting(explicit_content_filter)
-end
+function Guild:setExplicitContentSetting(explicit_content_filter) end
 ---Sets the guild's AFK timeout in seconds.
 ---@param afk_timeout number
 ---@return number
-function Guild:setAFKTimeout(afk_timeout)
-end
+function Guild:setAFKTimeout(afk_timeout) end
 ---Sets the guild's AFK channel.
 ---@param id Channel | string
 ---@return boolean
-function Guild:setAFKChannel(id)
-end
+function Guild:setAFKChannel(id) end
 ---Sets the guild's join message channel.
 ---@param id Channel | string
 ---@return boolean
-function Guild:setSystemChannel(id)
-end
+function Guild:setSystemChannel(id) end
 ---Transfers ownership of the guild to another user. Only the current guild owner can do this.
 ---@param id User | string
 ---@return boolean
-function Guild:setOwner(id)
-end
+function Guild:setOwner(id) end
 ---Sets the guild's icon. To remove the icon, pass `nil`.
 ---@param icon string
 ---@return boolean
-function Guild:setIcon(icon)
-end
+function Guild:setIcon(icon) end
 ---Sets the guild's banner. To remove the banner, pass `nil`.
 ---@param banner string
 ---@return boolean
-function Guild:setBanner(banner)
-end
+function Guild:setBanner(banner) end
 ---Sets the guild's splash. To remove the splash, pass `nil`.
 ---@param splash string
 ---@return boolean
-function Guild:setSplash(splash)
-end
+function Guild:setSplash(splash) end
 ---Returns the number of members that would be pruned from the guild if a prune were to be executed.
 ---@param days number
 ---@return number
-function Guild:getPruneCount(days)
-end
+function Guild:getPruneCount(days) end
 ---Prunes (removes) inactive, roleless members from the guild who have not been online in the last provided days. If the `count` boolean is provided, the number of pruned members is returned; otherwise, `0` is returned.
 ---@param days number
 ---@param count boolean
 ---@return number
-function Guild:pruneMembers(days, count)
-end
+function Guild:pruneMembers(days, count) end
 ---Returns a newly constructed cache of all ban objects for the guild. The cache and its objects are not automatically updated via gateway events. You must call this method again to get the updated objects.
 ---@return Cache
-function Guild:getBans()
-end
+function Guild:getBans() end
 ---This will return a Ban object for a giver user if that user is banned from the guild; otherwise, `nil` is returned.
 ---@param id User | string
 ---@return Ban
-function Guild:getBan(id)
-end
+function Guild:getBan(id) end
 ---Returns a newly constructed cache of all invite objects for the guild. The cache and its objects are not automatically updated via gateway events. You must call this method again to get the updated objects.
 ---@return Cache
-function Guild:getInvites()
-end
+function Guild:getInvites() end
 ---Returns a newly constructed cache of audit log entry objects for the guild. The cache and its objects are not automatically updated via gateway events. You must call this method again to get the updated objects. If included, the query parameters include: query.limit: number, query.user: UserId Resolvable query.before: EntryId Resolvable, query.type: ActionType Resolvable
 ---@param query table
 ---@return Cache
-function Guild:getAuditLogs(query)
-end
+function Guild:getAuditLogs(query) end
 ---Returns a newly constructed cache of all webhook objects for the guild. The cache and its objects are not automatically updated via gateway events. You must call this method again to get the updated objects.
 ---@return Cache
-function Guild:getWebhooks()
-end
+function Guild:getWebhooks() end
 ---Returns a raw data table that contains a list of available voice regions for this guild, as provided by Discord, with no additional parsing.
 ---@return table
-function Guild:listVoiceRegions()
-end
+function Guild:listVoiceRegions() end
 ---Removes the current user from the guild.
 ---@return boolean
-function Guild:leave()
-end
+function Guild:leave() end
 ---Permanently deletes the guild. The current user must owner the server. This cannot be undone!
 ---@return boolean
-function Guild:delete()
-end
+function Guild:delete() end
 ---Kicks a user/member from the guild with an optional reason.
 ---@param id User | string
 ---@param reason string
 ---@return boolean
-function Guild:kickUser(id, reason)
-end
+function Guild:kickUser(id, reason) end
 ---Bans a user/member from the guild with an optional reason. The `days` parameter is the number of days to consider when purging messages, up to 7.
 ---@param id User | string
 ---@param reason string
 ---@param days number
 ---@return boolean
-function Guild:banUser(id, reason, days)
-end
+function Guild:banUser(id, reason, days) end
 ---Unbans a user/member from the guild with an optional reason.
 ---@param id User | string
 ---@param reason string
 ---@return boolean
-function Guild:unbanUser(id, reason)
-end
+function Guild:unbanUser(id, reason) end
 ---Create a new Guild
 ---@return Guild
-function Guild:__init()
-end
+function Guild:__init() end
 
 ---Represents a single user of Discord, either a human or a bot, outside of any specific guild's context.
 ---@class User: Snowflake
@@ -1912,31 +1585,25 @@ local User = {}
 ---@param size number
 ---@param ext string
 ---@return string
-function User:getAvatarURL(size, ext)
-end
+function User:getAvatarURL(size, ext) end
 ---Returns a URL that can be used to view the user's default avatar.
 ---@param size number
 ---@return string
-function User:getDefaultAvatarURL(size)
-end
+function User:getDefaultAvatarURL(size) end
 ---Returns a private channel that can be used to communicate with the user. If the channel is not cached an HTTP request is made to open one.
 ---@return PrivateChannel
-function User:getPrivateChannel()
-end
+function User:getPrivateChannel() end
 ---Equivalent to `User:getPrivateChannel():send(content)`
 ---@param content string | table
 ---@return Message
-function User:send(content)
-end
+function User:send(content) end
 ---Equivalent to `User:getPrivateChannel():sendf(content)`
 ---@param content string
 ---@return Message
-function User:sendf(content)
-end
+function User:sendf(content) end
 ---Create a new User
 ---@return User
-function User:__init()
-end
+function User:__init() end
 
 ---Defines the base methods and/or properties for classes that represent a user's current presence information. Note that any method or property that exists for the User class is also available in the UserPresence class and its subclasses.
 ---@class UserPresence: Container
@@ -1949,12 +1616,10 @@ end
 local UserPresence = {}
 ---Returns `UserPresence.user.id`
 ---@return string
-function UserPresence:__hash()
-end
+function UserPresence:__hash() end
 ---Create a new UserPresence
 ---@return UserPresence
-function UserPresence:__init()
-end
+function UserPresence:__init() end
 
 ---Implements an asynchronous event emitter where callbacks can be subscribed to specific named events. When events are emitted, the callbacks are called in the order that they were originally registered.
 ---@class Emitter
@@ -1963,64 +1628,53 @@ local Emitter = {}
 ---@param name string
 ---@param fn function
 ---@return function
-function Emitter:on(name, fn)
-end
+function Emitter:on(name, fn) end
 ---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method will automatically be wrapped as a new coroutine when they are called. Returns the original callback for convenience.
 ---@param name string
 ---@param fn function
 ---@return function
-function Emitter:once(name, fn)
-end
+function Emitter:once(name, fn) end
 ---Subscribes a callback to be called every time the named event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
 ---@param name string
 ---@param fn function
 ---@return function
-function Emitter:onSync(name, fn)
-end
+function Emitter:onSync(name, fn) end
 ---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
 ---@param name string
 ---@param fn function
 ---@return function
-function Emitter:onceSync(name, fn)
-end
+function Emitter:onceSync(name, fn) end
 ---Emits the named event and a variable number of arguments to pass to the event callbacks.
 ---@param name string
 ---@vararg any
 ---@return nil
-function Emitter:emit(name, ...)
-end
+function Emitter:emit(name, ...) end
 ---Returns an iterator for all callbacks registered to the named event.
 ---@param name string
 ---@return function
-function Emitter:getListeners(name)
-end
+function Emitter:getListeners(name) end
 ---Returns the number of callbacks registered to the named event.
 ---@param name string
 ---@return number
-function Emitter:getListenerCount(name)
-end
+function Emitter:getListenerCount(name) end
 ---Unregisters all instances of the callback from the named event.
 ---@param name string
 ---@param fn function
 ---@return nil
-function Emitter:removeListener(name, fn)
-end
+function Emitter:removeListener(name, fn) end
 ---Unregisters all callbacks for the emitter. If a name is passed, then only callbacks for that specific event are unregistered.
 ---@param name string | nil
 ---@return nil
-function Emitter:removeAllListeners(name)
-end
+function Emitter:removeAllListeners(name) end
 ---When called inside of a coroutine, this will yield the coroutine until the named event is emitted. If a timeout (in milliseconds) is provided, the function will return after the time expires, regardless of whether the event is emitted, and `false` will be returned; otherwise, `true` is returned. If a predicate is provided, events that do not pass the predicate will be ignored.
 ---@param name string
 ---@param timeout number
 ---@param predicate function
 ---@return boolean ...
-function Emitter:waitFor(name, timeout, predicate)
-end
+function Emitter:waitFor(name, timeout, predicate) end
 ---Create a new Emitter
 ---@return Emitter
-function Emitter:__init()
-end
+function Emitter:__init() end
 
 ---Defines the base methods and/or properties for all Discord objects that have a Snowflake ID.
 ---@class Snowflake: Container
@@ -2030,18 +1684,93 @@ end
 local Snowflake = {}
 ---Returns `Snowflake.id`
 ---@return string
-function Snowflake:__hash()
-end
+function Snowflake:__hash() end
 ---Returns a unique Date object that represents when the object was created by Discord. Equivalent to `Date.fromSnowflake(Snowflake.id)`
 ---@return Date
-function Snowflake:getDate()
-end
+function Snowflake:getDate() end
 ---Create a new Snowflake
 ---@return Snowflake
-function Snowflake:__init()
-end
+function Snowflake:__init() end
+
+
 
 -- Hand written Discordia types for things which are also hand written in the documentation
+
+-- Add in auto complete for events
+
+---@alias clientEvents string
+---| "'ready'"                  # Emitted after all shards and guilds are fully loaded.
+---| "'shardReady'"             # Emitted after a shard successfully connects to a Discord gateway and loads all corresponding guilds.
+---| "'shardResume'"            # Emitted after the client successfully resumes a severed gateway connection.
+---| "'channelCreate'"          # Emitted when a guild channel is created, when a private channel is opened, or when a group channel is joined.
+---| "'channelUpdate'"          # Emitted when a channel property is updated, such as its name, topic, bitrate, etc.
+---| "'channelDelete'"          # Emitted when a guild channel is deleted, when a private channel is closed, or when a group channel is left.
+---| "'recipientAdd'"           # Emitted when a new recipient is added to a group channel. User-accounts only.
+---| "'recipientRemove'"        # Emitted when a new recipient is removed from a group channel. User-accounts only.
+---| "'guildAvailable'"         # Emitted when a guild becomes available. This can occur after a server outage or as guild data is streamed in after login.
+---| "'guildCreate'"            # Emitted when a guild is created from the perspective of the current user, usually after the client user joins a new one.
+---| "'guildUpdate'"            # Emitted when a guild property is updated such as its name, region, icon, etc.
+---| "'guildUnavailable'"       # Emitted when a guild becomes unavailable, potentially due to a server outage. Unavailable guilds may lack significant data.
+---| "'guildDelete'"            # Emitted when a guild is deleted from the perspective of the current user, usually after the client leaves one.
+---| "'userBan'"                # Emitted when a user is banned from a guild.
+---| "'userUnban'"              # Emitted when a user is unbanned from a guild.
+---| "'emojisUpdate'"           # Emitted when a guild's custom emoji is updated.
+---| "'memberJoin'"             # Emitted when a new user joins a guild.
+---| "'memberLeave'"            # Emitted when a user leaves a guild.
+---| "'memberUpdate'"           # Emitted when a guild member property is updated, such as its roles or nickname. See presenceUpdate for status changes.
+---| "'roleCreate'"             # Emitted when a guild role is created.
+---| "'roleUpdate'"             # Emitted when a guild role property is updated, such as its name, color, permissions, etc.
+---| "'roleDelete'"             # Emitted when a guild role is deleted.
+---| "'messageCreate'"          # Emitted when a text channel message is created.
+---| "'messageUpdate'"          # Emitted when the content of a text channel message is edited.
+---| "'messageUpdateUncached'"  # Emitted when the content of a text channel message is edited, but the message is not cached by the client.
+---| "'messageDelete'"          # Emitted when a text channel message is deleted. Bulk deletions will fire this for every message that is deleted.
+---| "'messageDeleteUncached'"  # Emitted when a text channel message is deleted, but the message is not cached by the client. Bulk deletions will fire this for every message that is deleted, but not cached.
+---| "'reactionAdd'"            # Emitted when an emoji reaction is added to message.
+---| "'reactionAddUncached'"    # Emitted when an emoji reaction is added to message, but the message is not cached by the client.
+---| "'reactionRemove'"         # Emitted when an emoji reaction is removed from a message.
+---| "'reactionRemoveUncached'" # Emitted when an emoji reaction is removed from a message, but the message is not cached by the client.
+---| "'pinsUpdate'"             # Emitted when a message is pinned or unpinned in a channel.
+---| "'presenceUpdate'"         # Emitted when a guild member's status or user properties change. See memberUpdate for role and nickname changes.
+---| "'relationshipUpdate'"     # Emitted when a relationship's (friend, blocked user) status or user properties change. User-accounts only.
+---| "'relationshipAdd'"        # Emitted when a relationship (friend, blocked user) is added. User-accounts only.
+---| "'relationshipRemove'"     # Emitted when a relationship (friend, blocked user) is removed. User-accounts only.
+---| "'typingStart'"            # Emitted when a user starts typing in a text channel.
+---| "'userUpdate'"             # Emitted when the client user updates itself.
+---| "'voiceConnect'"           # Emitted when a guild member connects to voice chat.
+---| "'voiceDisconnect'"        # Emitted when a guild member disconnects from voice chat.
+---| "'voiceUpdate'"            # Emitted when a guild member's mute/deaf status changes.
+---| "'voiceChannelJoin'"       # Emitted when a guild member joins a voice channel.
+---| "'voiceChannelLeave'"      # Emitted when a guild member leaves a voice channel.
+---| "'webhooksUpdate'"         # Emitted when a guild's text channel's webhooks have updated.
+---| "'heartbeat'"              # Emitted when Discord responds with a heartbeat acknowledgement.
+---| "'raw'"                    # Emitted for every Discord gateway event.
+---| "'debug'"                  # Emitted to provide detailed information regarding specific library behavior.
+---| "'info'"                   # Emitted to provide helpful information regarding general library behavior.
+---| "'warning'"                # Emitted when something went wrong, but your code will probably continue operating normally.
+---| "'error'"                  # Emitted when something went wrong and your code may not continue operating normally.
+
+---Subscribes a callback to be called every time the named event is emitted. Callbacks registered with this method will automatically be wrapped as a new coroutine when they are called. Returns the original callback for convenience.
+---@param name clientEvents
+---@param fn function
+---@return function
+function Client:on(name, fn) end
+---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method will automatically be wrapped as a new coroutine when they are called. Returns the original callback for convenience.
+---@param name clientEvents
+---@param fn function
+---@return function
+function Client:once(name, fn) end
+---Subscribes a callback to be called every time the named event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
+---@param name clientEvents
+---@param fn function
+---@return function
+function Client:onSync(name, fn) end
+---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
+---@param name clientEvents
+---@param fn function
+---@return function
+function Client:onceSync(name, fn) end
+
 --- The Lua language does not have classes, but it does have all of the tools needed to write them.
 --- Discordia uses a custom class system that was written explicitly to encapsulate data provided by Discord in intuitive, efficient structures.
 ---
@@ -2182,8 +1911,8 @@ end
 ---
 --- Table of all defined classes, indexed by name.
 ---
----@field classes table<string, any>
 ---@class class
+---@field classes table<string, any>
 local class = {}
 
 --- Function that returns true only if the provided argument is a Discordia class module.
@@ -2296,13 +2025,15 @@ end
 ---
 --- The enumerations are designed to be compatible with the Discord API. They are not necessarily unique to Discordia.
 --- gameType enum
+---@class enum_gameType
 ---@field public custom number | "4"
 ---@field public listening number | "2"
 ---@field public streaming number | "1"
 ---@field public default number | "0"
----@class enum_gameType
 local enum_gameType = {}
+
 --- messageType enum
+---@class enum_messageType
 ---@field public call number | "3"
 ---@field public channelNameChange number | "4"
 ---@field public pinnedMessage number | "6"
@@ -2315,72 +2046,82 @@ local enum_gameType = {}
 ---@field public premiumGuildSubscriptionTier2 number | "10"
 ---@field public channelIconchange number | "5"
 ---@field public default number | "0"
----@class enum_messageType
 local enum_messageType = {}
+
 --- activityType enum
+---@class enum_activityType
 ---@field public custom number | "4"
 ---@field public listening number | "2"
 ---@field public streaming number | "1"
 ---@field public default number | "0"
----@class enum_activityType
 local enum_activityType = {}
+
 --- verificationLevel enum
+---@class enum_verificationLevel
 ---@field public none number | "0"
 ---@field public medium number | "2"
 ---@field public high number | "3"
 ---@field public low number | "1"
 ---@field public veryHigh number | "4"
----@class enum_verificationLevel
 local enum_verificationLevel = {}
+
 --- messageFlag enum
+---@class enum_messageFlag
 ---@field public suppressEmbeds number | "4"
 ---@field public urgent number | "16"
 ---@field public isCrosspost number | "2"
 ---@field public sourceMessageDeleted number | "8"
 ---@field public crossposted number | "1"
----@class enum_messageFlag
 local enum_messageFlag = {}
+
 --- webhookType enum
+---@class enum_webhookType
 ---@field public incoming number | "1"
 ---@field public channelFollower number | "2"
----@class enum_webhookType
 local enum_webhookType = {}
+
 --- notificationSetting enum
+---@class enum_notificationSetting
 ---@field public allMessages number | "0"
 ---@field public onlyMentions number | "1"
----@class enum_notificationSetting
 local enum_notificationSetting = {}
+
 --- logLevel enum
+---@class enum_logLevel
 ---@field public none number | "0"
 ---@field public info number | "3"
 ---@field public debug number | "4"
 ---@field public error number | "1"
 ---@field public warning number | "2"
----@class enum_logLevel
 local enum_logLevel = {}
+
 --- relationshipType enum
+---@class enum_relationshipType
 ---@field public none number | "0"
 ---@field public friend number | "1"
 ---@field public blocked number | "2"
 ---@field public pendingOutgoing number | "4"
 ---@field public pendingIncoming number | "3"
----@class enum_relationshipType
 local enum_relationshipType = {}
+
 --- defaultAvatar enum
+---@class enum_defaultAvatar
 ---@field public blurple number | "0"
 ---@field public green number | "2"
 ---@field public gray number | "1"
 ---@field public red number | "4"
 ---@field public orange number | "3"
----@class enum_defaultAvatar
 local enum_defaultAvatar = {}
+
 --- explicitContentLevel enum
+---@class enum_explicitContentLevel
 ---@field public none number | "0"
 ---@field public medium number | "1"
 ---@field public high number | "2"
----@class enum_explicitContentLevel
 local enum_explicitContentLevel = {}
+
 --- actionType enum
+---@class enum_actionType
 ---@field public memberUpdate number | "24"
 ---@field public messageBulkDelete number | "73"
 ---@field public webhookDelete number | "52"
@@ -2416,9 +2157,10 @@ local enum_explicitContentLevel = {}
 ---@field public roleCreate number | "30"
 ---@field public botAdd number | "28"
 ---@field public emojiUpdate number | "61"
----@class enum_actionType
 local enum_actionType = {}
+
 --- permission enum
+---@class enum_permission
 ---@field public manageGuild number | "32"
 ---@field public createInstantInvite number | "1"
 ---@field public mentionEveryone number | "131072"
@@ -2449,31 +2191,34 @@ local enum_actionType = {}
 ---@field public useExternalEmojis number | "262144"
 ---@field public embedLinks number | "16384"
 ---@field public stream number | "512"
----@class enum_permission
 local enum_permission = {}
+
 --- status enum
+---@class enum_status
 ---@field public invisible string | "'invisible'"
 ---@field public idle string | "'idle'"
 ---@field public doNotDisturb string | "'dnd'"
 ---@field public online string | "'online'"
----@class enum_status
 local enum_status = {}
+
 --- premiumTier enum
+---@class enum_premiumTier
 ---@field public none number | "0"
 ---@field public tier2 number | "2"
 ---@field public tier3 number | "3"
 ---@field public tier1 number | "1"
----@class enum_premiumTier
 local enum_premiumTier = {}
+
 --- channelType enum
+---@class enum_channelType
 ---@field public private number | "1"
 ---@field public group number | "3"
 ---@field public category number | "4"
 ---@field public news number | "5"
 ---@field public voice number | "2"
 ---@field public text number | "0"
----@class enum_channelType
-local enum_channelType = {} ---@field public gameType enum_gameType
+local enum_channelType = {}
+---@field public gameType enum_gameType
 ---@field public messageType enum_messageType
 ---@field public activityType enum_activityType
 ---@field public verificationLevel enum_verificationLevel
@@ -2543,21 +2288,21 @@ local enums = {}
 --- An empty table that can be used to store user data.
 --- This may be used an alternative to storing values on class instances or in global variables, both of which are not recommended.
 ---
----@field public Client Client
----@field public Clock Clock
----@field public Color Color
----@field public Date Date
----@field public Deque Deque
----@field public Emitter Emitter
----@field public Logger Logger
----@field public Mutex Mutex
----@field public Permissions Permissions
----@field public Stopwatch Stopwatch
----@field public Time Time
----@field public class class
----@field public enums enums
----@field public extensions function
----@field public package table<string, any>
----@field public storage table<any, any>
 ---@class discordia
+---@field Client Client
+---@field Clock Clock
+---@field Color Color
+---@field Date Date
+---@field Deque Deque
+---@field Emitter Emitter
+---@field Logger Logger
+---@field Mutex Mutex
+---@field Permissions Permissions
+---@field Stopwatch Stopwatch
+---@field Time Time
+---@field class class
+---@field enums enums
+---@field extensions function
+---@field package table<string, any>
+---@field storage table<any, any>
 local discordia = {}

@@ -1,5 +1,5 @@
 --- Utility for managing time
----@module ms
+---@class ms
 local ms = {}
 
 local s = 1000

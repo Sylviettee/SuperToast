@@ -1,6 +1,6 @@
 return {
    name = 'SovietKitsune/SuperToast',
-   version = '0.3.4',
+   version = '0.3.5',
    description = 'The better Toast',
    tags = {'toast', 'discordia'},
    license = 'MIT',
@@ -11,6 +11,10 @@ return {
       'SovietKitsune/typed@1.0.2'
    },
    files = {
-      '**.lua', '!spec*', '!util', '!main.lua' -- Utils are for running and ops
+      '**.lua',
+      '!spec*',
+      '!util',
+      '!main.lua',
+      '!testRunner.lua'
    }
 }

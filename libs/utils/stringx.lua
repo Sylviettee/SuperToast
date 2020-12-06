@@ -1,5 +1,5 @@
 --- String utility library
----@module stringx
+---@class stringx
 local stringx = {}
 
 local byte, char = string.byte, string.char

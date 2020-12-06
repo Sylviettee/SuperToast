@@ -54,8 +54,8 @@ local f = string.format
 
 --- The SuperToast client with all the fun features
 ---@class SuperToastClient: Client
----@field commands TypedArray
----@field config SuperToastOptions
+---@field public commands TypedArray
+---@field public config SuperToastOptions
 local Helper, get = class('SuperToast Client', discordia.Client)
 
 --- Create a new SuperToast client

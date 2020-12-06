@@ -268,13 +268,15 @@ for i, v in pairs(enums) do
       table.insert(fields, '---@field public ' .. i .. ' enum_' .. i)
       local desc = '--- ' .. i .. ' enum'
 
+      desc = desc .. '\n---@class enum_' .. i
+
       for name, val in pairs(v) do
          desc = desc ..
                     f('\n---@field public %s %s | "%s"', name, type(val),
                       type(val) == 'string' and f('\'%s\'', val) or val)
       end
 
-      desc = desc .. '\n---@class enum_' .. i .. '\nlocal enum_' .. i .. ' = {}'
+       desc = desc .. '\nlocal enum_' .. i .. ' = {}\n'
 
       table.insert(enum_descs, desc)
    end

@@ -1,5 +1,5 @@
 --- Dotenv parsing module
----@module dotenv
+---@class dotenv
 local dotenv = {}
 
 local stringx = require 'utils/stringx'

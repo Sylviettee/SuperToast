@@ -17,10 +17,6 @@ Dotenv
 -------
 .. lua:automodule:: dotenv
 
-Typed
-------
-.. lua:automodule:: typed
-
 MS
 ---
 .. lua:automodule:: ms

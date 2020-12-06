@@ -1,5 +1,5 @@
 --- The SuperToast module
----@module SuperToast
+---@class SuperToast
 local SuperToast = {
    Array = require('classes/Array'),
    Client = require('classes/Client'),
