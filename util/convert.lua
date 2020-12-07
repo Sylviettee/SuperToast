@@ -150,7 +150,9 @@ end
 local writing = f('-- Do not touch, automatically generated!\n-- Generated on %s\n\n', os.date())
 
 local function convert(tp)
-   if not tp:match('%-') then
+   if tp == 'uv_timer' then
+      return 'userdata'
+   elseif not tp:match('%-') then
       return tp:gsub('/', ' | '):gsub('*', 'any')
    elseif tp:lower():match('id') then
       local resolving, id = tp:match('(%w+)%-.-%-(%w*)')
@@ -281,17 +283,19 @@ end
 
 local handWritten = fs.readFileSync(HANDWRITTEN_IN)
 
-local enums = require('discordia').enums
+local discordia = require('discordia')
+
+local enums = discordia.enums
 
 local enum_descs = {}
 local fields = {}
 
 for i, v in pairs(enums) do
    if i ~= 'enum' then
-      table.insert(fields, '---@field public ' .. i .. ' enum_' .. i)
+      table.insert(fields, '---@field public ' .. i .. ' enums.' .. i)
       local desc = '--- ' .. i .. ' enum'
 
-      desc = desc .. '\n---@class enum_' .. i
+      desc = desc .. '\n---@class enums.' .. i
 
       for name, val in pairs(v) do
          desc = desc ..
@@ -299,13 +303,27 @@ for i, v in pairs(enums) do
                       type(val) == 'string' and f('\'%s\'', val) or val)
       end
 
-       desc = desc .. '\nlocal enum_' .. i .. ' = {}\n'
+       desc = desc .. '\n\n'
 
       table.insert(enum_descs, desc)
    end
 end
 
+-- Fill out package
+
+local typed = require('typed')
+local package = discordia.package
+local whatIs = typed.whatIs
+
+local desc = '---@class package\n'
+
+for i, v in pairs(package) do
+   local val = (type(v) == 'table' and '') or ' | "' .. ((type(v) == 'string' and f('\'%s\'', v)) or tostring(v)) .. '"'
+   desc = desc .. f('---@field public %s %s%s\n', i, whatIs(v), val)
+end
+
 handWritten = handWritten:gsub('%-%-%s?@enums', table.concat(enum_descs, '\n') .. table.concat(fields, '\n'))
+handWritten = handWritten:gsub('%-%-%s?@package', desc)
 
 writing = writing .. '\n\n' .. handWritten
 

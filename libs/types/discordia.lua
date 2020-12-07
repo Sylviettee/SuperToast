@@ -1,5 +1,5 @@
 -- Do not touch, automatically generated!
--- Generated on Sun Dec  6 00:08:35 2020
+-- Generated on Sun Dec  6 17:45:56 2020
 
 ---Represents a Discord guild member. Though one user may be a member in more than one guild, each presence is represented by a different member object associated with that guild. Note that any method or property that exists for the User class is also available in the Member class.
 ---@class Member: UserPresence
@@ -903,7 +903,7 @@ function Mutex:lock(prepend) end
 function Mutex:unlock() end
 ---Asynchronously unlocks the mutex after a specified time in milliseconds. The relevant `uv_timer` object is returned.
 ---@param delay number
----@return uv_timer
+---@return userdata
 function Mutex:unlockAfter(delay) end
 ---Create a new Mutex
 ---@return Mutex
@@ -2064,6 +2064,217 @@ end
 function class.profile()
 end
 
+--- gameType enum
+---@class enums.gameType
+---@field public custom number | "4"
+---@field public listening number | "2"
+---@field public streaming number | "1"
+---@field public default number | "0"
+
+
+--- messageType enum
+---@class enums.messageType
+---@field public call number | "3"
+---@field public channelNameChange number | "4"
+---@field public pinnedMessage number | "6"
+---@field public memberJoin number | "7"
+---@field public recipientRemove number | "2"
+---@field public recipientAdd number | "1"
+---@field public premiumGuildSubscriptionTier1 number | "9"
+---@field public premiumGuildSubscriptionTier3 number | "11"
+---@field public premiumGuildSubscription number | "8"
+---@field public premiumGuildSubscriptionTier2 number | "10"
+---@field public channelIconchange number | "5"
+---@field public default number | "0"
+
+
+--- activityType enum
+---@class enums.activityType
+---@field public custom number | "4"
+---@field public listening number | "2"
+---@field public streaming number | "1"
+---@field public default number | "0"
+
+
+--- verificationLevel enum
+---@class enums.verificationLevel
+---@field public none number | "0"
+---@field public medium number | "2"
+---@field public high number | "3"
+---@field public low number | "1"
+---@field public veryHigh number | "4"
+
+
+--- messageFlag enum
+---@class enums.messageFlag
+---@field public suppressEmbeds number | "4"
+---@field public urgent number | "16"
+---@field public isCrosspost number | "2"
+---@field public sourceMessageDeleted number | "8"
+---@field public crossposted number | "1"
+
+
+--- webhookType enum
+---@class enums.webhookType
+---@field public incoming number | "1"
+---@field public channelFollower number | "2"
+
+
+--- notificationSetting enum
+---@class enums.notificationSetting
+---@field public allMessages number | "0"
+---@field public onlyMentions number | "1"
+
+
+--- logLevel enum
+---@class enums.logLevel
+---@field public none number | "0"
+---@field public info number | "3"
+---@field public debug number | "4"
+---@field public error number | "1"
+---@field public warning number | "2"
+
+
+--- relationshipType enum
+---@class enums.relationshipType
+---@field public none number | "0"
+---@field public friend number | "1"
+---@field public blocked number | "2"
+---@field public pendingOutgoing number | "4"
+---@field public pendingIncoming number | "3"
+
+
+--- defaultAvatar enum
+---@class enums.defaultAvatar
+---@field public blurple number | "0"
+---@field public green number | "2"
+---@field public gray number | "1"
+---@field public red number | "4"
+---@field public orange number | "3"
+
+
+--- explicitContentLevel enum
+---@class enums.explicitContentLevel
+---@field public none number | "0"
+---@field public medium number | "1"
+---@field public high number | "2"
+
+
+--- actionType enum
+---@class enums.actionType
+---@field public memberUpdate number | "24"
+---@field public messageBulkDelete number | "73"
+---@field public webhookDelete number | "52"
+---@field public channelDelete number | "12"
+---@field public messageDelete number | "72"
+---@field public channelOverwriteDelete number | "15"
+---@field public roleDelete number | "32"
+---@field public channelUpdate number | "11"
+---@field public inviteCreate number | "40"
+---@field public messageUnpin number | "75"
+---@field public inviteUpdate number | "41"
+---@field public memberMove number | "26"
+---@field public messagePin number | "74"
+---@field public channelOverwriteUpdate number | "14"
+---@field public integrationDelete number | "82"
+---@field public webhookUpdate number | "51"
+---@field public memberBanAdd number | "22"
+---@field public inviteDelete number | "42"
+---@field public channelOverwriteCreate number | "13"
+---@field public emojiCreate number | "60"
+---@field public memberPrune number | "21"
+---@field public channelCreate number | "10"
+---@field public integrationUpdate number | "81"
+---@field public webhookCreate number | "50"
+---@field public emojiDelete number | "62"
+---@field public memberBanRemove number | "23"
+---@field public integrationCreate number | "80"
+---@field public memberDisconnect number | "27"
+---@field public guildUpdate number | "1"
+---@field public memberRoleUpdate number | "25"
+---@field public memberKick number | "20"
+---@field public roleUpdate number | "31"
+---@field public roleCreate number | "30"
+---@field public botAdd number | "28"
+---@field public emojiUpdate number | "61"
+
+
+--- permission enum
+---@class enums.permission
+---@field public manageGuild number | "32"
+---@field public createInstantInvite number | "1"
+---@field public mentionEveryone number | "131072"
+---@field public manageRoles number | "268435456"
+---@field public addReactions number | "64"
+---@field public sendTextToSpeech number | "4096"
+---@field public readMessageHistory number | "65536"
+---@field public manageChannels number | "16"
+---@field public administrator number | "8"
+---@field public manageWebhooks number | "536870912"
+---@field public viewAuditLog number | "128"
+---@field public manageEmojis number | "1073741824"
+---@field public attachFiles number | "32768"
+---@field public moveMembers number | "16777216"
+---@field public banMembers number | "4"
+---@field public sendMessages number | "2048"
+---@field public manageMessages number | "8192"
+---@field public manageNicknames number | "134217728"
+---@field public useVoiceActivity number | "33554432"
+---@field public speak number | "2097152"
+---@field public readMessages number | "1024"
+---@field public connect number | "1048576"
+---@field public kickMembers number | "2"
+---@field public changeNickname number | "67108864"
+---@field public deafenMembers number | "8388608"
+---@field public muteMembers number | "4194304"
+---@field public prioritySpeaker number | "256"
+---@field public useExternalEmojis number | "262144"
+---@field public embedLinks number | "16384"
+---@field public stream number | "512"
+
+
+--- status enum
+---@class enums.status
+---@field public invisible string | "'invisible'"
+---@field public idle string | "'idle'"
+---@field public doNotDisturb string | "'dnd'"
+---@field public online string | "'online'"
+
+
+--- premiumTier enum
+---@class enums.premiumTier
+---@field public none number | "0"
+---@field public tier2 number | "2"
+---@field public tier3 number | "3"
+---@field public tier1 number | "1"
+
+
+--- channelType enum
+---@class enums.channelType
+---@field public private number | "1"
+---@field public group number | "3"
+---@field public category number | "4"
+---@field public news number | "5"
+---@field public voice number | "2"
+---@field public text number | "0"
+
+---@field public gameType enums.gameType
+---@field public messageType enums.messageType
+---@field public activityType enums.activityType
+---@field public verificationLevel enums.verificationLevel
+---@field public messageFlag enums.messageFlag
+---@field public webhookType enums.webhookType
+---@field public notificationSetting enums.notificationSetting
+---@field public logLevel enums.logLevel
+---@field public relationshipType enums.relationshipType
+---@field public defaultAvatar enums.defaultAvatar
+---@field public explicitContentLevel enums.explicitContentLevel
+---@field public actionType enums.actionType
+---@field public permission enums.permission
+---@field public status enums.status
+---@field public premiumTier enums.premiumTier
+---@field public channelType enums.channelType
+---@class enums
 --- The Discord API uses numbers to represent certain data types.
 --- For convenience, these are enumerated in Discord as special read-only tables, found in the main Discordia module.
 --- All available enumerations are listed at the end of this page.
@@ -2112,218 +2323,218 @@ end
 --- ## Discord Enumerations
 ---
 --- The enumerations are designed to be compatible with the Discord API. They are not necessarily unique to Discordia.
---- gameType enum
----@class enum_gameType
----@field public custom number | "4"
----@field public listening number | "2"
----@field public streaming number | "1"
----@field public default number | "0"
-local enum_gameType = {}
-
---- messageType enum
----@class enum_messageType
----@field public call number | "3"
----@field public channelNameChange number | "4"
----@field public pinnedMessage number | "6"
----@field public memberJoin number | "7"
----@field public recipientRemove number | "2"
----@field public recipientAdd number | "1"
----@field public premiumGuildSubscriptionTier1 number | "9"
----@field public premiumGuildSubscriptionTier3 number | "11"
----@field public premiumGuildSubscription number | "8"
----@field public premiumGuildSubscriptionTier2 number | "10"
----@field public channelIconchange number | "5"
----@field public default number | "0"
-local enum_messageType = {}
-
---- activityType enum
----@class enum_activityType
----@field public custom number | "4"
----@field public listening number | "2"
----@field public streaming number | "1"
----@field public default number | "0"
-local enum_activityType = {}
-
---- verificationLevel enum
----@class enum_verificationLevel
----@field public none number | "0"
----@field public medium number | "2"
----@field public high number | "3"
----@field public low number | "1"
----@field public veryHigh number | "4"
-local enum_verificationLevel = {}
-
---- messageFlag enum
----@class enum_messageFlag
----@field public suppressEmbeds number | "4"
----@field public urgent number | "16"
----@field public isCrosspost number | "2"
----@field public sourceMessageDeleted number | "8"
----@field public crossposted number | "1"
-local enum_messageFlag = {}
-
---- webhookType enum
----@class enum_webhookType
----@field public incoming number | "1"
----@field public channelFollower number | "2"
-local enum_webhookType = {}
-
---- notificationSetting enum
----@class enum_notificationSetting
----@field public allMessages number | "0"
----@field public onlyMentions number | "1"
-local enum_notificationSetting = {}
-
---- logLevel enum
----@class enum_logLevel
----@field public none number | "0"
----@field public info number | "3"
----@field public debug number | "4"
----@field public error number | "1"
----@field public warning number | "2"
-local enum_logLevel = {}
-
---- relationshipType enum
----@class enum_relationshipType
----@field public none number | "0"
----@field public friend number | "1"
----@field public blocked number | "2"
----@field public pendingOutgoing number | "4"
----@field public pendingIncoming number | "3"
-local enum_relationshipType = {}
-
---- defaultAvatar enum
----@class enum_defaultAvatar
----@field public blurple number | "0"
----@field public green number | "2"
----@field public gray number | "1"
----@field public red number | "4"
----@field public orange number | "3"
-local enum_defaultAvatar = {}
-
---- explicitContentLevel enum
----@class enum_explicitContentLevel
----@field public none number | "0"
----@field public medium number | "1"
----@field public high number | "2"
-local enum_explicitContentLevel = {}
-
---- actionType enum
----@class enum_actionType
----@field public memberUpdate number | "24"
----@field public messageBulkDelete number | "73"
----@field public webhookDelete number | "52"
----@field public channelDelete number | "12"
----@field public messageDelete number | "72"
----@field public channelOverwriteDelete number | "15"
----@field public roleDelete number | "32"
----@field public channelUpdate number | "11"
----@field public inviteCreate number | "40"
----@field public messageUnpin number | "75"
----@field public inviteUpdate number | "41"
----@field public memberMove number | "26"
----@field public messagePin number | "74"
----@field public channelOverwriteUpdate number | "14"
----@field public integrationDelete number | "82"
----@field public webhookUpdate number | "51"
----@field public memberBanAdd number | "22"
----@field public inviteDelete number | "42"
----@field public channelOverwriteCreate number | "13"
----@field public emojiCreate number | "60"
----@field public memberPrune number | "21"
----@field public channelCreate number | "10"
----@field public integrationUpdate number | "81"
----@field public webhookCreate number | "50"
----@field public emojiDelete number | "62"
----@field public memberBanRemove number | "23"
----@field public integrationCreate number | "80"
----@field public memberDisconnect number | "27"
----@field public guildUpdate number | "1"
----@field public memberRoleUpdate number | "25"
----@field public memberKick number | "20"
----@field public roleUpdate number | "31"
----@field public roleCreate number | "30"
----@field public botAdd number | "28"
----@field public emojiUpdate number | "61"
-local enum_actionType = {}
-
---- permission enum
----@class enum_permission
----@field public manageGuild number | "32"
----@field public createInstantInvite number | "1"
----@field public mentionEveryone number | "131072"
----@field public manageRoles number | "268435456"
----@field public addReactions number | "64"
----@field public sendTextToSpeech number | "4096"
----@field public readMessageHistory number | "65536"
----@field public manageChannels number | "16"
----@field public administrator number | "8"
----@field public manageWebhooks number | "536870912"
----@field public viewAuditLog number | "128"
----@field public manageEmojis number | "1073741824"
----@field public attachFiles number | "32768"
----@field public moveMembers number | "16777216"
----@field public banMembers number | "4"
----@field public sendMessages number | "2048"
----@field public manageMessages number | "8192"
----@field public manageNicknames number | "134217728"
----@field public useVoiceActivity number | "33554432"
----@field public speak number | "2097152"
----@field public readMessages number | "1024"
----@field public connect number | "1048576"
----@field public kickMembers number | "2"
----@field public changeNickname number | "67108864"
----@field public deafenMembers number | "8388608"
----@field public muteMembers number | "4194304"
----@field public prioritySpeaker number | "256"
----@field public useExternalEmojis number | "262144"
----@field public embedLinks number | "16384"
----@field public stream number | "512"
-local enum_permission = {}
-
---- status enum
----@class enum_status
----@field public invisible string | "'invisible'"
----@field public idle string | "'idle'"
----@field public doNotDisturb string | "'dnd'"
----@field public online string | "'online'"
-local enum_status = {}
-
---- premiumTier enum
----@class enum_premiumTier
----@field public none number | "0"
----@field public tier2 number | "2"
----@field public tier3 number | "3"
----@field public tier1 number | "1"
-local enum_premiumTier = {}
-
---- channelType enum
----@class enum_channelType
----@field public private number | "1"
----@field public group number | "3"
----@field public category number | "4"
----@field public news number | "5"
----@field public voice number | "2"
----@field public text number | "0"
-local enum_channelType = {}
----@field public gameType enum_gameType
----@field public messageType enum_messageType
----@field public activityType enum_activityType
----@field public verificationLevel enum_verificationLevel
----@field public messageFlag enum_messageFlag
----@field public webhookType enum_webhookType
----@field public notificationSetting enum_notificationSetting
----@field public logLevel enum_logLevel
----@field public relationshipType enum_relationshipType
----@field public defaultAvatar enum_defaultAvatar
----@field public explicitContentLevel enum_explicitContentLevel
----@field public actionType enum_actionType
----@field public permission enum_permission
----@field public status enum_status
----@field public premiumTier enum_premiumTier
----@field public channelType enum_channelType
----@class enums
 local enums = {}
+
+--- Extensions related to tables
+---@class ext.table
+local tableExt = {}
+
+--- Returns the total number of elements in a table. This uses the global `pairs` function and respects any `__pairs` metamethods.
+---@param tbl table
+---@return number
+function tableExt.count(tbl) end
+
+--- Returns the total number of elements in a table, recursively. 
+--- If a table is encountered, it is recursively counted instead of being directly added to the total count. 
+--- This uses the global `pairs` function and respects any `__pairs` metamethods.
+---@param tbl table
+---@return number
+function tableExt.deepcount(tbl) end
+
+--- Returns a copy of the original table, recursively. 
+--- If a table is encountered, it is recursively deep-copied. Metatables are not copied.
+---@param tbl table
+---@return table
+function tableExt.copy(tbl) end
+
+--- Returns a copy of the original table, recursively. 
+--- If a table is encountered, it is recursively deep-copied. Metatables are not copied.
+---@param tbl table
+---@return table
+function tableExt.deepcopy(tbl) end
+
+--- Reverses the elements of an array-like table in place.
+---@param tbl any[]
+function tableExt.reverse(tbl) end
+
+--- Returns a copy of an array-like table with its elements in reverse order. 
+--- The original table remains unchanged.
+---@param tbl any[]
+---@return any[]
+function tableExt.reversed(tbl) end
+
+--- Returns a new array-like table where all of its values are the keys of the original table.
+---@param tbl table
+---@return any[]
+function tableExt.keys(tbl) end
+
+--- Returns a new array-like table where all of its values are the values of the original table.
+---@param tbl table
+---@return any[]
+function tableExt.values(tbl) end
+
+--- Returns a random (index, value) pair from an array-like table.
+---@param tbl any[]
+---@return number, any
+function tableExt.randomipair(tbl) end
+
+--- Returns a random (key, value) pair from a dictionary-like table.
+---@param tbl table
+---@return any, any
+function tableExt.randompair(tbl) end
+
+--- Returns a copy of an array-like table sorted using Lua's `table.sort`.
+---@param tbl any[]
+---@param fn function
+---@return any[]
+function tableExt.sorted(tbl, fn) end
+
+--- Iterates through a table until it finds a value that is equal to `value` according to the `==` operator. 
+--- The key is returned if a match is found.
+---@param tbl table
+---@param value any
+---@return any
+function tableExt.search(tbl, value) end
+
+--- Returns a new table that is a slice of the original, defined by the start and stop bounds and the step size. 
+--- Default start, stop, and step values are 1, #tbl, and 1, respectively.
+---@param tbl table
+---@param start number
+---@param stop number
+---@param step number
+---@return table
+---@overload fun(tbl: table):table
+---@overload fun(tbl: table, start: number):table
+---@overload fun(tbl: table, start: number, stop: number):table
+---@overload fun(tbl: table, start: number, stop: number, step: number):table
+function tableExt.slice(tbl, start, stop, step) end
+
+--- Utilities related to strings
+---@class ext.string
+local stringExt = {}
+
+--- Splits a string into a table of specifically delimited sub-strings.
+--- If the delimiter is omitted or empty, the string is split into a table of characters.
+---@param str string
+---@param delim string
+---@return table
+---@overload fun(str: string):table
+function stringExt.split(str, delim) end
+
+--- Returns a new string with all whitespace removed from the left and right sides of the original string.
+---@param str string
+---@return string
+function stringExt.trim(str) end
+
+---@alias alignment string | "'left'" | "'right'" | "'center'"
+
+--- Returns a new string that is padded up to the desired length. 
+--- The alignment, either `left`, `right`, or `center` with left being the default, defines the placement of the original string. 
+--- The default pattern is a single space.
+---@param str string
+---@param len number
+---@param align alignment
+---@param pattern string
+---@return string
+---@overload fun(str: string, len: number):string
+---@overload fun(str: string, len: number, align: alignment):string
+function stringExt.pad(str, len, align, pattern) end
+
+--- Returns whether a string starts with a specified sub-string or pattern. 
+--- The plain parameter is the same as that used in Lua's `string.find`.
+---@param str string
+---@param pattern string
+---@param plain boolean
+---@return boolean
+---@overload fun(str: string, pattern: string):boolean
+function stringExt.startswith(str, pattern, plain) end
+
+--- Returns whether a string ends with a specified sub-string or pattern. 
+--- The plain parameter is the same as that used in Lua's `string.find`.
+---@param str string
+---@param pattern string
+---@param plain boolean
+---@return boolean
+---@overload fun(str: string, pattern: string):boolean
+function stringExt.endswith(str, pattern, plain) end
+
+--- Returns the Levenshtein distance between two strings. 
+--- A higher number indicates a greater distance.
+---@param str1 string
+---@param str2 string
+---@return number
+function stringExt.levenshtein(str1, str2) end
+
+--- Returns a string of random characters with the specified length. 
+--- If provided, the min and max bounds cannot be outside 0 to 255. 
+--- Use 32 to 126 for printable ASCII characters.
+---@param len number
+---@param min number
+---@param max number
+---@return string
+---@overload fun(len: number):string
+---@overload fun(len: number, max: number):string
+function stringExt.random(len, min, max) end
+
+--- Utilities related to math
+---@class ext.math
+local mathExt = {}
+
+--- Returns a number that is at least as small as the minimum value and at most as large as the maximum value, inclusively. 
+--- If the original number is already with the bounds, the same number is returned.
+---@param n number
+---@param min number
+---@param max number
+---@return number
+function mathExt.min(n, min, max) end
+
+--- Returns a number that is rounded to the nearest defined digit. 
+--- The nearest integer is returned if the digit is omitted.
+--- Negative values can be used for higher order places.
+---@param n number
+---@param digits number
+---@return number
+---@overload fun(n: number):number
+function mathExt.round(n, digits) end
+
+--- **Discordia** has some built-in Lua standard library extensions. 
+--- These provide complementary or supplementary, commonly used functions that the Lua standard library does not provide.
+---
+--- Extensions can be used directly...
+---
+--- ```lua
+--- local str = "  abc  "
+--- print(discordia.extensions.string.trim(str)) -- "abc"
+--- ```
+---
+--- ... or they can be loaded into the global tables:
+---
+--- ```lua
+--- local str = "  abc  "
+--- discordia.extensions.string()
+--- print(string.trim(str)) -- "abc"
+--- ```
+---
+--- Note that calling the whole extensions module will load all sub-modules:
+---
+--- ```lua
+--- discordia.extensions()
+--- ```
+---@class extensions
+---@field public string ext.string | function
+---@field public table ext.table | function
+---@field public math ext.math | function
+
+---@class package
+---@field public license string | "'MIT'"
+---@field public files string[]
+---@field public version string | "'2.8.4'"
+---@field public author string | "'Sinister Rectus'"
+---@field public dependencies string[]
+---@field public tags string[]
+---@field public name string | "'SinisterRectus/discordia'"
+---@field public homepage string | "'https://github.com/SinisterRectus/Discordia'"
+
 
 --- To write a Discordia application, the library's main module must be required. If it's in a deps or libs folder, simply require it by name.
 --- If you've manually installed the library elsewhere, then you will need to provide a relative or full path to the Discordia directory.
@@ -2390,7 +2601,7 @@ local enums = {}
 ---@field Time Time
 ---@field class class
 ---@field enums enums
----@field extensions function
----@field package table<string, any>
+---@field extensions extensions | function
+---@field package package
 ---@field storage table<any, any>
 local discordia = {}
