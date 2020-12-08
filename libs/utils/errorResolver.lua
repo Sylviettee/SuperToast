@@ -1,6 +1,7 @@
 local default = {
    GUILD_ONLY = 'This command must be ran in a guild!',
-   NSFW_ONLY = 'This command must be ran in a NSFW channel!'
+   NSFW_ONLY = 'This command must be ran in a NSFW channel!',
+   OWNER_ONLY = 'This command must be ran by an owner of the bot!',
 }
 
 ---@param cmd Command

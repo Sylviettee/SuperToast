@@ -6,11 +6,26 @@ local stringx = require('utils/stringx')
 return function(client, msg)
    local pre = client.config.prefix
 
-   if not stringx.startswith(msg.content, pre) then
+   if msg.author.bot then
       return
    end
 
-   if msg.author.bot then
+   if type(pre) == 'function' then
+      pre = pre(msg)
+   end
+
+   pre = type(pre) == 'string' and {pre} or pre
+
+   local foundPre
+
+   for _, v in pairs(pre) do
+      if stringx.startswith(msg.content, pre) then
+         foundPre = true
+         break
+      end
+   end
+
+   if not foundPre then
       return
    end
 
@@ -33,7 +48,7 @@ return function(client, msg)
    end)
 
    if found then
-      local toRun = found:toRun(msg, args)
+      local toRun = found:toRun(msg, args, client)
 
       if type(toRun) == 'string' then
          msg:reply(client.config.errorResolver(found, toRun))

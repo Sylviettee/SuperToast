@@ -29,6 +29,7 @@ end
 
 --- A class to typecheck option listings
 ---@class Option
+---@deprecated
 local Option = class('Option')
 
 function Option:__init(dict)

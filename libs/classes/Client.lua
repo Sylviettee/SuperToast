@@ -12,19 +12,18 @@ local stringx = require('utils/stringx')
 ---@type TypedArray
 local TypedArray = require('classes/TypedArray')
 
----@type Option
-local Option = require('classes/Option')
+---@type typed
+local typed = require('typed')
 
 local ch = require('utils/commandHandler')
 local er = require('utils/errorResolver')
 
-local clientOptions = Option({
-   prefix = {'string', nil, '!'},
-   defaultHelp = {'boolean', nil, true},
-   commandHandler = {'function', nil, ch, 'toast.commandHandler'},
-   errorResolver = {'function', nil, er, 'toast.errorResolver'},
-   owners = {'table', 'string[]', {}, '{}'}
-})
+
+local clientOptions = typed.Schema('clientConfig')
+   :field('prefix', 'string | string[] | function', '!')
+   :field('owners', 'string[] | unknown[]', {})
+   :field('commandHandler', 'function', ch)
+   :field('errorResolver', 'function', er)
 
 local f = string.format
 
@@ -48,9 +47,8 @@ local f = string.format
 ---@class SuperToastOptions
 ---@field public commandHandler fun(client: SuperToastClient, msg: Message) | "toast.commandHandler"
 ---@field public errorResolver fun(cmd: Command, err: string):string | "toast.errorResolver"
----@field public defaultHelp boolean | "true"
 ---@field public owners string[] | "{}"
----@field public prefix string | "'!'"
+---@field public prefix string | string[] | fun(msg: Message):string | string[] | "'!'"
 
 --- The SuperToast client with all the fun features
 ---@class SuperToastClient: Client
@@ -238,6 +236,10 @@ end
 
 function get:commands()
    return self._commands
+end
+
+function get:owners()
+   return self._config.owners or {}
 end
 
 function get:config()

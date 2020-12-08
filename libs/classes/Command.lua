@@ -7,6 +7,10 @@ local typed = require('typed')
 local TypedArray = require('classes/TypedArray')
 ---@type Array
 local Array = require('classes/Array')
+---@type ms
+local ms = require('utils/ms')
+
+local timer = require('timer')
 
 local class = discordia.class
 local enums = discordia.enums
@@ -37,6 +41,7 @@ local Command, get = class('Command')
 --- Possible fail codes
 --- * GUILD_ONLY - The command must be ran in a guild
 --- * NSFW_ONLY - The command must be ran in a nsfw channel
+--- * OWNER_ONLY - The command must be ran by the owner of the bot
 --- * MISSING_PERMISSIONS - The user is missing permissions
 --- * SELF_MISSING_PERMISSIONS - The bot is missing permissions
 --- * MISSING_ROLES - The user is missing roles
@@ -57,6 +62,7 @@ function Command:__init(name, ...)
    self._bot_permissions = TypedArray 'number'
    self._checks = TypedArray 'function'
    self._subcommands = TypedArray 'Subcommand'
+   self._cooldowns = {}
 
    for _, v in pairs({...}) do
       self._aliases:push(v)
@@ -66,8 +72,9 @@ end
 --- Check a message to see if it matches all the criteria listed
 ---@param message Message
 ---@param args string[]
+---@param client SuperToastClient
 ---@return boolean
-function Command:toRun(message, args)
+function Command:toRun(message, args, client)
    local isSub = self._subcommands:find(function(v)
       return v.name == args[1]
    end)
@@ -76,7 +83,18 @@ function Command:toRun(message, args)
    local _ = Array(args)
 
    if isSub then
-      return isSub:toRun(message, _:slice(2))
+      return isSub:toRun(message, _:slice(2), client)
+   end
+
+   -- Handle subcommands first
+   if self._cooldowns[message.author.id] then
+      return message:reply('You are on cooldown, wait ' .. ms.formatLong(self._cooldowns[message.author.id] - os.time() .. ' longer!'))
+   elseif self._cooldown then
+      self._cooldowns[message.author.id] = os.time() + self._cooldown
+
+      timer.setTimeout(self._cooldown * 1000, function()
+         self._cooldowns[message.author.id] = nil
+      end)
    end
 
    ---@type GuildTextChannel
@@ -90,6 +108,16 @@ function Command:toRun(message, args)
 
    if self._nsfw_only and not channel.nsfw then
       return 'NSFW_ONLY'
+   end
+
+   _ = Array(client.owners)
+
+   local isOwner = _:find(function(x)
+      return x == message.author.id
+   end)
+
+   if self._owner_only and not isOwner then
+      return 'OWNER_ONLY'
    end
 
    -- At this point we have a guild/member
@@ -190,6 +218,14 @@ function Command:nsfw_only()
    self:guild_only() -- nsfw channels only exist in guilds
 
    self._nsfw_only = true
+
+   return self
+end
+
+--- Set the command as owner only
+---@return Command
+function Command:owner_only()
+   self._owner_only = true
 
    return self
 end

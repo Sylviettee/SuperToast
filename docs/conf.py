@@ -23,7 +23,7 @@ author = 'Soviet Kitsune'
 pygments_style = 'sphinx'
 
 # The full version, including alpha/beta/rc tags
-release = '0.3.6'
+release = '0.3.7'
 
 
 # -- General configuration ---------------------------------------------------
