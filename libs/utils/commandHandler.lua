@@ -19,8 +19,8 @@ return function(client, msg)
    local foundPre
 
    for _, v in pairs(pre) do
-      if stringx.startswith(msg.content, pre) then
-         foundPre = true
+      if stringx.startswith(msg.content, v) then
+         foundPre = v
          break
       end
    end
@@ -29,7 +29,7 @@ return function(client, msg)
       return
    end
 
-   local command = string.match(msg.content, pre .. '(%S+)'):lower()
+   local command = string.match(msg.content, foundPre .. '(%S+)'):lower()
 
    if not command then
       return
@@ -37,7 +37,7 @@ return function(client, msg)
 
    local args = {}
 
-   for arg in string.gmatch(string.match(msg.content, pre .. '%S+%s*(.*)'), '%S+') do
+   for arg in string.gmatch(string.match(msg.content, foundPre .. '%S+%s*(.*)'), '%S+') do
       table.insert(args, arg)
    end
 

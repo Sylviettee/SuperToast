@@ -6,9 +6,6 @@ local class = discordia.class
 
 local splitPath = pathjoin.splitPath
 
----@type stringx
-local stringx = require('utils/stringx')
-
 ---@type TypedArray
 local TypedArray = require('classes/TypedArray')
 
@@ -69,7 +66,7 @@ function Helper:__init(token, options, discOptions)
    assert(token, 'A token must be passed!')
 
    ---@type SuperToastOptions
-   self._config = clientOptions:validate(options or {})
+   self._config = assert(clientOptions:validate(options))
    self._token = token
 
    self._commands = TypedArray 'Command'
