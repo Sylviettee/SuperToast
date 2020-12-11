@@ -7,8 +7,7 @@ return {
    author = {name = 'Soviet Kitsune', email = 'sovietkitsune@soviet.solutions'},
    homepage = 'https://github.com/SovietKitsune/SuperToast',
    dependencies = {
-      'SinisterRectus/discordia@2.8.4',
-      'SovietKitsune/typed@1.0.2'
+      'SinisterRectus/discordia@2.8.4'
    },
    files = {
       '**.lua',
