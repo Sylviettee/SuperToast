@@ -5,7 +5,8 @@
     "Lua.runtime.version": "LuaJIT",
     "Lua.diagnostics.globals": [
         "_",
-        "process"
+        "process",
+        "p"
     ],
     "restructuredtext.linter.disabled": true
 }
