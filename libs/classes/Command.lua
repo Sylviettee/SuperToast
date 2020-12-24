@@ -34,7 +34,11 @@ local tNumber = typed.func('_', 'number')
 ---@field public bot_permissions string[]
 ---@field public subcommands Subcommand[]
 ---@field public rawExecute function
+---@field public parent Plugin | Subcommand | nil
 local Command, get = class('Command')
+
+---@type Command | fun(name: string, ...): Command
+Command = Command
 
 --- Create a new command
 ---
@@ -79,11 +83,8 @@ function Command:toRun(message, args, client)
       return v.name == args[1]
    end)
 
-   ---@type Array
-   local _ = Array(args)
-
    if isSub then
-      return isSub:toRun(message, _:slice(2), client)
+      return isSub:toRun(message, Array.slice({_data = args})._data, client)
    end
 
    -- Handle subcommands first
@@ -110,9 +111,7 @@ function Command:toRun(message, args, client)
       return 'NSFW_ONLY'
    end
 
-   _ = Array(client.owners)
-
-   local isOwner = _:find(function(x)
+   local isOwner = Array.find({_data = client.owners}, function(x)
       return x == message.author.id
    end)
 
@@ -164,9 +163,9 @@ function Command:toRun(message, args, client)
    -- Custom checks
 
    for check in self._checks:iter() do
-      local res = check(message, args)
+      local res, err = check(message, args, client)
       if res ~= true then
-         return 'CUSTOM_' .. tostring(res or 'UNKNOWN')
+         return 'CUSTOM_' .. tostring(res or 'UNKNOWN'), err
       end
    end
 
@@ -242,7 +241,7 @@ function Command:cooldown(cooldown)
 end
 
 --- Add a custom check to the command
----@param check fun(msg: Message, args: string[]):string|boolean
+---@param check fun(msg: Message, args: string[], client: SuperToastClient):string|boolean, string
 ---@return Command
 function Command:check(check)
    self._checks:push(check) -- Will automatically be checked

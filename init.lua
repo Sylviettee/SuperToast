@@ -1,6 +1,8 @@
 --- The SuperToast module
 ---@class SuperToast
 local SuperToast = {
+   ---@type ArgParser
+   ArgParser = require('classes/ArgParser'),
    ---@type Array
    Array = require('classes/Array'),
    ---@type SuperToastClient

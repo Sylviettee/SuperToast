@@ -53,6 +53,9 @@ local f = string.format
 ---@field public config SuperToastOptions
 local Helper, get = class('SuperToast Client', discordia.Client)
 
+---@type SuperToastClient | fun(token: string, options: SuperToastOptions, discOptions: DiscordiaOptions): SuperToastClient
+Helper = Helper
+
 --- Create a new SuperToast client
 ---@see SuperToastOptions
 ---@see DiscordiaOptions
@@ -71,7 +74,7 @@ function Helper:__init(token, options, discOptions)
 
    self._commands = TypedArray 'Command'
    self._events = TypedArray 'Event'
-   self._cogs = TypedArray 'Cog'
+   self._plugins = TypedArray 'Plugin'
 
    self:on('ready', function()
       self:info('%s is ready!', self.user.tag)

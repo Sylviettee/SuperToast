@@ -11,6 +11,9 @@ local tNumber = typed.func(_, 'number')
 ---@class Embed
 local Embed = class('Embed')
 
+---@type Embed | fun(starting: Embed): string
+Embed = Embed
+
 --- Create a new embed
 ---@param starting table
 function Embed:__init(starting)

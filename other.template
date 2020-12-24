@@ -332,6 +332,12 @@ end
 --- The enumerations are designed to be compatible with the Discord API. They are not necessarily unique to Discordia.
 local enums = {}
 
+--- Create a new enum
+---@generic T
+---@param data T
+---@return T enum The newly constructed enum
+function enums.enum(data) end
+
 --- Extensions related to tables
 ---@class ext.table
 local tableExt = {}

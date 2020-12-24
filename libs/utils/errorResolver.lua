@@ -6,7 +6,7 @@ local default = {
 
 ---@param cmd Command
 ---@param err string
-return function(cmd, err)
+return function(cmd, err, customMsg)
    if default[err] then
       return default[err]
    end
@@ -18,8 +18,10 @@ return function(cmd, err)
    elseif err == 'MISSING_ROLES' or err == 'SELF_MISSING_ROLES' then
       return 'You/I are missing roles required' -- TODO; resolve names
    else
-      -- Custom
-      -- TODO; allow customs to have errors
-      return 'Checks failed while running this command, `' .. err .. '`'
+      if customMsg then
+         return customMsg
+      else
+         return 'Checks failed while running this command, `' .. err .. '`'
+      end
    end
 end

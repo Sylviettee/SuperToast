@@ -1,6 +1,6 @@
 return {
    name = 'SovietKitsune/SuperToast',
-   version = '0.3.8',
+   version = '0.4.0',
    description = 'The better Toast',
    tags = {'toast', 'discordia'},
    license = 'MIT',

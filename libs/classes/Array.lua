@@ -4,6 +4,9 @@ local class = require('discordia').class
 ---@class Array
 local Array = class('Array')
 
+---@type Array | fun(starting: any): Array
+Array = Array
+
 function Array:__init(starting)
    self._data = starting or {}
 end

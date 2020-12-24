@@ -12,7 +12,12 @@ local tFunc = typed.func(_, 'function')
 ---@class Subcommand: Command
 local Subcommand, get = class('Subcommand', Command)
 
+---@type Subcommand | fun(parent: Command, name: string): Subcommand
+Subcommand = Subcommand
+
 --- Create a new command
+---@param parent Command
+---@param name string
 function Subcommand:__init(parent, name)
    Command.__init(self, name)
 
@@ -29,13 +34,13 @@ end
 --- Sets the function to execute
 ---@param func fun(msg:Message, args: string[], client: SuperToastClient):void
 ---@return Command
-function Command:execute(func)
+function Subcommand:execute(func)
    tFunc(func)
 
    self._execute = function(msg, args, client)
       local _ = Array(args)
 
-      func(msg, _:slice(2), client)
+      func(msg, Array.slice({_data = args}, 2), client)
    end
 
    return self

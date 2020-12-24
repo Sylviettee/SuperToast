@@ -9,6 +9,9 @@ local f = string.format
 ---@field public type function The type of the data
 local TypedArray, get = class('TypedArray', Array)
 
+---@type TypedArray | fun(arrType: string, starting: any): TypedArray
+TypedArray = TypedArray
+
 function TypedArray:__init(arrType, starting)
    Array.__init(self, starting)
 

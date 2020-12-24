@@ -48,10 +48,10 @@ return function(client, msg)
    end)
 
    if found then
-      local toRun = found:toRun(msg, args, client)
+      local toRun, errMsg = found:toRun(msg, args, client)
 
       if type(toRun) == 'string' then
-         msg:reply(client.config.errorResolver(found, toRun))
+         msg:reply(client.config.errorResolver(found, toRun, errMsg))
       else
          local succ, err = pcall(toRun, msg, args, client)
 
