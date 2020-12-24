@@ -9,22 +9,27 @@ The API documentation is where you find how to do basically anything.
 Utilities
 ==========
 
-Stringx
---------
-.. lua:automodule:: stringx
-
 Dotenv
 -------
-.. lua:automodule:: dotenv
+.. lua:autoclass:: dotenv
 
 MS
 ---
-.. lua:automodule:: ms
+.. lua:autoclass:: ms
+
+Stringx
+--------
+.. lua:autoclass:: stringx
 
 Classes
 ========
 
 Properties prefixed with an ``_`` are private so you can't access them.
+
+Array 
+------
+.. lua:autoclass:: ArgParser
+    :members:
 
 Array 
 ------

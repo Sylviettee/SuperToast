@@ -8,5 +8,6 @@
         "process",
         "p"
     ],
-    "restructuredtext.linter.disabled": true
+    "restructuredtext.linter.disabled": true,
+    "restructuredtext.confPath": "${workspaceFolder}/docs"
 }

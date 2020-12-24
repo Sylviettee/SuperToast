@@ -216,7 +216,7 @@ function Client:onceSync(name, fn) end
 --- Table of all defined classes, indexed by name.
 ---
 ---@class class
----@field classes table<string, any>
+---@field public classes table<string, any>
 local class = {}
 
 --- Function that returns true only if the provided argument is a Discordia class module.
@@ -486,7 +486,7 @@ function stringExt.levenshtein(str1, str2) end
 ---@param max number
 ---@return string
 ---@overload fun(len: number):string
----@overload fun(len: number, max: number):string
+---@overload fun(len: number, min: number):string
 function stringExt.random(len, min, max) end
 
 --- Utilities related to math
@@ -592,20 +592,20 @@ function mathExt.round(n, digits) end
 --- This may be used an alternative to storing values on class instances or in global variables, both of which are not recommended.
 ---
 ---@class discordia
----@field Client Client
----@field Clock Clock
----@field Color Color
----@field Date Date
----@field Deque Deque
----@field Emitter Emitter
----@field Logger Logger
----@field Mutex Mutex
----@field Permissions Permissions
----@field Stopwatch Stopwatch
----@field Time Time
----@field class class
----@field enums enums
----@field extensions extensions | function
----@field package package
----@field storage table<any, any>
+---@field public Client Client
+---@field public Clock Clock
+---@field public Color Color
+---@field public Date Date
+---@field public Deque Deque
+---@field public Emitter Emitter
+---@field public Logger Logger
+---@field public Mutex Mutex
+---@field public Permissions Permissions
+---@field public Stopwatch Stopwatch
+---@field public Time Time
+---@field public class class
+---@field public enums enums
+---@field public extensions extensions | function
+---@field public package package
+---@field public storage table<any, any>
 local discordia = {}
