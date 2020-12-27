@@ -1,4 +1,4 @@
-name: Testing
+name: Testing and linting
 
 on: [push, pull_request]
 
@@ -27,3 +27,21 @@ jobs:
       - name: test
         run: |
           ./luvit testRunner.lua
+  run-luacheck-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: leafo/gh-actions-lua@v8.0.0
+        with:
+          luaVersion: "5.1.5"
+
+      - uses: leafo/gh-actions-luarocks@v4.0.0
+
+      - name: install luacheck
+        run: |
+          luarocks install luacheck
+
+      - name: run lints
+        run: |
+          luacheck ./libs

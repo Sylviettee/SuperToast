@@ -26,7 +26,9 @@ local SuperToast = {
    ---@type ms
    ms = require('utils/ms'),
    ---@type stringx
-   stringx = require('utils/stringx')
+   stringx = require('utils/stringx'),
+
+   typed = require('typed')
 }
 
 return SuperToast

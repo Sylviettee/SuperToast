@@ -6,7 +6,7 @@ local Command = require('classes/Command')
 ---@type Array
 local Array = require('classes/Array')
 
-local tFunc = typed.func(_, 'function')
+local tFunc = typed.func(nil, 'function')
 
 --- A subcommand to act as a mini command
 ---@class Subcommand: Command
@@ -46,7 +46,7 @@ function Subcommand:execute(func)
    return self
 end
 
-function get:isSub()
+function get.isSub()
    return true
 end
 

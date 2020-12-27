@@ -15,10 +15,10 @@ local timer = require('timer')
 local class = discordia.class
 local enums = discordia.enums
 
-local tString = typed.func(_, 'string')
-local tFunc = typed.func(_, 'function')
-local tFuncs = typed.func(_, 'function[]')
-local tNumber = typed.func('_', 'number')
+local tString = typed.func(nil, 'string')
+local tFunc = typed.func(nil, 'function')
+local tFuncs = typed.func(nil, 'function[]')
+local tNumber = typed.func(nil, 'number')
 
 --- The command class to handle most functionality
 ---@class Command
@@ -89,7 +89,10 @@ function Command:toRun(message, args, client)
 
    -- Handle subcommands first
    if self._cooldowns[message.author.id] then
-      return message:reply('You are on cooldown, wait ' .. ms.formatLong(self._cooldowns[message.author.id] - os.time() .. ' longer!'))
+      return message:reply('You are on cooldown, wait ' ..
+         ms.formatLong(self._cooldowns[message.author.id] - os.time()
+         .. ' longer!'
+      ))
    elseif self._cooldown then
       self._cooldowns[message.author.id] = os.time() + self._cooldown
 
@@ -407,7 +410,7 @@ function get:subcommands()
    return self._subcommands
 end
 
-function get:isSub()
+function get.isSub()
    return false
 end
 

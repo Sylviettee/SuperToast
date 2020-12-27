@@ -4,8 +4,8 @@ local class = discordia.class
 
 local typed = require('typed')
 
-local tString = typed.func(_, 'string')
-local tNumber = typed.func(_, 'number')
+local tString = typed.func(nil, 'string')
+local tNumber = typed.func(nil, 'number')
 
 --- An embed class to allow structuring embeds easier
 ---@class Embed
@@ -64,7 +64,7 @@ end
 function Embed:addField(name, value, inline, ignore)
    inline = inline or false
 
-   typed.func(_, 'string', 'string', 'boolean')(name, value, inline)
+   typed.func(nil, 'string', 'string', 'boolean')(name, value, inline)
 
    self._embed.fields = self._embed.fields or {}
 
@@ -88,7 +88,7 @@ function Embed:setAuthor(name, icon, url)
    icon = icon or ''
    url = url or ''
 
-   typed.func(_, 'string', 'string', 'string')(name, icon, url)
+   typed.func(nil, 'string', 'string', 'string')(name, icon, url)
 
    self._embed.author = {name = name:sub(0, 256), icon_url = icon, url = url}
 
@@ -102,7 +102,7 @@ end
 function Embed:setFooter(text, icon)
    icon = icon or ''
 
-   typed.func(_, 'string', 'string')(text, icon)
+   typed.func(nil, 'string', 'string')(text, icon)
 
    self._embed.footer = {text = text:sub(0, 2048), icon_url = icon}
 

@@ -69,7 +69,6 @@ lit install SovietKitsune/SuperToast
 ## TODO
 
 * [x] Command cooldowns
-* [ ] Type check stringx
 * [ ] Add event class
 * [ ] Add plugin class
-* [ ] Add tests for typed, Command and Subcommand
+* [ ] Add tests for Command, ArgParse and Subcommand

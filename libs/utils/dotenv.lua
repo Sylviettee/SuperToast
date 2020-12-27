@@ -70,15 +70,17 @@ function dotenv.config(options)
    local encoding = options.encoding or 'utf8'
    local debug = options.debug or false
    local succ, parsed = pcall(function()
-      parsed = dotenv.parse(readFileSync(path, {encoding = encoding}), {debug = debug})
-      for i, v in pairs(parsed) do
+      local unsafeParsed = dotenv.parse(readFileSync(path, {encoding = encoding}), {debug = debug})
+
+      for i, v in pairs(unsafeParsed) do
          if not process.env[i] then
             process.env[i] = v
          else
             print(tostring(i) .. ' is already defined in process.env and will not be overwritten')
          end
       end
-      return parsed
+
+      return unsafeParsed
    end)
 
    if succ then

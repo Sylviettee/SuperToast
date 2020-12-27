@@ -348,7 +348,7 @@ function typed.typedDict(keyType, valueType)
    local mt = {}
 
    function mt:__newindex(k, v)
-      typed.func(_, self.__keyType, self.__valueType)(k, v)
+      typed.func(nil, self.__keyType, self.__valueType)(k, v)
       tbl[k] = v
    end
 
@@ -371,7 +371,7 @@ Schema.__name = 'Schema' -- Typed
 ---@param name string
 ---@return Schema
 function Schema:__init(name)
-   typed.func(_, 'string')(name)
+   typed.func(nil, 'string')(name)
 
    assert(not Schema.schemas[name], 'The schema name must be unique!')
 
@@ -387,13 +387,13 @@ end
 ---@param default any
 ---@return Schema
 function Schema:field(name, value, default)
-   typed.func(_, 'string', 'string | Schema')(name, value)
+   typed.func(nil, 'string', 'string | Schema')(name, value)
 
    if default ~= nil then
       if type(value) == 'table' then
          assert(value._id[1]:validate())
       else
-         typed.func(_, 'string', 'string | Schema', value)(name, value, default)
+         typed.func(nil, 'string', 'string | Schema', value)(name, value, default)
       end
    end
 
@@ -442,7 +442,7 @@ function Schema:validate(tbl)
 end
 
 function get:name()
-   return self.name
+   return self._name
 end
 
 typed.Schema = Schema

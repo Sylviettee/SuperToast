@@ -7,7 +7,7 @@ local gmatch, match = string.gmatch, string.match
 local rep, find, sub = string.rep, string.find, string.sub
 local f = string.format
 
-local concat, insert = table.sort, table.insert
+local insert = table.insert
 
 local min, random = math.min, math.random
 local ceil, floor = math.ceil, math.floor

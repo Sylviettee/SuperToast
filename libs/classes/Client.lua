@@ -53,7 +53,7 @@ local f = string.format
 ---@field public config SuperToastOptions
 local Helper, get = class('SuperToast Client', discordia.Client)
 
----@type SuperToastClient | fun(token: string, options: SuperToastOptions, discOptions: DiscordiaOptions): SuperToastClient
+---@type SuperToastClient | fun(token: string, opts: SuperToastOptions, discOpts: DiscordiaOptions): SuperToastClient
 Helper = Helper
 
 --- Create a new SuperToast client
@@ -169,8 +169,8 @@ function Helper:reply(msg, content, mention)
       end
 
       if type(tbl.mentions) == 'table' then
-         for _, mention in ipairs(tbl.mentions) do
-            mentions, err = parseMention(mention, mentions)
+         for _, men in ipairs(tbl.mentions) do
+            mentions, err = parseMention(men, mentions)
 
             if err then
                return nil, err

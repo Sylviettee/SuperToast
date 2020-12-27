@@ -2,8 +2,6 @@ local class = require('discordia').class
 local Array = require('classes/Array')
 local typed = require('typed')
 
-local f = string.format
-
 --- A typed version of an array only allowing certain elements within
 ---@class TypedArray: Array
 ---@field public type function The type of the data
@@ -15,9 +13,9 @@ TypedArray = TypedArray
 function TypedArray:__init(arrType, starting)
    Array.__init(self, starting)
 
-   typed.func(_, 'string')(arrType)
+   typed.func(nil, 'string')(arrType)
 
-   self._type = typed.func(_, arrType)
+   self._type = typed.func(nil, arrType)
 end
 
 --- A typed version of the push method

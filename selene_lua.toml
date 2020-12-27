@@ -3,6 +3,9 @@
 property = true
 writable = "new-fields"
 
+[_]
+property = true
+
 [args]
 property = true
 

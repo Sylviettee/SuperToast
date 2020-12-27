@@ -10,7 +10,7 @@ local IN = './deps/discordia/libs'
 local fs = require('fs')
 local pathjoin = require('pathjoin')
 
-local insert, sort, concat = table.insert, table.sort, table.concat
+local insert, concat = table.insert, table.concat
 local f = string.format
 local pathJoin = pathjoin.pathJoin
 
@@ -125,9 +125,9 @@ local function newClass()
 
 end
 
-for f in coroutine.wrap(scan), IN do
+for file in coroutine.wrap(scan), IN do
 
-   local d = assert(fs.readFileSync(f))
+   local d = assert(fs.readFileSync(file))
 
    local class, initClass = newClass()
    for s in matchComments(d) do
