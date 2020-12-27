@@ -1,6 +1,6 @@
 return {
    name = 'SovietKitsune/SuperToast',
-   version = '0.4.0',
+   version = '0.5.0',
    description = 'The better Toast',
    tags = {'toast', 'discordia'},
    license = 'MIT',
@@ -14,6 +14,7 @@ return {
       '!spec*',
       '!util',
       '!main.lua',
-      '!testRunner.lua'
+      '!testRunner.lua',
+      '!luafetch.lua'
    }
 }

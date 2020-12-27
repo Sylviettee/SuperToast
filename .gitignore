@@ -7,3 +7,4 @@ main.lua
 private
 .idea
 native-utils/
+luafetch.lua
