@@ -304,7 +304,7 @@ function ArgParser:attach(command)
 
    command:check(function(_, args, client)
       local succ, err = self:parse(table.concat(args, ' '), client)
-      return succ and true or nil, err and '```\n' .. err .. '\n```' or nil
+      return succ and true or 'PARSE_FAIL', err and '```\n' .. err .. '\n```' or nil
    end)
 
    local oldExecute = command._execute
@@ -438,7 +438,7 @@ function ArgParser:parse(str, client)
          ))
 
          missing = missing + 1
-      else
+      elseif raw.flags[i] or v._ctx.type == 'boolean' then
          local flag = raw.flags[i]
 
          local data, start, stop
