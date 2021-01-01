@@ -32,6 +32,7 @@ jobs:
 
       - name: build docs
         run: |
+          luadoc . > docs.json
           py-lua-doc
           mkdocs build
 
