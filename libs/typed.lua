@@ -404,12 +404,13 @@ end
 
 --- Validate a table to see if it matches the schema
 ---@param tbl table<any, any>
----@return table<any, any> | boolean, string | nil
+---@return table<any, any> | boolean
+---@return string | nil
 function Schema:validate(tbl)
    local _, err = typed.resolve('table<string, any>', 1, 'validate')(tbl)
 
    --- Ignore if it is some sort of table since `any` works weird for some reason
-   if not typed.whatIs(tbl):match('table') then
+   if not typed.whatIs(tbl):match('table') and not typed.whatIs(tbl):match('unknown') then
       return false, err
    end
 

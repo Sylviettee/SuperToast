@@ -1,1 +1,4 @@
 
+[submodule "util/doc"]
+	path = util/doc
+	url = https://github.com/SovietKitsune/docs-demo.git

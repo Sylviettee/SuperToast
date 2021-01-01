@@ -6,7 +6,8 @@
     "Lua.diagnostics.globals": [
         "_",
         "process",
-        "p"
+        "p",
+        "bit"
     ],
     "restructuredtext.linter.disabled": true,
     "restructuredtext.confPath": "${workspaceFolder}/docs"

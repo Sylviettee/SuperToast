@@ -24,37 +24,41 @@ local clientOptions = typed.Schema('clientConfig')
 
 local f = string.format
 
+--- struct The options to pass to the discordia client
 ---@class DiscordiaOptions
----@field public maxRetries number | "5"
----@field public cacheAllMembers boolean | "false"
----@field public firstShard number | "0"
----@field public autoReconnect boolean | "true"
----@field public gatewayFile string | "'gateway.json'"
----@field public shardCount number | "0"
----@field public syncGuilds boolean | "false"
----@field public compress boolean | "true"
----@field public dateTime string | "'%F %T'"
----@field public logLevel number | "3"
----@field public bitrate number | "64000"
----@field public routeDelay number | "250"
----@field public logFile string | "'discordia.log'"
----@field public largeThreshold number | "100"
----@field public lastShard number | "-1"
+---@field public maxRetries number
+---@field public cacheAllMembers boolean
+---@field public firstShard number
+---@field public autoReconnect boolean
+---@field public gatewayFile string
+---@field public shardCount number
+---@field public syncGuilds boolean
+---@field public compress boolean
+---@field public dateTime string
+---@field public logLevel number
+---@field public bitrate number
+---@field public routeDelay number
+---@field public logFile string
+---@field public largeThreshold number
+---@field public lastShard number
+local _discordiaOptions = {}
 
+--- struct The options to pass to the SuperToast client
 ---@class SuperToastOptions
----@field public commandHandler fun(client: SuperToastClient, msg: Message) | "toast.commandHandler"
----@field public errorResolver fun(cmd: Command, err: string):string | "toast.errorResolver"
----@field public owners string[] | "{}"
----@field public prefix string | string[] | fun(msg: Message):string | string[] | "'!'"
+---@field public commandHandler fun(client: SuperToastClient, msg: Message) The function to call to handle a command
+---@field public errorResolver fun(cmd: Command, err: string):string The function to call to parse an error message
+---@field public owners string[] The ids of the people who own the bot
+---@field public prefix string | string[] | fun(msg: Message):string | string[] The prefix/prefixes/function to call to get a prefix/prefixes
+local _supertoastOptions = {}
 
 --- The SuperToast client with all the fun features
 ---@class SuperToastClient: Client
 ---@field public commands TypedArray
 ---@field public config SuperToastOptions
-local Helper, get = class('SuperToast Client', discordia.Client)
+local SuperToastClient, get = class('SuperToast Client', discordia.Client)
 
 ---@type SuperToastClient | fun(token: string, opts: SuperToastOptions, discOpts: DiscordiaOptions): SuperToastClient
-Helper = Helper
+SuperToastClient = SuperToastClient
 
 --- Create a new SuperToast client
 ---@see SuperToastOptions
@@ -63,13 +67,13 @@ Helper = Helper
 ---@param options SuperToastClient
 ---@param discOptions DiscordiaOptions
 ---@return SuperToastClient
-function Helper:__init(token, options, discOptions)
+function SuperToastClient:__init(token, options, discOptions)
    discordia.Client.__init(self, discOptions)
 
    assert(token, 'A token must be passed!')
 
    ---@type SuperToastOptions
-   self._config = assert(clientOptions:validate(options))
+   self._config = assert(clientOptions:validate(options or {}))
    self._token = token
 
    self._commands = TypedArray 'Command'
@@ -88,7 +92,7 @@ end
 
 --- Connect and login
 ---@param presence nil | table<string, any>
-function Helper:login(presence)
+function SuperToastClient:login(presence)
    self:run('Bot ' .. self._token)
 
    if presence then
@@ -98,13 +102,13 @@ end
 
 --- Register a command to the client
 ---@param command Command
-function Helper:addCommand(command)
+function SuperToastClient:addCommand(command)
    self._commands:push(command)
 end
 
 --- Remove a subcommand from the client
 ---@param command Command
-function Helper:removeCommand(command)
+function SuperToastClient:removeCommand(command)
    local _, i = self._commands:find(function(val)
       return val.name == command.name
    end)
@@ -144,10 +148,10 @@ end
 
 --- Send a reply to a message
 ---@param msg Message
----@param content string|table
+---@param content string | table
 ---@param mention boolean
 ---@return Message
-function Helper:reply(msg, content, mention)
+function SuperToastClient:reply(msg, content, mention)
    local data, err
 
    if type(content) == 'table' then
@@ -246,4 +250,4 @@ function get:config()
    return self._config
 end
 
-return Helper
+return SuperToastClient

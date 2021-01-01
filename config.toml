@@ -1,0 +1,11 @@
+[project]
+readme = "readme.md"
+template = "./templates/markdown.etlua"
+output = "./docs"
+topics = "./topics" # Extra markdown to add
+
+[cleaning]
+forceRemove = [ # If any sort of object contains these name, it is removed
+   "get",
+   "mt"
+]

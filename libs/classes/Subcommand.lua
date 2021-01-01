@@ -27,12 +27,13 @@ function Subcommand:__init(parent, name)
 end
 
 --- Count the amount of parents up this subcommand has
+---@return number
 function Subcommand:count()
    return 1 + (self._parent and self._parent:count() or 0)
 end
 
 --- Sets the function to execute
----@param func fun(msg:Message, args: string[], client: SuperToastClient):void
+---@param func fun(msg:Message, args: string[], client: SuperToastClient)
 ---@return Command
 function Subcommand:execute(func)
    tFunc(func)

@@ -1,5 +1,17 @@
---- The SuperToast module
+--- module The SuperToast module
 ---@class SuperToast
+---@field public ArgParser ArgParser re-export
+---@field public Array Array re-export
+---@field public Client SuperToastClient re-export
+---@field public Command Command re-export
+---@field public Embed Embed re-export
+---@field public TypedArray TypedArray re-export
+---@field public Option Option re-export
+---@field public Subcommand Subcommand re-export
+---@field public dotenv dotenv re-export
+---@field public ms ms re-export
+---@field public stringx stringx re-export
+---@field public typed typed re-export
 local SuperToast = {
    ---@type ArgParser
    ArgParser = require('classes/ArgParser'),
@@ -27,7 +39,7 @@ local SuperToast = {
    ms = require('utils/ms'),
    ---@type stringx
    stringx = require('utils/stringx'),
-
+   ---@type typed
    typed = require('typed')
 }
 

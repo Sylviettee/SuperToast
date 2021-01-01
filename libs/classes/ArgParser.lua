@@ -149,17 +149,20 @@ local conversions = {
 ---@field private _flags ArgParser.modifiers[]
 local ArgParser = discordia.class('ArgParser')
 
+--- struct
 ---@class ArgParser.rawArgs
 ---@field public flags table<string, string[]>
 ---@field public arguments string[]
+local _rawArgs = {} -- shut documentation generator
 
+--- Modify how flags are parsed
 ---@class ArgParser.modifiers
----@field public required fun(bool: boolean): ArgParser.modifiers
----@field public choices fun(choices: string[]): ArgParser.modifiers
----@field public args fun(amount: string | number): ArgParser.modifiers
----@field public finish fun(): ArgParser
+---@field public required fun(bool: boolean): ArgParser.modifiers Changes if the flag is required or not
+---@field public args fun(amount: string): ArgParser.modifiers Changes the amount of required arguments
+---@field public finish fun(): ArgParser Finish configuring the flag and return back to the parser
 ---@field private status fun(args: string[]): ArgParser.statuses
 ---@field private humanArg string
+local _modifiers = {}
 
 ---@alias ArgParser.statuses
 ---| "'+'"
@@ -283,17 +286,17 @@ end
 ---@param command Command
 ---@return ArgParser
 function ArgParser:attach(command)
-   local usage = command.name
+   local usage = ''
 
    for i = 1, #self._arguments do
       usage = usage .. ' <' .. self._arguments[i][2] .. '>'
    end
 
    for i, v in pairs(self._flags) do
-      if v[2] == 'boolean' then
-         usage = usage .. ' [--' .. i .. ']'
-      else
+      if v._ctx.required then
          usage = usage .. ' --' .. i .. ' <' .. v._ctx.type .. '>'
+      else
+         usage = usage .. ' [--' .. i .. (v._ctx.type == 'boolean' and '' or '<' .. v._ctx.type .. '>' ) .. ']'
       end
    end
 
@@ -366,7 +369,8 @@ end
 --- Parse the input, typechecking it along the way
 ---@param str string
 ---@param client Client
----@return table | nil, string | nil
+---@return table | nil
+---@return string | nil
 function ArgParser:parse(str, client)
    local raw, parseErr = self:_parse(str)
 
@@ -423,7 +427,7 @@ function ArgParser:parse(str, client)
    missing = 0
 
    for i, v in pairs(self._flags) do
-      if not raw.flags[i] and v.required then
+      if not raw.flags[i] and v._ctx.required then
          table.insert(errors, buildError(
             'missing_required_flag',
             f('Expected %s, got nothing', v._ctx.type),
@@ -441,7 +445,7 @@ function ArgParser:parse(str, client)
 
          local succ, err, went
 
-         local topErr = 'incorrect_argument_type'
+         local topErr = 'incorrect_flag_type'
 
          if v._ctx.type == 'boolean' then
             went = true
@@ -509,6 +513,10 @@ function ArgParser:_createModifier(ctx)
    local modifiers = {
       _ctx = ctx
    }
+
+   if ctx.type == 'boolean' then
+      ctx.required = false
+   end
 
    function modifiers.required(bool)
       ctx.required = bool

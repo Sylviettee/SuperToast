@@ -117,7 +117,7 @@ describe('typed', function()
    describe('.func', function()
       it('should automatically resolve function name', function()
          local function hi()
-            typed.func(_, 'string')()
+            typed.func(nil, 'string')()
          end
 
          assert.has.error(function()

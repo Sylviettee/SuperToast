@@ -1,4 +1,4 @@
---- Utility for managing time
+--- module Utility for managing time
 ---@class ms
 local ms = {}
 

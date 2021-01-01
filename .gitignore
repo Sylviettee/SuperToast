@@ -8,3 +8,5 @@ private
 .idea
 native-utils/
 luafetch.lua
+site
+docs.json

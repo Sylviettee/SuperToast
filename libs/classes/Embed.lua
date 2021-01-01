@@ -7,6 +7,76 @@ local typed = require('typed')
 local tString = typed.func(nil, 'string')
 local tNumber = typed.func(nil, 'number')
 
+do
+--- struct The raw data within an embed
+---@class Embed.raw
+---@field public title string | nil title of embed
+---@field public type string | nil type of embed (always "rich" for webhook embeds)
+---@field public description string | nil description of embed
+---@field public url string | nil url of embed
+---@field public timestamp string | nil ISO8601 timestamp of embed content
+---@field public color number | nil color code of the embed
+---@field public footer Embed.footer | nil footer information
+---@field public image Embed.image | nil image information
+---@field public thumbnail Embed.thumbnail | nil thumbnail information
+---@field public video Embed.video | nil video information
+---@field public provider Embed.provider | nil provider information
+---@field public author Embed.author | nil author information
+---@field public fields Embed.field[] | nil fields information
+local _raw = {}
+
+--- struct
+---@class Embed.footer
+---@field public text string footer text
+---@field public icon_url string | nil url of footer icon (only supports http(s) and attachments)
+---@field public proxy_icon_url string | nil a proxied url of footer icon
+_raw.footer = {}
+
+--- struct
+---@class Embed.field
+---@field public name string name of the field
+---@field public value string value of the field
+---@field public inline boolean | nil whether or not this field should display inline
+_raw.field = {}
+
+--- struct
+---@class Embed.thumbnail
+---@field public url string | nil source url of the thumbnail(only supports http(s) and attachments)
+---@field public proxy_url string | nil a proxied url of the thumbnail
+---@field public height number | nil height of the thumbnail
+---@field public width number | nil width of the thumbnail
+_raw.thumbnail = {}
+
+--- struct
+---@class Embed.image
+---@field public url string | nil source url of the thumbnail(only supports http(s) and attachments)
+---@field public proxy_url string | nil a proxied url of the thumbnail
+---@field public height number | nil height of the thumbnail
+---@field public width number | nil width of the thumbnail
+_raw.image = {}
+
+--- struct
+---@class Embed.video
+---@field public url string | nil source url of video
+---@field public height number | nil height of the video
+---@field public width number | nil width of the video
+_raw.video = {}
+
+--- struct
+---@class Embed.provider
+---@field public name string | nil name of provider
+---@field public url string | nil url of provider
+_raw.provider = {}
+
+--- struct
+---@class Embed.author
+---@field public name string | nil name of author
+---@field public url string | nil url of author
+---@field public icon_url string | nil url of author icon (only supports http(s) and attachments)
+---@field public proxy_icon_url string | nil a proxied url of author icon
+_raw.author = {}
+end
+
 --- An embed class to allow structuring embeds easier
 ---@class Embed
 local Embed = class('Embed')
@@ -145,6 +215,7 @@ function Embed:setTimestamp(date)
 end
 
 --- Set the url of the embed
+---@return Embed
 function Embed:setURL(url)
    tString(url)
 
@@ -160,7 +231,8 @@ end
 
 --- Send an embed to a channel
 ---@param channel TextChannel
----@return Message
+---@return Message | nil
+---@return string | nil
 function Embed:send(channel)
    if channel.guild then
       ---@type Permissions

@@ -19,16 +19,7 @@ end
 
 --- Loop over the array
 function Array:__pairs()
-   local function func(tbl, k)
-      local v
-      k, v = next(tbl, k)
-
-      if v then
-         return k, v
-      end
-   end
-
-   return func, self._data, nil
+   return next, self._data
 end
 
 --- Get an item at a specific index
@@ -82,8 +73,8 @@ end
 --- Loop over the array and call the function each time
 ---@param fn fun(val:any, key: number):void
 function Array:forEach(fn)
-   for i, v in pairs(self) do
-      fn(i, v)
+   for i = 1, #self do
+      fn(i, self:get(i))
    end
 end
 
@@ -93,7 +84,9 @@ end
 function Array:filter(fn)
    local arr = Array()
 
-   for _, v in pairs(self) do
+   for i = 1, #self do
+      local v = self:get(i)
+
       if fn(v) then
          arr:push(v)
       end
@@ -106,7 +99,9 @@ end
 ---@param fn fun(val:any):boolean
 ---@return any,number|nil
 function Array:find(fn)
-   for i, v in pairs(self) do
+   for i = 1, #self do
+      local v = self:get(i)
+
       if fn(v) then
          return v, i
       end
@@ -117,8 +112,8 @@ end
 ---@param fn fun(val:any):any
 ---@return any, number|nil
 function Array:search(fn)
-   for i, v in pairs(self) do
-      local res = fn(v)
+   for i = 1, #self do
+      local res = fn(self:get(i))
 
       if res then
          return res, i
@@ -132,8 +127,8 @@ end
 function Array:map(fn)
    local arr = Array()
 
-   for _, v in pairs(self) do
-      arr:push(fn(v))
+   for i = 1, #self do
+      arr:push(fn(self:get(i)))
    end
 
    return arr
@@ -159,8 +154,8 @@ end
 function Array:copy()
    local ret = {}
 
-   for k, v in pairs(self._data) do
-      ret[k] = v
+   for i = 1, #self do
+      ret[i] = self:get(i)
    end
 
    return Array(ret)
@@ -177,6 +172,12 @@ function Array:reverse()
    end
 
    return Array(tbl)
+end
+
+--- Return the data within the array
+---@return any[]
+function Array:toTable()
+   return self._data
 end
 
 return Array

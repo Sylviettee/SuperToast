@@ -1,4 +1,4 @@
---- Dotenv parsing module
+--- module Dotenv parsing module
 ---@class dotenv
 local dotenv = {}
 

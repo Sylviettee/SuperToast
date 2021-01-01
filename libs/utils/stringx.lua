@@ -1,4 +1,4 @@
---- String utility library
+--- module String utility library
 ---@class stringx
 local stringx = {}
 

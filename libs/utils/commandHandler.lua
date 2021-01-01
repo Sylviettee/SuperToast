@@ -1,4 +1,8 @@
+---@type discordia
+local discordia = require('discordia')
+
 local stringx = require('utils/stringx')
+local tablex = discordia.extensions.table
 
 --- Default command handler
 ---@param client SuperToastClient
@@ -29,17 +33,21 @@ return function(client, msg)
       return
    end
 
-   local command = string.match(msg.content, foundPre .. '(%S+)'):lower()
+   local cleaned = foundPre:gsub('[%(%)%.%%%+%-%*%?%[%]%^%$]', function(c)
+      return '%' .. c
+   end)
 
-   if not command then
+   local command = msg.content:gsub('^' .. cleaned, '')
+
+   local split = stringx.split(command, ' ')
+
+   command = split[1]
+
+   if not command or command == '' then
       return
    end
 
-   local args = {}
-
-   for arg in string.gmatch(string.match(msg.content, foundPre .. '%S+%s*(.*)'), '%S+') do
-      table.insert(args, arg)
-   end
+   local args = tablex.slice(split, 2)
 
    local found = client.commands:find(function(cmd)
       return cmd.name == command or cmd.aliases:find(function(alias)

@@ -5,8 +5,6 @@ local discordia = require('discordia')
 local typed = require('typed')
 ---@type TypedArray
 local TypedArray = require('classes/TypedArray')
----@type Array
-local Array = require('classes/Array')
 ---@type ms
 local ms = require('utils/ms')
 
@@ -14,6 +12,7 @@ local timer = require('timer')
 
 local class = discordia.class
 local enums = discordia.enums
+local tablex = discordia.extensions.table
 
 local tString = typed.func(nil, 'string')
 local tFunc = typed.func(nil, 'function')
@@ -34,7 +33,7 @@ local tNumber = typed.func(nil, 'number')
 ---@field public bot_permissions string[]
 ---@field public subcommands Subcommand[]
 ---@field public rawExecute function
----@field public parent Plugin | Subcommand | nil
+---@field public parent Subcommand | nil
 local Command, get = class('Command')
 
 ---@type Command | fun(name: string, ...): Command
@@ -68,8 +67,8 @@ function Command:__init(name, ...)
    self._subcommands = TypedArray 'Subcommand'
    self._cooldowns = {}
 
-   for _, v in pairs({...}) do
-      self._aliases:push(v)
+   for i = 1 , select('#', ...) do
+      self._aliases:push(select(i, ...))
    end
 end
 
@@ -84,7 +83,7 @@ function Command:toRun(message, args, client)
    end)
 
    if isSub then
-      return isSub:toRun(message, Array.slice({_data = args})._data, client)
+      return isSub:toRun(message, tablex.slice(args, 2), client)
    end
 
    -- Handle subcommands first
@@ -114,9 +113,7 @@ function Command:toRun(message, args, client)
       return 'NSFW_ONLY'
    end
 
-   local isOwner = Array.find({_data = client.owners}, function(x)
-      return x == message.author.id
-   end)
+   local isOwner = tablex.search(client.owners, message.author.id)
 
    if self._owner_only and not isOwner then
       return 'OWNER_ONLY'
