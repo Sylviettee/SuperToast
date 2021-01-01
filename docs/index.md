@@ -6,14 +6,14 @@
 </div>
 
 <div align="center">
-    <a href="https://supertoast.readthedocs.io/en/latest/">
-        <img alt="Read the Docs" src="https://img.shields.io/readthedocs/supertoast?style=flat-square">
+    <a href="https://github.com/SovietKitsune/SuperToast/actions">
+        <img alt="Github Documentation Status" src="https://img.shields.io/github/workflow/status/sovietkitsune/supertoast/Documentation?style=flat-square">
     </a>
     <a href="https://github.com/SovietKitsune/SuperToast/actions">
-        <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/sovietkitsune/supertoast/Testing?style=flat-square">
+        <img alt="GitHub Testing Status" src="https://img.shields.io/github/workflow/status/sovietkitsune/supertoast/Testing%20and%20linting?style=flat-square">
     </a>
     <a href="https://github.com/XAMPPRocky/tokei">
-        <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/sovietkitsune/supertoast?style=flat-square">
+        <img alt="Lines of Code" src="https://img.shields.io/tokei/lines/github/sovietkitsune/supertoast?style=flat-square">
     </a>
 </div>
 

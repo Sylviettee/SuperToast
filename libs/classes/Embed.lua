@@ -81,7 +81,7 @@ end
 ---@class Embed
 local Embed = class('Embed')
 
----@type Embed | fun(starting: Embed): string
+---@type Embed | fun(starting: Embed.raw): string
 Embed = Embed
 
 --- Create a new embed
@@ -225,6 +225,7 @@ function Embed:setURL(url)
 end
 
 --- Return the contents within the embed
+---@return Embed.raw
 function Embed:toJSON()
    return self._embed
 end

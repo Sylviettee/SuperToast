@@ -1,5 +1,5 @@
 -- Do not touch, automatically generated!
--- Generated on Thu Dec 31 18:25:40 2020
+-- Generated on Thu Dec 31 19:10:22 2020
 
 ---Represents a Discord guild member. Though one user may be a member in more than one guild, each presence is represented by a different member object associated with that guild. Note that any method or property that exists for the User class is also available in the Member class.
 ---@class Member: UserPresence

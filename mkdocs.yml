@@ -1,9 +1,26 @@
 site_name: SuperToast
+site_description: SuperToast is a Discordia command framework designed for ease of use.
+site_author: Soviet Kitsune
+
+repo_url: https://github.com/SovietKitsune/SuperToast
+repo_name: SovietKitsune/SuperToast
+
+edit_uri: ""
 
 theme:
   name: material
+  palette:
+    scheme: preference
+    primary: teal
+    accent: teal
+
+extra:
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/uCDq5mw
 
 markdown_extensions:
   - pymdownx.highlight
   - pymdownx.superfences
-
+  - toc:
+      permalink: true

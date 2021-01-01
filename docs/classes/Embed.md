@@ -65,7 +65,7 @@ Set the timestamp of the embed
 Set the url of the embed
 
 
-### Embed:toJSON()
+### Embed:toJSON(): [Embed.raw](../structures/Embed.raw.md)
 
 Return the contents within the embed
 
