@@ -26,7 +26,7 @@ jobs:
 
       - name: install lua dependencies
         run: |
-          cd ./util/doc && luarocks make
+          luarocks make ./util/doc/docsdemo-dev-1.rockspec
 
       - name: build docs
         run: |
