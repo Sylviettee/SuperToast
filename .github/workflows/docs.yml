@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
 
       - uses: actions/setup-python@v2
         with:
@@ -26,7 +28,7 @@ jobs:
 
       - name: install lua dependencies
         run: |
-          luarocks make ./util/doc/docsdemo-dev-1.rockspec
+          cd ./util/doc/ && luarocks make docsdemo-dev-1.rockspec
 
       - name: build docs
         run: |
