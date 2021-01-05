@@ -461,7 +461,7 @@ end
 
 --- Count the amount of parents up this (sub)command has
 ---@return number
-function Command:count()
+function Command.count()
    return 0
 end
 

@@ -5,8 +5,6 @@ local typed = require('typed')
 
 ---@type Command
 local Command = require('classes/Command')
----@type Array
-local Array = require('classes/Array')
 
 local tFunc = typed.func(nil, 'function')
 
