@@ -364,6 +364,9 @@ local class = require('discordia').class
 ---@class Schema
 local Schema, get = class 'Schema'
 
+---@type Schema | fun(name: string): Schema
+Schema = Schema
+
 Schema.schemas = {}
 Schema.__name = 'Schema' -- Typed
 

@@ -6,13 +6,9 @@ stds.tests = {
    globals = {"toast"}
 }
 
-ignore = {
-   "631", "211", "241"
-}
-
 std = "max+luvit"
 
-excluded_files = {"**/deps/**/*.lua"}
+ignore = {"2../_.*", "631"}
 
 files["**/spec/**/*_spec.lua"].std = "max+tests+busted"
 files["**/testRunner.lua"].ignore = {"143", "122"}

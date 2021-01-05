@@ -5,8 +5,8 @@ _G.toast = require './init'
 _G._TEST = true
 
 -- Prevent early exiting from typed
-os.exit = function()
-   error(os.error)
-end
+rawset(os, 'exit', function()
+   error(rawget(os, 'error'))
+end)
 
 require 'busted.runner'({standalone = false})

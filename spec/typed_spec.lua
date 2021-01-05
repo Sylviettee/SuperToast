@@ -3,10 +3,6 @@ local typed = toast.typed
 -- Prevents exiting program
 _G._TEST = true
 
-rawset(os, 'exit', function()
-   error(rawget(os, 'error'))
-end)
-
 describe('typed', function()
    describe('.isArray', function()
       it('should return false on dicts', function()

@@ -21,6 +21,8 @@ local SuperToast = {
    Client = require('classes/Client'),
    ---@type Command
    Command = require('classes/Command'),
+   ---@type CommandUtil
+   CommandUtil = require('classes/CommandUtil'),
    ---@type Embed
    Embed = require('classes/Embed'),
    ---@type TypedArray

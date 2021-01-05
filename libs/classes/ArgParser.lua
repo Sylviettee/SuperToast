@@ -309,6 +309,8 @@ function ArgParser:attach(command)
 
    local oldExecute = command._execute
 
+   command._realExecute = oldExecute
+
    command:execute(function(msg, args, client)
       local newArgs = self:parse(table.concat(args, ' '), client)
 

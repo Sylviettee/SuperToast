@@ -55,6 +55,8 @@ local _supertoastOptions = {}
 ---@class SuperToastClient: Client
 ---@field public commands TypedArray
 ---@field public config SuperToastOptions
+---@field public owners string[]
+---@field public mentionPrefix string
 local SuperToastClient, get = class('SuperToast Client', discordia.Client)
 
 ---@type SuperToastClient | fun(token: string, opts: SuperToastOptions, discOpts: DiscordiaOptions): SuperToastClient
@@ -77,8 +79,6 @@ function SuperToastClient:__init(token, options, discOptions)
    self._token = token
 
    self._commands = TypedArray 'Command'
-   self._events = TypedArray 'Event'
-   self._plugins = TypedArray 'Plugin'
 
    self:on('ready', function()
       self:info('%s is ready!', self.user.tag)
@@ -248,6 +248,10 @@ end
 
 function get:config()
    return self._config
+end
+
+function get:mentionPrefix()
+   return '<@' .. self.user.id .. '>'
 end
 
 return SuperToastClient

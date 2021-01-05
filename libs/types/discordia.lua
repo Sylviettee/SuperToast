@@ -1,5 +1,5 @@
 -- Do not touch, automatically generated!
--- Generated on Thu Dec 31 19:10:22 2020
+-- Generated on Sun Jan  3 17:34:44 2021
 
 ---Represents a Discord guild member. Though one user may be a member in more than one guild, each presence is represented by a different member object associated with that guild. Note that any method or property that exists for the User class is also available in the Member class.
 ---@class Member: UserPresence
@@ -1859,6 +1859,34 @@ function Client:onSync(name, fn) end
 ---@return function
 function Client:onceSync(name, fn) end
 
+--- Send a debug level(4) message
+---
+--- Used for all HTTP requests, all gateway events, gateway debugging information
+---@param msg string
+---@vararg any
+function Client:debug(msg, ...) end
+
+--- Send an info level(3) message
+---
+--- Used for messages about connecting to the gateway, launching shards, receiving select gateway events
+---@param msg string
+---@vararg any
+function Client:info(msg, ...) end
+
+--- Send a warning level(2) message
+---
+--- Used for uncached objects and unhandled gateway events, unacknowledged heartbeats, gateway reconnections
+---@param msg string
+---@vararg any
+function Client:warning(msg, ...) end
+
+--- Send an error level(1) message
+---
+--- Used for API request failures (HTTP 4xx/5xx), sharding issues, authentication issues
+---@param msg string
+---@vararg any
+function Client:error(msg, ...) end
+
 --- The Lua language does not have classes, but it does have all of the tools needed to write them.
 --- Discordia uses a custom class system that was written explicitly to encapsulate data provided by Discord in intuitive, efficient structures.
 ---
@@ -2011,8 +2039,7 @@ local class = {}
 --- ```
 ---@param obj any
 ---@return boolean
-function class.isClass(obj)
-end
+function class.isClass(obj) end
 
 --- Function that returns true only if the provided argument is an instance of a Discordia class.
 ---
@@ -2023,8 +2050,7 @@ end
 --- ```
 ---@param obj any
 ---@return boolean
-function class.isObject(obj)
-end
+function class.isObject(obj) end
 
 --- Function that returns true if the first argument is a subclass of the second argument.
 --- Note that classes are considered to be subclasses of themselves.
@@ -2037,8 +2063,7 @@ end
 ---@param obj any
 ---@param obj2 any
 ---@return boolean
-function class.isSubclass(obj, obj2)
-end
+function class.isSubclass(obj, obj2) end
 
 --- Function that returns the type of the provided argument.
 --- If the argument is a Discordia object, then this will return the name of its class; otherwise, it will return the result of calling Lua's global `type` function.
@@ -2049,8 +2074,7 @@ end
 --- ```
 --- @param obj any
 --- @return string
-function class.type(obj)
-end
+function class.type(obj) end
 
 --- Function that returns the number of each class instance currently alive (ie, not garbage collected) in table form.
 ---
@@ -2061,8 +2085,7 @@ end
 --- end
 --- ```
 ---@return table<string, number>
-function class.profile()
-end
+function class.profile() end
 
 --- gameType enum
 ---@class enums.gameType
@@ -2544,8 +2567,6 @@ function mathExt.round(n, digits) end
 
 --- To write a Discordia application, the library's main module must be required. If it's in a deps or libs folder, simply require it by name.
 --- If you've manually installed the library elsewhere, then you will need to provide a relative or full path to the Discordia directory.
----
---- (Side note: Add `--@type discordia` to view the types)
 ---
 --- ```lua
 --- local discordia = require('discordia')

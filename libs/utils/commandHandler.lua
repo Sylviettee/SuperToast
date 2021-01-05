@@ -61,7 +61,9 @@ return function(client, msg)
       if type(toRun) == 'string' then
          msg:reply(client.config.errorResolver(found, toRun, errMsg))
       else
-         local succ, err = pcall(toRun, msg, args, client)
+         local succ, err = pcall(toRun, msg, args, client, {
+            prefix = foundPre
+         })
 
          if not succ then
             msg:reply('Something went wrong, try again later')

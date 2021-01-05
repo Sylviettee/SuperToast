@@ -12,9 +12,9 @@ return function(cmd, err, customMsg)
    end
 
    if err == 'MISSING_PERMISSIONS' then
-      return 'This command requires ' .. table.concat(cmd.user_permissions, ', ')
+      return 'This command requires ' .. table.concat(cmd.userPermissions, ', ')
    elseif err == 'SELF_MISSING_PERMISSIONS' then
-      return 'I need ' .. table.concat(cmd.bot_permissions, ', ')
+      return 'I need ' .. table.concat(cmd.botPermissions, ', ')
    elseif err == 'MISSING_ROLES' or err == 'SELF_MISSING_ROLES' then
       return 'You/I are missing roles required' -- TODO; resolve names
    else

@@ -65,4 +65,51 @@ Which is a very friendly and understandable error message.
 
 Flags are another feature of the advanced argument parser.
 
-TODO; rest
+They have more features then arguments (for now) like greedy parsers, ranges and more.
+
+To make a flag, you first want to call the method `:flag` on an argument parser.
+
+```lua
+local parser = toast.ArgParser()
+   :flag('name', 'type')
+```
+
+Next we want to add some modifiers like setting the flag to required or changing the arguments it takes.
+
+```lua
+local parser = toast.ArgParser()
+   :flag('name', 'type')
+      .args('1')
+```
+
+Finally we add a `.finish()` after `.args` in order to finalize the flag.
+
+```lua
+local parser = toast.ArgParser()
+   :flag('name', 'type')
+      .args('1')
+      .finish()
+```
+
+The strings you can pass to `.args` would be
+
+* `num` - Expect exactly this amount of arguments
+* `min-max` - Expect arguments between the min and max (greedy)
+* `+` - Expect 1 or more arguments (greedy)
+* `*` - Expect 0 or more arguments (greedy)
+* `?` - Expect 0 or 1 arguments
+
+What this *greedy* means is that when the parser reaches the minimum, it'll keep reading until it can't anymore due to another flag or it reaches the max.
+
+Soon™️ ungreedy arguments will be supported.
+
+## Types
+
+Currently SuperToast supports these types:
+
+* `string` - Do nothing
+* `number` - Attempt to typecast to number
+* `boolean` - Attempt to typecast to boolean
+* `int` - Attempt to typecast to a whole number (math.floor(input) == input)
+* `command` - Check if the input is the name of a valid command then typecast
+* `user` - Check if the input is either a user id, user mention, or username then typecast to a User

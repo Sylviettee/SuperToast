@@ -1,3 +1,6 @@
+---@type discordia
+local discordia = require('discordia')
+
 ---@type Command
 local command = require('classes/Command')
 local sub = require('classes/Subcommand')
@@ -5,15 +8,24 @@ local sub = require('classes/Subcommand')
 local stringx = require('utils/stringx')
 local ms = require('utils/ms')
 
-local help = command('help'):description('Get help on a specific command'):usage('<name>'):example('help')
+local tablex = discordia.extensions.table
 
-help:execute(function(msg, args, client)
+local help = command('help')
+   :description('Get help on a specific command')
+   :usage('<name> [subcommand]')
+   :example('help')
+   :example('help all')
+
+---@param msg Message
+---@param args string[]
+---@param client SuperToastClient
+help:execute(function(msg, args, client, ctx)
    if not args[1] then
       local cmd = help.subcommands:find(function(x)
          return x.name == 'all'
       end).rawExecute
 
-      return cmd(msg, args, client)
+      return cmd(msg, args, client, ctx)
    end
 
    ---@type Command
@@ -83,29 +95,59 @@ Bot Perms   :: %s
 
    local flags = cmd.flags
 
-   builder = builder(flags.guild_only and '✅' or '❌')
-   builder = builder(flags.nsfw_only and '✅' or '❌')
+   builder = builder(flags.guildOnly and '✅' or '❌')
+   builder = builder(flags.nsfwOnly and '✅' or '❌')
 
-   builder = builder(table.concat(cmd.user_permissions, ', ') == '' and 'none' or
-                         table.concat(cmd.user_permissions, ', '))
-   builder =
-       builder(table.concat(cmd.bot_permissions, ', ') == '' and 'none' or table.concat(cmd.bot_permissions, ', '))
+   builder = builder(
+      table.concat(cmd.userPermissions, ', ') == '' and 'none' or
+      table.concat(cmd.userPermissions, ', ')
+   )
+
+   builder = builder(
+      table.concat(cmd.botPermissions, ', ') == '' and 'none' or
+      table.concat(cmd.botPermissions, ', ')
+   )
 
    msg:reply(tostring(builder))
 end)
 
 local all = sub(help, 'all'):description('Get all the commands')
 
-all:execute(function(msg, _, client)
-   local cmds = ''
+---@param msg Message
+---@param client SuperToastClient
+---@param ctx Command.additionalContext
+all:execute(function(msg, _, client, ctx)
+   local toReply = string.format([[```adoc
+==== Bot help ====
+Use `%shelp [command] [subcommand]` for more in depth information
+]], ctx.prefix)
 
-   client.commands:forEach(function(_, cmd)
-      cmds = cmds .. cmd.name .. ', '
+   local sections = {}
+
+   ---@param val Command
+   client.commands:forEach(function(_, val)
+      if val.flags.ownerOnly and not tablex.search(client.owners, msg.author.id) then
+         return
+      end
+
+      local cat = val.getCategory or 'Misc'
+
+      if not sections[cat] then
+         sections[cat] = {}
+      end
+
+      local desc = val.getDescription or ''
+
+      desc = desc:match('\n') and desc:match('(.-)\n') or desc
+
+      table.insert(sections[cat], '- ' .. val.name .. (desc ~= '' and ' - ' .. desc or ''))
    end)
 
-   cmds = cmds:sub(0, #cmds - 2)
+   for name, descriptions in pairs(sections) do
+      toReply = toReply .. '\n' .. '=== ' .. name .. ' ===\n' .. table.concat(descriptions, '\n')
+   end
 
-   msg:reply(cmds)
+   msg:reply(toReply .. '```')
 end)
 
 return help

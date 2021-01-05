@@ -6,7 +6,7 @@ If a command needs to be ran within a guild, a simple check can be used.
 
 ```lua
 local nickname = toast.Command('nickname')
-   :guild_only() -- The `guild_only` check makes sure that the command is ran within a guild
+   :guildOnly() -- The `guildOnly` check makes sure that the command is ran within a guild
 
 ---@param msg Message
 nickname:execute(function(msg)
@@ -16,11 +16,11 @@ end)
 
 If you are making your own error handler, the `GUILD_ONLY` code is thrown whenever this check fails.
 
-If a command is considered NSFW (Not safe for work) then you can use the `:nsfw_only` check.
+If a command is considered NSFW (Not safe for work) then you can use the `:nsfwOnly` check.
 
 ```lua
 local cool = toast.Command('cool')
-   :nsfw_only()
+   :nsfwOnly()
 
 ---@param msg Message
 cool:execute(function(msg)
@@ -34,11 +34,11 @@ This throws a `NSFW_ONLY` code when the check fails.
 
 Sometimes you want a command to only be owner only like an eval/exec command.
 
-This can be done with the `:owner_only` check.
+This can be done with the `:ownerOnly` check.
 
 ```lua
 local exec = toast.Command('exec')
-   :owner_only()
+   :ownerOnly()
 
 ---@param msg Message
 exec:execute(function(msg, args)
@@ -53,12 +53,12 @@ This throws a `OWNER_ONLY` code when the check fails.
 
 Some commands should only be able to be used by users with the correct permissions like moderation commands.
 
-This can be done with the checks `:has_permission` and `:bot_has_permission`, both of which automatically enable `:guild_only`.
+This can be done with the checks `:hasPermission` and `:botHasPermission`, both of which automatically enable `:guildOnly`.
 
 ```lua
 local ban = toast.Command('ban')
-   :has_permission('banMembers')
-   :bot_has_permissions('banMembers')
+   :hasPermission('banMembers')
+   :botHasPermissions('banMembers')
 
 ban:execute(function(msg)
    -- Argument parsing
@@ -73,15 +73,15 @@ Some commands you might want only a specific role to be able to run like with pe
 
 ```lua
 local ban = toast.Command('ban')
-   :has_role('banMembers')
-   :bot_has_permissions('banMembers')
+   :hasRole('banMembers')
+   :botHasPermissions('banMembers')
 
 ban:execute(function(msg)
    -- Argument parsing
 end)
 ```
 
-This and `:bot_has_role` throw `MISSING_ROLES` and `SELF_MISSING_ROLES` codes when they have failed.
+`:hasRole` and `:botHasRole` throw `MISSING_ROLES` and `SELF_MISSING_ROLES` codes when they have failed.
 
 ## Cooldowns
 
@@ -125,4 +125,4 @@ greetParser:attach(greetCmd)
 
 Behind the scenes, `greetParser:attach` adds a custom check.
 
-Custom checks return `CUSTOM_*` where `*` can be anything, they also can return an additional message.
+Custom checks return `CUSTOM_*` where `*` can be anything, they also can return an additional message which should replace the check failing message.

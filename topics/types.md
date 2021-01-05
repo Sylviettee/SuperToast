@@ -1,17 +1,18 @@
 # Types
 
-Types are one of the biggest benefits to using SuperToast. Before we get there you should know some basic EmmyLua
-comments.
+Types are one of the biggest benefits to using SuperToast. Before we get there you should install either [Lua by sumneko](https://github.com/sumneko/lua-language-server) or [Emmylua](https://emmylua.github.io/)
+
+
+You can test if things went correctly by writing something like this:
 
 ```lua
 ---@type Message
 local msg = {}
 ```
 
-Now if we index the message we see its properties provided you have EmmyLua running and the types setup correctly.
+Now if we index the message we see its properties, if you  don't then EmmyLua isn't running and/or the types are not setup correctly.
 
-Sometimes you may need to do this as a variable might not be known to EmmyLua. This will not work in events so in order
-to get it to work in events we use a different comment.
+Sometimes you may need to do this as a variable might not be known to EmmyLua. This will not work in events so in order to get it to work in events we use a different comment.
 
 ```lua
 ---@param msg Message

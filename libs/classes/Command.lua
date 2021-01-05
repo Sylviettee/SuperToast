@@ -19,18 +19,31 @@ local tFunc = typed.func(nil, 'function')
 local tFuncs = typed.func(nil, 'function[]')
 local tNumber = typed.func(nil, 'number')
 
+--- struct Flags which the command could have
+---@class Command.flags
+---@field public guildOnly boolean
+---@field public nsfwOnly boolean
+---@field public ownerOnly boolean
+local _flags = {}
+
+--- struct Additional information about the context
+---@class Command.additionalContext
+---@field public prefix string The prefix that was used
+local _additionalContext = {}
+
 --- The command class to handle most functionality
 ---@class Command
 ---@field public isSub boolean
 ---@field public name string
----@field public description string
----@field public usage string
----@field public cooldown number
----@field public flags table<string, boolean>
+---@field public getDescription string
+---@field public getCategory string | nil
+---@field public getUsage string
+---@field public getCooldown number
+---@field public flags Command.flags
 ---@field public aliases string[]
----@field public examples string[]
----@field public user_permissions string[]
----@field public bot_permissions string[]
+---@field public getExamples string[]
+---@field public userPermissions string[]
+---@field public botPermissions string[]
 ---@field public subcommands Subcommand[]
 ---@field public rawExecute function
 ---@field public parent Subcommand | nil
@@ -59,10 +72,10 @@ function Command:__init(name, ...)
 
    self._examples = TypedArray 'string'
    self._aliases = TypedArray 'string'
-   self._user_roles = TypedArray 'string'
-   self._bot_roles = TypedArray 'string'
-   self._user_permissions = TypedArray 'number'
-   self._bot_permissions = TypedArray 'number'
+   self._userRoles = TypedArray 'string'
+   self._botRoles = TypedArray 'string'
+   self._userPermissions = TypedArray 'number'
+   self._botPermissions = TypedArray 'number'
    self._checks = TypedArray 'function'
    self._subcommands = TypedArray 'Subcommand'
    self._cooldowns = {}
@@ -105,17 +118,17 @@ function Command:toRun(message, args, client)
 
    -- Guild and nsfw checks
 
-   if self._guild_only and not message.guild then
+   if self._guildOnly and not message.guild then
       return 'GUILD_ONLY'
    end
 
-   if self._nsfw_only and not channel.nsfw then
+   if self._nsfwOnly and not channel.nsfw then
       return 'NSFW_ONLY'
    end
 
    local isOwner = tablex.search(client.owners, message.author.id)
 
-   if self._owner_only and not isOwner then
+   if self._ownerOnly and not isOwner then
       return 'OWNER_ONLY'
    end
 
@@ -126,14 +139,14 @@ function Command:toRun(message, args, client)
 
    -- Permissions
 
-   local user_perms = member:getPermissions(channel)
-   local bot_perms = me:getPermissions(channel)
+   local userPerms = member:getPermissions(channel)
+   local botPerms = me:getPermissions(channel)
 
-   if not user_perms:has(self._user_permissions:unpack()) then
+   if not userPerms:has(self._userPermissions:unpack()) then
       return 'MISSING_PERMISSIONS'
    end
 
-   if not bot_perms:has(self._bot_permissions:unpack()) then
+   if not botPerms:has(self._botPermissions:unpack()) then
       return 'SELF_MISSING_PERMISSIONS'
    end
 
@@ -145,17 +158,17 @@ function Command:toRun(message, args, client)
       end
    end
 
-   local user_roles = member.roles
-   local bot_roles = me.roles
+   local userRoles = member.roles
+   local botRoles = me.roles
 
-   for role in self._user_roles:iter() do
-      if not user_roles:find(find(role)) then
+   for role in self._userRoles:iter() do
+      if not userRoles:find(find(role)) then
          return 'MISSING_ROLES'
       end
    end
 
-   for role in self._bot_roles:iter() do
-      if not bot_roles:find(find(role)) then
+   for role in self._botRoles:iter() do
+      if not botRoles:find(find(role)) then
          return 'SELF_MISSING_ROLES'
       end
    end
@@ -183,6 +196,17 @@ function Command:description(desc)
    return self
 end
 
+--- Attach a category to a command
+---@param name string
+---@return Command
+function Command:category(name)
+   tString(name)
+
+   self._category = name
+
+   return self
+end
+
 --- Attach an example to a command
 ---@param example string
 ---@return Command
@@ -203,28 +227,49 @@ function Command:usage(usage)
    return self
 end
 
---- Set the command as guild only
+--- Use Command:guildOnly instead
+---@deprecated
 ---@return Command
 function Command:guild_only()
-   self._guild_only = true
+   return self:guildOnly()
+end
+
+--- Set the command as guild only
+---@return Command
+function Command:guildOnly()
+   self._guildOnly = false
 
    return self
+end
+
+--- Use Command:nsfwOnly instead
+---@deprecated
+---@return Command
+function Command:nsfw_only()
+   return self:nsfwOnly()
 end
 
 --- Set the command as nsfw only
 ---@return Command
-function Command:nsfw_only()
-   self:guild_only() -- nsfw channels only exist in guilds
+function Command:nsfwOnly()
+   self:guildOnly() -- nsfw channels only exist in guilds
 
-   self._nsfw_only = true
+   self._nsfwOnly = true
 
    return self
 end
 
---- Set the command as owner only
+--- Use Command:ownerOnly instead
+---@deprecated
 ---@return Command
 function Command:owner_only()
-   self._owner_only = true
+   return self:ownerOnly()
+end
+
+--- Set the command as owner only
+---@return Command
+function Command:ownerOnly()
+   self._ownerOnly = true
 
    return self
 end
@@ -241,7 +286,7 @@ function Command:cooldown(cooldown)
 end
 
 --- Add a custom check to the command
----@param check fun(msg: Message, args: string[], client: SuperToastClient):string|boolean, string
+---@param check fun(msg: Message, args: string[], client: SuperToastClient):string | boolean, string
 ---@return Command
 function Command:check(check)
    self._checks:push(check) -- Will automatically be checked
@@ -249,16 +294,25 @@ function Command:check(check)
    return self
 end
 
---- Add multiple custom checks
+--- Use Command:checkAny instead
+---@deprecated
 ---@vararg function
 ---@return Command
 function Command:check_any(...)
+   return self:checkAny(...)
+end
+
+--- Add multiple custom checks
+---@vararg function
+---@return Command
+function Command:checkAny(...)
    local funcs = {...}
 
    tFuncs(funcs)
 
    self:check(function(msg, args)
-      for _, v in pairs(funcs) do
+      for i = 1, #funcs do
+         local v = funcs[i]
          if v(msg, args) == true then
             return true
          end
@@ -268,74 +322,115 @@ function Command:check_any(...)
    end)
 end
 
---- Add permission check for users
----@param perm string|number
+--- Use Command:hasPermission instead
+---@deprecated
+---@param perm string | number
 ---@return Command
 function Command:has_permission(perm)
-   self:guild_only()
+   return self:hasPermission(perm)
+end
+
+--- Add permission check for users
+---@param perm string | number
+---@return Command
+function Command:hasPermission(perm)
+   self:guildOnly()
 
    if type(perm) == 'string' then
       assert(enums.permission[perm], 'The permission must exist')
 
-      self._user_permissions:push(enums.permission[perm])
+      self._userPermissions:push(enums.permission[perm])
    else
-      self._user_permissions:push(perm)
+      self._userPermissions:push(perm)
    end
 
    return self
+end
+
+--- Use Command:hasPermission instead
+---@deprecated
+---@vararg string | number
+---@return Command
+function Command:has_permissions(...)
+   return self:hasPermissions(...)
 end
 
 --- Add multiple permission checks for users
----@vararg string|number
+---@vararg string | number
 ---@return Command
-function Command:has_permissions(...)
-   for _, v in pairs({...}) do
-      self:has_permission(v)
+function Command:hasPermissions(...)
+   for i = 1, select('#', ...) do
+      self:hasPermission(select(i, ...))
    end
 
    return self
 end
 
---- Add permission check for the bot
----@param perm string|number
+--- Use Command:botHasPermission instead
+---@deprecated
+---@param perm string | number
 ---@return Command
 function Command:bot_has_permission(perm)
-   self:guild_only() -- Permissions only exist in guilds
+   return self:botHasPermission(perm)
+end
+
+--- Add permission check for the bot
+---@param perm string | number
+---@return Command
+function Command:botHasPermission(perm)
+   self:guildOnly() -- Permissions only exist in guilds
 
    if type(perm) == 'string' then
       assert(enums.permission[perm], 'The permission must exist')
 
-      self._bot_permissions:push(enums.permission[perm])
+      self._botPermissions:push(enums.permission[perm])
    else
-      self._bot_permissions:push(perm)
+      self._botPermissions:push(perm)
    end
 
    return self
 end
 
---- Add multiple permission checks for the bot
----@vararg string|number
+--- Use Command:botHasPermissions instead
+---@deprecated
+---@vararg string | number
 ---@return Command
 function Command:bot_has_permissions(...)
-   for _, v in pairs({...}) do
-      self:bot_has_permission(v)
+   return self:botHasPermission(...)
+end
+
+--- Add multiple permission checks for the bot
+---@vararg string | number
+---@return Command
+function Command:botHasPermissions(...)
+   for i = 1, select('#', ...) do
+      self:botHasPermission(select(i, ...))
    end
 
    return self
+end
+
+--- Use Command:hasRole instead
+---@deprecated
+---@param role string
+---@return Command
+function Command:has_role(role)
+   return self:hasRole(role)
 end
 
 --- Check if the user has a specific role
 ---@param role string
 ---@return Command
-function Command:has_role(role)
-   self:guild_only() -- Roles only exist in guilds
+function Command:hasRole(role)
+   self:guildOnly() -- Roles only exist in guilds
 
-   self._user_roles:push(role)
+   self._userRoles:push(role)
 
    return self
 end
 
---- Add a subcommand to the function
+--- Use Command:addSubcommand instead
+---@deprecated
 ---@param subcommand Subcommand
 ---@return Command
 function Command:add_subcommand(subcommand)
@@ -344,8 +439,17 @@ function Command:add_subcommand(subcommand)
    return self
 end
 
+--- Add a subcommand to the function
+---@param subcommand Subcommand
+---@return Command
+function Command:addSubcommand(subcommand)
+   self._subcommands:push(subcommand)
+
+   return self
+end
+
 --- Sets the function to execute
----@param func fun(msg:Message, args: string[], client: SuperToastClient):void
+---@param func fun(msg:Message, args: string[], client: SuperToastClient, ctx: Command.additionalContext):void
 ---@return Command
 function Command:execute(func)
    tFunc(func)
@@ -353,6 +457,12 @@ function Command:execute(func)
    self._execute = func
 
    return self
+end
+
+--- Count the amount of parents up this (sub)command has
+---@return number
+function Command:count()
+   return 0
 end
 
 function get:name()
@@ -375,29 +485,37 @@ function get:getUsage()
    return self._usage
 end
 
+function get:getCategory()
+   return self._category
+end
+
 function get:flags()
-   return {guild_only = self._guild_only, nsfw_only = self._nsfw_only}
+   return {
+      guildOnly = self._guildOnly,
+      nsfwOnly = self._nsfwOnly,
+      ownerOnly = self._ownerOnly
+   }
 end
 
 function get:getCooldown()
    return self._cooldown
 end
 
-function get:user_permissions()
+function get:userPermissions()
    local perms = {}
 
-   for _, v in pairs(self._user_permissions) do
-      table.insert(perms, enums.permission(v))
+   for i = 1, #self._userPermissions do
+      table.insert(perms, enums.permission(self._userPermissions[i]))
    end
 
    return perms
 end
 
-function get:bot_permissions()
+function get:botPermissions()
    local perms = {}
 
-   for _, v in pairs(self._bot_permissions) do
-      table.insert(perms, enums.permission(v))
+   for i = 1, #self._botPermissions do
+      table.insert(perms, enums.permission(self._botPermissions[i]))
    end
 
    return perms
@@ -407,12 +525,12 @@ function get:subcommands()
    return self._subcommands
 end
 
-function get.isSub()
-   return false
-end
-
 function get:rawExecute()
    return self._execute
+end
+
+function get.isSub()
+   return false
 end
 
 return Command

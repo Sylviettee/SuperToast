@@ -1,4 +1,6 @@
-local class = require('discordia').class
+---@type discordia
+local discordia = require('discordia')
+
 local typed = require('typed')
 
 ---@type Command
@@ -8,9 +10,11 @@ local Array = require('classes/Array')
 
 local tFunc = typed.func(nil, 'function')
 
+local tablex = discordia.extensions.table
+
 --- A subcommand to act as a mini command
 ---@class Subcommand: Command
-local Subcommand, get = class('Subcommand', Command)
+local Subcommand, get = discordia.class('Subcommand', Command)
 
 ---@type Subcommand | fun(parent: Command, name: string): Subcommand
 Subcommand = Subcommand
@@ -21,7 +25,7 @@ Subcommand = Subcommand
 function Subcommand:__init(parent, name)
    Command.__init(self, name)
 
-   parent:add_subcommand(self)
+   parent:addSubcommand(self)
 
    self._parent = parent
 end
@@ -38,10 +42,8 @@ end
 function Subcommand:execute(func)
    tFunc(func)
 
-   self._execute = function(msg, args, client)
-      local _ = Array(args)
-
-      func(msg, Array.slice({_data = args}, 2), client)
+   self._execute = function(msg, args, client, ctx)
+      func(msg, tablex.slice(args, 2), client, ctx)
    end
 
    return self

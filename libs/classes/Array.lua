@@ -71,7 +71,7 @@ function Array:pop(pos)
 end
 
 --- Loop over the array and call the function each time
----@param fn fun(val:any, key: number):void
+---@param fn fun(key: number, val:any)
 function Array:forEach(fn)
    for i = 1, #self do
       fn(i, self:get(i))
@@ -79,7 +79,7 @@ function Array:forEach(fn)
 end
 
 --- Loop through each item and each item that satisfies the function gets added to an array and gets returned
----@param fn fun(val:any):void
+---@param fn fun(val:any)
 ---@return Array
 function Array:filter(fn)
    local arr = Array()
