@@ -33,7 +33,7 @@ Parsing is how each framework deals with parsing given input.
 | Command Parsing | SuperToast | Toast | Commandia |
 | --------------- | ---------- | ----- | --------- |
 | Aliases | ✓ | ✓ | ✓ |
-| Mention as prefix | ✘ | ✘ | ✘ |
+| Mention as prefix | ✘ | ✓ | ✘ |
 | Multiple prefixes | ✓ | ✓ | ✘ |
 | Per-guild prefix customization | ✓ | ✘ | ✓ |
 | Pattern trigger | ✘ | ✘ | ✘ |
@@ -62,7 +62,7 @@ For matching, the parser should support more than just the id like the object na
 | ---------------- | ---------- | ----- | --------- |
 | Ordered arguments | ✓ | ✓ | ✓ |
 | Unordered arguments | ✘ | ✘ | ? |
-| Optional arguments | ✘ | ✘ | ? |
+| Optional arguments | ✘ | ✓ | ? |
 | Quoted arguments | ✓ | ✓ | ✓ |
 | Flag arguments | ✓ | ✘ | ✓ |
 | Dependant arguments | ✘ | ✘ | ? |
