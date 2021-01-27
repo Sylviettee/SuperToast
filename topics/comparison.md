@@ -1,4 +1,4 @@
-## Comparison
+# Comparison
 
 Here is a small comparison to other Discordia frameworks/command handlers.
 
@@ -7,6 +7,10 @@ The frameworks compared are:
 * [SuperToast](https://github.com/SovietKitsune/SuperToast)
 * [Toast](https://github.com/NotSoClassy/Toast)
 * [Commandia](https://github.com/Bilal2453/Commandia) (dev branch)
+
+## Points
+
+Here are some things to consider when choosing a framework for your bot.
 
 ### Metadata
 
@@ -95,8 +99,8 @@ Frameworks might fire events depending on whenever a command is reloaded or unlo
 | Module event listeners | ✓ | N/A | ✓ |
 | On invalid commands | ✘ | ✘ | ✘ |
 | On command blocked | / | ✘ | ? |
-| On command start | ✘ | ✘ | ? |
-| On command end | ✘ | ✘ | ? |
+| On command start | ✘ | ✓ | ? |
+| On command end | ✘ | ✓ | ? |
 | On command error | ✓ | ✓ | ✓ |
 
 ### Settings
