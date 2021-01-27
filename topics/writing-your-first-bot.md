@@ -6,8 +6,8 @@ Making a bot with SuperToast is a breeze thanks to all its utilities.
 
 Before starting to do anything else, you should install the dependencies needed, discordia and SuperToast.
 
-* `lit install discordia`
-* `lit install SuperToast`
+* `lit install SinisterRectus/discordia`
+* `lit install SovietKitsune/SuperToast`
 
 (This expects you have added [lit to your path](https://gist.github.com/Bilal2453/7370a143244d5ef2480c3db358fa2790))
 
