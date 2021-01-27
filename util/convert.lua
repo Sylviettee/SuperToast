@@ -166,7 +166,6 @@ local function convert(tp)
 
       return resolving .. ' | string' .. (multi and '[]' or '')
    else
-
       if tp == 'Base64-Resolveable' or tp == 'Base64-Resolvable' then
          return 'string'
       elseif tp == 'Permission-Resolvables' then
@@ -247,12 +246,14 @@ for _, class in pairs(docs) do
       writing = writing .. f('---@field public %s %s %s\n', fields.name, convert(fields.type), fields.desc)
    end
 
-   -- Create table
-
-   writing = writing .. f('local %s = {}\n---@type %s | %s\n%s = %s\n', class.name, class.name, descInlineFunc({
+   writing = writing .. f('---@overload %s\n', descInlineFunc({
       parameters = class.parameters,
       returns = {class.name}
-   }), class.name, class.name)
+   }))
+
+   -- Create table
+
+   writing = writing .. f('local %s = {}\n', class.name)
 
    -- Methods
 
@@ -292,10 +293,10 @@ local fields = {}
 
 for i, v in pairs(enums) do
    if i ~= 'enum' then
-      table.insert(fields, '---@field public ' .. i .. ' enums.' .. i)
+      table.insert(fields, '---@field public ' .. i .. ' enums_' .. i)
       local desc = '--- ' .. i .. ' enum'
 
-      desc = desc .. '\n---@class enums.' .. i
+      desc = desc .. '\n---@class enums_' .. i
 
       for name, val in pairs(v) do
          desc = desc ..
@@ -322,8 +323,59 @@ for i, v in pairs(package) do
    desc = desc .. f('---@field public %s %s%s\n', i, whatIs(v), val)
 end
 
+-- Overloads
+
+local overloads = [[
+---@overload fun(name: 'ready', fn: fun()): function
+---@overload fun(name: 'shardReady', fn: fun(shardId: number)): function
+---@overload fun(name: 'shardResumed', fn: fun(shardId: number)): function
+---@overload fun(name: 'channelCreate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelUpdate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelDelete', fn: fun(channel: Channel)): function
+---@overload fun(name: 'recipientAdd', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'recipientRemove', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'guildAvailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildCreate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildUnavailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildDelete', fn: fun(guild: Guild)): function
+---@overload fun(name: 'userBan', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'userUnban', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'emojisUpdate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'memberJoin', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberLeave', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberUpdate', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'roleCreate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleUpdate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleDelete', fn: fun(role: Role)): function
+---@overload fun(name: 'messageCreate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdateUncached', fn: fun(channel: TextChannel, messageId: string)): function
+---@overload fun(name: 'reactionAdd', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionAddUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'reactionRemove', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionRemoveUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'pinsUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'presenceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'relationshipUpdate', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipAdd', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipRemove', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'typingStart', fn: fun(userId: string, channelId: string, timestamp: string)): function
+---@overload fun(name: 'userUpdate', fn: fun(user: User)): function
+---@overload fun(name: 'voiceConnect', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceChannelJoin', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'voiceChannelLeave', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'webhooksUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'debug', fn: fun(message: string)): function
+---@overload fun(name: 'info', fn: fun(message: string)): function
+---@overload fun(name: 'warning', fn: fun(message: string)): function
+---@overload fun(name: 'error', fn: fun(message: string)): function
+---@overload fun(name: 'heartbeat', fn: fun(shardId: number, latency: number)): function
+---@overload fun(name: 'raw', fn: fun(json: string)): function]]
+
 handWritten = handWritten:gsub('%-%-%s?@enums', table.concat(enum_descs, '\n') .. table.concat(fields, '\n'))
 handWritten = handWritten:gsub('%-%-%s?@package', desc)
+handWritten = handWritten:gsub('%-%-%s?@clientEmitters', overloads)
 
 writing = writing .. '\n\n' .. handWritten
 

@@ -1,3 +1,4 @@
+---@type discordia
 local discordia = require('discordia')
 local pathjoin = require('pathjoin')
 local fs = require('fs')
@@ -14,7 +15,6 @@ local typed = require('typed')
 
 local ch = require('utils/commandHandler')
 local er = require('utils/errorResolver')
-
 
 local clientOptions = typed.Schema('clientConfig')
    :field('prefix', 'string | string[] | function', '!')
@@ -49,7 +49,7 @@ local _discordiaOptions = {}
 ---@field public errorResolver fun(cmd: Command, err: string):string The function to call to parse an error message
 ---@field public owners string[] The ids of the people who own the bot
 ---@field public prefix string | string[] | fun(msg: Message):string | string[] The prefix/prefixes/function to call to get a prefix/prefixes
-local _supertoastOptions = {}
+local _SuperToastOptions = {}
 
 --- The SuperToast client with all the fun features
 ---@class SuperToastClient: Client
@@ -63,8 +63,6 @@ local SuperToastClient, get = class('SuperToast Client', discordia.Client)
 SuperToastClient = SuperToastClient
 
 --- Create a new SuperToast client
----@see SuperToastOptions
----@see DiscordiaOptions
 ---@param token string
 ---@param options SuperToastClient
 ---@param discOptions DiscordiaOptions
@@ -91,7 +89,8 @@ function SuperToastClient:__init(token, options, discOptions)
 end
 
 --- Connect and login
----@param presence nil | table<string, any>
+---@param presence table<string, any>
+---@overload fun()
 function SuperToastClient:login(presence)
    self:run('Bot ' .. self._token)
 
@@ -117,7 +116,6 @@ function SuperToastClient:removeCommand(command)
       self._commands:pop(i)
    end
 end
-
 
 local function parseFile(obj, files)
    if type(obj) == 'string' then

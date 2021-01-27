@@ -20,14 +20,14 @@ local tFuncs = typed.func(nil, 'function[]')
 local tNumber = typed.func(nil, 'number')
 
 --- struct Flags which the command could have
----@class Command.flags
+---@class Command_flags
 ---@field public guildOnly boolean
 ---@field public nsfwOnly boolean
 ---@field public ownerOnly boolean
 local _flags = {}
 
 --- struct Additional information about the context
----@class Command.additionalContext
+---@class Command_additionalContext
 ---@field public prefix string The prefix that was used
 local _additionalContext = {}
 
@@ -39,7 +39,7 @@ local _additionalContext = {}
 ---@field public getCategory string | nil
 ---@field public getUsage string
 ---@field public getCooldown number
----@field public flags Command.flags
+---@field public flags Command_flags
 ---@field public aliases string[]
 ---@field public getExamples string[]
 ---@field public userPermissions string[]
@@ -53,19 +53,8 @@ local Command, get = class('Command')
 Command = Command
 
 --- Create a new command
----
---- Possible fail codes
---- * GUILD_ONLY - The command must be ran in a guild
---- * NSFW_ONLY - The command must be ran in a nsfw channel
---- * OWNER_ONLY - The command must be ran by the owner of the bot
---- * MISSING_PERMISSIONS - The user is missing permissions
---- * SELF_MISSING_PERMISSIONS - The bot is missing permissions
---- * MISSING_ROLES - The user is missing roles
---- * SELF_MISSING_ROLES - The bot is missing roles
---- * CUSTOM_* - Custom check error codes
 ---@param name string
 ---@vararg string
----@return Command
 function Command:__init(name, ...)
    tString(name)
    self._name = name
@@ -89,7 +78,7 @@ end
 ---@param message Message
 ---@param args string[]
 ---@param client SuperToastClient
----@return boolean
+---@return boolean | string
 function Command:toRun(message, args, client)
    local isSub = self._subcommands:find(function(v)
       return v.name == args[1]
@@ -102,9 +91,9 @@ function Command:toRun(message, args, client)
    -- Handle subcommands first
    if self._cooldowns[message.author.id] then
       return message:reply('You are on cooldown, wait ' ..
-         ms.formatLong(self._cooldowns[message.author.id] - os.time()
+         ms.formatLong(self._cooldowns[message.author.id] - os.time())
          .. ' longer!'
-      ))
+      )
    elseif self._cooldown then
       self._cooldowns[message.author.id] = os.time() + self._cooldown
 
@@ -449,7 +438,7 @@ function Command:addSubcommand(subcommand)
 end
 
 --- Sets the function to execute
----@param func fun(msg:Message, args: string[], client: SuperToastClient, ctx: Command.additionalContext):void
+---@param func fun(msg:Message, args: string[], client: SuperToastClient, ctx: Command_additionalContext):void
 ---@return Command
 function Command:execute(func)
    tFunc(func)

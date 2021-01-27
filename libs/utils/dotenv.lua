@@ -31,6 +31,7 @@ local NEWLINES_MATCH = [[\n|\r|\r\n]]
 --- Parse a dotenv file and return the data
 ---@param src string
 ---@param options table<string, boolean>
+---@overload fun(src: string): table<string, any>
 ---@return table<string, any>
 function dotenv.parse(src, options)
    local debug = options and options.debug
@@ -61,6 +62,7 @@ end
 
 --- Load a .env file into the current env
 ---@param options table<string, any>
+---@overload fun()
 function dotenv.config(options)
    if options == nil then
       options = {}

@@ -1,5 +1,5 @@
 -- Do not touch, automatically generated!
--- Generated on Sun Jan  3 17:34:44 2021
+-- Generated on Tue Jan 26 15:33:14 2021
 
 ---Represents a Discord guild member. Though one user may be a member in more than one guild, each presence is represented by a different member object associated with that guild. Note that any method or property that exists for the User class is also available in the Member class.
 ---@class Member: UserPresence
@@ -13,9 +13,8 @@
 ---@field public deafened boolean Whether the member is voice deafened in its guild.
 ---@field public guild Guild The guild in which this member exists.
 ---@field public highestRole Role The highest positioned role that the member has. If the member has no explicit roles, then this is equivalent to `Member.guild.defaultRole`.
+---@overload fun():Member
 local Member = {}
----@type Member | fun():Member
-Member = Member
 ---Returns a color object that represents the member's color as determined by its highest colored role. If the member has no colored roles, then the default color with a value of 0 is returned.
 ---@return Color
 function Member:getColor() end
@@ -81,9 +80,8 @@ function Member:__init() end
 ---@class Container
 ---@field public client Client A shortcut to the client object to which this container is visible.
 ---@field public parent Container | Client The parent object of to which this container is a child. For example, the parent of a role is the guild in which the role exists.
+---@overload fun():Container
 local Container = {}
----@type Container | fun():Container
-Container = Container
 ---Defines the behavior of the `==` operator. Allows containers to be directly compared according to their type and `__hash` return values.
 ---@return boolean
 function Container:__eq() end
@@ -98,9 +96,8 @@ function Container:__init() end
 ---@class ArrayIterable: Iterable
 ---@field public first any The first object in the array
 ---@field public last any The last object in the array
+---@overload fun():ArrayIterable
 local ArrayIterable = {}
----@type ArrayIterable | fun():ArrayIterable
-ArrayIterable = ArrayIterable
 ---Returns an iterator for all contained objects in a consistent order.
 ---@return function
 function ArrayIterable:iter() end
@@ -110,9 +107,8 @@ function ArrayIterable:__init() end
 
 ---Iterable class that wraps another iterable and serves a subset of the objects that the original iterable contains.
 ---@class FilteredIterable: Iterable
+---@overload fun():FilteredIterable
 local FilteredIterable = {}
----@type FilteredIterable | fun():FilteredIterable
-FilteredIterable = FilteredIterable
 ---Returns an iterator that returns all contained objects. The order of the objects is not guaranteed.
 ---@return function
 function FilteredIterable:iter() end
@@ -132,9 +128,8 @@ function FilteredIterable:__init() end
 ---@field public avatarURL string Equivalent to the result of calling `Webhook:getAvatarURL()`.
 ---@field public defaultAvatar number The default avatar for the webhook. See the `defaultAvatar` enumeration for a human-readable representation. This should always be `defaultAvatar.blurple`.
 ---@field public defaultAvatarURL string Equivalent to the result of calling `Webhook:getDefaultAvatarURL()`.
+---@overload fun():Webhook
 local Webhook = {}
----@type Webhook | fun():Webhook
-Webhook = Webhook
 ---Returns a URL that can be used to view the webhooks's full avatar. If provided, the size must be a power of 2 while the extension must be a valid image format. If the webhook does not have a custom avatar, the default URL is returned.
 ---@param size number
 ---@param ext string
@@ -173,9 +168,8 @@ function Webhook:__init() end
 ---@field public privateChannels Cache An iterable cache of all private channels that are visible to the client. The channel must exist and must be open for it to be cached here. To access a private channel that may exist but is not cached, `User:getPrivateChannel`.
 ---@field public groupChannels Cache An iterable cache of all group channels that are visible to the client. Only user-accounts should have these.
 ---@field public relationships Cache An iterable cache of all relationships that are visible to the client. Only user-accounts should have these.
+---@overload fun(options: table):Client
 local Client = {}
----@type Client | fun(options: table):Client
-Client = Client
 ---Authenticates the current user via HTTPS and launches as many WSS gateway shards as are required or requested. By using coroutines that are automatically managed by Luvit libraries and a libuv event loop, multiple clients per process and multiple shards per client can operate concurrently. This should be the last method called after all other code and event handlers have been initialized. If a presence table is provided, it will act as if the user called `setStatus` and `setGame` after `run`.
 ---@param token string
 ---@param presence table
@@ -256,9 +250,8 @@ function Client:__init(options) end
 
 ---Iterable class that holds references to Discordia Class objects in no particular order.
 ---@class Cache: Iterable
+---@overload fun():Cache
 local Cache = {}
----@type Cache | fun():Cache
-Cache = Cache
 ---Returns an individual object by key, where the key should match the result of calling `__hash` on the contained objects. Unlike Iterable:get, this method operates with O(1) complexity.
 ---@param k any
 ---@return any
@@ -279,9 +272,8 @@ function Cache:__init() end
 ---@field public userId string The Snowflake ID of the user who commited the action.
 ---@field public reason string | nil The reason provided by the user for the change.
 ---@field public guild Guild The guild in which this audit log entry was found.
+---@overload fun():AuditLogEntry
 local AuditLogEntry = {}
----@type AuditLogEntry | fun():AuditLogEntry
-AuditLogEntry = AuditLogEntry
 ---Returns two tables of the target's properties before the change, and after the change.
 ---@return table table
 function AuditLogEntry:getBeforeAfter() end
@@ -319,9 +311,8 @@ function AuditLogEntry:__init() end
 ---@field public emojiName string | nil The name of the emoji used in this presence if one is set and if it has a custom emoji. This will be the raw string for a standard emoji.
 ---@field public emojiHash string | nil The discord hash for the emoji used in this presence if one is set. This will be the raw string for a standard emoji.
 ---@field public emojiURL string | nil string The URL that can be used to view a full version of the emoji used in this activity if one is set and if it is a custom emoji.
+---@overload fun():Activity
 local Activity = {}
----@type Activity | fun():Activity
-Activity = Activity
 ---Create a new Activity
 ---@return Activity
 function Activity:__init() end
@@ -331,9 +322,8 @@ function Activity:__init() end
 ---@field public reason string | nil The reason for the ban, if one was set. This should be from 1 to 512 characters in length.
 ---@field public guild Guild The guild in which this ban object exists.
 ---@field public user User The user that this ban object represents.
+---@overload fun():Ban
 local Ban = {}
----@type Ban | fun():Ban
-Ban = Ban
 ---Returns `Ban.user.id`
 ---@return string
 function Ban:__hash() end
@@ -346,9 +336,8 @@ function Ban:__init() end
 
 ---Iterable class that wraps another cache. Objects added to or removed from a secondary cache are also automatically added to or removed from the primary cache that it wraps.
 ---@class SecondaryCache: Iterable
+---@overload fun():SecondaryCache
 local SecondaryCache = {}
----@type SecondaryCache | fun():SecondaryCache
-SecondaryCache = SecondaryCache
 ---Returns an individual object by key, where the key should match the result of calling `__hash` on the contained objects. Unlike the default version, this method operates with O(1) complexity.
 ---@param k any
 ---@return any
@@ -366,9 +355,8 @@ function SecondaryCache:__init() end
 ---@field public userLimit number The amount of users allowed to be in this channel. Users with `moveMembers` permission ignore this limit.
 ---@field public connectedMembers TableIterable An iterable of all users connected to the channel.
 ---@field public connection VoiceConnection | nil The VoiceConnection for this channel if one exists.
+---@overload fun():GuildVoiceChannel
 local GuildVoiceChannel = {}
----@type GuildVoiceChannel | fun():GuildVoiceChannel
-GuildVoiceChannel = GuildVoiceChannel
 ---Sets the channel's audio bitrate in bits per second (bps). This must be between 8000 and 96000 (or 128000 for partnered servers). If `nil` is passed, the default is set, which is 64000.
 ---@param bitrate number
 ---@return boolean
@@ -390,9 +378,8 @@ function GuildVoiceChannel:__init() end
 ---Defines the base methods and properties for all Discord text channels.
 ---@class TextChannel: Channel
 ---@field public messages WeakCache An iterable weak cache of all messages that are visible to the client. Messages that are not referenced elsewhere are eventually garbage collected. To access a message that may exist but is not cached, use `TextChannel:getMessage`.
+---@overload fun():TextChannel
 local TextChannel = {}
----@type TextChannel | fun():TextChannel
-TextChannel = TextChannel
 ---Gets a message object by ID. If the object is already cached, then the cached object will be returned; otherwise, an HTTP request is made.
 ---@param id Message | string
 ---@return Message
@@ -443,9 +430,8 @@ function TextChannel:__init() end
 
 ---Used to periodically execute code according to the ticking of the system clock instead of arbitrary interval.
 ---@class Clock: Emitter
+---@overload fun():Clock
 local Clock = {}
----@type Clock | fun():Clock
-Clock = Clock
 ---Starts the main loop for the clock. If a truthy argument is passed, then UTC time is used; otherwise, local time is used. As the clock ticks, an event is emitted for every `os.date` value change. The event name is the key of the value that changed and the event argument is the corresponding date table.
 ---@param utc boolean
 ---@return nil
@@ -459,9 +445,8 @@ function Clock:__init() end
 
 ---Iterable class that wraps a basic Lua table, where order is not guaranteed. Some versions may use a map function to shape the objects before they are accessed.
 ---@class TableIterable: Iterable
+---@overload fun():TableIterable
 local TableIterable = {}
----@type TableIterable | fun():TableIterable
-TableIterable = TableIterable
 ---Returns an iterator that returns all contained objects. The order of the objects is not guaranteed.
 ---@return function
 function TableIterable:iter() end
@@ -476,9 +461,8 @@ function TableIterable:__init() end
 ---@field public guild Guild The guild in which this overwrite exists. Equivalent to `PermissionOverwrite.channel.guild`.
 ---@field public allowedPermissions number The number representing the total permissions allowed by this overwrite.
 ---@field public deniedPermissions number The number representing the total permissions denied by this overwrite.
+---@overload fun():PermissionOverwrite
 local PermissionOverwrite = {}
----@type PermissionOverwrite | fun():PermissionOverwrite
-PermissionOverwrite = PermissionOverwrite
 ---Deletes the permission overwrite. This can be undone by creating a new version of the same overwrite.
 ---@return boolean
 function PermissionOverwrite:delete() end
@@ -533,9 +517,8 @@ function PermissionOverwrite:__init() end
 ---@class GuildCategoryChannel: GuildChannel
 ---@field public textChannels FilteredIterable Iterable of all textChannels in the Category.
 ---@field public voiceChannels FilteredIterable Iterable of all voiceChannels in the Category.
+---@overload fun():GuildCategoryChannel
 local GuildCategoryChannel = {}
----@type GuildCategoryChannel | fun():GuildCategoryChannel
-GuildCategoryChannel = GuildCategoryChannel
 ---Creates a new GuildTextChannel with this category as it's parent. Similar to `Guild:createTextChannel(name)`
 ---@param name string
 ---@return GuildTextChannel
@@ -555,9 +538,8 @@ function GuildCategoryChannel:__init() end
 ---@field public rateLimit number Slowmode rate limit per guild member.
 ---@field public isNews boolean Whether this channel is a news channel of type 5.
 ---@field public members FilteredIterable A filtered iterable of guild members that have permission to read this channel. If you want to check whether a specific member has permission to read this channel, it would be better to get the member object elsewhere and use `Member:hasPermission` rather than check whether the member exists here.
+---@overload fun():GuildTextChannel
 local GuildTextChannel = {}
----@type GuildTextChannel | fun():GuildTextChannel
-GuildTextChannel = GuildTextChannel
 ---Creates a webhook for this channel. The name must be between 2 and 32 characters in length.
 ---@param name string
 ---@return Webhook
@@ -593,9 +575,8 @@ function GuildTextChannel:__init() end
 ---@field public r number The value that represents the color's red-level.
 ---@field public g number The value that represents the color's green-level.
 ---@field public b number The value that represents the color's blue-level.
+---@overload fun(value: number):Color
 local Color = {}
----@type Color | fun(value: number):Color
-Color = Color
 ---Returns a 6-digit hexadecimal string that represents the color value.
 ---@return string
 function Color:toHex() end
@@ -655,9 +636,8 @@ function Color:__init(value) end
 ---@field public owner User | nil Equivalent to `GroupChannel.recipients:get(GroupChannel.ownerId)`.
 ---@field public icon string | nil The hash for the channel's custom icon, if one is set.
 ---@field public iconURL string | nil The URL that can be used to view the channel's icon, if one is set.
+---@overload fun():GroupChannel
 local GroupChannel = {}
----@type GroupChannel | fun():GroupChannel
-GroupChannel = GroupChannel
 ---Sets the channel's name. This must be between 1 and 100 characters in length.
 ---@param name string
 ---@return boolean
@@ -690,9 +670,8 @@ function GroupChannel:__init() end
 ---@field public me boolean Whether the current user has used this reaction.
 ---@field public count number The total number of users that have used this reaction.
 ---@field public message Message The message on which this reaction exists.
+---@overload fun():Reaction
 local Reaction = {}
----@type Reaction | fun():Reaction
-Reaction = Reaction
 ---Returns `Reaction.emojiId or Reaction.emojiName`
 ---@return string
 function Reaction:__hash() end
@@ -743,9 +722,8 @@ function Reaction:__init() end
 ---@field public revoked boolean | nil Whether the invite has been revoked. This will not exist if the invite is accessed via `Client:getInvite`.
 ---@field public approximatePresenceCount number | nil The approximate count of online members.
 ---@field public approximateMemberCount number | nil The approximate count of all members.
+---@overload fun():Invite
 local Invite = {}
----@type Invite | fun():Invite
-Invite = Invite
 ---Returns `Invite.code`
 ---@return string
 function Invite:__hash() end
@@ -764,9 +742,8 @@ function Invite:__init() end
 ---@field public guild Guild The guild in which this channel exists.
 ---@field public category GuildCategoryChannel | nil The parent channel category that may contain this channel.
 ---@field public private boolean Whether the "everyone" role has permission to view this channel. In the Discord channel, private text channels are indicated with a lock icon and private voice channels are not visible.
+---@overload fun():GuildChannel
 local GuildChannel = {}
----@type GuildChannel | fun():GuildChannel
-GuildChannel = GuildChannel
 ---Sets the channel's name. This must be between 2 and 100 characters in length.
 ---@param name string
 ---@return boolean
@@ -803,9 +780,8 @@ function GuildChannel:__init() end
 
 ---Represents a length of time and provides utilities for converting to and from different formats. Supported units are: weeks, days, hours, minutes, seconds, and milliseconds.
 ---@class Time
+---@overload fun():Time
 local Time = {}
----@type Time | fun():Time
-Time = Time
 ---Returns a human-readable string built from the set of normalized time values that the object represents.
 ---@return string
 function Time:toString() end
@@ -864,18 +840,16 @@ function Time:__init() end
 
 ---Extends the functionality of a regular cache by making use of weak references to the objects that are cached. If all references to an object are weak, as they are here, then the object will be deleted on the next garbage collection cycle.
 ---@class WeakCache: Cache
+---@overload fun():WeakCache
 local WeakCache = {}
----@type WeakCache | fun():WeakCache
-WeakCache = WeakCache
 ---Create a new WeakCache
 ---@return WeakCache
 function WeakCache:__init() end
 
 ---Used to log formatted messages to stdout (the console) or to a file. The `dateTime` argument should be a format string that is accepted by `os.date`. The file argument should be a relative or absolute file path or `nil` if no log file is desired. See the `logLevel` enumeration for acceptable log level values.
 ---@class Logger
+---@overload fun(level: number, dateTime: string, file: string):Logger
 local Logger = {}
----@type Logger | fun(level: number, dateTime: string, file: string):Logger
-Logger = Logger
 ---If the provided level is less than or equal to the log level set on initialization, this logs a message to stdout as defined by Luvit's `process` module and to a file if one was provided on initialization. The `msg, ...` pair is formatted according to `string.format` and returned if the message is logged.
 ---@param level number
 ---@param msg string
@@ -891,9 +865,8 @@ function Logger:__init(level, dateTime, file) end
 
 ---Mutual exclusion class used to control Lua coroutine execution order.
 ---@class Mutex
+---@overload fun():Mutex
 local Mutex = {}
----@type Mutex | fun():Mutex
-Mutex = Mutex
 ---If the mutex is not active (if a coroutine is not queued), this will activate the mutex; otherwise, this will yield and queue the current coroutine.
 ---@param prepend boolean
 ---@return nil
@@ -912,9 +885,8 @@ function Mutex:__init() end
 ---Represents a connection to a Discord voice server.
 ---@class VoiceConnection
 ---@field public channel GuildVoiceChannel | nil The corresponding GuildVoiceChannel for this connection, if one exists.
+---@overload fun():VoiceConnection
 local VoiceConnection = {}
----@type VoiceConnection | fun():VoiceConnection
-VoiceConnection = VoiceConnection
 ---Returns the bitrate of the interal Opus encoder in bits per second (bps).
 ---@return nil
 function VoiceConnection:getBitrate() end
@@ -958,9 +930,8 @@ function VoiceConnection:__init() end
 ---Used to measure an elapsed period of time. If a truthy value is passed as an argument, then the stopwatch will initialize in an idle state; otherwise, it will initialize in an active state. Although nanosecond precision is available, Lua can only reliably provide microsecond accuracy due to the lack of native 64-bit integer support. Generally, milliseconds should be sufficient here.
 ---@class Stopwatch
 ---@field public milliseconds number The total number of elapsed milliseconds. If the stopwatch is running, this will naturally be different each time that it is accessed.
+---@overload fun():Stopwatch
 local Stopwatch = {}
----@type Stopwatch | fun():Stopwatch
-Stopwatch = Stopwatch
 ---Defines the behavior of the `tostring` function. Returns a string that represents the elapsed milliseconds for convenience of introspection.
 ---@return string
 function Stopwatch:__tostring() end
@@ -983,9 +954,8 @@ function Stopwatch:__init() end
 ---Wrapper for a bitfield that is more specifically used to represent Discord permissions. See the `permission` enumeration for acceptable permission values.
 ---@class Permissions
 ---@field public value number The raw decimal value that represents the permissions value.
+---@overload fun():Permissions
 local Permissions = {}
----@type Permissions | fun():Permissions
-Permissions = Permissions
 ---Defines the behavior of the `tostring` function. Returns a readable list of permissions stored for convenience of introspection.
 ---@return string
 function Permissions:__tostring() end
@@ -1060,9 +1030,8 @@ function Permissions:__init() end
 ---@field public hash string String with the format `name:id`, used in HTTP requests. This is different from `Emoji:__hash`, which returns only the Snowflake ID.
 ---@field public animated boolean Whether this emoji is animated.
 ---@field public roles ArrayIterable An iterable array of roles that may be required to use this emoji, generally related to integration-managed emojis. Object order is not guaranteed.
+---@overload fun():Emoji
 local Emoji = {}
----@type Emoji | fun():Emoji
-Emoji = Emoji
 ---Sets the emoji's name. The name must be between 2 and 32 characters in length.
 ---@param name string
 ---@return boolean
@@ -1086,18 +1055,16 @@ function Emoji:__init() end
 ---@class Channel: Snowflake
 ---@field public type number The channel type. See the `channelType` enumeration for a human-readable representation.
 ---@field public mentionString string A string that, when included in a message content, may resolve as a link to a channel in the official Discord client.
+---@overload fun():Channel
 local Channel = {}
----@type Channel | fun():Channel
-Channel = Channel
 ---Create a new Channel
 ---@return Channel
 function Channel:__init() end
 
 ---Represents a single moment in time and provides utilities for converting to and from different date and time formats. Although microsecond precision is available, most formats are implemented with only second precision.
 ---@class Date
+---@overload fun(seconds: number, microseconds: number):Date
 local Date = {}
----@type Date | fun(seconds: number, microseconds: number):Date
-Date = Date
 ---Returns a string from this Date object via Lua's `os.date`. If no format string is provided, the default is '%a %b %d %Y %T GMT%z (%Z)'.
 ---@param fmt string
 ---@return string
@@ -1191,9 +1158,8 @@ function Date:__init(seconds, microseconds) end
 
 ---An implementation of a double-ended queue.
 ---@class Deque
+---@overload fun():Deque
 local Deque = {}
----@type Deque | fun():Deque
-Deque = Deque
 ---Returns the total number of values stored.
 ---@return number
 function Deque:getCount() end
@@ -1250,9 +1216,8 @@ function Deque:__init() end
 ---@field public member Member | nil The member object of the message's author. This will not exist if the message is not sent in a guild text channel or if the member object is not cached. Equivalent to `Message.guild.members:get(Message.author.id)`.
 ---@field public link string URL that can be used to jump-to the message in the Discord client.
 ---@field public webhookId string | nil The ID of the webhook that generated this message, if applicable.
+---@overload fun():Message
 local Message = {}
----@type Message | fun():Message
-Message = Message
 ---Sets the message's content. The message must be authored by the current user (ie: you cannot change the content of messages sent by other users). The content must be from 1 to 2000 characters in length.
 ---@param content string
 ---@return boolean
@@ -1308,9 +1273,8 @@ function Message:__init() end
 ---@class PrivateChannel: TextChannel
 ---@field public name string Equivalent to `PrivateChannel.recipient.username`.
 ---@field public recipient User The recipient of this channel's messages, other than the current user.
+---@overload fun():PrivateChannel
 local PrivateChannel = {}
----@type PrivateChannel | fun():PrivateChannel
-PrivateChannel = PrivateChannel
 ---Closes the channel. This does not delete the channel. To re-open the channel, use `User:getPrivateChannel`.
 ---@return boolean
 function PrivateChannel:close() end
@@ -1320,9 +1284,8 @@ function PrivateChannel:__init() end
 
 ---Abstract base class that defines the base methods and properties for a general purpose data structure with features that are better suited for an object-oriented environment. Note: All sub-classes should implement their own `__init` and `iter` methods and all stored objects should have a `__hash` method.
 ---@class Iterable
+---@overload fun():Iterable
 local Iterable = {}
----@type Iterable | fun():Iterable
-Iterable = Iterable
 ---Defines the behavior of the `pairs` function. Returns an iterator that returns a `key, value` pair, where `key` is the result of calling `__hash` on the `value`.
 ---@return function
 function Iterable:__pairs() end
@@ -1373,9 +1336,8 @@ function Iterable:__init() end
 ---@class Relationship: UserPresence
 ---@field public name string Equivalent to `Relationship.user.username`.
 ---@field public type number The relationship type. See the `relationshipType` enumeration for a human-readable representation.
+---@overload fun():Relationship
 local Relationship = {}
----@type Relationship | fun():Relationship
-Relationship = Relationship
 ---Create a new Relationship
 ---@return Relationship
 function Relationship:__init() end
@@ -1393,9 +1355,8 @@ function Relationship:__init() end
 ---@field public guild Guild The guild in which this role exists.
 ---@field public members FilteredIterable A filtered iterable of guild members that have this role. If you want to check whether a specific member has this role, it would be better to get the member object elsewhere and use `Member:hasRole` rather than check whether the member exists here.
 ---@field public emojis FilteredIterable A filtered iterable of guild emojis that have this role. If you want to check whether a specific emoji has this role, it would be better to get the emoji object elsewhere and use `Emoji:hasRole` rather than check whether the emoji exists here.
+---@overload fun():Role
 local Role = {}
----@type Role | fun():Role
-Role = Role
 ---Permanently deletes the role. This cannot be undone!
 ---@return boolean
 function Role:delete() end
@@ -1498,9 +1459,8 @@ function Role:__init() end
 ---@field public textChannels Cache An iterable cache of all text channels that exist in this guild.
 ---@field public voiceChannels Cache An iterable cache of all voice channels that exist in this guild.
 ---@field public categories Cache An iterable cache of all channel categories that exist in this guild.
+---@overload fun():Guild
 local Guild = {}
----@type Guild | fun():Guild
-Guild = Guild
 ---Asynchronously loads all members for this guild. You do not need to call this if the `cacheAllMembers` client option (and the `syncGuilds` option for user-accounts) is enabled on start-up.
 ---@return boolean
 function Guild:requestMembers() end
@@ -1660,9 +1620,8 @@ function Guild:__init() end
 ---@field public defaultAvatarURL string Equivalent to the result of calling `User:getDefaultAvatarURL()`.
 ---@field public mentionString string A string that, when included in a message content, may resolve as user notification in the official Discord client.
 ---@field public mutualGuilds FilteredIterable A iterable cache of all guilds where this user shares a membership with the current user. The guild must be cached on the current client and the user's member object must be cached in that guild in order for it to appear here.
+---@overload fun():User
 local User = {}
----@type User | fun():User
-User = User
 ---Returns a URL that can be used to view the user's full avatar. If provided, the size must be a power of 2 while the extension must be a valid image format. If the user does not have a custom avatar, the default URL is returned.
 ---@param size number
 ---@param ext string
@@ -1695,9 +1654,8 @@ function User:__init() end
 ---@field public desktopStatus string The user's desktop status (online, dnd, idle, offline).
 ---@field public user User The user that this presence represents.
 ---@field public activity Activity | nil The Activity that this presence represents.
+---@overload fun():UserPresence
 local UserPresence = {}
----@type UserPresence | fun():UserPresence
-UserPresence = UserPresence
 ---Returns `UserPresence.user.id`
 ---@return string
 function UserPresence:__hash() end
@@ -1707,9 +1665,8 @@ function UserPresence:__init() end
 
 ---Implements an asynchronous event emitter where callbacks can be subscribed to specific named events. When events are emitted, the callbacks are called in the order that they were originally registered.
 ---@class Emitter
+---@overload fun():Emitter
 local Emitter = {}
----@type Emitter | fun():Emitter
-Emitter = Emitter
 ---Subscribes a callback to be called every time the named event is emitted. Callbacks registered with this method will automatically be wrapped as a new coroutine when they are called. Returns the original callback for convenience.
 ---@param name string
 ---@param fn function
@@ -1767,9 +1724,8 @@ function Emitter:__init() end
 ---@field public id string The Snowflake ID that can be used to identify the object. This is guaranteed to be unique except in cases where an object shares the ID of its parent.
 ---@field public createdAt number The Unix time in seconds at which this object was created by Discord. Additional decimal points may be present, though only the first 3 (milliseconds) should be considered accurate. Equivalent to `Date.parseSnowflake(Snowflake.id)`.
 ---@field public timestamp string The date and time at which this object was created by Discord, represented as an ISO 8601 string plus microseconds when available. Equivalent to `Date.fromSnowflake(Snowflake.id):toISO()`.
+---@overload fun():Snowflake
 local Snowflake = {}
----@type Snowflake | fun():Snowflake
-Snowflake = Snowflake
 ---Returns `Snowflake.id`
 ---@return string
 function Snowflake:__hash() end
@@ -1842,21 +1798,205 @@ function Snowflake:__init() end
 ---@param name clientEvents
 ---@param fn function
 ---@return function
+---@overload fun(name: 'ready', fn: fun()): function
+---@overload fun(name: 'shardReady', fn: fun(shardId: number)): function
+---@overload fun(name: 'shardResumed', fn: fun(shardId: number)): function
+---@overload fun(name: 'channelCreate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelUpdate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelDelete', fn: fun(channel: Channel)): function
+---@overload fun(name: 'recipientAdd', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'recipientRemove', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'guildAvailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildCreate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildUnavailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildDelete', fn: fun(guild: Guild)): function
+---@overload fun(name: 'userBan', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'userUnban', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'emojisUpdate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'memberJoin', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberLeave', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberUpdate', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'roleCreate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleUpdate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleDelete', fn: fun(role: Role)): function
+---@overload fun(name: 'messageCreate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdateUncached', fn: fun(channel: TextChannel, messageId: string)): function
+---@overload fun(name: 'reactionAdd', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionAddUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'reactionRemove', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionRemoveUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'pinsUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'presenceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'relationshipUpdate', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipAdd', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipRemove', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'typingStart', fn: fun(userId: string, channelId: string, timestamp: string)): function
+---@overload fun(name: 'userUpdate', fn: fun(user: User)): function
+---@overload fun(name: 'voiceConnect', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceChannelJoin', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'voiceChannelLeave', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'webhooksUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'debug', fn: fun(message: string)): function
+---@overload fun(name: 'info', fn: fun(message: string)): function
+---@overload fun(name: 'warning', fn: fun(message: string)): function
+---@overload fun(name: 'error', fn: fun(message: string)): function
+---@overload fun(name: 'heartbeat', fn: fun(shardId: number, latency: number)): function
+---@overload fun(name: 'raw', fn: fun(json: string)): function
 function Client:on(name, fn) end
 ---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method will automatically be wrapped as a new coroutine when they are called. Returns the original callback for convenience.
 ---@param name clientEvents
 ---@param fn function
 ---@return function
+---@overload fun(name: 'ready', fn: fun()): function
+---@overload fun(name: 'shardReady', fn: fun(shardId: number)): function
+---@overload fun(name: 'shardResumed', fn: fun(shardId: number)): function
+---@overload fun(name: 'channelCreate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelUpdate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelDelete', fn: fun(channel: Channel)): function
+---@overload fun(name: 'recipientAdd', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'recipientRemove', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'guildAvailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildCreate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildUnavailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildDelete', fn: fun(guild: Guild)): function
+---@overload fun(name: 'userBan', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'userUnban', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'emojisUpdate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'memberJoin', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberLeave', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberUpdate', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'roleCreate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleUpdate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleDelete', fn: fun(role: Role)): function
+---@overload fun(name: 'messageCreate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdateUncached', fn: fun(channel: TextChannel, messageId: string)): function
+---@overload fun(name: 'reactionAdd', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionAddUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'reactionRemove', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionRemoveUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'pinsUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'presenceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'relationshipUpdate', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipAdd', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipRemove', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'typingStart', fn: fun(userId: string, channelId: string, timestamp: string)): function
+---@overload fun(name: 'userUpdate', fn: fun(user: User)): function
+---@overload fun(name: 'voiceConnect', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceChannelJoin', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'voiceChannelLeave', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'webhooksUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'debug', fn: fun(message: string)): function
+---@overload fun(name: 'info', fn: fun(message: string)): function
+---@overload fun(name: 'warning', fn: fun(message: string)): function
+---@overload fun(name: 'error', fn: fun(message: string)): function
+---@overload fun(name: 'heartbeat', fn: fun(shardId: number, latency: number)): function
+---@overload fun(name: 'raw', fn: fun(json: string)): function
 function Client:once(name, fn) end
 ---Subscribes a callback to be called every time the named event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
 ---@param name clientEvents
 ---@param fn function
 ---@return function
+---@overload fun(name: 'ready', fn: fun()): function
+---@overload fun(name: 'shardReady', fn: fun(shardId: number)): function
+---@overload fun(name: 'shardResumed', fn: fun(shardId: number)): function
+---@overload fun(name: 'channelCreate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelUpdate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelDelete', fn: fun(channel: Channel)): function
+---@overload fun(name: 'recipientAdd', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'recipientRemove', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'guildAvailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildCreate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildUnavailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildDelete', fn: fun(guild: Guild)): function
+---@overload fun(name: 'userBan', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'userUnban', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'emojisUpdate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'memberJoin', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberLeave', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberUpdate', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'roleCreate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleUpdate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleDelete', fn: fun(role: Role)): function
+---@overload fun(name: 'messageCreate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdateUncached', fn: fun(channel: TextChannel, messageId: string)): function
+---@overload fun(name: 'reactionAdd', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionAddUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'reactionRemove', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionRemoveUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'pinsUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'presenceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'relationshipUpdate', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipAdd', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipRemove', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'typingStart', fn: fun(userId: string, channelId: string, timestamp: string)): function
+---@overload fun(name: 'userUpdate', fn: fun(user: User)): function
+---@overload fun(name: 'voiceConnect', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceChannelJoin', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'voiceChannelLeave', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'webhooksUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'debug', fn: fun(message: string)): function
+---@overload fun(name: 'info', fn: fun(message: string)): function
+---@overload fun(name: 'warning', fn: fun(message: string)): function
+---@overload fun(name: 'error', fn: fun(message: string)): function
+---@overload fun(name: 'heartbeat', fn: fun(shardId: number, latency: number)): function
+---@overload fun(name: 'raw', fn: fun(json: string)): function
 function Client:onSync(name, fn) end
 ---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
 ---@param name clientEvents
 ---@param fn function
 ---@return function
+---@overload fun(name: 'ready', fn: fun()): function
+---@overload fun(name: 'shardReady', fn: fun(shardId: number)): function
+---@overload fun(name: 'shardResumed', fn: fun(shardId: number)): function
+---@overload fun(name: 'channelCreate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelUpdate', fn: fun(channel: Channel)): function
+---@overload fun(name: 'channelDelete', fn: fun(channel: Channel)): function
+---@overload fun(name: 'recipientAdd', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'recipientRemove', fn: fun(channel: Channel, user: User)): function
+---@overload fun(name: 'guildAvailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildCreate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildUnavailable', fn: fun(guild: Guild)): function
+---@overload fun(name: 'guildDelete', fn: fun(guild: Guild)): function
+---@overload fun(name: 'userBan', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'userUnban', fn: fun(user: User, guild: Guild)): function
+---@overload fun(name: 'emojisUpdate', fn: fun(guild: Guild)): function
+---@overload fun(name: 'memberJoin', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberLeave', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'memberUpdate', fn: fun(member: Member, guild: Guild)): function
+---@overload fun(name: 'roleCreate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleUpdate', fn: fun(role: Role)): function
+---@overload fun(name: 'roleDelete', fn: fun(role: Role)): function
+---@overload fun(name: 'messageCreate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdate', fn: fun(message: Message)): function
+---@overload fun(name: 'messageUpdateUncached', fn: fun(channel: TextChannel, messageId: string)): function
+---@overload fun(name: 'reactionAdd', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionAddUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'reactionRemove', fn: fun(reaction: Reaction, userId: string)): function
+---@overload fun(name: 'reactionRemoveUncached', fn: fun(channel: TextChannel, messageId: string, hash: string, userId: string)): function
+---@overload fun(name: 'pinsUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'presenceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'relationshipUpdate', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipAdd', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'relationshipRemove', fn: fun(relationship: Relationship)): function
+---@overload fun(name: 'typingStart', fn: fun(userId: string, channelId: string, timestamp: string)): function
+---@overload fun(name: 'userUpdate', fn: fun(user: User)): function
+---@overload fun(name: 'voiceConnect', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceUpdate', fn: fun(member: Member)): function
+---@overload fun(name: 'voiceChannelJoin', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'voiceChannelLeave', fn: fun(member: Member, channel: GuildVoiceChannel)): function
+---@overload fun(name: 'webhooksUpdate', fn: fun(channel: TextChannel)): function
+---@overload fun(name: 'debug', fn: fun(message: string)): function
+---@overload fun(name: 'info', fn: fun(message: string)): function
+---@overload fun(name: 'warning', fn: fun(message: string)): function
+---@overload fun(name: 'error', fn: fun(message: string)): function
+---@overload fun(name: 'heartbeat', fn: fun(shardId: number, latency: number)): function
+---@overload fun(name: 'raw', fn: fun(json: string)): function
 function Client:onceSync(name, fn) end
 
 --- Send a debug level(4) message
@@ -2031,6 +2171,9 @@ function Client:error(msg, ...) end
 ---@field public classes table<string, any>
 local class = {}
 
+---@type class | fun(name: string, ...): any, table, table
+class = class
+
 --- Function that returns true only if the provided argument is a Discordia class module.
 ---
 --- ```lua
@@ -2088,7 +2231,7 @@ function class.type(obj) end
 function class.profile() end
 
 --- gameType enum
----@class enums.gameType
+---@class enums_gameType
 ---@field public custom number | "4"
 ---@field public listening number | "2"
 ---@field public streaming number | "1"
@@ -2096,7 +2239,7 @@ function class.profile() end
 
 
 --- messageType enum
----@class enums.messageType
+---@class enums_messageType
 ---@field public call number | "3"
 ---@field public channelNameChange number | "4"
 ---@field public pinnedMessage number | "6"
@@ -2112,7 +2255,7 @@ function class.profile() end
 
 
 --- activityType enum
----@class enums.activityType
+---@class enums_activityType
 ---@field public custom number | "4"
 ---@field public listening number | "2"
 ---@field public streaming number | "1"
@@ -2120,7 +2263,7 @@ function class.profile() end
 
 
 --- verificationLevel enum
----@class enums.verificationLevel
+---@class enums_verificationLevel
 ---@field public none number | "0"
 ---@field public medium number | "2"
 ---@field public high number | "3"
@@ -2129,7 +2272,7 @@ function class.profile() end
 
 
 --- messageFlag enum
----@class enums.messageFlag
+---@class enums_messageFlag
 ---@field public suppressEmbeds number | "4"
 ---@field public urgent number | "16"
 ---@field public isCrosspost number | "2"
@@ -2138,19 +2281,19 @@ function class.profile() end
 
 
 --- webhookType enum
----@class enums.webhookType
+---@class enums_webhookType
 ---@field public incoming number | "1"
 ---@field public channelFollower number | "2"
 
 
 --- notificationSetting enum
----@class enums.notificationSetting
+---@class enums_notificationSetting
 ---@field public allMessages number | "0"
 ---@field public onlyMentions number | "1"
 
 
 --- logLevel enum
----@class enums.logLevel
+---@class enums_logLevel
 ---@field public none number | "0"
 ---@field public info number | "3"
 ---@field public debug number | "4"
@@ -2159,7 +2302,7 @@ function class.profile() end
 
 
 --- relationshipType enum
----@class enums.relationshipType
+---@class enums_relationshipType
 ---@field public none number | "0"
 ---@field public friend number | "1"
 ---@field public blocked number | "2"
@@ -2168,7 +2311,7 @@ function class.profile() end
 
 
 --- defaultAvatar enum
----@class enums.defaultAvatar
+---@class enums_defaultAvatar
 ---@field public blurple number | "0"
 ---@field public green number | "2"
 ---@field public gray number | "1"
@@ -2177,14 +2320,14 @@ function class.profile() end
 
 
 --- explicitContentLevel enum
----@class enums.explicitContentLevel
+---@class enums_explicitContentLevel
 ---@field public none number | "0"
 ---@field public medium number | "1"
 ---@field public high number | "2"
 
 
 --- actionType enum
----@class enums.actionType
+---@class enums_actionType
 ---@field public memberUpdate number | "24"
 ---@field public messageBulkDelete number | "73"
 ---@field public webhookDelete number | "52"
@@ -2223,7 +2366,7 @@ function class.profile() end
 
 
 --- permission enum
----@class enums.permission
+---@class enums_permission
 ---@field public manageGuild number | "32"
 ---@field public createInstantInvite number | "1"
 ---@field public mentionEveryone number | "131072"
@@ -2257,7 +2400,7 @@ function class.profile() end
 
 
 --- status enum
----@class enums.status
+---@class enums_status
 ---@field public invisible string | "'invisible'"
 ---@field public idle string | "'idle'"
 ---@field public doNotDisturb string | "'dnd'"
@@ -2265,7 +2408,7 @@ function class.profile() end
 
 
 --- premiumTier enum
----@class enums.premiumTier
+---@class enums_premiumTier
 ---@field public none number | "0"
 ---@field public tier2 number | "2"
 ---@field public tier3 number | "3"
@@ -2273,7 +2416,7 @@ function class.profile() end
 
 
 --- channelType enum
----@class enums.channelType
+---@class enums_channelType
 ---@field public private number | "1"
 ---@field public group number | "3"
 ---@field public category number | "4"
@@ -2281,22 +2424,22 @@ function class.profile() end
 ---@field public voice number | "2"
 ---@field public text number | "0"
 
----@field public gameType enums.gameType
----@field public messageType enums.messageType
----@field public activityType enums.activityType
----@field public verificationLevel enums.verificationLevel
----@field public messageFlag enums.messageFlag
----@field public webhookType enums.webhookType
----@field public notificationSetting enums.notificationSetting
----@field public logLevel enums.logLevel
----@field public relationshipType enums.relationshipType
----@field public defaultAvatar enums.defaultAvatar
----@field public explicitContentLevel enums.explicitContentLevel
----@field public actionType enums.actionType
----@field public permission enums.permission
----@field public status enums.status
----@field public premiumTier enums.premiumTier
----@field public channelType enums.channelType
+---@field public gameType enums_gameType
+---@field public messageType enums_messageType
+---@field public activityType enums_activityType
+---@field public verificationLevel enums_verificationLevel
+---@field public messageFlag enums_messageFlag
+---@field public webhookType enums_webhookType
+---@field public notificationSetting enums_notificationSetting
+---@field public logLevel enums_logLevel
+---@field public relationshipType enums_relationshipType
+---@field public defaultAvatar enums_defaultAvatar
+---@field public explicitContentLevel enums_explicitContentLevel
+---@field public actionType enums_actionType
+---@field public permission enums_permission
+---@field public status enums_status
+---@field public premiumTier enums_premiumTier
+---@field public channelType enums_channelType
 ---@class enums
 --- The Discord API uses numbers to represent certain data types.
 --- For convenience, these are enumerated in Discord as special read-only tables, found in the main Discordia module.
@@ -2355,7 +2498,8 @@ local enums = {}
 function enums.enum(data) end
 
 --- Extensions related to tables
----@class ext.table
+---@class ext_table
+---@overload fun()
 local tableExt = {}
 
 --- Returns the total number of elements in a table. This uses the global `pairs` function and respects any `__pairs` metamethods.
@@ -2363,20 +2507,20 @@ local tableExt = {}
 ---@return number
 function tableExt.count(tbl) end
 
---- Returns the total number of elements in a table, recursively. 
---- If a table is encountered, it is recursively counted instead of being directly added to the total count. 
+--- Returns the total number of elements in a table, recursively.
+--- If a table is encountered, it is recursively counted instead of being directly added to the total count.
 --- This uses the global `pairs` function and respects any `__pairs` metamethods.
 ---@param tbl table
 ---@return number
 function tableExt.deepcount(tbl) end
 
---- Returns a copy of the original table, recursively. 
+--- Returns a copy of the original table, recursively.
 --- If a table is encountered, it is recursively deep-copied. Metatables are not copied.
 ---@param tbl table
 ---@return table
 function tableExt.copy(tbl) end
 
---- Returns a copy of the original table, recursively. 
+--- Returns a copy of the original table, recursively.
 --- If a table is encountered, it is recursively deep-copied. Metatables are not copied.
 ---@param tbl table
 ---@return table
@@ -2386,7 +2530,7 @@ function tableExt.deepcopy(tbl) end
 ---@param tbl any[]
 function tableExt.reverse(tbl) end
 
---- Returns a copy of an array-like table with its elements in reverse order. 
+--- Returns a copy of an array-like table with its elements in reverse order.
 --- The original table remains unchanged.
 ---@param tbl any[]
 ---@return any[]
@@ -2418,14 +2562,14 @@ function tableExt.randompair(tbl) end
 ---@return any[]
 function tableExt.sorted(tbl, fn) end
 
---- Iterates through a table until it finds a value that is equal to `value` according to the `==` operator. 
+--- Iterates through a table until it finds a value that is equal to `value` according to the `==` operator.
 --- The key is returned if a match is found.
 ---@param tbl table
 ---@param value any
 ---@return any
 function tableExt.search(tbl, value) end
 
---- Returns a new table that is a slice of the original, defined by the start and stop bounds and the step size. 
+--- Returns a new table that is a slice of the original, defined by the start and stop bounds and the step size.
 --- Default start, stop, and step values are 1, #tbl, and 1, respectively.
 ---@param tbl table
 ---@param start number
@@ -2439,7 +2583,8 @@ function tableExt.search(tbl, value) end
 function tableExt.slice(tbl, start, stop, step) end
 
 --- Utilities related to strings
----@class ext.string
+---@class ext_string
+---@overload fun()
 local stringExt = {}
 
 --- Splits a string into a table of specifically delimited sub-strings.
@@ -2457,8 +2602,8 @@ function stringExt.trim(str) end
 
 ---@alias alignment string | "'left'" | "'right'" | "'center'"
 
---- Returns a new string that is padded up to the desired length. 
---- The alignment, either `left`, `right`, or `center` with left being the default, defines the placement of the original string. 
+--- Returns a new string that is padded up to the desired length.
+--- The alignment, either `left`, `right`, or `center` with left being the default, defines the placement of the original string.
 --- The default pattern is a single space.
 ---@param str string
 ---@param len number
@@ -2469,7 +2614,7 @@ function stringExt.trim(str) end
 ---@overload fun(str: string, len: number, align: alignment):string
 function stringExt.pad(str, len, align, pattern) end
 
---- Returns whether a string starts with a specified sub-string or pattern. 
+--- Returns whether a string starts with a specified sub-string or pattern.
 --- The plain parameter is the same as that used in Lua's `string.find`.
 ---@param str string
 ---@param pattern string
@@ -2478,7 +2623,7 @@ function stringExt.pad(str, len, align, pattern) end
 ---@overload fun(str: string, pattern: string):boolean
 function stringExt.startswith(str, pattern, plain) end
 
---- Returns whether a string ends with a specified sub-string or pattern. 
+--- Returns whether a string ends with a specified sub-string or pattern.
 --- The plain parameter is the same as that used in Lua's `string.find`.
 ---@param str string
 ---@param pattern string
@@ -2487,15 +2632,15 @@ function stringExt.startswith(str, pattern, plain) end
 ---@overload fun(str: string, pattern: string):boolean
 function stringExt.endswith(str, pattern, plain) end
 
---- Returns the Levenshtein distance between two strings. 
+--- Returns the Levenshtein distance between two strings.
 --- A higher number indicates a greater distance.
 ---@param str1 string
 ---@param str2 string
 ---@return number
 function stringExt.levenshtein(str1, str2) end
 
---- Returns a string of random characters with the specified length. 
---- If provided, the min and max bounds cannot be outside 0 to 255. 
+--- Returns a string of random characters with the specified length.
+--- If provided, the min and max bounds cannot be outside 0 to 255.
 --- Use 32 to 126 for printable ASCII characters.
 ---@param len number
 ---@param min number
@@ -2506,10 +2651,11 @@ function stringExt.levenshtein(str1, str2) end
 function stringExt.random(len, min, max) end
 
 --- Utilities related to math
----@class ext.math
+---@class ext_math
+---@overload fun()
 local mathExt = {}
 
---- Returns a number that is at least as small as the minimum value and at most as large as the maximum value, inclusively. 
+--- Returns a number that is at least as small as the minimum value and at most as large as the maximum value, inclusively.
 --- If the original number is already with the bounds, the same number is returned.
 ---@param n number
 ---@param min number
@@ -2517,7 +2663,7 @@ local mathExt = {}
 ---@return number
 function mathExt.min(n, min, max) end
 
---- Returns a number that is rounded to the nearest defined digit. 
+--- Returns a number that is rounded to the nearest defined digit.
 --- The nearest integer is returned if the digit is omitted.
 --- Negative values can be used for higher order places.
 ---@param n number
@@ -2526,7 +2672,7 @@ function mathExt.min(n, min, max) end
 ---@overload fun(n: number):number
 function mathExt.round(n, digits) end
 
---- **Discordia** has some built-in Lua standard library extensions. 
+--- **Discordia** has some built-in Lua standard library extensions.
 --- These provide complementary or supplementary, commonly used functions that the Lua standard library does not provide.
 ---
 --- Extensions can be used directly...
@@ -2550,9 +2696,9 @@ function mathExt.round(n, digits) end
 --- discordia.extensions()
 --- ```
 ---@class extensions
----@field public string ext.string | function
----@field public table ext.table | function
----@field public math ext.math | function
+---@field public string ext_string
+---@field public table ext_table
+---@field public math ext_math
 
 ---@class package
 ---@field public license string | "'MIT'"

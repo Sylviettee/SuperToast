@@ -293,7 +293,7 @@ end
 --- The rest of the arguments are validation strings.
 ---
 --- This returns a function which would take those arguments defined in the validation string.
----@param name string
+---@param name string | nil
 ---@vararg string
 ---@return fun(...):void
 function typed.func(name, ...)

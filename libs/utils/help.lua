@@ -115,7 +115,7 @@ local all = sub(help, 'all'):description('Get all the commands')
 
 ---@param msg Message
 ---@param client SuperToastClient
----@param ctx Command.additionalContext
+---@param ctx Command_additionalContext
 all:execute(function(msg, _, client, ctx)
    local toReply = string.format([[```adoc
 ==== Bot help ====

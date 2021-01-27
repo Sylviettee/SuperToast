@@ -31,7 +31,7 @@
 
 SuperToast is a Discordia command framework designed for ease of use.
 
-It is recommended to use [EmmyLua](https://github.com/EmmyLua/VSCode-EmmyLua) or [Lua by Sumneko](https://github.com/sumneko/lua-language-server) when using this as you will get types as seen below.
+It is recommended to use [LuaAnalysis](https://github.com/Benjamin-Dobell/IntelliJ-Luanalysis/), [EmmyLua](https://github.com/EmmyLua/VSCode-EmmyLua) or [Lua by Sumneko](https://github.com/sumneko/lua-language-server) when using this as you will get types as seen below.
 
 ## Quick example
 
@@ -130,7 +130,7 @@ In our example, we can view the types of the `msg` object as seen below.
 
 This allows for easier use as you don't need to look at the docs constantly.
 
-(Note: Types on callbacks don't work on Lua by sumneko)
+(Note: Types on callbacks don't work on Lua by Sumneko)
 
 ## Installation
 

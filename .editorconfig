@@ -1,7 +1,17 @@
 root = true
 
-[*.lua]
+[*]
+charset = utf-8
 end_of_line = lf
 insert_final_newfile = true
+trim_trailing_whitespace = true
+
+[*.{lua,mp,moon}]
 indent_style = space
 indent_size = 3
+
+[Makefile]
+indent_style = tab
+
+[*.md]
+trim_trailing_whitespace = false

@@ -64,14 +64,74 @@ local function between(str, id, start, stop)
    return gotStart + tooMuchStart, gotStop - tooMuchEnd
 end
 
-local function buildError(code, msg, topMsg, input, start, stop)
-   local builder = f('error[%s]: %s\n   ┌─ input\n   │\n   │ %s\n   │ ', code, topMsg, input)
+local function colorize(str, no)
+   ---@type table<string, number>
+   local keys = {
+      -- reset
+      reset =      0,
 
-   local below = string.rep(' ', start - 1) ..
+      -- misc
+      bright     = 1,
+      dim        = 2,
+      underline  = 4,
+      blink      = 5,
+      reverse    = 7,
+      hidden     = 8,
+
+      -- foreground colors
+      black     = 30,
+      red       = 31,
+      green     = 32,
+      yellow    = 33,
+      blue      = 34,
+      magenta   = 35,
+      cyan      = 36,
+      white     = 37,
+
+      -- background colors
+      blackbg   = 40,
+      redbg     = 41,
+      greenbg   = 42,
+      yellowbg  = 43,
+      bluebg    = 44,
+      magentabg = 45,
+      cyanbg    = 46,
+      whitebg   = 47
+   }
+
+   str = str:gsub('{{(.-)}}', function(raw)
+      if no then
+         return ''
+      end
+
+      local split = stringx.split(raw, ' ')
+
+      ---@type string[]
+      local buffer = {}
+
+      for i = 1, #split do
+         table.insert(buffer, f('\27[%dm', keys[split[i]]))
+      end
+
+      return table.concat(buffer, ' ')
+   end)
+
+   return str .. (not no and '\27[0m' or '')
+end
+
+local function buildError(code, msg, topMsg, input, start, stop, config)
+   local builder =
+      f('{{bright red}}error[%s]:{{bright white}} %s{{reset}}\n', code, topMsg) ..
+      f('{{cyan}}   ┌─{{reset}} %s\n', config.filename or 'input') ..
+        '{{cyan}}   │{{reset}}\n' ..
+      f('{{cyan}}   │{{reset}} %s\n', input) ..
+        '{{cyan}}   │{{reset}}'
+
+   local below = '{{bright red}} ' .. string.rep(' ', start - 1) ..
       string.rep('^', stop - start + 1) ..
-      ' ' .. msg
+      ' {{white}}' .. msg
 
-   return builder .. below
+   return colorize(builder .. below, not config.color)
 end
 
 local function merge(tbl1, tbl2)
@@ -146,35 +206,36 @@ local conversions = {
 
 --- An argument parser which can be used in part with commands
 ---@class ArgParser
----@field private _flags ArgParser.modifiers[]
+---@field private _flags ArgParser_modifiers[]
+---@field public types table<string, fun(input: string, msg: Message)>
 local ArgParser = discordia.class('ArgParser')
 
+---@type ArgParser | fun():ArgParser
+ArgParser = ArgParser
+
 --- struct
----@class ArgParser.rawArgs
+---@class ArgParser_rawArgs
 ---@field public flags table<string, string[]>
 ---@field public arguments string[]
 local _rawArgs = {} -- shut documentation generator
 
+--- struct Configuration options
+---@class ArgParser_config
+---@field public color boolean | nil To use color in errors or not
+---@field public filename string | nil The filename to specify
+local _config = {}
+
 --- Modify how flags are parsed
----@class ArgParser.modifiers
----@field public required fun(bool: boolean): ArgParser.modifiers Changes if the flag is required or not
----@field public args fun(amount: string): ArgParser.modifiers Changes the amount of required arguments
+---@class ArgParser_modifiers
+---@field public required fun(bool: boolean): ArgParser_modifiers Changes if the flag is required or not
+---@field public args fun(amount: string): ArgParser_modifiers Changes the amount of required arguments
 ---@field public finish fun(): ArgParser Finish configuring the flag and return back to the parser
----@field private status fun(args: string[]): ArgParser.statuses
+---@field private status fun(args: string[]): ArgParser_statuses
 ---@field private humanArg string
+---@field private _ctx table
 local _modifiers = {}
 
----@alias ArgParser.statuses
----| "'+'"
----| "'-'"
-
----@alias ArgParser.types
----| "'string'"      # Do nothing
----| "'number'"      # Attempt to typecast to number
----| "'boolean'"     # Attempt to typecast to boolean
----| "'int'"         # Attempt to typecast to a whole number (math.floor(input) == input)
----| "'command'"     # Check if the input is the name of a valid command then typecast
----| "'user'"        # Check if the input is either a user id, user mention, or username then typecast to a User
+---@alias ArgParser_statuses string | "'+'" | "'-'"
 
 ArgParser.types = {
    string = function(input)
@@ -205,7 +266,12 @@ ArgParser.types = {
          return nil, f('Cannot convert %s to a number', input)
       end
    end,
-   command = function(input, client)
+   ---@param input string
+   ---@param msg Message
+   command = function(input, msg)
+      ---@type SuperToastClient
+      local client = msg.client
+
       local args = stringx.split(input, ' ')
 
       local cmd = client.commands:search(function(comm)
@@ -228,7 +294,10 @@ ArgParser.types = {
 
       return cmd, not cmd and f('Unable to find the command by the name of `%s`', input)
    end,
-   user = function(input, client)
+   ---@param input string
+   ---@param msg Message from
+   user = function(input, msg)
+      local client = msg.client
       local user = client.users:get(input)
 
       if user then
@@ -254,6 +323,7 @@ ArgParser.types = {
       local distance = math.huge
       local lowered = input:lower()
 
+      ---@type User
       local closest
 
       for u in client.users:iter() do
@@ -323,7 +393,7 @@ end
 --- Register a function to check a passed argument
 ---@param func function
 ---@param name string
----@overload fun(func: ArgParser.types)
+---@overload fun(type: string): ArgParser
 ---@return ArgParser
 function ArgParser:arg(func, name)
    if type(func) == 'function' then
@@ -343,9 +413,10 @@ end
 ---@param name string
 ---@param func function
 ---@param typeName string
----@overload fun(name: string, func: ArgParser.types)
----@return ArgParser.modifiers
+---@overload fun(name: string, type: string)
+---@return ArgParser_modifiers
 function ArgParser:flag(name, func, typeName)
+   ---@type function, string
    local check, flagType
 
    if type(func) == 'function' then
@@ -368,13 +439,18 @@ function ArgParser:flag(name, func, typeName)
    return self._flags[name]
 end
 
---- Parse the input, typechecking it along the way
+--- Parse the input, type-checking it along the way
 ---@param str string
----@param client Client
----@return table | nil
----@return string | nil
-function ArgParser:parse(str, client)
-   local raw, parseErr = self:_parse(str)
+---@param message Message | nil If nil, some types will not work
+---@param config ArgParser_config | nil The config to use
+---@return table | nil, string | nil
+---@overload fun(str: string): table | nil, string | nil
+---@overload fun(str: string, message: Message): table | nil, string | nil
+---@overload fun(str: string, message: nil, config: ArgParser_config) : table | nil, string | nil
+function ArgParser:parse(str, message, config)
+   config = config or {}
+
+   local raw, parseErr = self:_parse(str, config)
 
    if not raw then
       return nil, 'Parse error: \n' .. parseErr
@@ -396,13 +472,14 @@ function ArgParser:parse(str, client)
             f('Expected %s, got nothing', self._arguments[i][2]),
             str,
             #str + (missing * 3) + 1,
-            #str + ((missing + 1) * 3)
+            #str + ((missing + 1) * 3),
+            config
          ))
 
          missing = missing + 1
       else
          local v, start, stop = raw.arguments[i][1], raw.arguments[i][2], raw.arguments[i][3]
-         local succ, err = self._arguments[i][1](v, client)
+         local succ, err = self._arguments[i][1](v, message)
 
          if succ == nil then
             local part = str:sub(start, stop)
@@ -418,7 +495,8 @@ function ArgParser:parse(str, client)
                f('Unable to convert argument %s to %s', i, self._arguments[i][2]),
                str,
                start,
-               stop
+               stop,
+               config
             ))
          else
             table.insert(res.arguments, succ)
@@ -436,7 +514,8 @@ function ArgParser:parse(str, client)
             f('Flag %s is a required flag', i),
             str,
             #str + (missing * 3) + 1,
-            #str + ((missing + 1) * 3)
+            #str + ((missing + 1) * 3),
+            config
          ))
 
          missing = missing + 1
@@ -459,7 +538,7 @@ function ArgParser:parse(str, client)
          elseif #flag == 0 then
             went = true
             succ = nil
-            err = f('Expected a flag argument of type %s, got nothing', v[2])
+            err = f('Expected a flag argument of type %s, got nothing', v._ctx.type)
             topErr = 'missing_required_flag_argument'
 
             start = flag.pos[1] + (flag.pos[2] - flag.pos[1]) + 2
@@ -476,7 +555,7 @@ function ArgParser:parse(str, client)
          end
 
          if not went then
-            succ, err = v.check(data, client)
+            succ, err = v.check(data, message)
          end
 
          if succ == nil then
@@ -493,7 +572,8 @@ function ArgParser:parse(str, client)
                f('Unable to convert flag %s to %s', i, v._ctx.type),
                str,
                start,
-               stop
+               stop,
+               config
             ))
          else
             res[i] = succ
@@ -506,7 +586,7 @@ end
 
 --- Internal function for creating modifier packages
 ---@param ctx table
----@return ArgParser.modifiers
+---@return ArgParser_modifiers
 function ArgParser:_createModifier(ctx)
    function ctx.argCheck(args)
       return args
@@ -593,8 +673,10 @@ end
 ---
 --- It also leaves a lot of fragments like symbol positions
 ---@param str string
----@return ArgParser.rawArgs
-function ArgParser:_parse(str)
+---@param config ArgParser_config The config to use
+---@return ArgParser_rawArgs
+---@return string | nil
+function ArgParser:_parse(str, config)
    local res = {
       arguments = {},
       flags = {}
@@ -641,7 +723,8 @@ function ArgParser:_parse(str)
                'Flags start with either 1 or 2 dashes',
                str,
                where(str, ' ', lastI - 1),
-               where(str, ' ', lastI - 1) + #v:match('([%-]*)')
+               where(str, ' ', lastI - 1) + #v:match('([%-]*)'),
+               config
             ))
          elseif not self._flags[name] then
             local names = {}
@@ -654,12 +737,16 @@ function ArgParser:_parse(str)
 
             local namesStr = table.concat(names, ', ')
 
+            local start, stop = between(str, ' ', lastI - 1, i)
+
             table.insert(errors, buildError(
                'invalid_flag_name',
                f('Expected %s, got %s', (namesStr ~= '' and namesStr .. ' or ' or '') .. last, name),
                f('Unable to locate flag with the name of %s', name),
                str,
-               between(str, ' ', lastI - 1, i)
+               start,
+               stop,
+               config
             ))
          else
             currentFlag = name
@@ -717,14 +804,15 @@ function ArgParser:_parse(str)
 
             args.pos = {between(str, ' ', lastI - 1, i)}
 
-            if not matched then
+            if not matched and not flag.humanArg == '0' then
                table.insert(errors, buildError(
                   'invalid_argument_amount',
-                  f('Found only %s argument%s', #args, #args ~= 0 and 's' or ''),
-                  f('There should be %s arguments, got %s', flag.humanArg, #args),
+                  f('Found only %s argument%s', #args, #args ~= 1 and 's' or ''),
+                  f('There should be %s argument%s, got %s', flag.humanArg, #args ~= 1 and 's' or '', #args),
                   str,
                   args.pos[1],
-                  where(str, ' ', k) - 1
+                  where(str, ' ', k),
+                  config
                ))
             end
 

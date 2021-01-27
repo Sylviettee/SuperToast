@@ -9,38 +9,38 @@ local tNumber = typed.func(nil, 'number')
 
 do
 --- struct The raw data within an embed
----@class Embed.raw
+---@class Embed_raw
 ---@field public title string | nil title of embed
 ---@field public type string | nil type of embed (always "rich" for webhook embeds)
 ---@field public description string | nil description of embed
 ---@field public url string | nil url of embed
 ---@field public timestamp string | nil ISO8601 timestamp of embed content
 ---@field public color number | nil color code of the embed
----@field public footer Embed.footer | nil footer information
----@field public image Embed.image | nil image information
----@field public thumbnail Embed.thumbnail | nil thumbnail information
----@field public video Embed.video | nil video information
----@field public provider Embed.provider | nil provider information
----@field public author Embed.author | nil author information
----@field public fields Embed.field[] | nil fields information
+---@field public footer Embed_footer | nil footer information
+---@field public image Embed_image | nil image information
+---@field public thumbnail Embed_thumbnail | nil thumbnail information
+---@field public video Embed_video | nil video information
+---@field public provider Embed_provider | nil provider information
+---@field public author Embed_author | nil author information
+---@field public fields Embed_field[] | nil fields information
 local _raw = {}
 
 --- struct
----@class Embed.footer
+---@class Embed_footer
 ---@field public text string footer text
 ---@field public icon_url string | nil url of footer icon (only supports http(s) and attachments)
 ---@field public proxy_icon_url string | nil a proxied url of footer icon
 _raw.footer = {}
 
 --- struct
----@class Embed.field
+---@class Embed_field
 ---@field public name string name of the field
 ---@field public value string value of the field
 ---@field public inline boolean | nil whether or not this field should display inline
 _raw.field = {}
 
 --- struct
----@class Embed.thumbnail
+---@class Embed_thumbnail
 ---@field public url string | nil source url of the thumbnail(only supports http(s) and attachments)
 ---@field public proxy_url string | nil a proxied url of the thumbnail
 ---@field public height number | nil height of the thumbnail
@@ -48,7 +48,7 @@ _raw.field = {}
 _raw.thumbnail = {}
 
 --- struct
----@class Embed.image
+---@class Embed_image
 ---@field public url string | nil source url of the thumbnail(only supports http(s) and attachments)
 ---@field public proxy_url string | nil a proxied url of the thumbnail
 ---@field public height number | nil height of the thumbnail
@@ -56,20 +56,20 @@ _raw.thumbnail = {}
 _raw.image = {}
 
 --- struct
----@class Embed.video
+---@class Embed_video
 ---@field public url string | nil source url of video
 ---@field public height number | nil height of the video
 ---@field public width number | nil width of the video
 _raw.video = {}
 
 --- struct
----@class Embed.provider
+---@class Embed_provider
 ---@field public name string | nil name of provider
 ---@field public url string | nil url of provider
 _raw.provider = {}
 
 --- struct
----@class Embed.author
+---@class Embed_author
 ---@field public name string | nil name of author
 ---@field public url string | nil url of author
 ---@field public icon_url string | nil url of author icon (only supports http(s) and attachments)
@@ -81,7 +81,7 @@ end
 ---@class Embed
 local Embed = class('Embed')
 
----@type Embed | fun(starting: Embed.raw): string
+---@type Embed | fun(starting: Embed_raw): Embed
 Embed = Embed
 
 --- Create a new embed
@@ -225,7 +225,7 @@ function Embed:setURL(url)
 end
 
 --- Return the contents within the embed
----@return Embed.raw
+---@return Embed_raw
 function Embed:toJSON()
    return self._embed
 end

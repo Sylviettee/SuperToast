@@ -4,7 +4,7 @@ local class = require('discordia').class
 ---@class Array
 local Array = class('Array')
 
----@type Array | fun(starting: any): Array
+---@type Array | fun(starting: any[]): Array
 Array = Array
 
 function Array:__init(starting)
@@ -110,7 +110,7 @@ end
 
 --- Similar to array:find except returns what the function returns as long as its truthy
 ---@param fn fun(val:any):any
----@return any, number|nil
+---@return any, number | nil
 function Array:search(fn)
    for i = 1, #self do
       local res = fn(self:get(i))

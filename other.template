@@ -58,21 +58,25 @@
 ---@param name clientEvents
 ---@param fn function
 ---@return function
+--@clientEmitters
 function Client:on(name, fn) end
 ---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method will automatically be wrapped as a new coroutine when they are called. Returns the original callback for convenience.
 ---@param name clientEvents
 ---@param fn function
 ---@return function
+--@clientEmitters
 function Client:once(name, fn) end
 ---Subscribes a callback to be called every time the named event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
 ---@param name clientEvents
 ---@param fn function
 ---@return function
+--@clientEmitters
 function Client:onSync(name, fn) end
 ---Subscribes a callback to be called only the first time this event is emitted. Callbacks registered with this method are not automatically wrapped as a coroutine. Returns the original callback for convenience.
 ---@param name clientEvents
 ---@param fn function
 ---@return function
+--@clientEmitters
 function Client:onceSync(name, fn) end
 
 --- Send a debug level(4) message
@@ -247,6 +251,9 @@ function Client:error(msg, ...) end
 ---@field public classes table<string, any>
 local class = {}
 
+---@type class | fun(name: string, ...): any, table, table
+class = class
+
 --- Function that returns true only if the provided argument is a Discordia class module.
 ---
 --- ```lua
@@ -362,7 +369,8 @@ local enums = {}
 function enums.enum(data) end
 
 --- Extensions related to tables
----@class ext.table
+---@class ext_table
+---@overload fun()
 local tableExt = {}
 
 --- Returns the total number of elements in a table. This uses the global `pairs` function and respects any `__pairs` metamethods.
@@ -370,20 +378,20 @@ local tableExt = {}
 ---@return number
 function tableExt.count(tbl) end
 
---- Returns the total number of elements in a table, recursively. 
---- If a table is encountered, it is recursively counted instead of being directly added to the total count. 
+--- Returns the total number of elements in a table, recursively.
+--- If a table is encountered, it is recursively counted instead of being directly added to the total count.
 --- This uses the global `pairs` function and respects any `__pairs` metamethods.
 ---@param tbl table
 ---@return number
 function tableExt.deepcount(tbl) end
 
---- Returns a copy of the original table, recursively. 
+--- Returns a copy of the original table, recursively.
 --- If a table is encountered, it is recursively deep-copied. Metatables are not copied.
 ---@param tbl table
 ---@return table
 function tableExt.copy(tbl) end
 
---- Returns a copy of the original table, recursively. 
+--- Returns a copy of the original table, recursively.
 --- If a table is encountered, it is recursively deep-copied. Metatables are not copied.
 ---@param tbl table
 ---@return table
@@ -393,7 +401,7 @@ function tableExt.deepcopy(tbl) end
 ---@param tbl any[]
 function tableExt.reverse(tbl) end
 
---- Returns a copy of an array-like table with its elements in reverse order. 
+--- Returns a copy of an array-like table with its elements in reverse order.
 --- The original table remains unchanged.
 ---@param tbl any[]
 ---@return any[]
@@ -425,14 +433,14 @@ function tableExt.randompair(tbl) end
 ---@return any[]
 function tableExt.sorted(tbl, fn) end
 
---- Iterates through a table until it finds a value that is equal to `value` according to the `==` operator. 
+--- Iterates through a table until it finds a value that is equal to `value` according to the `==` operator.
 --- The key is returned if a match is found.
 ---@param tbl table
 ---@param value any
 ---@return any
 function tableExt.search(tbl, value) end
 
---- Returns a new table that is a slice of the original, defined by the start and stop bounds and the step size. 
+--- Returns a new table that is a slice of the original, defined by the start and stop bounds and the step size.
 --- Default start, stop, and step values are 1, #tbl, and 1, respectively.
 ---@param tbl table
 ---@param start number
@@ -446,7 +454,8 @@ function tableExt.search(tbl, value) end
 function tableExt.slice(tbl, start, stop, step) end
 
 --- Utilities related to strings
----@class ext.string
+---@class ext_string
+---@overload fun()
 local stringExt = {}
 
 --- Splits a string into a table of specifically delimited sub-strings.
@@ -464,8 +473,8 @@ function stringExt.trim(str) end
 
 ---@alias alignment string | "'left'" | "'right'" | "'center'"
 
---- Returns a new string that is padded up to the desired length. 
---- The alignment, either `left`, `right`, or `center` with left being the default, defines the placement of the original string. 
+--- Returns a new string that is padded up to the desired length.
+--- The alignment, either `left`, `right`, or `center` with left being the default, defines the placement of the original string.
 --- The default pattern is a single space.
 ---@param str string
 ---@param len number
@@ -476,7 +485,7 @@ function stringExt.trim(str) end
 ---@overload fun(str: string, len: number, align: alignment):string
 function stringExt.pad(str, len, align, pattern) end
 
---- Returns whether a string starts with a specified sub-string or pattern. 
+--- Returns whether a string starts with a specified sub-string or pattern.
 --- The plain parameter is the same as that used in Lua's `string.find`.
 ---@param str string
 ---@param pattern string
@@ -485,7 +494,7 @@ function stringExt.pad(str, len, align, pattern) end
 ---@overload fun(str: string, pattern: string):boolean
 function stringExt.startswith(str, pattern, plain) end
 
---- Returns whether a string ends with a specified sub-string or pattern. 
+--- Returns whether a string ends with a specified sub-string or pattern.
 --- The plain parameter is the same as that used in Lua's `string.find`.
 ---@param str string
 ---@param pattern string
@@ -494,15 +503,15 @@ function stringExt.startswith(str, pattern, plain) end
 ---@overload fun(str: string, pattern: string):boolean
 function stringExt.endswith(str, pattern, plain) end
 
---- Returns the Levenshtein distance between two strings. 
+--- Returns the Levenshtein distance between two strings.
 --- A higher number indicates a greater distance.
 ---@param str1 string
 ---@param str2 string
 ---@return number
 function stringExt.levenshtein(str1, str2) end
 
---- Returns a string of random characters with the specified length. 
---- If provided, the min and max bounds cannot be outside 0 to 255. 
+--- Returns a string of random characters with the specified length.
+--- If provided, the min and max bounds cannot be outside 0 to 255.
 --- Use 32 to 126 for printable ASCII characters.
 ---@param len number
 ---@param min number
@@ -513,10 +522,11 @@ function stringExt.levenshtein(str1, str2) end
 function stringExt.random(len, min, max) end
 
 --- Utilities related to math
----@class ext.math
+---@class ext_math
+---@overload fun()
 local mathExt = {}
 
---- Returns a number that is at least as small as the minimum value and at most as large as the maximum value, inclusively. 
+--- Returns a number that is at least as small as the minimum value and at most as large as the maximum value, inclusively.
 --- If the original number is already with the bounds, the same number is returned.
 ---@param n number
 ---@param min number
@@ -524,7 +534,7 @@ local mathExt = {}
 ---@return number
 function mathExt.min(n, min, max) end
 
---- Returns a number that is rounded to the nearest defined digit. 
+--- Returns a number that is rounded to the nearest defined digit.
 --- The nearest integer is returned if the digit is omitted.
 --- Negative values can be used for higher order places.
 ---@param n number
@@ -533,7 +543,7 @@ function mathExt.min(n, min, max) end
 ---@overload fun(n: number):number
 function mathExt.round(n, digits) end
 
---- **Discordia** has some built-in Lua standard library extensions. 
+--- **Discordia** has some built-in Lua standard library extensions.
 --- These provide complementary or supplementary, commonly used functions that the Lua standard library does not provide.
 ---
 --- Extensions can be used directly...
@@ -557,9 +567,9 @@ function mathExt.round(n, digits) end
 --- discordia.extensions()
 --- ```
 ---@class extensions
----@field public string ext.string | function
----@field public table ext.table | function
----@field public math ext.math | function
+---@field public string ext_string
+---@field public table ext_table
+---@field public math ext_math
 
 --@package
 

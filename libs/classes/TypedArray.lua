@@ -7,7 +7,7 @@ local typed = require('typed')
 ---@field public type function The type of the data
 local TypedArray, get = class('TypedArray', Array)
 
----@type TypedArray | fun(arrType: string, starting: any): TypedArray
+---@type TypedArray | fun(arrType: string, starting: any): TypedArray | fun(arrType: string): TypedArray
 TypedArray = TypedArray
 
 function TypedArray:__init(arrType, starting)

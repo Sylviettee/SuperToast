@@ -22,7 +22,7 @@ local configValidation = typed.Schema('CommandUtil.config')
 ---| "'changed'"
 ---| "'firstLoad'"
 
----@class CommandUtil.config
+---@class CommandUtil_config
 ---@field public directory string The directory to search for commands
 ---@field public watch boolean | nil If set to true, it will watch `directory` for changes
 ---@field public unloadOnError boolean | nil If set to true, it will unload the command if it had an error loading
@@ -36,16 +36,15 @@ local _config = {}
 ---@class CommandUtil
 local CommandUtil = discordia.class('CommandUtil')
 
----@type CommandUtil | fun(config: CommandUtil.config): CommandUtil
+---@type CommandUtil | fun(client: SuperToastClient, config: CommandUtil_config)
 CommandUtil = CommandUtil
 
 --- Create a new command utility
 ---@param client SuperToastClient
----@param config CommandUtil.config
----@return CommandUtil
+---@param config CommandUtil_config
 function CommandUtil:__init(client, config)
    self._client = client
-   ---@type CommandUtil.config
+   ---@type CommandUtil_config
    self._config = assert(configValidation:validate(config or {}))
 
    self._handles = {}
