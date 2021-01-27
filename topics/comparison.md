@@ -34,7 +34,7 @@ Parsing is how each framework deals with parsing given input.
 | --------------- | ---------- | ----- | --------- |
 | Aliases | ✓ | ✓ | ✓ |
 | Mention as prefix | ✘ | ✓ | ✘ |
-| Multiple prefixes | ✓ | ✓ | ✘ |
+| Multiple prefixes | ✓ | ✓ | ✓ |
 | Per-guild prefix customization | ✓ | ✘ | ✓ |
 | Pattern trigger | ✘ | ✘ | ✘ |
 | Store original input | ✓ | ✓ | ✓ |
@@ -46,11 +46,11 @@ Command handling is how each framework will handle a command once one has been i
 | Command Handling | SuperToast | Toast | Commandia |
 | ---------------- | ---------- | ----- | --------- |
 | Cooldowns | ✓ | ✓ | ✘ |
-| Channel restrictions | ✓ | ✓ | ? |
+| Channel restrictions | ✓ | ✓ | ✘ |
 | Permission restrictions | ✓ | ✓ | ✓ |
 | Command edits | ✘ | ✘ | ✘ |
 | Subcommands | ✓ | ✓ | ✘ |
-| Help information | ✓ | ✓ | ? |
+| Help information | ✓ | ✓ | ✘ |
 
 ### Argument Parsing
 
@@ -61,18 +61,18 @@ For matching, the parser should support more than just the id like the object na
 | Argument Parsing | SuperToast | Toast | Commandia |
 | ---------------- | ---------- | ----- | --------- |
 | Ordered arguments | ✓ | ✓ | ✓ |
-| Unordered arguments | ✘ | ✘ | ? |
-| Optional arguments | ✘ | ✓ | ? |
+| Unordered arguments | ✘ | ✘ | ✘ |
+| Optional arguments | ✘ | ✓ | ✓ |
 | Quoted arguments | ✓ | ✓ | ✓ |
 | Flag arguments | ✓ | ✘ | ✓ |
-| Dependant arguments | ✘ | ✘ | ? |
+| Dependant arguments | ✘ | ✘ | ✓ |
 | Argument types | ✓ | ✓ | ✓ |
-| Union types | ✘ | ✘ | ? |
+| Union types | ✘ | ✘ | ✘ |
 | Custom types | ✓ | ✓ | ✓ |
 | User and member matching | ✓ | ✘ | ✘ |
 | Role matching | ✘ | ✘ | ✘ |
 | Channel matching | ✘ | ✘ | ✘ |
-| Pattern arguments | ✘ | ✘ | ? |
+| Pattern arguments | ✘ | ✘ | ✘ |
 
 ### Module System
 
@@ -98,9 +98,9 @@ Frameworks might fire events depending on whenever a command is reloaded or unlo
 | ------ | ---------- | ----- | --------- |
 | Module event listeners | ✓ | N/A | ✓ |
 | On invalid commands | ✘ | ✘ | ✘ |
-| On command blocked | / | ✘ | ? |
-| On command start | ✘ | ✓ | ? |
-| On command end | ✘ | ✓ | ? |
+| On command blocked | / | ✘ | ✘ |
+| On command start | ✘ | ✓ | ✘ |
+| On command end | ✘ | ✓ | ✘ |
 | On command error | ✓ | ✓ | ✓ |
 
 ### Settings
@@ -114,6 +114,6 @@ Built-in features are marked with a `✓` means they exist and are modifiable. I
 | Modifiable built-in commands | ✘ | ✘ | ∅ |
 | Modifiable built-in command handler | ✓ | ✓ | ✘ |
 | Modifiable built-in responses | ✓ | ✘ | ✘ |
-| Bot owner | ✓ | ✓ | ∅ |
+| Bot owner | ✓ | ✓ | ✓ |
 | Multiple owners | ✓ | ✓ | ∅ |
-| Module directories | ✓ | N/A | ? |
+| Module directories | ✓ | N/A | ✓ |
