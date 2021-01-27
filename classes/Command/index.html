@@ -1,0 +1,1655 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SuperToast is a Discordia command framework designed for ease of use.">
+      
+      
+      
+        <meta name="author" content="Soviet Kitsune">
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.6">
+    
+    
+      
+        <title>Class `Command` - SuperToast</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#009485">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="teal" data-md-color-accent="teal">
+      
+        <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#class-command" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="SuperToast" class="md-header-nav__button md-logo" aria-label="SuperToast">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            SuperToast
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Class `Command`
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/SovietKitsune/SuperToast" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SovietKitsune/SuperToast
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SuperToast" class="md-nav__button md-logo" aria-label="SuperToast">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    SuperToast
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/SovietKitsune/SuperToast" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SovietKitsune/SuperToast
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      
+      <label class="md-nav__link" for="nav-2">
+        Classes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Classes" data-md-level="1">
+        <label class="md-nav__title" for="nav-2">
+          <span class="md-nav__icon md-icon"></span>
+          Classes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ArgParser/" class="md-nav__link">
+        Class `ArgParser`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ArgParser.modifiers/" class="md-nav__link">
+        Class `ArgParser.modifiers`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Array/" class="md-nav__link">
+        Class `Array`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Class `Command`
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Class `Command`
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command__initname-string-string" class="md-nav__link">
+    Command:__init(name: string, ...: string)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandtorunmessage-message-args-string-client-supertoastclient-boolean-string" class="md-nav__link">
+    Command:toRun(message: Message, args: string[], client: SuperToastClient): boolean | string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commanddescriptiondesc-string-command" class="md-nav__link">
+    Command:description(desc: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcategoryname-string-command" class="md-nav__link">
+    Command:category(name: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandexampleexample-string-command" class="md-nav__link">
+    Command:example(example: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandusageusage-string-command" class="md-nav__link">
+    Command:usage(usage: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandguild_only-command" class="md-nav__link">
+    Command:guild_only(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandguildonly-command" class="md-nav__link">
+    Command:guildOnly(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandnsfw_only-command" class="md-nav__link">
+    Command:nsfw_only(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandnsfwonly-command" class="md-nav__link">
+    Command:nsfwOnly(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandowner_only-command" class="md-nav__link">
+    Command:owner_only(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandowneronly-command" class="md-nav__link">
+    Command:ownerOnly(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcooldowncooldown-number-command" class="md-nav__link">
+    Command:cooldown(cooldown: number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcheckcheck-funmsg-message-args-string-client-supertoastclient-string-boolean-string-command" class="md-nav__link">
+    Command:check(check: fun(msg: Message, args: string[], client: SuperToastClient): string | boolean | string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcheck_any-function-command" class="md-nav__link">
+    Command:check_any(...: function): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcheckany-function-command" class="md-nav__link">
+    Command:checkAny(...: function): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhas_permissionperm-string-number-command" class="md-nav__link">
+    Command:has_permission(perm: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhaspermissionperm-string-number-command" class="md-nav__link">
+    Command:hasPermission(perm: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhas_permissions-string-number-command" class="md-nav__link">
+    Command:has_permissions(...: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhaspermissions-string-number-command" class="md-nav__link">
+    Command:hasPermissions(...: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandbot_has_permissionperm-string-number-command" class="md-nav__link">
+    Command:bot_has_permission(perm: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandbothaspermissionperm-string-number-command" class="md-nav__link">
+    Command:botHasPermission(perm: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandbot_has_permissions-string-number-command" class="md-nav__link">
+    Command:bot_has_permissions(...: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandbothaspermissions-string-number-command" class="md-nav__link">
+    Command:botHasPermissions(...: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhas_rolerole-string-command" class="md-nav__link">
+    Command:has_role(role: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhasrolerole-string-command" class="md-nav__link">
+    Command:hasRole(role: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandadd_subcommandsubcommand-subcommand-command" class="md-nav__link">
+    Command:add_subcommand(subcommand: Subcommand): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandaddsubcommandsubcommand-subcommand-command" class="md-nav__link">
+    Command:addSubcommand(subcommand: Subcommand): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandexecutefunc-funmsg-message-args-string-client-supertoastclient-ctx-command_additionalcontext-void-command" class="md-nav__link">
+    Command:execute(func: fun(msg: Message, args: string[], client: SuperToastClient, ctx: Command_additionalContext): void): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcount-number" class="md-nav__link">
+    Command.count(): number
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CommandUtil/" class="md-nav__link">
+        Class `CommandUtil`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CommandUtil_config/" class="md-nav__link">
+        Class `CommandUtil_config`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Embed/" class="md-nav__link">
+        Class `Embed`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Option/" class="md-nav__link">
+        Class `Option`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Schema/" class="md-nav__link">
+        Class `Schema`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Subcommand/" class="md-nav__link">
+        Class `Subcommand`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SuperToastClient/" class="md-nav__link">
+        Class `SuperToastClient`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TypedArray/" class="md-nav__link">
+        Class `TypedArray`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../typed/" class="md-nav__link">
+        Class `typed`
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+      
+      <label class="md-nav__link" for="nav-3">
+        Modules
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Modules" data-md-level="1">
+        <label class="md-nav__title" for="nav-3">
+          <span class="md-nav__icon md-icon"></span>
+          Modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/SuperToast/" class="md-nav__link">
+        Module `SuperToast`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/dotenv/" class="md-nav__link">
+        Module `dotenv`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/ms/" class="md-nav__link">
+        Module `ms`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/stringx/" class="md-nav__link">
+        Module `stringx`
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+      
+      <label class="md-nav__link" for="nav-4">
+        Structures
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Structures" data-md-level="1">
+        <label class="md-nav__title" for="nav-4">
+          <span class="md-nav__icon md-icon"></span>
+          Structures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/ArgParser.rawArgs/" class="md-nav__link">
+        Structure `ArgParser.rawArgs`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Command_additionalContext/" class="md-nav__link">
+        Structure `Command_additionalContext`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Command_flags/" class="md-nav__link">
+        Structure `Command_flags`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/DiscordiaOptions/" class="md-nav__link">
+        Structure `DiscordiaOptions`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed.author/" class="md-nav__link">
+        Structure `Embed.author`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed.field/" class="md-nav__link">
+        Structure `Embed.field`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed.footer/" class="md-nav__link">
+        Structure `Embed.footer`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed.image/" class="md-nav__link">
+        Structure `Embed.image`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed.provider/" class="md-nav__link">
+        Structure `Embed.provider`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed.raw/" class="md-nav__link">
+        Structure `Embed.raw`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed.thumbnail/" class="md-nav__link">
+        Structure `Embed.thumbnail`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed.video/" class="md-nav__link">
+        Structure `Embed.video`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed_author/" class="md-nav__link">
+        Structure `Embed_author`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed_field/" class="md-nav__link">
+        Structure `Embed_field`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed_footer/" class="md-nav__link">
+        Structure `Embed_footer`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed_image/" class="md-nav__link">
+        Structure `Embed_image`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed_provider/" class="md-nav__link">
+        Structure `Embed_provider`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed_raw/" class="md-nav__link">
+        Structure `Embed_raw`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed_thumbnail/" class="md-nav__link">
+        Structure `Embed_thumbnail`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/Embed_video/" class="md-nav__link">
+        Structure `Embed_video`
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structures/SuperToastOptions/" class="md-nav__link">
+        Structure `SuperToastOptions`
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+      
+      <label class="md-nav__link" for="nav-5">
+        Topics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Topics" data-md-level="1">
+        <label class="md-nav__title" for="nav-5">
+          <span class="md-nav__icon md-icon"></span>
+          Topics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/arguments/" class="md-nav__link">
+        Arguments
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/command-checks/" class="md-nav__link">
+        Command Checks
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/comparison/" class="md-nav__link">
+        Comparison
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/types/" class="md-nav__link">
+        Types
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topics/writing-your-first-bot/" class="md-nav__link">
+        Writing your first bot
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command__initname-string-string" class="md-nav__link">
+    Command:__init(name: string, ...: string)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandtorunmessage-message-args-string-client-supertoastclient-boolean-string" class="md-nav__link">
+    Command:toRun(message: Message, args: string[], client: SuperToastClient): boolean | string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commanddescriptiondesc-string-command" class="md-nav__link">
+    Command:description(desc: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcategoryname-string-command" class="md-nav__link">
+    Command:category(name: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandexampleexample-string-command" class="md-nav__link">
+    Command:example(example: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandusageusage-string-command" class="md-nav__link">
+    Command:usage(usage: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandguild_only-command" class="md-nav__link">
+    Command:guild_only(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandguildonly-command" class="md-nav__link">
+    Command:guildOnly(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandnsfw_only-command" class="md-nav__link">
+    Command:nsfw_only(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandnsfwonly-command" class="md-nav__link">
+    Command:nsfwOnly(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandowner_only-command" class="md-nav__link">
+    Command:owner_only(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandowneronly-command" class="md-nav__link">
+    Command:ownerOnly(): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcooldowncooldown-number-command" class="md-nav__link">
+    Command:cooldown(cooldown: number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcheckcheck-funmsg-message-args-string-client-supertoastclient-string-boolean-string-command" class="md-nav__link">
+    Command:check(check: fun(msg: Message, args: string[], client: SuperToastClient): string | boolean | string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcheck_any-function-command" class="md-nav__link">
+    Command:check_any(...: function): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcheckany-function-command" class="md-nav__link">
+    Command:checkAny(...: function): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhas_permissionperm-string-number-command" class="md-nav__link">
+    Command:has_permission(perm: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhaspermissionperm-string-number-command" class="md-nav__link">
+    Command:hasPermission(perm: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhas_permissions-string-number-command" class="md-nav__link">
+    Command:has_permissions(...: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhaspermissions-string-number-command" class="md-nav__link">
+    Command:hasPermissions(...: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandbot_has_permissionperm-string-number-command" class="md-nav__link">
+    Command:bot_has_permission(perm: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandbothaspermissionperm-string-number-command" class="md-nav__link">
+    Command:botHasPermission(perm: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandbot_has_permissions-string-number-command" class="md-nav__link">
+    Command:bot_has_permissions(...: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandbothaspermissions-string-number-command" class="md-nav__link">
+    Command:botHasPermissions(...: string | number): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhas_rolerole-string-command" class="md-nav__link">
+    Command:has_role(role: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandhasrolerole-string-command" class="md-nav__link">
+    Command:hasRole(role: string): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandadd_subcommandsubcommand-subcommand-command" class="md-nav__link">
+    Command:add_subcommand(subcommand: Subcommand): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandaddsubcommandsubcommand-subcommand-command" class="md-nav__link">
+    Command:addSubcommand(subcommand: Subcommand): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandexecutefunc-funmsg-message-args-string-client-supertoastclient-ctx-command_additionalcontext-void-command" class="md-nav__link">
+    Command:execute(func: fun(msg: Message, args: string[], client: SuperToastClient, ctx: Command_additionalContext): void): Command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandcount-number" class="md-nav__link">
+    Command.count(): number
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="class-command">Class <code>Command</code><a class="headerlink" href="#class-command" title="Permanent link">&para;</a></h1>
+<p>The command class to handle most functionality</p>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isSub</td>
+<td><a href="https://www.lua.org/pil/2.2.html">boolean</a></td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td><a href="https://www.lua.org/pil/2.4.html">string</a></td>
+<td></td>
+</tr>
+<tr>
+<td>getDescription</td>
+<td><a href="https://www.lua.org/pil/2.4.html">string</a></td>
+<td></td>
+</tr>
+<tr>
+<td>getCategory</td>
+<td><a href="https://www.lua.org/pil/2.4.html">string</a>?</td>
+<td></td>
+</tr>
+<tr>
+<td>getUsage</td>
+<td><a href="https://www.lua.org/pil/2.4.html">string</a></td>
+<td></td>
+</tr>
+<tr>
+<td>getCooldown</td>
+<td><a href="https://www.lua.org/pil/2.3.html">number</a></td>
+<td></td>
+</tr>
+<tr>
+<td>flags</td>
+<td><a href="../../structures/Command_flags/">Command_flags</a></td>
+<td></td>
+</tr>
+<tr>
+<td>aliases</td>
+<td><a href="https://www.lua.org/pil/2.4.html">string</a>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>getExamples</td>
+<td><a href="https://www.lua.org/pil/2.4.html">string</a>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>userPermissions</td>
+<td><a href="https://www.lua.org/pil/2.4.html">string</a>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>botPermissions</td>
+<td><a href="https://www.lua.org/pil/2.4.html">string</a>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>subcommands</td>
+<td><a href="../Subcommand/">Subcommand</a>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>rawExecute</td>
+<td><a href="https://www.lua.org/pil/2.6.html">function</a></td>
+<td></td>
+</tr>
+<tr>
+<td>parent</td>
+<td><a href="../Subcommand/">Subcommand</a>?</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="command__initname-string-string">Command:__init(name: <a href="https://www.lua.org/pil/2.4.html">string</a>, ...: <a href="https://www.lua.org/pil/2.4.html">string</a>)<a class="headerlink" href="#command__initname-string-string" title="Permanent link">&para;</a></h3>
+<p>Create a new command</p>
+<h3 id="commandtorunmessage-message-args-string-client-supertoastclient-boolean-string">Command:toRun(message: Message, args: <a href="https://www.lua.org/pil/2.4.html">string</a>[], client: <a href="../SuperToastClient/">SuperToastClient</a>): <a href="https://www.lua.org/pil/2.2.html">boolean</a> | <a href="https://www.lua.org/pil/2.4.html">string</a><a class="headerlink" href="#commandtorunmessage-message-args-string-client-supertoastclient-boolean-string" title="Permanent link">&para;</a></h3>
+<p>Check a message to see if it matches all the criteria listed</p>
+<h3 id="commanddescriptiondesc-string-command">Command:description(desc: <a href="https://www.lua.org/pil/2.4.html">string</a>): <a href="./">Command</a><a class="headerlink" href="#commanddescriptiondesc-string-command" title="Permanent link">&para;</a></h3>
+<p>Attach a description to a command</p>
+<h3 id="commandcategoryname-string-command">Command:category(name: <a href="https://www.lua.org/pil/2.4.html">string</a>): <a href="./">Command</a><a class="headerlink" href="#commandcategoryname-string-command" title="Permanent link">&para;</a></h3>
+<p>Attach a category to a command</p>
+<h3 id="commandexampleexample-string-command">Command:example(example: <a href="https://www.lua.org/pil/2.4.html">string</a>): <a href="./">Command</a><a class="headerlink" href="#commandexampleexample-string-command" title="Permanent link">&para;</a></h3>
+<p>Attach an example to a command</p>
+<h3 id="commandusageusage-string-command">Command:usage(usage: <a href="https://www.lua.org/pil/2.4.html">string</a>): <a href="./">Command</a><a class="headerlink" href="#commandusageusage-string-command" title="Permanent link">&para;</a></h3>
+<p>Attach a usage to a command</p>
+<h3 id="commandguild_only-command">Command:guild_only(): <a href="./">Command</a><a class="headerlink" href="#commandguild_only-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:guildOnly instead</p>
+<h3 id="commandguildonly-command">Command:guildOnly(): <a href="./">Command</a><a class="headerlink" href="#commandguildonly-command" title="Permanent link">&para;</a></h3>
+<p>Set the command as guild only</p>
+<h3 id="commandnsfw_only-command">Command:nsfw_only(): <a href="./">Command</a><a class="headerlink" href="#commandnsfw_only-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:nsfwOnly instead</p>
+<h3 id="commandnsfwonly-command">Command:nsfwOnly(): <a href="./">Command</a><a class="headerlink" href="#commandnsfwonly-command" title="Permanent link">&para;</a></h3>
+<p>Set the command as nsfw only</p>
+<h3 id="commandowner_only-command">Command:owner_only(): <a href="./">Command</a><a class="headerlink" href="#commandowner_only-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:ownerOnly instead</p>
+<h3 id="commandowneronly-command">Command:ownerOnly(): <a href="./">Command</a><a class="headerlink" href="#commandowneronly-command" title="Permanent link">&para;</a></h3>
+<p>Set the command as owner only</p>
+<h3 id="commandcooldowncooldown-number-command">Command:cooldown(cooldown: <a href="https://www.lua.org/pil/2.3.html">number</a>): <a href="./">Command</a><a class="headerlink" href="#commandcooldowncooldown-number-command" title="Permanent link">&para;</a></h3>
+<p>Set the cooldown of the command</p>
+<h3 id="commandcheckcheck-funmsg-message-args-string-client-supertoastclient-string-boolean-string-command">Command:check(check: fun(msg: Message, args: <a href="https://www.lua.org/pil/2.4.html">string</a>[], client: <a href="../SuperToastClient/">SuperToastClient</a>): <a href="https://www.lua.org/pil/2.4.html">string</a> | <a href="https://www.lua.org/pil/2.2.html">boolean</a> | <a href="https://www.lua.org/pil/2.4.html">string</a>): <a href="./">Command</a><a class="headerlink" href="#commandcheckcheck-funmsg-message-args-string-client-supertoastclient-string-boolean-string-command" title="Permanent link">&para;</a></h3>
+<p>Add a custom check to the command</p>
+<h3 id="commandcheck_any-function-command">Command:check_any(...: <a href="https://www.lua.org/pil/2.6.html">function</a>): <a href="./">Command</a><a class="headerlink" href="#commandcheck_any-function-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:checkAny instead</p>
+<h3 id="commandcheckany-function-command">Command:checkAny(...: <a href="https://www.lua.org/pil/2.6.html">function</a>): <a href="./">Command</a><a class="headerlink" href="#commandcheckany-function-command" title="Permanent link">&para;</a></h3>
+<p>Add multiple custom checks</p>
+<h3 id="commandhas_permissionperm-string-number-command">Command:has_permission(perm: <a href="https://www.lua.org/pil/2.4.html">string</a> | <a href="https://www.lua.org/pil/2.3.html">number</a>): <a href="./">Command</a><a class="headerlink" href="#commandhas_permissionperm-string-number-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:hasPermission instead</p>
+<h3 id="commandhaspermissionperm-string-number-command">Command:hasPermission(perm: <a href="https://www.lua.org/pil/2.4.html">string</a> | <a href="https://www.lua.org/pil/2.3.html">number</a>): <a href="./">Command</a><a class="headerlink" href="#commandhaspermissionperm-string-number-command" title="Permanent link">&para;</a></h3>
+<p>Add permission check for users</p>
+<h3 id="commandhas_permissions-string-number-command">Command:has_permissions(...: <a href="https://www.lua.org/pil/2.4.html">string</a> | <a href="https://www.lua.org/pil/2.3.html">number</a>): <a href="./">Command</a><a class="headerlink" href="#commandhas_permissions-string-number-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:hasPermission instead</p>
+<h3 id="commandhaspermissions-string-number-command">Command:hasPermissions(...: <a href="https://www.lua.org/pil/2.4.html">string</a> | <a href="https://www.lua.org/pil/2.3.html">number</a>): <a href="./">Command</a><a class="headerlink" href="#commandhaspermissions-string-number-command" title="Permanent link">&para;</a></h3>
+<p>Add multiple permission checks for users</p>
+<h3 id="commandbot_has_permissionperm-string-number-command">Command:bot_has_permission(perm: <a href="https://www.lua.org/pil/2.4.html">string</a> | <a href="https://www.lua.org/pil/2.3.html">number</a>): <a href="./">Command</a><a class="headerlink" href="#commandbot_has_permissionperm-string-number-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:botHasPermission instead</p>
+<h3 id="commandbothaspermissionperm-string-number-command">Command:botHasPermission(perm: <a href="https://www.lua.org/pil/2.4.html">string</a> | <a href="https://www.lua.org/pil/2.3.html">number</a>): <a href="./">Command</a><a class="headerlink" href="#commandbothaspermissionperm-string-number-command" title="Permanent link">&para;</a></h3>
+<p>Add permission check for the bot</p>
+<h3 id="commandbot_has_permissions-string-number-command">Command:bot_has_permissions(...: <a href="https://www.lua.org/pil/2.4.html">string</a> | <a href="https://www.lua.org/pil/2.3.html">number</a>): <a href="./">Command</a><a class="headerlink" href="#commandbot_has_permissions-string-number-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:botHasPermissions instead</p>
+<h3 id="commandbothaspermissions-string-number-command">Command:botHasPermissions(...: <a href="https://www.lua.org/pil/2.4.html">string</a> | <a href="https://www.lua.org/pil/2.3.html">number</a>): <a href="./">Command</a><a class="headerlink" href="#commandbothaspermissions-string-number-command" title="Permanent link">&para;</a></h3>
+<p>Add multiple permission checks for the bot</p>
+<h3 id="commandhas_rolerole-string-command">Command:has_role(role: <a href="https://www.lua.org/pil/2.4.html">string</a>): <a href="./">Command</a><a class="headerlink" href="#commandhas_rolerole-string-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:hasRole instead</p>
+<h3 id="commandhasrolerole-string-command">Command:hasRole(role: <a href="https://www.lua.org/pil/2.4.html">string</a>): <a href="./">Command</a><a class="headerlink" href="#commandhasrolerole-string-command" title="Permanent link">&para;</a></h3>
+<p>Check if the user has a specific role</p>
+<h3 id="commandadd_subcommandsubcommand-subcommand-command">Command:add_subcommand(subcommand: <a href="../Subcommand/">Subcommand</a>): <a href="./">Command</a><a class="headerlink" href="#commandadd_subcommandsubcommand-subcommand-command" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🛑 This method is deprecated and should not be used</p>
+</blockquote>
+<p>Use Command:addSubcommand instead</p>
+<h3 id="commandaddsubcommandsubcommand-subcommand-command">Command:addSubcommand(subcommand: <a href="../Subcommand/">Subcommand</a>): <a href="./">Command</a><a class="headerlink" href="#commandaddsubcommandsubcommand-subcommand-command" title="Permanent link">&para;</a></h3>
+<p>Add a subcommand to the function</p>
+<h3 id="commandexecutefunc-funmsg-message-args-string-client-supertoastclient-ctx-command_additionalcontext-void-command">Command:execute(func: fun(msg: Message, args: <a href="https://www.lua.org/pil/2.4.html">string</a>[], client: <a href="../SuperToastClient/">SuperToastClient</a>, ctx: <a href="../../structures/Command_additionalContext/">Command_additionalContext</a>): void): <a href="./">Command</a><a class="headerlink" href="#commandexecutefunc-funmsg-message-args-string-client-supertoastclient-ctx-command_additionalcontext-void-command" title="Permanent link">&para;</a></h3>
+<p>Sets the function to execute</p>
+<h3 id="commandcount-number">Command.count(): <a href="https://www.lua.org/pil/2.3.html">number</a><a class="headerlink" href="#commandcount-number" title="Permanent link">&para;</a></h3>
+<p>Count the amount of parents up this (sub)command has</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../Array/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Class `Array`
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../CommandUtil/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Class `CommandUtil`
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://discord.gg/uCDq5mw" target="_blank" rel="noopener" title="discord.gg" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M297.216 243.2c0 15.616-11.52 28.416-26.112 28.416-14.336 0-26.112-12.8-26.112-28.416s11.52-28.416 26.112-28.416c14.592 0 26.112 12.8 26.112 28.416zm-119.552-28.416c-14.592 0-26.112 12.8-26.112 28.416s11.776 28.416 26.112 28.416c14.592 0 26.112-12.8 26.112-28.416.256-15.616-11.52-28.416-26.112-28.416zM448 52.736V512c-64.494-56.994-43.868-38.128-118.784-107.776l13.568 47.36H52.48C23.552 451.584 0 428.032 0 398.848V52.736C0 23.552 23.552 0 52.48 0h343.04C424.448 0 448 23.552 448 52.736zm-72.96 242.688c0-82.432-36.864-149.248-36.864-149.248-36.864-27.648-71.936-26.88-71.936-26.88l-3.584 4.096c43.52 13.312 63.744 32.512 63.744 32.512-60.811-33.329-132.244-33.335-191.232-7.424-9.472 4.352-15.104 7.424-15.104 7.424s21.248-20.224 67.328-33.536l-2.56-3.072s-35.072-.768-71.936 26.88c0 0-36.864 66.816-36.864 149.248 0 0 21.504 37.12 78.08 38.912 0 0 9.472-11.52 17.152-21.248-32.512-9.728-44.8-30.208-44.8-30.208 3.766 2.636 9.976 6.053 10.496 6.4 43.21 24.198 104.588 32.126 159.744 8.96 8.96-3.328 18.944-8.192 29.44-15.104 0 0-12.8 20.992-46.336 30.464 7.68 9.728 16.896 20.736 16.896 20.736 56.576-1.792 78.336-38.912 78.336-38.912z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.53cc9318.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9c9f54f.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
