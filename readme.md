@@ -1,8 +1,21 @@
 <div align="center">
 <p>
-    <img width="25%" src="https://imgur.com/zyUqIi2.png">
+    <svg width="250" height="250" viewBox="0 0 597 588" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="299" cy="312" r="276" fill="#F9F9F9"/>
+        <circle cx="298.5" cy="312.5" r="259.5" fill="#F5F5F5"/>
+        <path d="M550.002 248.933C488.735 179.045 447.119 146.255 334.657 121.415C325.104 88.8916 322.429 70.3064 264.779 92.8081C209.832 123.03 201.359 143.297 185.34 179.309C80.5796 217.183 37.3419 271.035 49.8051 316.796C62.2683 362.556 110.221 325.059 98.0658 352.255C148.805 414.992 196.822 445.129 284.812 498.988C372.467 388.187 430.096 333.078 550.002 248.933Z" fill="#F0BF85"/>
+        <path d="M282.529 501.14L284.812 498.988M284.812 498.988C372.467 388.187 430.096 333.078 550.002 248.933C488.735 179.045 447.119 146.255 334.657 121.415C325.104 88.8916 322.429 70.3064 264.779 92.8081C209.832 123.03 201.359 143.297 185.34 179.309C80.5796 217.183 37.3419 271.035 49.8051 316.796C62.2683 362.556 110.221 325.059 98.0658 352.255C148.805 414.992 196.822 445.129 284.812 498.988Z" stroke="#563B1B" stroke-width="10"/>
+        <path d="M529.458 435.953C513.936 344.317 495.694 294.575 412.958 214.453C421.878 181.75 429.345 164.522 368.458 153.453C305.823 150.375 287.982 163.189 255.458 185.453C146.395 162.77 81.3406 185.953 67.958 231.453C54.5754 276.953 115.069 270.17 90.458 286.953C100.766 366.979 125.849 417.818 172.53 509.817C305.268 461.434 383.236 444.727 529.458 435.953Z" fill="#F0BF85"/>
+        <path d="M169.458 510.453L172.53 509.817M172.53 509.817C305.268 461.434 383.236 444.727 529.458 435.953C513.936 344.317 495.694 294.575 412.958 214.453C421.878 181.75 429.345 164.522 368.458 153.453C305.823 150.375 287.982 163.189 255.458 185.453C146.395 162.77 81.3406 185.953 67.958 231.453C54.5754 276.953 115.069 270.17 90.458 286.953C100.766 366.979 125.849 417.818 172.53 509.817Z" stroke="#563B1B" stroke-width="10"/>
+        <rect x="234" y="268.87" width="108.484" height="108.484" transform="rotate(-11.0916 234 268.87)" fill="#EDDC40"/>
+        <rect x="251" y="282.323" width="79.6496" height="79.6496" transform="rotate(-11.0916 251 282.323)" fill="#F5E65F"/>
+    </svg>
 </p>
 <h1>SuperToast</h1>
+
+[Docs](https://SovietKitsune.github.io/SuperToast) |
+[Comparison](./topics/comparison.md)
+
 </div>
 
 <div align="center">
@@ -19,96 +32,17 @@
 
 <br/>
 
-- [About](#about)
-- [Quick example](#quick-example)
-- [Argument parsing](#argument-parsing)
-- [Features](#features)
-- [Types](#types)
-- [Installation](#installation)
-- [TODO](#todo)
-
 ## About
 
 SuperToast is a Discordia command framework designed for ease of use.
 
-It is recommended to use [LuaAnalysis](https://github.com/Benjamin-Dobell/IntelliJ-Luanalysis/), [EmmyLua](https://github.com/EmmyLua/VSCode-EmmyLua) or [Lua by Sumneko](https://github.com/sumneko/lua-language-server) when using this as you will get types as seen below.
+## Installation
 
-## Quick example
+You can install SuperToast using `lit`, the package manager of luvit:
 
-```lua
-local toast = require 'SuperToast'
-local cmd = toast.Command
-
-toast.dotenv.config()
-
-local client = toast.Client(process.env.TOKEN)
-
-local ping = cmd('ping')
-
-ping:execute(function(msg)
-   msg:reply 'pong!'
-end)
-
-client:addCommand(ping)
-
-client:login()
+```sh
+lit install SovietKitsune/SuperToast
 ```
-
-In this example we can see a lot of what SuperToast provides. 
-
-This is just the basics, we can see more with SuperToasts closeness to types.
-
-For a more in-depth into read [writing your first bot.](./topics/writing-your-first-bot.md)
-
-## Argument parsing
-
-Argument parsing is something else used quite a lot within bots and SuperToast makes it easy.
-
-```lua
-local toast = require 'SuperToast'
-
-toast.dotenv.config()
-
-local client = toast.Client(process.env.TOKEN)
-
-local greetCmd = toast.Command('greet')
-
-local greetParser = ArgParser()
-   :flag('users', 'user')
-      .args('+')
-      .finish()
-
-greetCmd:execute(function(msg, args)
-   local greet = ''
-
-   for i = 1, #args.users do
-      greet = greet .. 'Hello ' .. args.users[i].username .. '!\n'
-   end
-
-   msg:reply(greet)
-end)
-
-greetParser:attach(greetCmd)
-client:addCommand(greetCmd)
-
-client:login()
-```
-
-Now run something like `!greet --users a`.
-
-You might get something like
-
-```
-error[incorrect_argument_type]: Unable to convert flag users to user
-   ┌─ input
-   │
-   │ --users a
-   │         ^ Did you mean `username`? (Or Unable to find anybody with the username of `a`.)
-```
-
-This is something very powerful, clean, nice errors with pointers.
-
-This argument parsing is something you just don't get within a lot of other utility libraries.
 
 ## Features
 
@@ -122,7 +56,7 @@ This argument parsing is something you just don't get within a lot of other util
 
 ## Types
 
-SuperToast is typed using EmmyLua and even includes types for all Discordia objects!
+SuperToast uses EmmyLua and also includes types for all Discordia objects.
 
 In our example, we can view the types of the `msg` object as seen below.
 
@@ -131,20 +65,3 @@ In our example, we can view the types of the `msg` object as seen below.
 This allows for easier use as you don't need to look at the docs constantly.
 
 (Note: Types on callbacks don't work on Lua by Sumneko)
-
-## Installation
-
-You can install SuperToast using `lit`, the package manager of luvit
-
-```sh
-lit install SovietKitsune/SuperToast
-```
-
-## TODO
-
-* [x] Command cooldowns
-* [ ] Bug fixes
-* [ ] More documentation
-* [ ] Add event class
-* [ ] Add plugin class
-* [ ] Add tests for Command, ArgParse and Subcommand
