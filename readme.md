@@ -9,10 +9,10 @@
 
 <div align="center">
     <a href="https://github.com/SovietKitsune/SuperToast/actions">
-        <img alt="Github Documentation Status" src="https://img.shields.io/github/workflow/status/sovietkitsune/supertoast/Documentation?style=flat-square">
+        <img alt="Github Documentation Status" src="https://img.shields.io/github/workflow/status/sovietkitsune/supertoast/Documentation?style=flat-square&label=docs">
     </a>
     <a href="https://github.com/SovietKitsune/SuperToast/actions">
-        <img alt="GitHub Testing Status" src="https://img.shields.io/github/workflow/status/sovietkitsune/supertoast/Testing%20and%20linting?style=flat-square">
+        <img alt="GitHub Testing Status" src="https://img.shields.io/github/workflow/status/sovietkitsune/supertoast/Testing%20and%20linting?style=flat-square&label=tests">
     </a>
     <a href="https://github.com/XAMPPRocky/tokei">
         <img alt="Lines of Code" src="https://img.shields.io/tokei/lines/github/sovietkitsune/supertoast?style=flat-square">
