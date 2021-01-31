@@ -1,8 +1,5 @@
 local typed = toast.typed
 
--- Prevents exiting program
-_G._TEST = true
-
 describe('typed', function()
    describe('.isArray', function()
       it('should return false on dicts', function()

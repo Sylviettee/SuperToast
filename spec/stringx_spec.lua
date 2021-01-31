@@ -1,6 +1,6 @@
-describe('stringx', function()
-   local stringx = toast.stringx
+local stringx = toast.stringx
 
+describe('stringx', function()
    describe('.split', function()
       it('should split a string', function()
          assert.are.same({'this', 'can', 'split'}, stringx.split('this can split', ' '))

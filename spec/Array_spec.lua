@@ -1,7 +1,9 @@
+local Array = toast.Array
+
 describe('Array', function()
    describe(':__len', function()
       it('should return the arrays length', function()
-         local array = toast.Array {5, 7, 1, 5, 0}
+         local array = Array {5, 7, 1, 5, 0}
 
          assert.are.equal(5, #array)
       end)
@@ -12,7 +14,7 @@ describe('Array', function()
          local s = spy.new(function()
          end)
 
-         local array = toast.Array {2, 9, 3, 2}
+         local array = Array {2, 9, 3, 2}
 
          for i, v in pairs(array) do
             s(i, v)
@@ -25,7 +27,7 @@ describe('Array', function()
 
    describe(':get', function()
       it('should return contents correctly', function()
-         local array = toast.Array {5, 8, '20'}
+         local array = Array {5, 8, '20'}
 
          array:push(5)
 
@@ -41,7 +43,7 @@ describe('Array', function()
       it('should iterate in the same order', function()
          local input = {0, 5, 10, 20, '50', true, false}
 
-         local array = toast.Array(input)
+         local array = Array(input)
 
          local output = {}
 
@@ -57,7 +59,7 @@ describe('Array', function()
       it('should unpack the table in the same order', function()
          local input = {0, 5, 19, 8}
 
-         local array = toast.Array(input)
+         local array = Array(input)
 
          assert.are.same(input, {array:unpack()})
       end)
@@ -65,7 +67,7 @@ describe('Array', function()
 
    describe(':push', function()
       it('should add items in the same order', function()
-         local array = toast.Array()
+         local array = Array()
 
          array:push(5)
 
@@ -77,7 +79,7 @@ describe('Array', function()
 
    describe(':pop', function()
       it('should remove the selected item', function()
-         local array = toast.Array {1}
+         local array = Array {1}
 
          array:pop()
 
@@ -85,13 +87,13 @@ describe('Array', function()
       end)
 
       it('should return popped item', function()
-         local array = toast.Array {2}
+         local array = Array {2}
 
          assert.is.equal(2, array:pop())
       end)
 
       it('should rebase the array', function()
-         local array = toast.Array {2, 3, 5}
+         local array = Array {2, 3, 5}
 
          array:pop(2)
 
@@ -104,7 +106,7 @@ describe('Array', function()
          local s = spy.new(function()
          end)
 
-         local array = toast.Array {2, 9, 3, 2}
+         local array = Array {2, 9, 3, 2}
 
          array:forEach(s)
 
@@ -118,7 +120,7 @@ describe('Array', function()
          local s = spy.new(function()
          end)
 
-         local array = toast.Array {2, 9, 3, 2}
+         local array = Array {2, 9, 3, 2}
 
          array:filter(s)
 
@@ -127,7 +129,7 @@ describe('Array', function()
       end)
 
       it('should reduce the items in the new array', function()
-         local array = toast.Array {5, 2, 8, 9}
+         local array = Array {5, 2, 8, 9}
 
          local newArr = array:filter(function()
             return false
@@ -142,7 +144,7 @@ describe('Array', function()
          local s = spy.new(function()
          end)
 
-         local array = toast.Array {2, 9, 3, 2}
+         local array = Array {2, 9, 3, 2}
 
          array:find(s)
 
@@ -151,7 +153,7 @@ describe('Array', function()
       end)
 
       it('should return the found item', function()
-         local array = toast.Array {2, 8, 1, '6'}
+         local array = Array {2, 8, 1, '6'}
 
          local item = array:find(function(v)
             return v == '6'
@@ -166,7 +168,7 @@ describe('Array', function()
          local s = spy.new(function()
          end)
 
-         local array = toast.Array {2, 9, 3, 2}
+         local array = Array {2, 9, 3, 2}
 
          array:map(s)
 
@@ -175,7 +177,7 @@ describe('Array', function()
       end)
 
       it('should change the items in the new array', function()
-         local array = toast.Array {2, 7, 3, 1}
+         local array = Array {2, 7, 3, 1}
 
          local newArr = array:map(function(x)
             return x * 2
@@ -187,7 +189,7 @@ describe('Array', function()
 
    describe(':slice', function()
       it('should create a new array', function()
-         local array = toast.Array {7, 1, 3, 1}
+         local array = Array {7, 1, 3, 1}
 
          local slice = array:slice()
 
@@ -197,7 +199,7 @@ describe('Array', function()
       end)
 
       it('should return a slice of the contents', function()
-         local array = toast.Array {1, 6, 2, 1}
+         local array = Array {1, 6, 2, 1}
 
          local slice = array:slice(2, 3)
 
@@ -207,7 +209,7 @@ describe('Array', function()
 
    describe(':copy', function()
       it('should create a new array', function()
-         local array = toast.Array {7, 1, 3, 1}
+         local array = Array {7, 1, 3, 1}
 
          local copy = array:copy()
 
@@ -219,7 +221,7 @@ describe('Array', function()
 
    describe(':reverse', function()
       it('should reverse the array contents', function()
-         local array = toast.Array {1, 2, 3, 4}
+         local array = Array {1, 2, 3, 4}
 
          local rev = array:reverse()
 

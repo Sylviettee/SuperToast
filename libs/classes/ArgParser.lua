@@ -120,18 +120,26 @@ local function colorize(str, no)
 end
 
 local function buildError(code, msg, topMsg, input, start, stop, config)
-   local builder =
-      f('{{bright red}}error[%s]:{{bright white}} %s{{reset}}\n', code, topMsg) ..
-      f('{{cyan}}   ┌─{{reset}} %s\n', config.filename or 'input') ..
-        '{{cyan}}   │{{reset}}\n' ..
-      f('{{cyan}}   │{{reset}} %s\n', input) ..
-        '{{cyan}}   │{{reset}}'
+   local builder
 
-   local below = '{{bright red}} ' .. string.rep(' ', start - 1) ..
-      string.rep('^', stop - start + 1) ..
-      ' {{white}}' .. msg
+   if config.simple then
+      builder = f('error[%s]:%u:%u: %s', code, start, stop, topMsg)
+   else
+      builder =
+         f('{{bright red}}error[%s]:{{bright white}} %s{{reset}}\n', code, topMsg) ..
+         f('{{cyan}}   ┌─{{reset}} %s\n', config.filename or 'input') ..
+           '{{cyan}}   │{{reset}}\n' ..
+         f('{{cyan}}   │{{reset}} %s\n', input) ..
+           '{{cyan}}   │{{reset}}'
 
-   return colorize(builder .. below, not config.color)
+      local below = '{{bright red}} ' .. string.rep(' ', start - 1) ..
+         string.rep('^', stop - start + 1) ..
+         ' {{white}}' .. msg
+
+      builder = builder .. below
+   end
+
+   return colorize(builder, not config.color)
 end
 
 local function merge(tbl1, tbl2)
@@ -223,6 +231,7 @@ local _rawArgs = {} -- shut documentation generator
 ---@class ArgParser_config
 ---@field public color boolean | nil To use color in errors or not
 ---@field public filename string | nil The filename to specify
+---@field public simple boolean | nil To use a simplified output
 local _config = {}
 
 --- Modify how flags are parsed
@@ -416,7 +425,6 @@ end
 ---@overload fun(name: string, type: string)
 ---@return ArgParser_modifiers
 function ArgParser:flag(name, func, typeName)
-   ---@type function, string
    local check, flagType
 
    if type(func) == 'function' then
@@ -613,6 +621,8 @@ function ArgParser:_createModifier(ctx)
    end
 
    function modifiers.args(count)
+      count = tostring(count)
+
       for i = 1, #conversions do
          local pat, func, human = conversions[i][1], conversions[i][2], conversions[i][3]
 

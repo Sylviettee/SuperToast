@@ -1,6 +1,4 @@
-describe('dotenv', function()
-   describe('parse file', function()
-      local file = [[
+local file = [[
 BASIC=basic
 
 # previous line intentionally left blank
@@ -24,8 +22,10 @@ RETAIN_INNER_QUOTES_AS_STRING='{"foo": "bar"}'
 TRIM_SPACE_FROM_UNQUOTED=    some spaced out string
 USERNAME=therealnerdybeast@example.tld
 SPACED_KEY = parsed
-    ]]
+]]
 
+describe('dotenv', function()
+   describe('parse file', function()
       local parsed = toast.dotenv.parse(file)
 
       it('should return a table', function()
