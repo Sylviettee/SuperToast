@@ -35,7 +35,7 @@ Parsing is how each framework deals with parsing given input.
 | Aliases | ✓ | ✓ | ✓ |
 | Mention as prefix | ✘ | ✓ | ✘ |
 | Multiple prefixes | ✓ | ✓ | ✓ |
-| Per-guild prefix customization | ✓ | ✘ | ✓ |
+| Per-guild prefix customization | ✓ | ✓ | ✓ |
 | Pattern trigger | ✘ | ✘ | ✘ |
 | Store original input | ✓ | ✓ | ✓ |
 
@@ -64,8 +64,8 @@ For matching, the parser should support more than just the id like the object na
 | Unordered arguments | ✘ | ✘ | ✘ |
 | Optional arguments | ✘ | ✓ | ✓ |
 | Quoted arguments | ✓ | ✓ | ✓ |
-| Flag arguments | ✓ | ✘ | ✓ |
-| Dependant arguments | ✘ | ✘ | ✓ |
+| Flag arguments | ✓ | ✓ | ✓ |
+| Dependant arguments | ✘ | ✓ | ✓ |
 | Argument types | ✓ | ✓ | ✓ |
 | Union types | ✘ | ✘ | ✘ |
 | Custom types | ✓ | ✓ | ✓ |
