@@ -53,14 +53,14 @@ local Command, get = class('Command')
 Command = Command
 
 --- Create a new command
----@param name string
----@vararg string
+---@param name string | function
+---@vararg string | function
 function Command:__init(name, ...)
-   tString(name)
+   typed.func(nil, 'string | function')(name)
    self._name = name
 
    self._examples = TypedArray 'string'
-   self._aliases = TypedArray 'string'
+   self._aliases = TypedArray 'string | function'
    self._userRoles = TypedArray 'string'
    self._botRoles = TypedArray 'string'
    self._userPermissions = TypedArray 'number'
@@ -74,6 +74,30 @@ function Command:__init(name, ...)
    end
 end
 
+--- Check if the passed name matches what is expected
+---@param name string
+function Command:checkName(name)
+   local validNames = {self._name}
+
+   self._aliases:forEach(function(v)
+      table.insert(validNames, v)
+   end)
+
+   for i = 1, #validNames do
+      if validNames[i] == name then
+         return true
+      elseif type(validNames[i]) == 'function' then
+         local res = validNames[i](name)
+
+         if res then
+            return res
+         end
+      end
+   end
+
+   return false
+end
+
 --- Check a message to see if it matches all the criteria listed
 ---@param message Message
 ---@param args string[]
@@ -81,7 +105,7 @@ end
 ---@return boolean | string
 function Command:toRun(message, args, client)
    local isSub = self._subcommands:find(function(v)
-      return v.name == args[1]
+      return v:checkName(args[1])
    end)
 
    if isSub then
@@ -448,10 +472,21 @@ function Command:execute(func)
    return self
 end
 
+-- Static
+
 --- Count the amount of parents up this (sub)command has
 ---@return number
 function Command.count()
    return 0
+end
+
+--- A factory for creating commands that rely on patterns
+---@param pattern string
+---@return function
+function Command.pattern(pattern)
+   return function(content)
+      return content:match(pattern)
+   end
 end
 
 function get:name()

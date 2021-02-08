@@ -36,7 +36,7 @@ Parsing is how each framework deals with parsing given input.
 | Mention as prefix | ✘ | ✓ | ✘ |
 | Multiple prefixes | ✓ | ✓ | ✓ |
 | Per-guild prefix customization | ✓ | ✓ | ✓ |
-| Pattern trigger | ✘ | ✘ | ✘ |
+| Pattern trigger | ✓ | ✘ | ✘ |
 | Store original input | ✓ | ✓ | ✓ |
 
 ### Command Handling

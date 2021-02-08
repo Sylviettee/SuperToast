@@ -50,9 +50,7 @@ return function(client, msg)
    local args = tablex.slice(split, 2)
 
    local found = client.commands:find(function(cmd)
-      return cmd.name == command or cmd.aliases:find(function(alias)
-         return alias == command
-      end)
+      return cmd:checkName(command)
    end)
 
    if found then
