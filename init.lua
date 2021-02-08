@@ -27,8 +27,6 @@ local SuperToast = {
    Embed = require('classes/Embed'),
    ---@type TypedArray
    TypedArray = require('classes/TypedArray'),
-   ---@type Option
-   Option = require('classes/Option'),
    ---@type Subcommand
    Subcommand = require('classes/Subcommand'),
 
