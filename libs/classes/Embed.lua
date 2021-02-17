@@ -85,7 +85,8 @@ local Embed = class('Embed')
 Embed = Embed
 
 --- Create a new embed
----@param starting table
+---@param starting Embed_raw
+---@return Embed
 function Embed:__init(starting)
    self._embed = starting or {}
 

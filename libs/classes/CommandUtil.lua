@@ -9,10 +9,10 @@ local fs = require('fs')
 local new_fs_event = uv.new_fs_event
 
 local configValidation = typed.Schema('CommandUtil.config')
-   --; TODO :field('allowMention', 'boolean', true)
-   --; TODO :field('blockBots', 'boolean', true)
-   --; TODO :field('handleEdits', 'boolean', false)
-   --; TODO :field('prefix', 'string | string[] | function')
+   -- TODO :field('allowMention', 'boolean', true)
+   -- TODO :field('blockBots', 'boolean', true)
+   -- TODO :field('handleEdits', 'boolean', false)
+   -- TODO :field('prefix', 'string | string[] | function')
    :field('watch', 'boolean', false)
    :field('unloadOnError', 'boolean', true)
    :field('directory', 'string')
@@ -26,10 +26,10 @@ local configValidation = typed.Schema('CommandUtil.config')
 ---@field public directory string The directory to search for commands
 ---@field public watch boolean | nil If set to true, it will watch `directory` for changes
 ---@field public unloadOnError boolean | nil If set to true, it will unload the command if it had an error loading
---; TODO ---@field public allowMention boolean | nil Whether to allow the bots mention to work as a prefix
---; TODO ---@field public blockBots boolean | nil Whether or not to block bots from running commands
---; TODO ---@field public handleEdits boolean | nil Whether to rerun a command when an edit happens
---; TODO ---@field public prefix string | string[] | fun(msg: Message):string | string[] The prefix/prefixes/function to call to get a prefix/prefixes
+-- TODO ---@field public allowMention boolean | nil Whether to allow the bots mention to work as a prefix
+-- TODO ---@field public blockBots boolean | nil Whether or not to block bots from running commands
+-- TODO ---@field public handleEdits boolean | nil Whether to rerun a command when an edit happens
+-- TODO ---@field public prefix string | string[] | fun(msg: Message):string | string[] The prefix/prefixes/function to call to get a prefix/prefixes
 local _config = {}
 
 --- Command util is a class which loads commands from directories.
